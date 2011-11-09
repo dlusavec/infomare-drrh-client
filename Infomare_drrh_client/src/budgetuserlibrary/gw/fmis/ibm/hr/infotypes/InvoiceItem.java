@@ -13,6 +13,8 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
+import org.apache.commons.lang.StringUtils;
+
 /**
  * <p>
  * Java class for InvoiceItem complex type.
@@ -300,9 +302,9 @@ public class InvoiceItem {
 			throws Exception {
 		budgetStructure = new BudgetStructure();
 		budgetStructure.postaviVrijednosti(invItem);
-		glAccount = invItem.getGlaccount();
+		glAccount = StringUtils.trimToNull(invItem.getGlaccount());
 		amount = invItem.getAmountini();
-		description = invItem.getDescrt();
+		description = StringUtils.trimToNull(invItem.getDescrt());
 		lineItemNumber = invItem.getInvitemid();
 		quantity = invItem.getQty();
 		// Jmj kolicine, enumeracija koja nije definirana sa njihove strane
@@ -314,7 +316,7 @@ public class InvoiceItem {
 			referencedDocumentItem.postaviVrijednosti(invItem, docHeadDAO);
 		}
 		location = new Location();
-		location.setLocationName(invItem.getLocation());
+		location.setLocationName(StringUtils.trimToNull(invItem.getLocation()));
 		localCurrencyAmount = invItem.getLcuramou();
 		try {
 			debitCreditIndicator = DebitCreditIndicatorType.valueOf(invItem

@@ -8,6 +8,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
+import org.apache.commons.lang.StringUtils;
+
 /**
  * <p>
  * Java class for BudgetStructure complex type.
@@ -176,20 +178,20 @@ public class BudgetStructure {
 	}
 
 	public void postaviVrijednosti(Bcitemlst bctItem) {
-		fund = bctItem.getFund();
-		year = bctItem.getYearbs();
-		functionalArea = bctItem.getFuncarea();
+		fund = StringUtils.trimToNull(bctItem.getFund());
+		year = StringUtils.trimToNull(bctItem.getYearbs());
+		functionalArea = StringUtils.trimToNull(bctItem.getFuncarea());
 		commitmentItem = new CommitmentItem();
 		commitmentItem.postaviVrijednosti(bctItem);
-		activity = bctItem.getActivity();
+		activity = StringUtils.trimToNull(bctItem.getActivity());
 	};
 
 	public void postaviVrijednosti(Invitemlst invItemLst) {
-		fund = invItemLst.getFund();
-		year = invItemLst.getYearbs();
-		functionalArea = invItemLst.getFuncarea();
+		fund = StringUtils.trimToNull(invItemLst.getFund());
+		year = StringUtils.trimToNull(invItemLst.getYearbs());
+		functionalArea = StringUtils.trimToNull(invItemLst.getFuncarea());
 		commitmentItem = new CommitmentItem();
 		commitmentItem.postaviVrijednosti(invItemLst);
-		activity = invItemLst.getActivity();
+		activity = StringUtils.trimToNull(invItemLst.getActivity());
 	};
 }

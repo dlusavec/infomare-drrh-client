@@ -134,7 +134,23 @@ public final class InvoiceManagementServiceClientImpl {
 						docheadDAO, vendorVeznaDAO);
 				request.setMessageHeader(messageHeader);
 				request.setInvoice(invoice);
-				response = port.createInvoice(request);
+				try {
+					response = port.createInvoice(request);
+					if (response.getResponseMessageType().equals(
+							ResponseMessageType.ERROR)) {
+						response.setMessageHeader(Pomocna
+								.getNewMessageHeader(session));
+					}
+				} catch (Exception e) {
+					if (response == null) {
+						response = new InvoiceResponseMsg();
+						response.setMessageHeader(Pomocna
+								.getNewMessageHeader(session));
+						response.setResponseMessageType(ResponseMessageType.ERROR);
+						response.setErrorResponse(PomocnaError
+								.getErrorResponse("Invoice", e));
+					}
+				}
 				// Response
 				resMsg = new Resmsg();
 				reqMsg = new Reqmsg();
@@ -289,7 +305,23 @@ public final class InvoiceManagementServiceClientImpl {
 						docheadDAO, vendorVeznaDAO);
 				request.setMessageHeader(messageHeader);
 				request.setInvoice(invoice);
-				response = port.changeInvoice(request);
+				try {
+					response = port.changeInvoice(request);
+					if (response.getResponseMessageType().equals(
+							ResponseMessageType.ERROR)) {
+						response.setMessageHeader(Pomocna
+								.getNewMessageHeader(session));
+					}
+				} catch (Exception e) {
+					if (response == null) {
+						response = new InvoiceResponseMsg();
+						response.setMessageHeader(Pomocna
+								.getNewMessageHeader(session));
+						response.setResponseMessageType(ResponseMessageType.ERROR);
+						response.setErrorResponse(PomocnaError
+								.getErrorResponse("Invoice", e));
+					}
+				}
 				// Response
 				resMsg = new Resmsg();
 				reqMsg = new Reqmsg();
@@ -445,9 +477,24 @@ public final class InvoiceManagementServiceClientImpl {
 				request.setMessageHeader(messageHeader);
 				request.setInvoice(documentHeader);
 				request.setBuFmisDocumentIdToReverse(invoiceMsg.getBufmisrev()
-						.toString());
-
-				response = port.reverseInvoice(request);
+						.toString());				
+				try {
+					response = port.reverseInvoice(request);
+					if (response.getResponseMessageType().equals(
+							ResponseMessageType.ERROR)) {
+						response.setMessageHeader(Pomocna
+								.getNewMessageHeader(session));
+					}
+				} catch (Exception e) {
+					if (response == null) {
+						response = new InvoiceResponseMsg();
+						response.setMessageHeader(Pomocna
+								.getNewMessageHeader(session));
+						response.setResponseMessageType(ResponseMessageType.ERROR);
+						response.setErrorResponse(PomocnaError
+								.getErrorResponse("Invoice", e));
+					}
+				}
 				// Response
 				resMsg = new Resmsg();
 				reqMsg = new Reqmsg();

@@ -9,6 +9,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
+import org.apache.commons.lang.StringUtils;
+
 /**
  * <p>
  * Java class for VendorItem complex type.
@@ -387,21 +389,21 @@ public class VendorItem {
 
 	public void postaviVrijednosti(Invoicemsg invoiceMsg,
 			VendorVeznaDAO vendorVeznaDAO) {
-		VendorVezna vendorVezna = vendorVeznaDAO.getVendorVeznaByPK(invoiceMsg
-				.getBufmisven());
+		VendorVezna vendorVezna = vendorVeznaDAO.getVendorVeznaByPK(StringUtils
+				.trimToNull(invoiceMsg.getBufmisven()));
 		if (vendorVezna != null) {
 			masterVendorId = Long.parseLong(vendorVezna.getF41ctr().trim());
 			// Citam iz InvoiceMSG
 			// buFmisVendorId = vendorVezna.getF41vid();
-			sapVendorId = vendorVezna.getF41svi();
+			sapVendorId = StringUtils.trimToNull(vendorVezna.getF41svi());
 		}
-		buFmisVendorId = invoiceMsg.getBufmisven();
-		paymentReference = invoiceMsg.getPayref();
-		description = invoiceMsg.getPaydesc();
-		houseBank = invoiceMsg.getHousebank();
-		vendorBank = invoiceMsg.getVendobank();
-		instructionKey = invoiceMsg.getInstrkey();
-		referenceDetails = invoiceMsg.getRefdetail();
-		vendorAccountNumber = invoiceMsg.getVenaccnum();
+		buFmisVendorId = StringUtils.trimToNull(invoiceMsg.getBufmisven());
+		paymentReference = StringUtils.trimToNull(invoiceMsg.getPayref());
+		description = StringUtils.trimToNull(invoiceMsg.getPaydesc());
+		houseBank = StringUtils.trimToNull(invoiceMsg.getHousebank());
+		vendorBank = StringUtils.trimToNull(invoiceMsg.getVendobank());
+		instructionKey = StringUtils.trimToNull(invoiceMsg.getInstrkey());
+		referenceDetails = StringUtils.trimToNull(invoiceMsg.getRefdetail());
+		vendorAccountNumber = StringUtils.trimToNull(invoiceMsg.getVenaccnum());
 	};
 }

@@ -289,9 +289,9 @@ public class BudgetCommitmentItem {
 			VendorVezna vendorVezna = vendorVeznaDAO.getVendorVeznaByPK(bctItem
 					.getVendorid());
 			if (vendorVezna != null) {
-				bufmisVendorId = vendorVezna.getF41ctr();
-				masterVendorId = vendorVezna.getF41vid();
-				sapVendorId = vendorVezna.getF41svi();
+				bufmisVendorId = StringUtils.trimToNull(vendorVezna.getF41ctr());
+				masterVendorId = StringUtils.trimToNull(vendorVezna.getF41vid());
+				sapVendorId = StringUtils.trimToNull(vendorVezna.getF41svi());
 			}
 		}
 		if (bctItem.getRefdochead() != null) {
@@ -300,6 +300,6 @@ public class BudgetCommitmentItem {
 		}
 		lineItemNumber = bctItem.getBcitemid();
 		location = new Location();
-		location.setLocationName(bctItem.getLocationbc());
+		location.setLocationName(StringUtils.trimToNull(bctItem.getLocationbc()));
 	}
 }

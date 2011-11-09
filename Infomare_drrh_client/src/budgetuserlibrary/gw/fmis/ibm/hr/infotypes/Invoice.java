@@ -5,11 +5,12 @@ import hr.infomare.drrh.dao.VendorVeznaDAO;
 import hr.infomare.drrh.pojo.Dochead;
 import hr.infomare.drrh.pojo.Invitemlst;
 import hr.infomare.drrh.pojo.Invoicemsg;
-import hr.infomare.drrh.pojo.VendorVezna;
 import hr.infomare.drrh.pomocni.PomocnaDatum;
+
 import java.math.BigDecimal;
 import java.util.Iterator;
 import java.util.List;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlSchemaType;
@@ -306,21 +307,20 @@ public class Invoice {
 				InvoiceItem invoiceItem = new InvoiceItem();
 				invoiceItem.postaviVrijednosti(invItem, vendorVeznaDAO,
 						docHeadDAO);
-
 				invoiceItems.add(invoiceItem);
 			}
-		}	
+		}
 		documentHeader = new DocumentHeader();
 		documentHeader.postaviVrijednosti(docHead);
 		amount = invoiceMsg.getAmount();
-		localCurrencyAmount = invoiceMsg.getInvlcam();		
-		vendorItemList = new VendorItemList();		
-		List<VendorItem> vendorItems=vendorItemList.getVendorItem();
-		VendorItem vendorItem= new VendorItem();
+		localCurrencyAmount = invoiceMsg.getInvlcam();
+		vendorItemList = new VendorItemList();
+		List<VendorItem> vendorItems = vendorItemList.getVendorItem();
+		VendorItem vendorItem = new VendorItem();
 		vendorItem.postaviVrijednosti(invoiceMsg, vendorVeznaDAO);
-		vendorItems.add(vendorItem);		
+		vendorItems.add(vendorItem);
 		isCession = invoiceMsg.getIscess().equals("1");
-		documentBlock = invoiceMsg.getDocbloc();
+		documentBlock = StringUtils.trimToNull(invoiceMsg.getDocbloc());
 		creditMemoBuFmisDocumentId = invoiceMsg.getCmbufmisid() == 0 ? null
 				: Integer.toString(invoiceMsg.getCmbufmisid());
 	}

@@ -143,21 +143,21 @@ public class CommitmentItem {
 	}
 
 	public void postaviVrijednosti(Bcitemlst bctItem) {
-		code = bctItem.getCode();
-		year = bctItem.getYearci();
-		description = bctItem.getDescrt();
+		code = StringUtils.trimToNull(bctItem.getCode());
+		year = StringUtils.trimToNull(bctItem.getYearci());
+		description = StringUtils.trimToNull(bctItem.getDescrt());
 		if (StringUtils.isNotBlank(bctItem.getType())) {
 			type = new CommitmentItemType();
-			type.setName(bctItem.getType());
+			type.setName(StringUtils.trimToNull(bctItem.getType()));
 		}
 	}
 	public void postaviVrijednosti(Invitemlst invItemlst) {
-		code = invItemlst.getCode();
-		year = invItemlst.getYearci();
-		description = invItemlst.getDescrt();
+		code = StringUtils.trimToNull(invItemlst.getCode());
+		year = StringUtils.trimToNull(invItemlst.getYearci());
+		description = StringUtils.trimToNull(invItemlst.getDescrt());
 		if (StringUtils.isNotBlank(invItemlst.getType())) {
 			type = new CommitmentItemType();
-			type.setName(invItemlst.getType());
+			type.setName(StringUtils.trimToNull(invItemlst.getType()));
 		}
 	}
 }

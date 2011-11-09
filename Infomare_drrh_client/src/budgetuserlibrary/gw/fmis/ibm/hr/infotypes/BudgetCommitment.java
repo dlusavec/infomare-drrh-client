@@ -175,7 +175,6 @@ public class BudgetCommitment {
 				BudgetCommitmentItem budgetCommitmentItem = new BudgetCommitmentItem();
 				budgetCommitmentItem.postaviVrijednosti(bctItem,
 						vendorVeznaDAO, docHeadDAO);
-
 				budgetCommitmentItems.add(budgetCommitmentItem);
 			}
 		}
