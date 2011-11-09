@@ -426,7 +426,7 @@ public final class VendorManagementInterfaceClientImpl {
 									.getNewMessageHeader(session));
 							response.setResponseMessageType(ResponseMessageType.ERROR);
 							response.setErrorResponse(PomocnaError
-									.getErrorResponse("VEN_BAN_ACC", e));
+									.getErrorResponse("VEN_BANK_ACC", e));
 						}
 					}
 					resMsg.postaviVrijednosti(response.getMessageHeader(),
