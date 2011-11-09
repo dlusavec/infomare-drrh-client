@@ -25,11 +25,15 @@ import hr.infomare.drrh.pomocni.Pomocna;
 import hr.infomare.drrh.pomocni.PomocnaDatum;
 import hr.infomare.drrh.pomocni.PomocnaError;
 import hr.infomare.drrh.postavke.Postavke;
+
 import java.net.URL;
 import java.util.Iterator;
 import java.util.List;
+
 import javax.xml.namespace.QName;
+
 import org.hibernate.Session;
+
 import budgetuserlibrary.gw.fmis.ibm.hr.infotypes.BudgetCommitment;
 import budgetuserlibrary.gw.fmis.ibm.hr.infotypes.MessageHeader;
 import budgetuserlibrary.gw.fmis.ibm.hr.infotypes.ResponseMessageType;
@@ -131,7 +135,23 @@ public final class PurchaseOrderManagementServiceClientImpl {
 						docHead, vendorVeznaDAO, docHeadDAO);
 				request.setMessageHeader(messageHeader);
 				request.setBudgetCommitment(budgetCommitment);
-				response = port.createPurchaseOrder(request);
+				try {
+					response = port.createPurchaseOrder(request);
+					if (response.getResponseMessageType().equals(
+							ResponseMessageType.ERROR)) {
+						response.setMessageHeader(Pomocna
+								.getNewMessageHeader(session));
+					}
+				} catch (Exception e) {
+					if (response == null) {
+						response = new PurchaseOrderResponseMsg();
+						response.setMessageHeader(Pomocna
+								.getNewMessageHeader(session));
+						response.setResponseMessageType(ResponseMessageType.ERROR);
+						response.setErrorResponse(PomocnaError
+								.getErrorResponse("Purchase_order", e));
+					}
+				}
 				// Response
 				resMsg = new Resmsg();
 				reqMsg = new Reqmsg();
@@ -289,7 +309,23 @@ public final class PurchaseOrderManagementServiceClientImpl {
 						docHead, vendorVeznaDAO, docHeadDAO);
 				request.setMessageHeader(messageHeader);
 				request.setBudgetCommitment(budgetCommitment);
-				response = port.changePurchaseOrder(request);
+				try {
+					response = port.changePurchaseOrder(request);
+					if (response.getResponseMessageType().equals(
+							ResponseMessageType.ERROR)) {
+						response.setMessageHeader(Pomocna
+								.getNewMessageHeader(session));
+					}
+				} catch (Exception e) {
+					if (response == null) {
+						response = new PurchaseOrderResponseMsg();
+						response.setMessageHeader(Pomocna
+								.getNewMessageHeader(session));
+						response.setResponseMessageType(ResponseMessageType.ERROR);
+						response.setErrorResponse(PomocnaError
+								.getErrorResponse("Purchase_order", e));
+					}
+				}
 				// Response
 				resMsg = new Resmsg();
 				reqMsg = new Reqmsg();
@@ -448,7 +484,23 @@ public final class PurchaseOrderManagementServiceClientImpl {
 						docHead, vendorVeznaDAO, docHeadDAO);
 				request.setMessageHeader(messageHeader);
 				request.setBudgetCommitment(budgetCommitment);
-				response = port.closePurchaseOrder(request);
+				try {
+					response = port.closePurchaseOrder(request);
+					if (response.getResponseMessageType().equals(
+							ResponseMessageType.ERROR)) {
+						response.setMessageHeader(Pomocna
+								.getNewMessageHeader(session));
+					}
+				} catch (Exception e) {
+					if (response == null) {
+						response = new PurchaseOrderResponseMsg();
+						response.setMessageHeader(Pomocna
+								.getNewMessageHeader(session));
+						response.setResponseMessageType(ResponseMessageType.ERROR);
+						response.setErrorResponse(PomocnaError
+								.getErrorResponse("Purchase_order", e));
+					}
+				}
 				// Response
 				resMsg = new Resmsg();
 				reqMsg = new Reqmsg();
