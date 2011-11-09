@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:bons0="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes/"
+  xmlns:bons1="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes">
+  <xsd:include schemaLocation="QuantityUnitType.xsd"></xsd:include>
+  <xsd:import schemaLocation="DebitCreditIndicatorType.xsd"
+    namespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes/">
+  </xsd:import>
+  <xsd:include schemaLocation="Location.xsd"></xsd:include>
+  <xsd:include schemaLocation="ReferencedDocumentItem.xsd"></xsd:include>
+  <xsd:import schemaLocation="BudgetStructure.xsd" namespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes/"></xsd:import>
+  <xsd:complexType name="InvoiceItem">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="budgetStructure" type="bons0:BudgetStructure"></xsd:element>
+      <xsd:element minOccurs="0" name="glAccount" type="xsd:string"></xsd:element>
+      <xsd:element minOccurs="0" name="amount" type="xsd:decimal"></xsd:element>
+      <xsd:element minOccurs="0" name="description" type="xsd:string"></xsd:element>
+      <xsd:element minOccurs="0" name="lineItemNumber" type="xsd:long"></xsd:element>
+      <xsd:element minOccurs="0" name="quantity" type="xsd:decimal"></xsd:element>
+      <xsd:element minOccurs="0" name="quantityUnit" type="bons1:QuantityUnitType"></xsd:element>
+      <xsd:element minOccurs="0" name="referencedDocumentItem" type="bons1:ReferencedDocumentItem"></xsd:element>
+      <xsd:element minOccurs="0" name="location" type="bons1:Location"></xsd:element>
+      <xsd:element minOccurs="0" name="localCurrencyAmount" type="xsd:decimal"></xsd:element>
+      <xsd:element minOccurs="0" name="debitCreditIndicator" type="bons0:DebitCreditIndicatorType"></xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

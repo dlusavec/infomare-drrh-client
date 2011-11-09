@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:simpleType name="InvoiceStatusType">
+    <xsd:restriction base="xsd:string">
+
+
+
+      <xsd:enumeration value="APPROVED"></xsd:enumeration>
+      <xsd:enumeration value="DENIED"></xsd:enumeration>
+      <xsd:enumeration value="PENDING_APPROVAL"></xsd:enumeration>
+      <xsd:enumeration value="ACCEPTED"></xsd:enumeration>
+      <xsd:enumeration value="REVERSE"></xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+</xsd:schema>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions name="InvoiceManagementService" targetNamespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/interfaces/InvoiceManagementService" xmlns:bons1="http://hr.ibm.fmis.gw.BudgetUserLibrary/messages" xmlns:tns="http://hr.ibm.fmis.gw.BudgetUserLibrary/interfaces/InvoiceManagementService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <wsdl:types>
+    <xsd:schema targetNamespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/interfaces/InvoiceManagementService">
+            <xsd:import namespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/messages" schemaLocation="../messages/InvoiceReverseRequestMsg.xsd"/>
+            <xsd:import namespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/messages" schemaLocation="../messages/InvoiceChangeRequestMsg.xsd"/>
+      <xsd:import namespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/messages" schemaLocation="../messages/InvoiceResponseMsg.xsd"/>
+      <xsd:import namespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/messages" schemaLocation="../messages/InvoiceCreateRequestMsg.xsd"/>
+      <xsd:element name="createInvoice">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="InvoiceCreateRequestMsg" nillable="true" type="bons1:InvoiceCreateRequestMsg"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="createInvoiceResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="InvoiceResponseMsg" nillable="true" type="bons1:InvoiceResponseMsg"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="reverseInvoice">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="InvoiceReverseRequestMsg" nillable="true" type="bons1:InvoiceReverseRequestMsg"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="reverseInvoiceResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="InvoiceResponseMsg" nillable="true" type="bons1:InvoiceResponseMsg"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="changeInvoice">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="InvoiceChangeRequestMsg" nillable="true" type="bons1:InvoiceChangeRequestMsg"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="changeInvoiceResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="InvoiceResponseMsg" nillable="true" type="bons1:InvoiceResponseMsg"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+    <wsdl:message name="createInvoiceRequestMsg">
+    <wsdl:part element="tns:createInvoice" name="createInvoiceParameters"/>
+  </wsdl:message>
+    <wsdl:message name="createInvoiceResponseMsg">
+    <wsdl:part element="tns:createInvoiceResponse" name="createInvoiceResult"/>
+  </wsdl:message>
+    <wsdl:message name="reverseInvoiceRequestMsg">
+    <wsdl:part element="tns:reverseInvoice" name="reverseInvoiceParameters"/>
+  </wsdl:message>
+    <wsdl:message name="reverseInvoiceResponseMsg">
+    <wsdl:part element="tns:reverseInvoiceResponse" name="reverseInvoiceResult"/>
+  </wsdl:message>
+    <wsdl:message name="changeInvoiceRequestMsg">
+    <wsdl:part element="tns:changeInvoice" name="changeInvoiceParameters"/>
+  </wsdl:message>
+    <wsdl:message name="changeInvoiceResponseMsg">
+    <wsdl:part element="tns:changeInvoiceResponse" name="changeInvoiceResult"/>
+  </wsdl:message>
+    <wsdl:portType name="InvoiceManagementService">
+    <wsdl:operation name="createInvoice">
+      <wsdl:input message="tns:createInvoiceRequestMsg" name="createInvoiceRequest"/>
+      <wsdl:output message="tns:createInvoiceResponseMsg" name="createInvoiceResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="reverseInvoice">
+      <wsdl:input message="tns:reverseInvoiceRequestMsg" name="reverseInvoiceRequest"/>
+      <wsdl:output message="tns:reverseInvoiceResponseMsg" name="reverseInvoiceResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="changeInvoice">
+      <wsdl:input message="tns:changeInvoiceRequestMsg" name="changeInvoiceRequest"/>
+      <wsdl:output message="tns:changeInvoiceResponseMsg" name="changeInvoiceResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:Q1="http://hr.ibm.fmis.gw.BudgetUserLibrary/messages" xmlns:bons0="http://hr.ibm.fmis.gw.BUFMISBudgetExecution/BUFMISBudgetExecutionServices/ReservationManagementService/" xmlns:tns="http://hr.ibm.fmis.gw.BudgetUserLibrary/interfaces/ReservationManagementService/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="ReservationManagementService" targetNamespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/interfaces/ReservationManagementService/">
+  <wsdl:types>
+    <xsd:schema xmlns:bons0="http://hr.ibm.fmis.gw.BudgetUserLibrary/interfaces/ReservationManagementService/" targetNamespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/interfaces/ReservationManagementService/">
+            <xsd:import namespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/messages" schemaLocation="../messages/ReservationResponseMsg.xsd"/>
+            <xsd:import namespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/messages" schemaLocation="../messages/ReservationChangeRequestMsg.xsd"/>
+            <xsd:import namespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/messages" schemaLocation="../messages/ReservationCloseRequestMsg.xsd"/>
+            <xsd:import namespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/messages" schemaLocation="../messages/ReservationCreateRequestMsg.xsd"/>
+            <xsd:element name="createReservation">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="createReservationParamIn" type="Q1:ReservationCreateRequestMsg"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="createReservationResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="createReservationParamReturn" type="Q1:ReservationResponseMsg"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="closeReservation">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="closeReservationParamIn" type="Q1:ReservationCloseRequestMsg"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="closeReservationResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="closeReservationParamReturn" type="Q1:ReservationResponseMsg"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="changeReservation">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="changeReservationParamIn" type="Q1:ReservationChangeRequestMsg"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="changeReservationResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="changeReservationParamReturn" type="Q1:ReservationResponseMsg"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+        </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="createReservationRequest">
+    <wsdl:part element="tns:createReservation" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="createReservationResponse">
+    <wsdl:part element="tns:createReservationResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="closeReservationRequest">
+    <wsdl:part element="tns:closeReservation" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="closeReservationResponse">
+    <wsdl:part element="tns:closeReservationResponse" name="parameters"/>
+  </wsdl:message>
+    <wsdl:message name="changeReservationRequestMsg">
+    <wsdl:part element="tns:changeReservation" name="changeReservationParameters"/>
+  </wsdl:message>
+    <wsdl:message name="changeReservationResponseMsg">
+    <wsdl:part element="tns:changeReservationResponse" name="changeReservationResult"/>
+  </wsdl:message>
+    <wsdl:portType name="ReservationManagementService">
+    <wsdl:operation name="createReservation">
+      <wsdl:input message="tns:createReservationRequest"/>
+      <wsdl:output message="tns:createReservationResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="closeReservation">
+      <wsdl:input message="tns:closeReservationRequest"/>
+      <wsdl:output message="tns:closeReservationResponse"/>
+    </wsdl:operation>
+        <wsdl:operation name="changeReservation">
+      <wsdl:input message="tns:changeReservationRequestMsg" name="changeReservationRequest"/>
+      <wsdl:output message="tns:changeReservationResponseMsg" name="changeReservationResponse"/>
+    </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:simpleType name="PaymentExecutionStatusType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="paid"></xsd:enumeration>
+      <xsd:enumeration value="notPaid"></xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+</xsd:schema>

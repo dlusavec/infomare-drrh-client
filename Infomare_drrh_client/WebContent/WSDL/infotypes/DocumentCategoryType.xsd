@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:simpleType name="DocumentCategoryType">
+    <xsd:restriction base="xsd:string">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <xsd:enumeration value="RESERVATION"></xsd:enumeration>
+      <xsd:enumeration value="CONTRACT"></xsd:enumeration>
+      <xsd:enumeration value="PURCHASE_ORDER"></xsd:enumeration>
+      <xsd:enumeration value="INVOICE"></xsd:enumeration>
+      <xsd:enumeration value="PAYMENT_REQUEST"></xsd:enumeration>
+      <xsd:enumeration value="PAYMENT"></xsd:enumeration>
+      <xsd:enumeration value="BUDGET_PLAN"></xsd:enumeration>
+      <xsd:enumeration value="GL_TRANSFER"></xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+</xsd:schema>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions name="DocumentManagementInterface" targetNamespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/interfaces/DocumentManagementInterface" xmlns:bons1="http://hr.ibm.fmis.gw.BudgetUserLibrary/messages" xmlns:tns="http://hr.ibm.fmis.gw.BudgetUserLibrary/interfaces/DocumentManagementInterface" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <wsdl:types>
+    <xsd:schema targetNamespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/interfaces/DocumentManagementInterface">
+            <xsd:import namespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/messages" schemaLocation="../messages/DocumentReverseRequestMsg.xsd"/>
+            <xsd:import namespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/messages" schemaLocation="../messages/DocumentCloseRequestInputMsg.xsd"/>
+            <xsd:import namespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/messages" schemaLocation="../messages/DocumentChangeRequestMsg.xsd"/>
+            <xsd:import namespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/messages" schemaLocation="../messages/DocumentCreateRequestMsg.xsd"/>
+            <xsd:import namespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/messages" schemaLocation="../messages/DocumentResponseMsg.xsd"/>
+      <xsd:element name="createDocument">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="documentCreateInput" nillable="true" type="bons1:DocumentCreateRequestMsg"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="createDocumentResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="documentCreateResponse" nillable="true" type="bons1:DocumentResponseMsg"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="changeDocument">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="documentChangeInput" nillable="true" type="bons1:DocumentChangeRequestMsg"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="changeDocumentResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="documentChangeResponse" nillable="true" type="bons1:DocumentResponseMsg"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="closeDocument">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="documentCloseInput" nillable="true" type="bons1:DocumentCloseRequestInputMsg"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="closeDocumentResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="documentCloseResponseMsg" nillable="true" type="bons1:DocumentResponseMsg"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="reverseDocument">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="documentReverseInput" nillable="true" type="bons1:DocumentReverseRequestMsg"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="reverseDocumentResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="documentReverseResponseMsg" nillable="true" type="bons1:DocumentResponseMsg"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+        </xsd:schema>
+  </wsdl:types>
+    <wsdl:message name="createDocumentRequestMsg">
+    <wsdl:part element="tns:createDocument" name="createDocumentParameters"/>
+  </wsdl:message>
+    <wsdl:message name="createDocumentResponseMsg">
+    <wsdl:part element="tns:createDocumentResponse" name="createDocumentResult"/>
+  </wsdl:message>
+    <wsdl:message name="changeDocumentRequestMsg">
+    <wsdl:part element="tns:changeDocument" name="changeDocumentParameters"/>
+  </wsdl:message>
+    <wsdl:message name="changeDocumentResponseMsg">
+    <wsdl:part element="tns:changeDocumentResponse" name="changeDocumentResult"/>
+  </wsdl:message>
+    <wsdl:message name="closeDocumentRequestMsg">
+    <wsdl:part element="tns:closeDocument" name="closeDocumentParameters"/>
+  </wsdl:message>
+    <wsdl:message name="closeDocumentResponseMsg">
+    <wsdl:part element="tns:closeDocumentResponse" name="closeDocumentResult"/>
+  </wsdl:message>
+    <wsdl:message name="reverseDocumentRequestMsg">
+    <wsdl:part element="tns:reverseDocument" name="reverseDocumentParameters"/>
+  </wsdl:message>
+    <wsdl:message name="reverseDocumentResponseMsg">
+    <wsdl:part element="tns:reverseDocumentResponse" name="reverseDocumentResult"/>
+  </wsdl:message>
+    <wsdl:portType name="DocumentManagementInterface">
+    <wsdl:operation name="createDocument">
+      <wsdl:input message="tns:createDocumentRequestMsg" name="createDocumentRequest"/>
+      <wsdl:output message="tns:createDocumentResponseMsg" name="createDocumentResponse"/>
+    </wsdl:operation>
+        <wsdl:operation name="changeDocument">
+      <wsdl:input message="tns:changeDocumentRequestMsg" name="changeDocumentRequest"/>
+      <wsdl:output message="tns:changeDocumentResponseMsg" name="changeDocumentResponse"/>
+    </wsdl:operation>
+        <wsdl:operation name="closeDocument">
+      <wsdl:input message="tns:closeDocumentRequestMsg" name="closeDocumentRequest"/>
+      <wsdl:output message="tns:closeDocumentResponseMsg" name="closeDocumentResponse"/>
+    </wsdl:operation>
+        <wsdl:operation name="reverseDocument">
+      <wsdl:input message="tns:reverseDocumentRequestMsg" name="reverseDocumentRequest"/>
+      <wsdl:output message="tns:reverseDocumentResponseMsg" name="reverseDocumentResponse"/>
+    </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

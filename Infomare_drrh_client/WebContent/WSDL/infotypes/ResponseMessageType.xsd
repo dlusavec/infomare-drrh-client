@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema targetNamespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:simpleType name="ResponseMessageType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="error"/>
+      <xsd:enumeration value="notification"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+</xsd:schema>

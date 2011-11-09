@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/messages"
+  xmlns:bons1="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes/"
+  xmlns:bons2="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:import schemaLocation="../infotypes/ErrorResponse.xsd"
+    namespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes">
+  </xsd:import>
+  <xsd:import namespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes/"
+    schemaLocation="../infotypes/BudgetCommitmentStatusNotification.xsd" />
+  <xsd:import namespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes"
+    schemaLocation="../infotypes/ResponseMessageType.xsd" />
+  <xsd:import namespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes"
+    schemaLocation="../infotypes/MessageHeader.xsd" />
+
+  <xsd:complexType name="ContractResponseMsg">
+    <xsd:sequence>
+      <xsd:element name="responseMessageType" type="bons2:ResponseMessageType" />
+      <xsd:element name="errorResponse" type="bons2:ErrorResponse" maxOccurs="1" />
+      <xsd:element name="notificationResponse" type="bons1:BudgetCommitmentStatusNotification" />
+      <xsd:element name="messageHeader" type="bons2:MessageHeader" />
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

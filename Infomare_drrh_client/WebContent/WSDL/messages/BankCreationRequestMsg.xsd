@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/messages"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:bons0="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes">
+  <xsd:import schemaLocation="../infotypes/Bank.xsd" namespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes"></xsd:import>
+  <xsd:import schemaLocation="../infotypes/MessageHeader.xsd"
+    namespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes">
+  </xsd:import>
+  <xsd:complexType name="BankCreationRequestMsg">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="messageHeader" type="bons0:MessageHeader"></xsd:element>
+      <xsd:element minOccurs="0" name="bank" type="bons0:Bank"></xsd:element>
+      <xsd:element minOccurs="0" name="logicalSystemName" type="xsd:string"></xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

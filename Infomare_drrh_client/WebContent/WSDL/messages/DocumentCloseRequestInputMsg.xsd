@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/messages"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:bons0="http://hr.ibm.fmis.gw.BUFMISBudgetExecution/infotypes/"
+  xmlns:bons1="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes/"
+  xmlns:bons2="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes">
+  <xsd:import schemaLocation="../infotypes/Invoice.xsd" namespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes"></xsd:import>
+  <xsd:import schemaLocation="../infotypes/BudgetCommitment.xsd"
+    namespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes/">
+  </xsd:import>
+  <xsd:import schemaLocation="../infotypes/DocumentHeader.xsd"
+    namespace="http://hr.ibm.fmis.gw.BUFMISBudgetExecution/infotypes/">
+  </xsd:import>
+  <xsd:complexType name="DocumentCloseRequestInputMsg">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="documentHeader" type="bons0:DocumentHeader"></xsd:element>
+      <xsd:element minOccurs="0" name="budgetCommitment" type="bons1:BudgetCommitment"></xsd:element>
+      <xsd:element minOccurs="0" name="invoice" type="bons2:Invoice"></xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

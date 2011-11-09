@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes"
+  xmlns:bons0="http://hr.ibm.fmis.gw.BUFMISBudgetExecution/infotypes/"
+  xmlns:bons1="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:include schemaLocation="PaymentExecutionStatusType.xsd" />
+  <xsd:import namespace="http://hr.ibm.fmis.gw.BUFMISBudgetExecution/infotypes/" schemaLocation="DocumentHeader.xsd">
+  </xsd:import>
+  <xsd:complexType name="PaymentExecution">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="amount" type="xsd:decimal" />
+      <xsd:element minOccurs="0" name="documentHeader" type="bons0:DocumentHeader" />
+      <xsd:element minOccurs="0" name="localCurrencyAmount" type="xsd:decimal" />
+      <xsd:element minOccurs="0" name="referencedDocumentHeader" type="bons0:DocumentHeader" />
+      <xsd:element minOccurs="0" name="masterVendorId" type="xsd:long" />
+      <xsd:element minOccurs="0" name="sapVendorId" type="xsd:string" />
+      <xsd:element minOccurs="0" name="buFmisVendorId" type="xsd:string" />
+      <xsd:element minOccurs="0" name="paymentReference" type="xsd:string" />
+      <xsd:element minOccurs="0" name="paymentExecutionStatusType" type="bons1:PaymentExecutionStatusType" />
+      <xsd:element minOccurs="0" name="paymentDate" type="xsd:date"></xsd:element>
+      <xsd:element minOccurs="0" name="isCession" type="xsd:boolean"></xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

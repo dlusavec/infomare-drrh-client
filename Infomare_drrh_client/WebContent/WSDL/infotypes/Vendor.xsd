@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes"
+  xmlns:bons0="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:include schemaLocation="VendorAccountDataList.xsd"></xsd:include>
+  <xsd:include schemaLocation="VendorList.xsd"></xsd:include>
+
+  <xsd:complexType name="Vendor">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="LogicalSystemName" type="xsd:string"></xsd:element>
+      <xsd:element name="LogicalSystemVendorID" type="xsd:string" />
+
+
+
+
+
+
+      <xsd:element name="Title" type="xsd:string" />
+      <xsd:element name="Name" type="xsd:string" />
+
+      <xsd:element minOccurs="0" name="Oib" type="xsd:string" />
+      <xsd:element name="TaxNumber" type="xsd:string" />
+      <xsd:element name="NaturalPerson" type="xsd:string" />
+
+      <xsd:element name="Language" type="xsd:string" />
+      <xsd:element maxOccurs="1" name="VendorAccountDataList" type="bons0:VendorAccountDataList" />
+
+      <xsd:element minOccurs="0" name="VendorGroup" type="xsd:string"></xsd:element>
+      <xsd:element name="Street" type="xsd:string" />
+      <xsd:element name="HouseNumber" type="xsd:string" />
+      <xsd:element minOccurs="0" name="ZipCode" type="xsd:string"></xsd:element>
+      <xsd:element minOccurs="0" name="City" type="xsd:string" />
+      <xsd:element name="Country" type="xsd:string" />
+      <xsd:element name="Email" type="xsd:string" />
+      <xsd:element name="Fax" type="xsd:string" />
+      <xsd:element name="Telephone" type="xsd:string" />
+      <xsd:element minOccurs="0" name="AlternativeVendorDataList" type="bons0:VendorList" maxOccurs="1"></xsd:element>
+
+      <xsd:element minOccurs="0" name="VendorId" type="xsd:long"></xsd:element>
+      <xsd:element minOccurs="0" name="SapVendorId" type="xsd:string"></xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

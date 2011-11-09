@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema targetNamespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes" xmlns:bons0="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:include schemaLocation="DocumentTypeType.xsd"/>
+    <xsd:include schemaLocation="DocumentClassType.xsd"/>
+    <xsd:include schemaLocation="DocumentCategoryType.xsd"/>
+    <xsd:complexType name="DocumentClassCategoryType">
+    <xsd:sequence>
+      <xsd:element name="documentClass" type="bons0:DocumentClassType"/>
+      <xsd:element name="documentCategory" type="bons0:DocumentCategoryType"/>
+      <xsd:element name="documentType" type="bons0:DocumentTypeType"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

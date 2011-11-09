@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://hr.ibm.fmis.gw.BUFMISBudgetExecution/infotypes/"
+  xmlns:bons0="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:import namespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes"
+    schemaLocation="DocumentClassCategoryType.xsd" />
+  <xsd:import namespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes" schemaLocation="Currency.xsd" />
+  <xsd:complexType name="DocumentHeader">
+    <xsd:sequence>
+      <xsd:element name="logicalSystemName" type="xsd:string" />
+      <xsd:element name="budgetUser" type="xsd:string" />
+      <xsd:element name="buFmisDocumentId" type="xsd:string" />
+      <xsd:element name="documentDate" type="xsd:date" />
+      <xsd:element minOccurs="0" name="reference">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="16"></xsd:maxLength>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="currency" type="bons0:Currency" />
+      <xsd:element minOccurs="0" name="postingDate" type="xsd:date" />
+      <xsd:element minOccurs="0" name="description">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="50"></xsd:maxLength>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element default="DRRH" name="companyCode" type="xsd:string" />
+      <xsd:element name="documentClassCategory" type="bons0:DocumentClassCategoryType" />
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

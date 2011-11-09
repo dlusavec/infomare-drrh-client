@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsd_1="http://hr.ibm.fmis.gw.BUFMISBudgetExecution/infotypes/">
+  <xsd:import namespace="http://hr.ibm.fmis.gw.BUFMISBudgetExecution/infotypes/" schemaLocation="DocumentHeader.xsd" />
+  <xsd:complexType name="ReferencedDocumentItem">
+    <xsd:sequence>
+      <xsd:element maxOccurs="1" minOccurs="0" name="referencedDocumentHeader" type="xsd_1:DocumentHeader" />
+      <xsd:element name="referencedLineItemNumber" type="xsd:long" />
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions name="DocumentManagementInterfaceExport_DocumentManagementInterfaceHttp_Service" targetNamespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/interfaces/DocumentManagementInterface/Binding" xmlns:Port_0="http://hr.ibm.fmis.gw.BudgetUserLibrary/interfaces/DocumentManagementInterface" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:this="http://hr.ibm.fmis.gw.BudgetUserLibrary/interfaces/DocumentManagementInterface/Binding" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:import location="DocumentManagementInterface.wsdl" namespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/interfaces/DocumentManagementInterface"/>
+  <wsdl:binding name="DocumentManagementInterfaceExport_DocumentManagementInterfaceHttpBinding" type="Port_0:DocumentManagementInterface">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="createDocument">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="createDocumentRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="createDocumentResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="changeDocument">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="changeDocumentRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="changeDocumentResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="closeDocument">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="closeDocumentRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="closeDocumentResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="reverseDocument">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="reverseDocumentRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="reverseDocumentResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="DocumentManagementInterfaceExport_DocumentManagementInterfaceHttpService">
+    <wsdl:port binding="this:DocumentManagementInterfaceExport_DocumentManagementInterfaceHttpBinding" name="DocumentManagementInterfaceExport_DocumentManagementInterfaceHttpPort">
+      <soap:address location="http://localhost:9080/hr.ibm.fmis.gw.comm.BUDocumentManagementWeb/sca/DocumentManagementInterfaceExport"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

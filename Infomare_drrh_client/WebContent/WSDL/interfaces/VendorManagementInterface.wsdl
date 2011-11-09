@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions name="VendorManagementInterface" targetNamespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/interfaces/VendorManagementInterface" xmlns:bons0="http://hr.ibm.fmis.gw.BudgetUserLibrary/interfaces/VendorManagementInterface" xmlns:bons2="http://hr.ibm.fmis.gw.BudgetUserLibrary/messages" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <wsdl:types>
+    <xsd:schema targetNamespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/interfaces/VendorManagementInterface">
+            <xsd:import namespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/messages" schemaLocation="../messages/VendorRetrieveResponseMsg.xsd"/>
+            <xsd:import namespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/messages" schemaLocation="../messages/BankAccountDeactivateRequestMsg.xsd"/>
+            <xsd:import namespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/messages" schemaLocation="../messages/BankAccountResponseMsg.xsd"/>
+            <xsd:import namespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/messages" schemaLocation="../messages/BankAccountCreationRequestMsg.xsd"/>
+            <xsd:import namespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/messages" schemaLocation="../messages/VendorRetrieveRequestMsg.xsd"/>
+            <xsd:import namespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/messages" schemaLocation="../messages/VendorDeactivationRequestMsg.xsd"/>
+            <xsd:import namespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/messages" schemaLocation="../messages/VendorChangeRequestMsg.xsd"/>
+            <xsd:import namespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/messages" schemaLocation="../messages/VendorResponseMsg.xsd"/>
+            <xsd:import namespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/messages" schemaLocation="../messages/VendorCreationRequestMsg.xsd"/>
+            <xsd:element name="createVendor">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="requestVendorCreationInput" nillable="true" type="bons2:VendorCreationRequestMsg"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="createVendorResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="requestVendorCreationOutput" nillable="true" type="bons2:VendorResponseMsg"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="changeVendor">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="requestVendorChangeInput" nillable="true" type="bons2:VendorChangeRequestMsg"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="changeVendorResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="requestVendorChangeOutput" nillable="true" type="bons2:VendorResponseMsg"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="deactivateVendor">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="requestVendorDeactivationInput" nillable="true" type="bons2:VendorDeactivationRequestMsg"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="deactivateVendorResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="requestVendorDeactivationOutput" nillable="true" type="bons2:VendorResponseMsg"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="retrieveVendor">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="vendorRetrieveRequestMsg" nillable="true" type="bons2:VendorRetrieveRequestMsg"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="retrieveVendorResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="vendorResponseMsg" nillable="true" type="bons2:VendorRetrieveResponseMsg"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="addNewBankAccount">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="bankAccountCreationRequestMsg" nillable="true" type="bons2:BankAccountCreationRequestMsg"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="addNewBankAccountResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="bankAccountResponseMsg" nillable="true" type="bons2:BankAccountResponseMsg"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="deactivateBankAccount">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="bankAccountDeactivateRequestMsg" nillable="true" type="bons2:BankAccountDeactivateRequestMsg"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="deactivateBankAccountResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="bankAccountResponseMsg" nillable="true" type="bons2:BankAccountResponseMsg"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+        </xsd:schema>
+  </wsdl:types>
+    <wsdl:message name="createVendorRequestMsg">
+    <wsdl:part element="bons0:createVendor" name="createVendorParameters"/>
+  </wsdl:message>
+    <wsdl:message name="createVendorResponseMsg">
+    <wsdl:part element="bons0:createVendorResponse" name="createVendorResult"/>
+  </wsdl:message>
+    <wsdl:message name="changeVendorRequestMsg">
+    <wsdl:part element="bons0:changeVendor" name="changeVendorParameters"/>
+  </wsdl:message>
+    <wsdl:message name="changeVendorResponseMsg">
+    <wsdl:part element="bons0:changeVendorResponse" name="changeVendorResult"/>
+  </wsdl:message>
+    <wsdl:message name="deactivateVendorRequestMsg">
+    <wsdl:part element="bons0:deactivateVendor" name="deactivateVendorParameters"/>
+  </wsdl:message>
+    <wsdl:message name="deactivateVendorResponseMsg">
+    <wsdl:part element="bons0:deactivateVendorResponse" name="deactivateVendorResult"/>
+  </wsdl:message>
+    <wsdl:message name="retrieveVendorRequestMsg">
+    <wsdl:part element="bons0:retrieveVendor" name="retrieveVendorParameters"/>
+  </wsdl:message>
+    <wsdl:message name="retrieveVendorResponseMsg">
+    <wsdl:part element="bons0:retrieveVendorResponse" name="retrieveVendorResult"/>
+  </wsdl:message>
+    <wsdl:message name="addNewBankAccountRequestMsg">
+    <wsdl:part element="bons0:addNewBankAccount" name="addNewBankAccountParameters"/>
+  </wsdl:message>
+    <wsdl:message name="addNewBankAccountResponseMsg">
+    <wsdl:part element="bons0:addNewBankAccountResponse" name="addNewBankAccountResult"/>
+  </wsdl:message>
+    <wsdl:message name="deactivateBankAccountRequestMsg">
+    <wsdl:part element="bons0:deactivateBankAccount" name="deactivateBankAccountParameters"/>
+  </wsdl:message>
+    <wsdl:message name="deactivateBankAccountResponseMsg">
+    <wsdl:part element="bons0:deactivateBankAccountResponse" name="deactivateBankAccountResult"/>
+  </wsdl:message>
+    <wsdl:portType name="VendorManagementInterface">
+    <wsdl:operation name="createVendor">
+      <wsdl:input message="bons0:createVendorRequestMsg" name="createVendorRequest"/>
+      <wsdl:output message="bons0:createVendorResponseMsg" name="createVendorResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="changeVendor">
+      <wsdl:input message="bons0:changeVendorRequestMsg" name="changeVendorRequest"/>
+      <wsdl:output message="bons0:changeVendorResponseMsg" name="changeVendorResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="deactivateVendor">
+      <wsdl:input message="bons0:deactivateVendorRequestMsg" name="deactivateVendorRequest"/>
+      <wsdl:output message="bons0:deactivateVendorResponseMsg" name="deactivateVendorResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="retrieveVendor">
+      <wsdl:input message="bons0:retrieveVendorRequestMsg" name="retrieveVendorRequest"/>
+      <wsdl:output message="bons0:retrieveVendorResponseMsg" name="retrieveVendorResponse"/>
+    </wsdl:operation>
+        <wsdl:operation name="addNewBankAccount">
+      <wsdl:input message="bons0:addNewBankAccountRequestMsg" name="addNewBankAccountRequest"/>
+      <wsdl:output message="bons0:addNewBankAccountResponseMsg" name="addNewBankAccountResponse"/>
+    </wsdl:operation>
+        <wsdl:operation name="deactivateBankAccount">
+      <wsdl:input message="bons0:deactivateBankAccountRequestMsg" name="deactivateBankAccountRequest"/>
+      <wsdl:output message="bons0:deactivateBankAccountResponseMsg" name="deactivateBankAccountResponse"/>
+    </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

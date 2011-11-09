@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/messages"
+  xmlns:bons0="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  xmlns:bons1="http://hr.ibm.fmis.gw.BUFMISBudgetExecution/infotypes/">
+  <xsd:import schemaLocation="../infotypes/DocumentHeader.xsd"
+    namespace="http://hr.ibm.fmis.gw.BUFMISBudgetExecution/infotypes/">
+  </xsd:import>
+  <xsd:import namespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes"
+    schemaLocation="../infotypes/MessageHeader.xsd">
+  </xsd:import>
+  <xsd:complexType name="InvoiceReverseRequestMsg">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="messageHeader" type="bons0:MessageHeader" />
+      <xsd:element minOccurs="0" name="invoice" type="bons1:DocumentHeader" />
+      <xsd:element minOccurs="0" name="buFmisDocumentIdToReverse" type="xsd:string"></xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

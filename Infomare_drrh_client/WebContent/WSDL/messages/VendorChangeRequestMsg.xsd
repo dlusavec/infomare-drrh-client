@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema targetNamespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/messages" xmlns:bons1="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:import namespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes" schemaLocation="../infotypes/Vendor.xsd"/>
+    <xsd:import namespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes" schemaLocation="../infotypes/MessageHeader.xsd"/>
+  <xsd:complexType name="VendorChangeRequestMsg">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="messageHeader" type="bons1:MessageHeader"/>
+      <xsd:element minOccurs="0" name="vendor" type="bons1:Vendor"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

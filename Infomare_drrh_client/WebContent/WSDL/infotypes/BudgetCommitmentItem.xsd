@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes/"
+  xmlns:bons0="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes/"
+  xmlns:bons1="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:import namespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes" schemaLocation="ReferencedDocumentItem.xsd" />
+  <xsd:import namespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes" schemaLocation="Location.xsd" />
+  <xsd:include schemaLocation="BudgetStructure.xsd" />
+  <xsd:complexType name="BudgetCommitmentItem">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="amount" type="xsd:decimal" />
+      <xsd:element minOccurs="0" name="localCurrencyAmount" type="xsd:decimal"></xsd:element>
+      <xsd:element name="itemDueDate" type="xsd:date" />
+      <xsd:element name="budgetStructure" type="bons0:BudgetStructure" />
+      <xsd:element name="bufmisVendorId" type="xsd:string" />
+      <xsd:element name="masterVendorId" type="xsd:string" />
+      <xsd:element name="sapVendorId" type="xsd:string" />
+      <xsd:element name="lineItemNumber" type="xsd:long" />
+      <xsd:element minOccurs="0" name="referencedDocumentItem" type="bons1:ReferencedDocumentItem" />
+      <xsd:element minOccurs="0" name="location" type="bons1:Location" />
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

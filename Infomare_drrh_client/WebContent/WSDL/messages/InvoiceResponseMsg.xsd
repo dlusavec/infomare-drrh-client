@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/messages"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:bons0="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes">
+  <xsd:import schemaLocation="../infotypes/ErrorResponse.xsd"
+    namespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes">
+  </xsd:import>
+  <xsd:import schemaLocation="../infotypes/Invoice.xsd" namespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes"></xsd:import>
+  <xsd:import schemaLocation="../infotypes/MessageHeader.xsd"
+    namespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes">
+  </xsd:import>
+  <xsd:import schemaLocation="../infotypes/InvoiceStatusNotification.xsd"
+    namespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes">
+  </xsd:import>
+
+  <xsd:import schemaLocation="../infotypes/ResponseMessageType.xsd"
+    namespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes">
+  </xsd:import>
+  <xsd:complexType name="InvoiceResponseMsg">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="responseMessageType" type="bons0:ResponseMessageType"></xsd:element>
+      <xsd:element minOccurs="0" name="errorResponse" type="bons0:ErrorResponse" maxOccurs="1"></xsd:element>
+      <xsd:element minOccurs="0" name="notificationResponse" type="bons0:InvoiceStatusNotification"></xsd:element>
+      <xsd:element minOccurs="0" name="messageHeader" type="bons0:MessageHeader"></xsd:element>
+      <xsd:element minOccurs="0" name="invoice" type="bons0:Invoice"></xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

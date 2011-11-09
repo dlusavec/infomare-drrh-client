@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/messages"
+  xmlns:bons1="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:import schemaLocation="../infotypes/ErrorResponse.xsd"
+    namespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes">
+  </xsd:import>
+  <xsd:import schemaLocation="../infotypes/Vendor.xsd" namespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes"></xsd:import>
+  <xsd:import namespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes"
+    schemaLocation="../infotypes/ResponseMessageType.xsd" />
+  <xsd:import namespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes"
+    schemaLocation="../infotypes/MessageHeader.xsd" />
+
+  <xsd:complexType name="VendorResponseMsg">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="messageHeader" type="bons1:MessageHeader" />
+      <xsd:element minOccurs="0" name="responseMessageType" type="bons1:ResponseMessageType" />
+      <xsd:element minOccurs="0" name="errorResponse" type="bons1:ErrorResponse" maxOccurs="1" />
+      <xsd:element minOccurs="0" name="vendor" type="bons1:Vendor"></xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

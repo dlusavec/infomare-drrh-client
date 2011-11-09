@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions name="DistributionManagementWebServiceInterface" targetNamespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/interfaces/ResponseMessageHandlerService/" xmlns:bons0="http://hr.ibm.fmis.gw.comm.DistributionManagementLibrary/interfaces/DistributionManagementWebServiceInterface" xmlns:tns="http://hr.ibm.fmis.gw.BudgetUserLibrary/interfaces/ResponseMessageHandlerService/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <wsdl:types>
+    <xsd:schema targetNamespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/interfaces/ResponseMessageHandlerService/" xmlns:bons0="http://hr.ibm.fmis.gw.BudgetUserLibrary/interfaces/ResponseMessageHandlerService/">
+      <xsd:element name="getAllResponseList">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="logicalSystemName" nillable="true" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getAllResponseListResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="distributionMessageList" nillable="true" type="xsd:anyType"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="getReservationResponseList">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="logicalSystemName" nillable="true" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="getReservationResponseListResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="reservationResponseList" nillable="true" type="xsd:anyType"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="getContractResponseList">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="logicalSystemName" nillable="true" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="getContractResponseListResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="contractResponseList" nillable="true" type="xsd:anyType"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="getPurchaseOrderResponseList">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="logicalSystemName" nillable="true" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="getPurchaseOrderResponseListResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="purchaseOrderResponseList" nillable="true" type="xsd:anyType"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="getInvoiceResponseList">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="logicalSystemName" nillable="true" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="getInvoiceResponseListResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="invoiceResponseList" nillable="true" type="xsd:anyType"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="getPaymentExecutionList">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="logicalSystemName" nillable="true" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="getPaymentExecutionListResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="paymentExecutionList" nillable="true" type="xsd:anyType"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="getVendorUpdatesList">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="logicalSystemName" nillable="true" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="getVendorUpdatesListResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="vendorUpdatesList" nillable="true" type="xsd:anyType"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="getBankUpdatesList">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="logicalSystemName" nillable="true" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="getBankUpdatesListResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="bankUpdatesList" nillable="true" type="xsd:anyType"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="getAllResponseListStartingWithMessageId">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="logicalSystemName" nillable="true" type="xsd:string"/>
+            <xsd:element name="messageId" nillable="true" type="xsd:long"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="getAllResponseListStartingWithMessageIdResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="distributionMessageList" nillable="true" type="xsd:anyType"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="getReservationResponseListStartingWithMessageId">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="logicalSystemName" nillable="true" type="xsd:string"/>
+            <xsd:element name="messageId" nillable="true" type="xsd:long"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="getReservationResponseListStartingWithMessageIdResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="distributionMessageList" nillable="true" type="xsd:anyType"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="getContractResponseListStartingWithMessageId">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="logicalSystemName" nillable="true" type="xsd:string"/>
+            <xsd:element name="messageId" nillable="true" type="xsd:long"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="getContractResponseListStartingWithMessageIdResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="distributionMessageList" nillable="true" type="xsd:anyType"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="getPurchaseOrderResponseListStartingWithMessageId">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="logicalSystemName" nillable="true" type="xsd:string"/>
+            <xsd:element name="messageId" nillable="true" type="xsd:long"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="getPurchaseOrderResponseListStartingWithMessageIdResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="distributionMessageList" nillable="true" type="xsd:anyType"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="getInvoiceResponseListStartingWithMessageId">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="logicalSystemName" nillable="true" type="xsd:string"/>
+            <xsd:element name="messageId" nillable="true" type="xsd:long"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="getInvoiceResponseListStartingWithMessageIdResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="distributionMessageList" nillable="true" type="xsd:anyType"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="getPaymentExecutionListStartingWithMessageId">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="logicalSystemName" nillable="true" type="xsd:string"/>
+            <xsd:element name="messageId" nillable="true" type="xsd:long"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="getPaymentExecutionListStartingWithMessageIdResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="distributionMessageList" nillable="true" type="xsd:anyType"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="getVendorUpdatesListStartingWithMessageId">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="logicalSystemName" nillable="true" type="xsd:string"/>
+            <xsd:element name="messageId" nillable="true" type="xsd:long"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="getVendorUpdatesListStartingWithMessageIdResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="distributionMessageList" nillable="true" type="xsd:anyType"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="getBankUpdatesListStartingWithMessageId">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="logicalSystemName" nillable="true" type="xsd:string"/>
+            <xsd:element name="messageId" nillable="true" type="xsd:long"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="getBankUpdatesListStartingWithMessageIdResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="distributionMessageList" nillable="true" type="xsd:anyType"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+        </xsd:schema>
+  </wsdl:types>
+    <wsdl:message name="getAllResponseListRequestMsg">
+    <wsdl:part element="tns:getAllResponseList" name="getAllResponseListParameters1"/>
+  </wsdl:message>
+    <wsdl:message name="getAllResponseListResponseMsg">
+    <wsdl:part element="tns:getAllResponseListResponse" name="getAllResponseListResult1"/>
+  </wsdl:message>
+    <wsdl:message name="getReservationResponseListRequestMsg">
+    <wsdl:part element="tns:getReservationResponseList" name="getReservationResponseListParameters"/>
+  </wsdl:message>
+    <wsdl:message name="getReservationResponseListResponseMsg">
+    <wsdl:part element="tns:getReservationResponseListResponse" name="getReservationResponseListResult"/>
+  </wsdl:message>
+    <wsdl:message name="getContractResponseListRequestMsg">
+    <wsdl:part element="tns:getContractResponseList" name="getContractResponseListParameters"/>
+  </wsdl:message>
+    <wsdl:message name="getContractResponseListResponseMsg">
+    <wsdl:part element="tns:getContractResponseListResponse" name="getContractResponseListResult"/>
+  </wsdl:message>
+    <wsdl:message name="getPurchaseOrderResponseListRequestMsg">
+    <wsdl:part element="tns:getPurchaseOrderResponseList" name="getPurchaseOrderResponseListParameters"/>
+  </wsdl:message>
+    <wsdl:message name="getPurchaseOrderResponseListResponseMsg">
+    <wsdl:part element="tns:getPurchaseOrderResponseListResponse" name="getPurchaseOrderResponseListResult"/>
+  </wsdl:message>
+    <wsdl:message name="getInvoiceResponseListRequestMsg">
+    <wsdl:part element="tns:getInvoiceResponseList" name="getInvoiceResponseListParameters"/>
+  </wsdl:message>
+    <wsdl:message name="getInvoiceResponseListResponseMsg">
+    <wsdl:part element="tns:getInvoiceResponseListResponse" name="getInvoiceResponseListResult"/>
+  </wsdl:message>
+    <wsdl:message name="getPaymentExecutionListRequestMsg">
+    <wsdl:part element="tns:getPaymentExecutionList" name="getPaymentExecutionListParameters"/>
+  </wsdl:message>
+    <wsdl:message name="getPaymentExecutionListResponseMsg">
+    <wsdl:part element="tns:getPaymentExecutionListResponse" name="getPaymentExecutionListResult"/>
+  </wsdl:message>
+    <wsdl:message name="getVendorUpdatesListRequestMsg">
+    <wsdl:part element="tns:getVendorUpdatesList" name="getVendorUpdatesListParameters"/>
+  </wsdl:message>
+    <wsdl:message name="getVendorUpdatesListResponseMsg">
+    <wsdl:part element="tns:getVendorUpdatesListResponse" name="getVendorUpdatesListResult"/>
+  </wsdl:message>
+    <wsdl:message name="getBankUpdatesListRequestMsg">
+    <wsdl:part element="tns:getBankUpdatesList" name="getBankUpdatesListParameters"/>
+  </wsdl:message>
+    <wsdl:message name="getBankUpdatesListResponseMsg">
+    <wsdl:part element="tns:getBankUpdatesListResponse" name="getBankUpdatesListResult"/>
+  </wsdl:message>
+    <wsdl:message name="getAllResponseListStartingWithMessageIdMsg0">
+    <wsdl:part element="tns:getAllResponseListStartingWithMessageId" name="getAllResponseListParameters11"/>
+  </wsdl:message>
+    <wsdl:message name="getAllResponseListStartingWithMessageIdMsg1">
+    <wsdl:part element="tns:getAllResponseListStartingWithMessageIdResponse" name="getAllResponseListResult11"/>
+  </wsdl:message>
+    <wsdl:message name="getReservationResponseListStartingWithMessageIdMsg0">
+    <wsdl:part element="tns:getReservationResponseListStartingWithMessageId" name="getAllResponseListParameters111"/>
+  </wsdl:message>
+    <wsdl:message name="getReservationResponseListStartingWithMessageIdMsg1">
+    <wsdl:part element="tns:getReservationResponseListStartingWithMessageIdResponse" name="getAllResponseListResult111"/>
+  </wsdl:message>
+    <wsdl:message name="getContractResponseListStartingWithMessageIdMsg0">
+    <wsdl:part element="tns:getContractResponseListStartingWithMessageId" name="getAllResponseListParameters1111"/>
+  </wsdl:message>
+    <wsdl:message name="getContractResponseListStartingWithMessageIdMsg1">
+    <wsdl:part element="tns:getContractResponseListStartingWithMessageIdResponse" name="getAllResponseListResult1111"/>
+  </wsdl:message>
+    <wsdl:message name="getPurchaseOrderResponseListStartingWithMessageIdMsg0">
+    <wsdl:part element="tns:getPurchaseOrderResponseListStartingWithMessageId" name="getAllResponseListParameters11111"/>
+  </wsdl:message>
+    <wsdl:message name="getPurchaseOrderResponseListStartingWithMessageIdMsg1">
+    <wsdl:part element="tns:getPurchaseOrderResponseListStartingWithMessageIdResponse" name="getAllResponseListResult11111"/>
+  </wsdl:message>
+    <wsdl:message name="getInvoiceResponseListStartingWithMessageIdMsg0">
+    <wsdl:part element="tns:getInvoiceResponseListStartingWithMessageId" name="getAllResponseListParameters111111"/>
+  </wsdl:message>
+    <wsdl:message name="getInvoiceResponseListStartingWithMessageIdMsg1">
+    <wsdl:part element="tns:getInvoiceResponseListStartingWithMessageIdResponse" name="getAllResponseListResult111111"/>
+  </wsdl:message>
+    <wsdl:message name="getPaymentExecutionListStartingWithMessageIdMsg0">
+    <wsdl:part element="tns:getPaymentExecutionListStartingWithMessageId" name="getAllResponseListParameters11111111"/>
+  </wsdl:message>
+    <wsdl:message name="getPaymentExecutionListStartingWithMessageIdMsg1">
+    <wsdl:part element="tns:getPaymentExecutionListStartingWithMessageIdResponse" name="getAllResponseListResult11111111"/>
+  </wsdl:message>
+    <wsdl:message name="getVendorUpdatesListStartingWithMessageIdMsg0">
+    <wsdl:part element="tns:getVendorUpdatesListStartingWithMessageId" name="getAllResponseListParameters111111111"/>
+  </wsdl:message>
+    <wsdl:message name="getVendorUpdatesListStartingWithMessageIdMsg1">
+    <wsdl:part element="tns:getVendorUpdatesListStartingWithMessageIdResponse" name="getAllResponseListResult111111111"/>
+  </wsdl:message>
+    <wsdl:message name="getBankUpdatesListStartingWithMessageIdMsg0">
+    <wsdl:part element="tns:getBankUpdatesListStartingWithMessageId" name="getAllResponseListParameters111111111"/>
+  </wsdl:message>
+    <wsdl:message name="getBankUpdatesListStartingWithMessageIdMsg1">
+    <wsdl:part element="tns:getBankUpdatesListStartingWithMessageIdResponse" name="getAllResponseListResult111111111"/>
+  </wsdl:message>
+    <wsdl:portType name="ResponseMessageHandlerService">
+    <wsdl:operation name="getAllResponseList">
+      <wsdl:input message="tns:getAllResponseListRequestMsg" name="getAllResponseListRequest"/>
+      <wsdl:output message="tns:getAllResponseListResponseMsg" name="getAllResponseList1Msg1"/>
+    </wsdl:operation>
+        <wsdl:operation name="getReservationResponseList">
+      <wsdl:input message="tns:getReservationResponseListRequestMsg" name="getReservationResponseListRequest"/>
+      <wsdl:output message="tns:getReservationResponseListResponseMsg" name="getReservationResponseListResponse"/>
+    </wsdl:operation>
+        <wsdl:operation name="getContractResponseList">
+      <wsdl:input message="tns:getContractResponseListRequestMsg" name="getContractResponseListRequest"/>
+      <wsdl:output message="tns:getContractResponseListResponseMsg" name="getContractResponseListResponse"/>
+    </wsdl:operation>
+        <wsdl:operation name="getPurchaseOrderResponseList">
+      <wsdl:input message="tns:getPurchaseOrderResponseListRequestMsg" name="getPurchaseOrderResponseListRequest"/>
+      <wsdl:output message="tns:getPurchaseOrderResponseListResponseMsg" name="getPurchaseOrderResponseListResponse"/>
+    </wsdl:operation>
+        <wsdl:operation name="getInvoiceResponseList">
+      <wsdl:input message="tns:getInvoiceResponseListRequestMsg" name="getInvoiceResponseListRequest"/>
+      <wsdl:output message="tns:getInvoiceResponseListResponseMsg" name="getInvoiceResponseListResponse"/>
+    </wsdl:operation>
+        <wsdl:operation name="getPaymentExecutionList">
+      <wsdl:input message="tns:getPaymentExecutionListRequestMsg" name="getPaymentExecutionListRequest"/>
+      <wsdl:output message="tns:getPaymentExecutionListResponseMsg" name="getPaymentExecutionListResponse"/>
+    </wsdl:operation>
+        <wsdl:operation name="getVendorUpdatesList">
+      <wsdl:input message="tns:getVendorUpdatesListRequestMsg" name="getVendorUpdatesListRequest"/>
+      <wsdl:output message="tns:getVendorUpdatesListResponseMsg" name="getVendorUpdatesListResponse"/>
+    </wsdl:operation>
+        <wsdl:operation name="getBankUpdatesList">
+      <wsdl:input message="tns:getBankUpdatesListRequestMsg" name="getBankUpdatesListRequest"/>
+      <wsdl:output message="tns:getBankUpdatesListResponseMsg" name="getBankUpdatesListResponse"/>
+    </wsdl:operation>
+        <wsdl:operation name="getAllResponseListStartingWithMessageId">
+      <wsdl:input message="tns:getAllResponseListStartingWithMessageIdMsg0" name="getAllResponseListStartingWithMessageIdRequest"/>
+      <wsdl:output message="tns:getAllResponseListStartingWithMessageIdMsg1" name="getAllResponseListStartingWithMessageId1Msg1"/>
+    </wsdl:operation>
+        <wsdl:operation name="getReservationResponseListStartingWithMessageId">
+      <wsdl:input message="tns:getReservationResponseListStartingWithMessageIdMsg0" name="getReservationResponseListStartingWithMessageIdRequest"/>
+      <wsdl:output message="tns:getReservationResponseListStartingWithMessageIdMsg1" name="getReservationResponseListStartingWithMessageId1Msg1"/>
+    </wsdl:operation>
+        <wsdl:operation name="getContractResponseListStartingWithMessageId">
+      <wsdl:input message="tns:getContractResponseListStartingWithMessageIdMsg0" name="getContractResponseListStartingWithMessageIdRequest"/>
+      <wsdl:output message="tns:getContractResponseListStartingWithMessageIdMsg1" name="getContractResponseListStartingWithMessageId1Msg1"/>
+    </wsdl:operation>
+        <wsdl:operation name="getPurchaseOrderResponseListStartingWithMessageId">
+      <wsdl:input message="tns:getPurchaseOrderResponseListStartingWithMessageIdMsg0" name="getPurchaseOrderResponseListStartingWithMessageIdRequest"/>
+      <wsdl:output message="tns:getPurchaseOrderResponseListStartingWithMessageIdMsg1" name="getPurchaseOrderResponseListStartingWithMessageId1Msg1"/>
+    </wsdl:operation>
+        <wsdl:operation name="getInvoiceResponseListStartingWithMessageId">
+      <wsdl:input message="tns:getInvoiceResponseListStartingWithMessageIdMsg0" name="getInvoiceResponseListStartingWithMessageIdRequest"/>
+      <wsdl:output message="tns:getInvoiceResponseListStartingWithMessageIdMsg1" name="getInvoiceResponseListStartingWithMessageId1Msg1"/>
+    </wsdl:operation>
+        <wsdl:operation name="getPaymentExecutionListStartingWithMessageId">
+      <wsdl:input message="tns:getPaymentExecutionListStartingWithMessageIdMsg0" name="getPaymentExecutionListStartingWithMessageIdRequest"/>
+      <wsdl:output message="tns:getPaymentExecutionListStartingWithMessageIdMsg1" name="getPaymentExecutionListStartingWithMessageId2Msg1"/>
+    </wsdl:operation>
+        <wsdl:operation name="getVendorUpdatesListStartingWithMessageId">
+      <wsdl:input message="tns:getVendorUpdatesListStartingWithMessageIdMsg0" name="getVendorUpdatesListStartingWithMessageIdRequest"/>
+      <wsdl:output message="tns:getVendorUpdatesListStartingWithMessageIdMsg1" name="getVendorUpdatesListStartingWithMessageIdResponse"/>
+    </wsdl:operation>
+        <wsdl:operation name="getBankUpdatesListStartingWithMessageId">
+      <wsdl:input message="tns:getBankUpdatesListStartingWithMessageIdMsg0" name="getBankUpdatesListStartingWithMessageIdRequest"/>
+      <wsdl:output message="tns:getBankUpdatesListStartingWithMessageIdMsg1" name="getBankUpdatesListStartingWithMessageIdResponse"/>
+    </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

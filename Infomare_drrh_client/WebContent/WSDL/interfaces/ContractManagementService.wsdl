@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions name="ContractManagementService" targetNamespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/interfaces/ContractManagementService" xmlns:Q1="http://hr.ibm.fmis.gw.BudgetUserLibrary/messages" xmlns:bons1="http://hr.ibm.fmis.gw.BudgetUserLibrary/interfaces/" xmlns:tns="http://hr.ibm.fmis.gw.BudgetUserLibrary/interfaces/ContractManagementService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/interfaces/ContractManagementService" xmlns:bons1="http://hr.ibm.fmis.gw.BudgetUserLibrary/interfaces/ContractManagementService">
+            <xsd:import namespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/messages" schemaLocation="../messages/ContractChangeRequestMsg.xsd"/>
+            <xsd:import namespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/messages" schemaLocation="../messages/ContractResponseMsg.xsd"/>
+            <xsd:import namespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/messages" schemaLocation="../messages/ContractCreateRequestMsg.xsd"/>
+            <xsd:import namespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/messages" schemaLocation="../messages/ContractCloseRequestMsg.xsd"/>
+            <xsd:element name="createContract">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="createContractParamIn" type="Q1:ContractCreateRequestMsg"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="createContractResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="createContractParamReturn" type="Q1:ContractResponseMsg"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="closeContract">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="closeContractParamIn" type="Q1:ContractCloseRequestMsg"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="closeContractResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="closeContractParamReturn" type="Q1:ContractResponseMsg"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="changeContract">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="changeContractParamIn" nillable="true" type="Q1:ContractChangeRequestMsg"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="changeContractResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="changeContractParamReturn" nillable="true" type="Q1:ContractResponseMsg"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+        </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="createContractRequest">
+    <wsdl:part element="tns:createContract" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="createContractResponse">
+    <wsdl:part element="tns:createContractResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="closeContractRequest">
+    <wsdl:part element="tns:closeContract" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="closeContractResponse">
+    <wsdl:part element="tns:closeContractResponse" name="parameters"/>
+  </wsdl:message>
+    <wsdl:message name="changeContractRequestMsg">
+    <wsdl:part element="tns:changeContract" name="changeContractParameters"/>
+  </wsdl:message>
+    <wsdl:message name="changeContractResponseMsg">
+    <wsdl:part element="tns:changeContractResponse" name="changeContractResult"/>
+  </wsdl:message>
+    <wsdl:portType name="ContractManagementService">
+    <wsdl:operation name="createContract">
+      <wsdl:input message="tns:createContractRequest"/>
+      <wsdl:output message="tns:createContractResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="closeContract">
+      <wsdl:input message="tns:closeContractRequest"/>
+      <wsdl:output message="tns:closeContractResponse"/>
+    </wsdl:operation>
+        <wsdl:operation name="changeContract">
+      <wsdl:input message="tns:changeContractRequestMsg" name="changeContractRequest"/>
+      <wsdl:output message="tns:changeContractResponseMsg" name="changeContractResponse"/>
+    </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

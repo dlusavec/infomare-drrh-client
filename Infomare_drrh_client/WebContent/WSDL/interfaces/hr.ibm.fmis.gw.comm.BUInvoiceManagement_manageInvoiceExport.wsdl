@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="manageInvoiceExport_InvoiceManagementServiceHttp_Service" targetNamespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/interfaces/InvoiceManagementService/Binding" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:Port_0="http://hr.ibm.fmis.gw.BudgetUserLibrary/interfaces/InvoiceManagementService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:this="http://hr.ibm.fmis.gw.BudgetUserLibrary/interfaces/InvoiceManagementService/Binding">
+  <wsdl:import namespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/interfaces/InvoiceManagementService" location="InvoiceManagementService.wsdl">
+    </wsdl:import>
+  <wsdl:binding name="manageInvoiceExport_InvoiceManagementServiceHttpBinding" type="Port_0:InvoiceManagementService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="createInvoice">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="createInvoiceRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="createInvoiceResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="reverseInvoice">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="reverseInvoiceRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="reverseInvoiceResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="changeInvoice">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="changeInvoiceRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="changeInvoiceResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="manageInvoiceExport_InvoiceManagementServiceHttpService">
+    <wsdl:port name="manageInvoiceExport_InvoiceManagementServiceHttpPort" binding="this:manageInvoiceExport_InvoiceManagementServiceHttpBinding">
+      <soap:address location="http://localhost:8080/Infomare_drrh_web_services/services/manageInvoiceExport_InvoiceManagementServiceHttpPort"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

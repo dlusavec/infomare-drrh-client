@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/messages"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:bons0="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes">
+  <xsd:import schemaLocation="../infotypes/Invoice.xsd" namespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes"></xsd:import>
+  <xsd:import schemaLocation="../infotypes/MessageHeader.xsd"
+    namespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes">
+  </xsd:import>
+  <xsd:complexType name="InvoiceChangeRequestMsg">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="messageHeader" type="bons0:MessageHeader"></xsd:element>
+      <xsd:element minOccurs="0" name="invoice" type="bons0:Invoice"></xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

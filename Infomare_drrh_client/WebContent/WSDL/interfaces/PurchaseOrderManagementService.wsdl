@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions name="PurchaseOrderManagementService" targetNamespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/interfaces/PurchaseOrderManagementService/" xmlns:Q1="http://hr.ibm.fmis.gw.BudgetUserLibrary/messages" xmlns:bons0="http://hr.ibm.fmis.gw.BUFMISBudgetExecution/BUFMISBudgetExecutionServices/PurchaseOrderManagementService/" xmlns:tns="http://hr.ibm.fmis.gw.BudgetUserLibrary/interfaces/PurchaseOrderManagementService/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/interfaces/PurchaseOrderManagementService/" xmlns:bons0="http://hr.ibm.fmis.gw.BudgetUserLibrary/interfaces/PurchaseOrderManagementService/">
+            <xsd:import namespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/messages" schemaLocation="../messages/PurchaseOrderChangeRequestMsg.xsd"/>
+            <xsd:import namespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/messages" schemaLocation="../messages/PurchaseOrderCloseRequestMsg.xsd"/>
+            <xsd:import namespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/messages" schemaLocation="../messages/PurchaseOrderResponseMsg.xsd"/>
+            <xsd:import namespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/messages" schemaLocation="../messages/PurchaseOrderCreateRequestMsg.xsd"/>
+            <xsd:element name="createPurchaseOrder">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="createPurchaseOrderParamIn" type="Q1:PurchaseOrderCreateRequestMsg"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="createPurchaseOrderResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="createPurchaseOrderParamReturn" type="Q1:PurchaseOrderResponseMsg"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="closePurchaseOrder">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="closePurchaseOrderParamIn" type="Q1:PurchaseOrderCloseRequestMsg"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="closePurchaseOrderResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="closePurchaseOrderParamReturn" type="Q1:PurchaseOrderResponseMsg"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="changePurchaseOrder">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="changePurchaseOrderParamIn" nillable="true" type="Q1:PurchaseOrderChangeRequestMsg"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="changePurchaseOrderResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="changePurchaseOrderParamReturn" nillable="true" type="Q1:PurchaseOrderResponseMsg"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+        </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="createPurchaseOrderRequest">
+    <wsdl:part element="tns:createPurchaseOrder" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="createPurchaseOrderResponse">
+    <wsdl:part element="tns:createPurchaseOrderResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="closePurchaseOrderRequest">
+    <wsdl:part element="tns:closePurchaseOrder" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="closePurchaseOrderResponse">
+    <wsdl:part element="tns:closePurchaseOrderResponse" name="parameters"/>
+  </wsdl:message>
+    <wsdl:message name="changePurchaseOrderRequestMsg">
+    <wsdl:part element="tns:changePurchaseOrder" name="changePurchaseOrderParameters"/>
+  </wsdl:message>
+    <wsdl:message name="changePurchaseOrderResponseMsg">
+    <wsdl:part element="tns:changePurchaseOrderResponse" name="changePurchaseOrderResult"/>
+  </wsdl:message>
+    <wsdl:portType name="PurchaseOrderManagementService">
+    <wsdl:operation name="createPurchaseOrder">
+      <wsdl:input message="tns:createPurchaseOrderRequest"/>
+      <wsdl:output message="tns:createPurchaseOrderResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="closePurchaseOrder">
+      <wsdl:input message="tns:closePurchaseOrderRequest"/>
+      <wsdl:output message="tns:closePurchaseOrderResponse"/>
+    </wsdl:operation>
+        <wsdl:operation name="changePurchaseOrder">
+      <wsdl:input message="tns:changePurchaseOrderRequestMsg" name="changePurchaseOrderRequest"/>
+      <wsdl:output message="tns:changePurchaseOrderResponseMsg" name="changePurchaseOrderResponse"/>
+    </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

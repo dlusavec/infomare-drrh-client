@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="BankManagementInterfaceExport_BankManagementInterfaceHttp_Service" targetNamespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/interfaces/BankManagementInterface/Binding" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:Port_0="http://hr.ibm.fmis.gw.BudgetUserLibrary/interfaces/BankManagementInterface" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:this="http://hr.ibm.fmis.gw.BudgetUserLibrary/interfaces/BankManagementInterface/Binding">
+  <wsdl:import namespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/interfaces/BankManagementInterface" location="BankManagementInterface.wsdl">
+    </wsdl:import>
+  <wsdl:binding name="BankManagementInterfaceExport_BankManagementInterfaceHttpBinding" type="Port_0:BankManagementInterface">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="createBank">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="createBankRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="createBankResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="retrieveBank">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="retrieveBankRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="retrieveBankResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="changeBank">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="changeBankRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="changeBankResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="BankManagementInterfaceExport_BankManagementInterfaceHttpService">
+    <wsdl:port name="BankManagementInterfaceExport_BankManagementInterfaceHttpPort" binding="this:BankManagementInterfaceExport_BankManagementInterfaceHttpBinding">
+      <soap:address location="http://localhost:8080/Infomare_drrh_web_services/services/BankManagementInterfaceExport_BankManagementInterfaceHttpPort"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

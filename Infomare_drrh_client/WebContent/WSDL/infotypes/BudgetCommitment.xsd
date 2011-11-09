@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes/"
+  xmlns:bons0="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes/" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  xmlns:xsd_1="http://hr.ibm.fmis.gw.BUFMISBudgetExecution/infotypes/"
+  xmlns:bons1="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes">
+  <xsd:import schemaLocation="BudgetCommitmentItemList.xsd"
+    namespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes">
+  </xsd:import>
+  <xsd:include schemaLocation="BudgetCommitmentStatusType.xsd" />
+
+  <xsd:import namespace="http://hr.ibm.fmis.gw.BUFMISBudgetExecution/infotypes/" schemaLocation="DocumentHeader.xsd" />
+  <xsd:complexType name="BudgetCommitment">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="dueDate" type="xsd:date" />
+      <xsd:element maxOccurs="1" minOccurs="0" name="budgetCommitmentItemList" type="bons1:BudgetCommitmentItemList" />
+      <xsd:element name="completed" type="xsd:boolean">
+        <xsd:annotation>
+          <xsd:documentation>Storniranje Commitmenta je ustvari Zatvaranje - jer se moze vratiti samo dio sredstava ako je npr. vec neki Invoice
+potrosio dio.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="budgetCommitmentStatus" type="bons0:BudgetCommitmentStatusType" />
+      <xsd:element name="documentHeader" type="xsd_1:DocumentHeader" />
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

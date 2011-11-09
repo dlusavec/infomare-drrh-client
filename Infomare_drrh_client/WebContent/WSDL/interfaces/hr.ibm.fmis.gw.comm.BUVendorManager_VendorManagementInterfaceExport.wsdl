@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="VendorManagementInterfaceExport_VendorManagementInterfaceHttp_Service" targetNamespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/interfaces/VendorManagementInterface/Binding" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:Port_0="http://hr.ibm.fmis.gw.BudgetUserLibrary/interfaces/VendorManagementInterface" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:this="http://hr.ibm.fmis.gw.BudgetUserLibrary/interfaces/VendorManagementInterface/Binding">
+  <wsdl:import namespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/interfaces/VendorManagementInterface" location="VendorManagementInterface.wsdl">
+    </wsdl:import>
+  <wsdl:binding name="VendorManagementInterfaceExport_VendorManagementInterfaceHttpBinding" type="Port_0:VendorManagementInterface">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="createVendor">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="createVendorRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="createVendorResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="changeVendor">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="changeVendorRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="changeVendorResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deactivateVendor">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="deactivateVendorRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="deactivateVendorResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="retrieveVendor">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="retrieveVendorRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="retrieveVendorResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addNewBankAccount">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="addNewBankAccountRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="addNewBankAccountResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deactivateBankAccount">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="deactivateBankAccountRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="deactivateBankAccountResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="VendorManagementInterfaceExport_VendorManagementInterfaceHttpService">
+    <wsdl:port name="VendorManagementInterfaceExport_VendorManagementInterfaceHttpPort" binding="this:VendorManagementInterfaceExport_VendorManagementInterfaceHttpBinding">
+      <soap:address location="http://localhost:8080/Infomare_drrh_web_services/services/VendorManagementInterfaceExport_VendorManagementInterfaceHttpPort"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

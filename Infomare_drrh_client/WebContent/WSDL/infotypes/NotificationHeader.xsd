@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:complexType name="NotificationHeader">
+    <xsd:sequence>
+      <xsd:element name="notifiedBudgetUser" type="xsd:string" />
+      <xsd:element name="notifiedLogicalSystemName" type="xsd:string" />
+      <xsd:element name="fmisGwNotificationId" type="xsd:string" />
+      <xsd:element name="originatingBuFmisDocumentID" type="xsd:string" />
+      <xsd:element minOccurs="0" name="sapDocumentId" type="xsd:string"></xsd:element>
+      <xsd:element name="notificationDate" type="xsd:string" />
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

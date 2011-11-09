@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema targetNamespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/messages" xmlns:bons0="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes/" xmlns:bons1="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:import namespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes/" schemaLocation="../infotypes/BudgetCommitment.xsd"/>
+    <xsd:import namespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes" schemaLocation="../infotypes/MessageHeader.xsd"/>
+  <xsd:complexType name="ContractCreateRequestMsg">
+    <xsd:sequence>
+      <xsd:element name="budgetCommitment" type="bons0:BudgetCommitment"/>
+      <xsd:element name="messageHeader" type="bons1:MessageHeader"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

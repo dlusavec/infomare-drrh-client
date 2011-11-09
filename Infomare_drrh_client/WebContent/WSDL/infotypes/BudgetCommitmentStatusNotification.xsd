@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema targetNamespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes/" xmlns:bons0="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes/" xmlns:bons1="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:import namespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes" schemaLocation="NotificationHeader.xsd"/>
+    <xsd:include schemaLocation="BudgetCommitmentStatusType.xsd"/>
+    <xsd:complexType name="BudgetCommitmentStatusNotification">
+    <xsd:sequence>
+      <xsd:element name="header" type="bons1:NotificationHeader"/>
+      <xsd:element name="commitmentStatus" type="bons0:BudgetCommitmentStatusType"/>
+      <xsd:element name="description" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

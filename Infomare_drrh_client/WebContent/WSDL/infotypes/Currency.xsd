@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:complexType name="Currency">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="name" type="xsd:string"></xsd:element>
+      <xsd:element minOccurs="0" name="code" type="xsd:string"></xsd:element>
+      <xsd:element minOccurs="0" name="codeNum" type="xsd:string"></xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

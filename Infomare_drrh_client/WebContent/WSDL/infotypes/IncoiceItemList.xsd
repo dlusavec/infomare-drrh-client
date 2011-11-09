@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:bons0="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes">
+  <xsd:include schemaLocation="InvoiceItem.xsd"></xsd:include>
+  <xsd:complexType name="IncoiceItemList">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="invoiceItem" type="bons0:InvoiceItem" maxOccurs="unbounded"></xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

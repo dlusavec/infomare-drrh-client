@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions name="ResponseMessageHandlerServiceExport_ResponseMessageHandlerServiceHttp_Service" targetNamespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/interfaces/ResponseMessageHandlerService/Binding2" xmlns:Port_0="http://hr.ibm.fmis.gw.BudgetUserLibrary/interfaces/ResponseMessageHandlerService/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:this="http://hr.ibm.fmis.gw.BudgetUserLibrary/interfaces/ResponseMessageHandlerService/Binding2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:import location="ResponseMessageHandlerService.wsdl" namespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/interfaces/ResponseMessageHandlerService/"/>
+  <wsdl:binding name="ResponseMessageHandlerServiceExport_ResponseMessageHandlerServiceHttpBinding" type="Port_0:ResponseMessageHandlerService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getAllResponseList">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="getAllResponseListRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getAllResponseList1Msg1">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getReservationResponseList">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="getReservationResponseListRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getReservationResponseListResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getContractResponseList">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="getContractResponseListRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getContractResponseListResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPurchaseOrderResponseList">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="getPurchaseOrderResponseListRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getPurchaseOrderResponseListResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getInvoiceResponseList">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="getInvoiceResponseListRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getInvoiceResponseListResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPaymentExecutionList">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="getPaymentExecutionListRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getPaymentExecutionListResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getVendorUpdatesList">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="getVendorUpdatesListRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getVendorUpdatesListResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getBankUpdatesList">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="getBankUpdatesListRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getBankUpdatesListResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAllResponseListStartingWithMessageId">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="getAllResponseListStartingWithMessageIdRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getAllResponseListStartingWithMessageId1Msg1">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getReservationResponseListStartingWithMessageId">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="getReservationResponseListStartingWithMessageIdRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getReservationResponseListStartingWithMessageId1Msg1">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getContractResponseListStartingWithMessageId">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="getContractResponseListStartingWithMessageIdRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getContractResponseListStartingWithMessageId1Msg1">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPurchaseOrderResponseListStartingWithMessageId">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="getPurchaseOrderResponseListStartingWithMessageIdRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getPurchaseOrderResponseListStartingWithMessageId1Msg1">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getInvoiceResponseListStartingWithMessageId">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="getInvoiceResponseListStartingWithMessageIdRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getInvoiceResponseListStartingWithMessageId1Msg1">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPaymentExecutionListStartingWithMessageId">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="getPaymentExecutionListStartingWithMessageIdRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getPaymentExecutionListStartingWithMessageId2Msg1">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getVendorUpdatesListStartingWithMessageId">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="getVendorUpdatesListStartingWithMessageIdRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getVendorUpdatesListStartingWithMessageIdResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getBankUpdatesListStartingWithMessageId">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="getBankUpdatesListStartingWithMessageIdRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getBankUpdatesListStartingWithMessageIdResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ResponseMessageHandlerServiceExport_ResponseMessageHandlerServiceHttpService">
+    <wsdl:port binding="this:ResponseMessageHandlerServiceExport_ResponseMessageHandlerServiceHttpBinding" name="ResponseMessageHandlerServiceExport_ResponseMessageHandlerServiceHttpPort">
+      <soap:address location="http://localhost:9080/hr.ibm.fmis.gw.comm.DistributionManagementWeb/sca/ResponseMessageHandlerServiceExport"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

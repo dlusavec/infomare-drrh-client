@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema targetNamespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+  <xsd:complexType name="Bank">
+    <xsd:sequence>
+
+      <xsd:element minOccurs="0" name="Vbdi" type="xsd:string"/>
+      <xsd:element minOccurs="1" name="Name" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="Swift" type="xsd:string"/>
+      <xsd:element minOccurs="1" name="StreetName" type="xsd:string"/>
+      <xsd:element minOccurs="1" name="StreetNumber" type="xsd:string"/>
+      <xsd:element minOccurs="1" name="City" type="xsd:string"/>
+      <xsd:element minOccurs="1" name="ZipCode" type="xsd:string"/>
+      <xsd:element minOccurs="1" name="CountryCode" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

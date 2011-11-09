@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions name="BankManagementInterface" targetNamespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/interfaces/BankManagementInterface" xmlns:bons1="http://hr.ibm.fmis.gw.BudgetUserLibrary/messages" xmlns:tns="http://hr.ibm.fmis.gw.BudgetUserLibrary/interfaces/BankManagementInterface" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <wsdl:types>
+    <xsd:schema targetNamespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/interfaces/BankManagementInterface">
+            <xsd:import namespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/messages" schemaLocation="../messages/BankChangeRequestMsg.xsd"/>
+      <xsd:import namespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/messages" schemaLocation="../messages/BankRetrieveRequestMsg.xsd"/>
+      <xsd:import namespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/messages" schemaLocation="../messages/BankResponseMsg.xsd"/>
+      <xsd:import namespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/messages" schemaLocation="../messages/BankCreationRequestMsg.xsd"/>
+      <xsd:element name="createBank">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="bankCreationRequestMsg" nillable="true" type="bons1:BankCreationRequestMsg"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="createBankResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="bankResponseMsg" nillable="true" type="bons1:BankResponseMsg"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="retrieveBank">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="bankRetrieveRequestMsg" nillable="true" type="bons1:BankRetrieveRequestMsg"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="retrieveBankResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="bankResponseMsg" nillable="true" type="bons1:BankResponseMsg"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="changeBank">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="bankChangeRequestMsg" nillable="true" type="bons1:BankChangeRequestMsg"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="changeBankResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="bankResponseMsg" nillable="true" type="bons1:BankResponseMsg"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+        </xsd:schema>
+  </wsdl:types>
+    <wsdl:message name="createBankRequestMsg">
+    <wsdl:part element="tns:createBank" name="createBankParameters"/>
+  </wsdl:message>
+    <wsdl:message name="createBankResponseMsg">
+    <wsdl:part element="tns:createBankResponse" name="createBankResult"/>
+  </wsdl:message>
+    <wsdl:message name="retrieveBankRequestMsg">
+    <wsdl:part element="tns:retrieveBank" name="retrieveBankParameters"/>
+  </wsdl:message>
+    <wsdl:message name="retrieveBankResponseMsg">
+    <wsdl:part element="tns:retrieveBankResponse" name="retrieveBankResult"/>
+  </wsdl:message>
+    <wsdl:message name="changeBankRequestMsg">
+    <wsdl:part element="tns:changeBank" name="changeBankParameters"/>
+  </wsdl:message>
+    <wsdl:message name="changeBankResponseMsg">
+    <wsdl:part element="tns:changeBankResponse" name="changeBankResult"/>
+  </wsdl:message>
+    <wsdl:portType name="BankManagementInterface">
+    <wsdl:operation name="createBank">
+      <wsdl:input message="tns:createBankRequestMsg" name="createBankRequest"/>
+      <wsdl:output message="tns:createBankResponseMsg" name="createBankResponse"/>
+        </wsdl:operation>
+    <wsdl:operation name="retrieveBank">
+      <wsdl:input message="tns:retrieveBankRequestMsg" name="retrieveBankRequest"/>
+      <wsdl:output message="tns:retrieveBankResponseMsg" name="retrieveBankResponse"/>
+        </wsdl:operation>
+    <wsdl:operation name="changeBank">
+      <wsdl:input message="tns:changeBankRequestMsg" name="changeBankRequest"/>
+      <wsdl:output message="tns:changeBankResponseMsg" name="changeBankResponse"/>
+        </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

@@ -1,0 +1,40 @@
+<?xml version="1.0" ?>
+<project default="generate-client" basedir=".">
+  
+  <!-- Get common settings -->
+  <property file="cxf_client.properties"/>
+  
+  <property name="cxf-lib" location="${cxf-home}/lib"/>
+  <property name="build-dir" location="${basedir}"/>
+  <property name="build-client" location="${build-dir}/src"/>
+  <property name="wsdl-name" value="hr.ibm.fmis.gw.comm.BUVendorManager_VendorManagementInterfaceExport.wsdl"/>
+  <property name="wsdl-path" value="WebContent/wsdl/interfaces/${wsdl-name}"/>
+  <property name="binding-name" value="BUVendorManager_VendorManagementInterfaceExport.xml"/>
+  <property name="binding-path" value="WebContent/wsdl/binding_options/${binding-name}"/>
+  
+  <path id="cxf-classpath">
+    <fileset dir="${cxf-lib}" includes="**/*.jar"/>
+  </path>
+
+  <!-- Generate client linkage code from WSDL -->
+  <target name="generate-client">
+    <echo message="Running WSDL2Java task"/>
+  	<echo message="${cxf-lib}"/>
+    <java classpathref="cxf-classpath" fork="true" failonerror="true"
+         classname="org.apache.cxf.tools.wsdlto.WSDLToJava">
+      <!-- ako se ne želi koristiti noviji JAXB (2.2) nego onaj koji dolazi sa Javom (2.1) onda se mogu uključiti i ova dva retka 
+    <arg value="-fe"/>
+        <arg value="jaxws21"/>    	-->
+      <arg value="-client"/>
+      <arg value="-ant"/>
+      <arg value="-keep"/>
+      <arg value="-d"/>
+      <arg value="${build-client}"/>
+      <arg value="-b"/>
+      <arg value="${binding-path}"/>
+      <arg value="-verbose"/>
+      <!-- -uri parameter provides the WSDL input -->
+      <arg value="${wsdl-path}"/>
+    </java>
+  </target>
+</project>
