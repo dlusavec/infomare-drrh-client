@@ -1,9 +1,12 @@
 package budgetuserlibrary.gw.fmis.ibm.hr.infotypes;
 
-import hr.infomare.drrh.pojo.VendorVezna;
 import hr.infomare.drrh.pojo.Venbanaccm;
+import hr.infomare.drrh.pojo.VendorVezna;
 import hr.infomare.drrh.pojo.Vendormsg;
 import hr.infomare.drrh.postavke.Postavke;
+
+import java.util.Iterator;
+import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -34,7 +37,7 @@ import org.apache.commons.lang.math.NumberUtils;
  *         &lt;element name="TaxNumber" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="NaturalPerson" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="Language" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="vendorAccountData" type="{http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes}VendorAccountData"/>
+ *         &lt;element name="VendorAccountDataList" type="{http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes}VendorAccountDataList"/>
  *         &lt;element name="VendorGroup" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="Street" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="HouseNumber" type="{http://www.w3.org/2001/XMLSchema}string"/>
@@ -45,7 +48,6 @@ import org.apache.commons.lang.math.NumberUtils;
  *         &lt;element name="Fax" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="Telephone" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="AlternativeVendorDataList" type="{http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes}VendorList" minOccurs="0"/>
- *         &lt;element name="InstructionKey" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="VendorId" type="{http://www.w3.org/2001/XMLSchema}long" minOccurs="0"/>
  *         &lt;element name="SapVendorId" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
@@ -59,10 +61,9 @@ import org.apache.commons.lang.math.NumberUtils;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Vendor", propOrder = { "logicalSystemName",
 		"logicalSystemVendorID", "title", "name", "oib", "taxNumber",
-		"naturalPerson", "language", "vendorAccountData", "vendorGroup",
+		"naturalPerson", "language", "vendorAccountDataList", "vendorGroup",
 		"street", "houseNumber", "zipCode", "city", "country", "email", "fax",
-		"telephone", "alternativeVendorDataList", "instructionKey", "vendorId",
-		"sapVendorId" })
+		"telephone", "alternativeVendorDataList", "vendorId", "sapVendorId" })
 public class Vendor {
 
 	@XmlElement(name = "LogicalSystemName")
@@ -81,8 +82,8 @@ public class Vendor {
 	protected String naturalPerson;
 	@XmlElement(name = "Language", required = true)
 	protected String language;
-	@XmlElement(required = true)
-	protected VendorAccountData vendorAccountData;
+	@XmlElement(name = "VendorAccountDataList", required = true)
+	protected VendorAccountDataList vendorAccountDataList;
 	@XmlElement(name = "VendorGroup")
 	protected String vendorGroup;
 	@XmlElement(name = "Street", required = true)
@@ -103,8 +104,6 @@ public class Vendor {
 	protected String telephone;
 	@XmlElement(name = "AlternativeVendorDataList")
 	protected VendorList alternativeVendorDataList;
-	@XmlElement(name = "InstructionKey")
-	protected String instructionKey;
 	@XmlElement(name = "VendorId")
 	protected Long vendorId;
 	@XmlElement(name = "SapVendorId")
@@ -279,24 +278,24 @@ public class Vendor {
 	}
 
 	/**
-	 * Gets the value of the vendorAccountData property.
+	 * Gets the value of the vendorAccountDataList property.
 	 * 
-	 * @return possible object is {@link VendorAccountData }
+	 * @return possible object is {@link VendorAccountDataList }
 	 * 
 	 */
-	public VendorAccountData getVendorAccountData() {
-		return vendorAccountData;
+	public VendorAccountDataList getVendorAccountDataList() {
+		return vendorAccountDataList;
 	}
 
 	/**
-	 * Sets the value of the vendorAccountData property.
+	 * Sets the value of the vendorAccountDataList property.
 	 * 
 	 * @param value
-	 *            allowed object is {@link VendorAccountData }
+	 *            allowed object is {@link VendorAccountDataList }
 	 * 
 	 */
-	public void setVendorAccountData(VendorAccountData value) {
-		this.vendorAccountData = value;
+	public void setVendorAccountDataList(VendorAccountDataList value) {
+		this.vendorAccountDataList = value;
 	}
 
 	/**
@@ -510,27 +509,6 @@ public class Vendor {
 	}
 
 	/**
-	 * Gets the value of the instructionKey property.
-	 * 
-	 * @return possible object is {@link String }
-	 * 
-	 */
-	public String getInstructionKey() {
-		return instructionKey;
-	}
-
-	/**
-	 * Sets the value of the instructionKey property.
-	 * 
-	 * @param value
-	 *            allowed object is {@link String }
-	 * 
-	 */
-	public void setInstructionKey(String value) {
-		this.instructionKey = value;
-	}
-
-	/**
 	 * Gets the value of the vendorId property.
 	 * 
 	 * @return possible object is {@link Long }
@@ -572,8 +550,8 @@ public class Vendor {
 		this.sapVendorId = value;
 	}
 
-	public void postaviVrijednosti(Vendormsg vendorMsg, Venbanaccm venBanAccM,
-			VendorVezna vendorVezna) {
+	public void postaviVrijednosti(Vendormsg vendorMsg,
+			List<Venbanaccm> venBanAccounti, VendorVezna vendorVezna) {
 		logicalSystemName = StringUtils
 				.trimToNull(Postavke.LOGICAL_SYSTEM_NAME);
 		logicalSystemVendorID = StringUtils.trimToNull(vendorMsg.getF41ctr());
@@ -586,9 +564,18 @@ public class Vendor {
 		language = StringUtils
 				.trimToNull(vendorMsg.getLanguage().toLowerCase());
 		// Upis ziro racuna, samo kod upisa novog partnera
-		if (((int) vendorMsg.getOpt()) == 1 && venBanAccM != null) {
-			vendorAccountData = new VendorAccountData();
-			vendorAccountData.postaviVrijednosti(venBanAccM);
+		if (((int) vendorMsg.getOpt()) == 1 && venBanAccounti != null
+				&& venBanAccounti.size() > 0) {
+			vendorAccountDataList = new VendorAccountDataList();
+			List<VendorAccountData> vendorAccountDataLista = vendorAccountDataList
+					.getVendorAccountData();
+			for (Iterator iterator = venBanAccounti.iterator(); iterator
+					.hasNext();) {
+				Venbanaccm venBanAccM = (Venbanaccm) iterator.next();
+				VendorAccountData vendorAccountData = new VendorAccountData();
+				vendorAccountData.postaviVrijednosti(venBanAccM);
+				vendorAccountDataLista.add(vendorAccountData);
+			}
 		}
 		vendorGroup = StringUtils.trimToNull(vendorMsg.getVendorgro());
 		street = StringUtils.trimToNull(vendorMsg.getStreet());

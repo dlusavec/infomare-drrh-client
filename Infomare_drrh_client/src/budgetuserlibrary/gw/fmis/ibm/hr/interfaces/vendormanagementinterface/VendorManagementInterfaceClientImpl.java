@@ -16,10 +16,10 @@ import hr.infomare.drrh.pojo.Resmsg;
 import hr.infomare.drrh.pojo.Venbanaccm;
 import hr.infomare.drrh.pojo.VendorVezna;
 import hr.infomare.drrh.pojo.Vendormsg;
-import hr.infomare.drrh.pomocni.PomocnaDatum;
 import hr.infomare.drrh.pomocni.Debug;
 import hr.infomare.drrh.pomocni.Log;
 import hr.infomare.drrh.pomocni.Pomocna;
+import hr.infomare.drrh.pomocni.PomocnaDatum;
 import hr.infomare.drrh.pomocni.PomocnaError;
 import hr.infomare.drrh.postavke.Postavke;
 
@@ -30,6 +30,10 @@ import java.util.List;
 import javax.xml.namespace.QName;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.cxf.endpoint.Client;
+import org.apache.cxf.frontend.ClientProxy;
+import org.apache.cxf.interceptor.LoggingInInterceptor;
+import org.apache.cxf.interceptor.LoggingOutInterceptor;
 import org.hibernate.Session;
 
 import budgetuserlibrary.gw.fmis.ibm.hr.infotypes.MessageHeader;
@@ -74,8 +78,8 @@ public final class VendorManagementInterfaceClientImpl {
 					VendorManagementInterfaceExportVendorManagementInterfaceHttpService.SERVIS);
 			otvoriPortISesiju();
 			createVendor();
-			changeVendor();
-			addNewBankAccount();
+			// changeVendor();
+			// addNewBankAccount();
 			Log.loger.info("Završetak razmjene partnera.");
 		} catch (Exception e) {
 			Log.loger.severe("Greška kod razmjene partnera "
@@ -104,32 +108,37 @@ public final class VendorManagementInterfaceClientImpl {
 		MessageHeader messageHeader;
 		Vendor vendor;
 		VendorVezna vendorVezna;
-		Venbanaccm venBanAccM;
 		Reqmsg reqMsg = null;
 		Resmsg resMsg = null;
 		VendorResponseMsg response = null;
+		Venbanaccm venBanAccM;
 		List vendori = vendorMsgDAO.getVendormsg((byte) 1);
-		List venBanAccounti = null;
+		List<Venbanaccm> venBanAccounti = null;
 		for (Iterator iterator = vendori.iterator(); iterator.hasNext();) {
 			Vendormsg vendorMsg = (Vendormsg) iterator.next();
 			try {
 				venBanAccounti = venBanAccMDAO.getVenbanaccm((byte) 1,
 						vendorMsg.getF41ctr());
-
 				// Partneri bez ziro racuna se ne salju
 				if (venBanAccounti != null && venBanAccounti.size() > 0) {
 					sessionPomocna.otvoriTransakciju();
 					// Request
 					messageHeader = new MessageHeader();
 					vendor = new Vendor();
-					venBanAccM = (Venbanaccm) venBanAccounti.get(0);
-					vendor.postaviVrijednosti(vendorMsg, venBanAccM, null);
+					vendor.postaviVrijednosti(vendorMsg, venBanAccounti, null);
 					request.setMessageHeader(messageHeader);
 					request.setVendor(vendor);
 					// Response
 					resMsg = new Resmsg();
 					reqMsg = new Reqmsg();
 					vendorVezna = new VendorVezna();
+
+					/*Client client = ClientProxy.getClient(port);
+					client.getInInterceptors().add(new LoggingInInterceptor());
+					client.getOutInterceptors()
+							.add(new LoggingOutInterceptor());
+					Thread.sleep(5000);*/
+
 					try {
 						response = port.createVendor(request);
 						if (response.getResponseMessageType().equals(
@@ -155,10 +164,7 @@ public final class VendorManagementInterfaceClientImpl {
 							.getResponseMessageType()), reqMsg, PomocnaDatum
 							.XMLDatumUDate(response.getMessageHeader()
 									.getSubmitionTimestamp()), response);
-					venBanAccM.postaviVrijednosti(Pomocna.getStatus(response
-							.getResponseMessageType()), reqMsg, PomocnaDatum
-							.XMLDatumUDate(response.getMessageHeader()
-									.getSubmitionTimestamp()));
+
 					// Upis u bazu
 					if (response.getResponseMessageType().equals(
 							ResponseMessageType.NOTIFICATION)) {
@@ -173,7 +179,16 @@ public final class VendorManagementInterfaceClientImpl {
 							response.getMessageHeader());
 					session.save(reqMsg);
 					session.update(vendorMsg);
-					session.update(venBanAccM);
+					for (Iterator iteratorAccounti = venBanAccounti.iterator(); iteratorAccounti
+							.hasNext();) {
+						venBanAccM = (Venbanaccm) iteratorAccounti.next();
+						venBanAccM.postaviVrijednosti(Pomocna
+								.getStatus(response.getResponseMessageType()),
+								reqMsg, PomocnaDatum.XMLDatumUDate(response
+										.getMessageHeader()
+										.getSubmitionTimestamp()));
+						session.update(venBanAccM);
+					}
 					sessionPomocna.commitTransakcije();
 					++reqMsgId;
 				}

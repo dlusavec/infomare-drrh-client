@@ -148,7 +148,15 @@ public class ObjectFactory {
     public VendorAccountData createVendorAccountData() {
         return new VendorAccountData();
     }
-
+    
+    /**
+     * Create an instance of {@link VendorAccountDataList }
+     * 
+     */
+    public VendorAccountDataList createVendorAccountDataList() {
+        return new VendorAccountDataList();
+    }
+    
     /**
      * Create an instance of {@link ErrorResponse }
      * 
