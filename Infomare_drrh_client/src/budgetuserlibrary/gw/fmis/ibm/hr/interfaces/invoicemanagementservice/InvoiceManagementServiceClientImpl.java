@@ -70,7 +70,7 @@ public final class InvoiceManagementServiceClientImpl {
 	public InvoiceManagementServiceClientImpl() {
 	}
 
-	public void razmjenaUgovora() {
+	public void razmjenaFaktura() {
 		try {
 			Log.loger.info("Poèetak razmjene faktura.");
 			otvoriPortISesiju();
@@ -170,23 +170,23 @@ public final class InvoiceManagementServiceClientImpl {
 				// Samo ako response nema error-a
 				if (response.getResponseMessageType().equals(
 						ResponseMessageType.NOTIFICATION)) {
-					statNotif.postaviVrijednosti(statNotId, resMsg,
-							"createInvoice", response.getNotificationResponse()
-									.getInvoiceStatus(), response
-									.getMessageHeader());
-					notifHead.postaviVrijednosti(notHeadId, statNotId, resMsg,
-							response.getMessageHeader(), response
-									.getNotificationResponse().getHeader(),
-							response.getNotificationResponse());
+					//statNotif.postaviVrijednosti(statNotId, resMsg,
+					//		"createInvoice", response.getNotificationResponse()
+					//				.getInvoiceStatus(), response
+					//				.getMessageHeader());
+					//notifHead.postaviVrijednosti(notHeadId, statNotId, resMsg,
+					//		response.getMessageHeader(), response
+					//				.getNotificationResponse().getHeader(),
+					//		response.getNotificationResponse());
 
-					faktura.postaviVrijednosti(invoiceMsg, notHeadId,
-							statNotId, response.getNotificationResponse()
-									.getHeader(), response
-									.getNotificationResponse()
-									.getInvoiceStatus(), resMsg);
-					docHead.postaviVrijednosti(response
-							.getNotificationResponse().getHeader(), response
-							.getMessageHeader());
+					//faktura.postaviVrijednosti(invoiceMsg, notHeadId,
+						//	statNotId, response.getNotificationResponse()
+						//			.getHeader(), response
+						//			.getNotificationResponse()
+						//			.getInvoiceStatus(), resMsg);
+					//docHead.postaviVrijednosti(response
+					//		.getNotificationResponse().getHeader(), response
+					//		.getMessageHeader());
 				}
 
 				// Upis u bazu
@@ -197,10 +197,10 @@ public final class InvoiceManagementServiceClientImpl {
 				session.update(invoiceMsg);
 				if (response.getResponseMessageType().equals(
 						ResponseMessageType.NOTIFICATION)) {
-					session.save(statNotif);
-					session.save(notifHead);
-					session.saveOrUpdate(faktura);
-					session.update(docHead);
+					//session.save(statNotif);
+					//session.save(notifHead);
+					//session.saveOrUpdate(faktura);
+					//session.update(docHead);
 				}
 				sessionPomocna.commitTransakcije();
 				++reqMsgId;
