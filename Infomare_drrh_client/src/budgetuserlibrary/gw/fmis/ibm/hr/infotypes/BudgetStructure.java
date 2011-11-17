@@ -184,6 +184,7 @@ public class BudgetStructure {
 		commitmentItem = new CommitmentItem();
 		commitmentItem.postaviVrijednosti(bctItem);
 		activity = StringUtils.trimToNull(bctItem.getActivity());
+		budgetUser=StringUtils.trimToNull(bctItem.getBuduserbs());
 	};
 
 	public void postaviVrijednosti(Invitemlst invItemLst) {
@@ -193,5 +194,6 @@ public class BudgetStructure {
 		commitmentItem = new CommitmentItem();
 		commitmentItem.postaviVrijednosti(invItemLst);
 		activity = StringUtils.trimToNull(invItemLst.getActivity());
+		budgetUser=StringUtils.trimToNull(invItemLst.getBuduserbs());
 	};
 }

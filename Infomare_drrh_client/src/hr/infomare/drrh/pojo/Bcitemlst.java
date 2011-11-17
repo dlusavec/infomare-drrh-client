@@ -28,6 +28,7 @@ public class Bcitemlst implements java.io.Serializable {
 	private String yearbs;
 	private String funcarea;
 	private String activity;
+	private String buduserbs;
 	private String code;
 	private String yearci;
 	private String descrt;
@@ -115,6 +116,15 @@ public class Bcitemlst implements java.io.Serializable {
 		this.funcarea = funcarea;
 	}
 
+	@Column(name = "BUDUSERBS", nullable = false, length = 50)
+	public String getBuduserbs() {
+		return buduserbs;
+	}
+
+	public void setBuduserbs(String buduserbs) {
+		this.buduserbs = buduserbs;
+	}
+
 	@Column(name = "ACTIVITY", nullable = false, length = 20)
 	public String getActivity() {
 		return this.activity;
@@ -168,16 +178,16 @@ public class Bcitemlst implements java.io.Serializable {
 	public void setRefdochead(Integer refdochead) {
 		this.refdochead = refdochead;
 	}
-	
-	@Column(name="REFITEMNUM", length=20)
-    public String getRefitemnum() {
-        return this.refitemnum;
-    }
-    
-    public void setRefitemnum(String refitemnum) {
-        this.refitemnum = refitemnum;
-    }
-	
+
+	@Column(name = "REFITEMNUM", length = 20)
+	public String getRefitemnum() {
+		return this.refitemnum;
+	}
+
+	public void setRefitemnum(String refitemnum) {
+		this.refitemnum = refitemnum;
+	}
+
 	@Column(name = "LOCATIONBC", nullable = false, length = 50)
 	public String getLocationbc() {
 		return this.locationbc;

@@ -15,17 +15,17 @@ import javax.persistence.Table;
 @Table(name = "INVITEMLST")
 @org.hibernate.annotations.Entity(dynamicInsert = true, dynamicUpdate = true)
 public class Invitemlst implements java.io.Serializable {
-	
+
 	private int invmsgid;
 	private long invitemid;
 
-	
 	private BigDecimal amountini;
 	private String descinvit;
 	private String fund;
 	private String yearbs;
 	private String funcarea;
 	private String activity;
+	private String buduserbs;
 	private String code;
 	private String yearci;
 	private String descrt;
@@ -63,7 +63,7 @@ public class Invitemlst implements java.io.Serializable {
 	public void setInvitemid(long invitemid) {
 		this.invitemid = invitemid;
 	}
-	
+
 	@Column(name = "REFDOCID", precision = 9, scale = 0)
 	public Integer getRefdochead() {
 		return this.refdocid;
@@ -71,7 +71,7 @@ public class Invitemlst implements java.io.Serializable {
 
 	public void setRefdochead(Integer refdocid) {
 		this.refdocid = refdocid;
-	}	
+	}
 
 	@Column(name = "AMOUNTINI", nullable = false, precision = 15)
 	public BigDecimal getAmountini() {
@@ -116,6 +116,14 @@ public class Invitemlst implements java.io.Serializable {
 
 	public void setFuncarea(String funcarea) {
 		this.funcarea = funcarea;
+	}
+	@Column(name = "BUDUSERBS", nullable = false, length = 50)
+	public String getBuduserbs() {
+		return buduserbs;
+	}
+
+	public void setBuduserbs(String buduserbs) {
+		this.buduserbs = buduserbs;
 	}
 
 	@Column(name = "ACTIVITY", nullable = false, length = 20)

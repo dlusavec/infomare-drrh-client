@@ -78,6 +78,12 @@ public final class BankManagementInterfaceClientImpl {
 				wsdlURL, serviceName);
 		port = servis
 				.getBankManagementInterfaceExportBankManagementInterfaceHttpPort();
+		/*
+		 * Client client = ClientProxy.getClient(port);
+		 * client.getInInterceptors().add(new LoggingInInterceptor());
+		 * client.getOutInterceptors().add(new LoggingOutInterceptor());
+		 * Thread.sleep(10000);
+		 */
 		sessionPomocna = new SessionPomocna();
 		session = sessionPomocna.getSession();
 		bankMsgDAO = new BankmsgDAO(session);
@@ -114,15 +120,7 @@ public final class BankManagementInterfaceClientImpl {
 				bank = new Bank();
 				bank.postaviVrijednosti(bankMsg);
 				request.setMessageHeader(messageHeader);
-				request.setBank(bank);
-
-				/*
-				 * Client client = ClientProxy.getClient(port);
-				 * client.getInInterceptors().add(new LoggingInInterceptor());
-				 * client.getOutInterceptors().add(new LoggingOutInterceptor());
-				 * Thread.sleep(10000);
-				 */
-
+				request.setBank(bank);				
 				try {
 					response = port.createBank(request);
 					if (response.getResponseMessageType().equals(

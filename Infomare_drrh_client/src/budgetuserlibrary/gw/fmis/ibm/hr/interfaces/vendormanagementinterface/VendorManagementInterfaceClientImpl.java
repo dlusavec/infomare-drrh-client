@@ -132,7 +132,7 @@ public final class VendorManagementInterfaceClientImpl {
 					resMsg = new Resmsg();
 					reqMsg = new Reqmsg();
 					vendorVezna = new VendorVezna();
-
+					// Stavi gore kod otvaranja port-a
 					/*Client client = ClientProxy.getClient(port);
 					client.getInInterceptors().add(new LoggingInInterceptor());
 					client.getOutInterceptors()

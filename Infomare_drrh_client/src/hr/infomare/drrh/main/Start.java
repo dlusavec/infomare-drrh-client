@@ -25,8 +25,8 @@ public class Start {
 		 //BankManagementInterfaceClientImpl();
 		 //klijentB.razmjenaBanaka();
 		// Partneri
-		VendorManagementInterfaceClientImpl klijentV = new VendorManagementInterfaceClientImpl();
-		klijentV.razmjenaPartnera();
+		//VendorManagementInterfaceClientImpl klijentV = new VendorManagementInterfaceClientImpl();
+		//klijentV.razmjenaPartnera();
 		// Rezervacije
 		// ReservationManagementServiceClientImpl klijentR=new
 		// ReservationManagementServiceClientImpl();
@@ -40,8 +40,8 @@ public class Start {
 		// PurchaseOrderManagementServiceClientImpl();
 		// klijentPO.razmjenaNarudzbenica();
 		// Fakture
-		// InvoiceManagementServiceClientImpl klijentI=new
-		// InvoiceManagementServiceClientImpl();
-		// klijentI.razmjenaUgovora();
+		 InvoiceManagementServiceClientImpl klijentI=new
+		 InvoiceManagementServiceClientImpl();
+		 klijentI.razmjenaUgovora();
 	}
 }

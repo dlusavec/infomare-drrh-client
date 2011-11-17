@@ -301,7 +301,7 @@ public class Invoice {
 		if (invItemLst != null) {
 			invoiceItemList = new IncoiceItemList();
 			List<InvoiceItem> invoiceItems = invoiceItemList.getInvoiceItem();
-			for (Iterator iterator = invoiceItems.iterator(); iterator
+			for (Iterator iterator = invItemLst.iterator(); iterator
 					.hasNext();) {
 				Invitemlst invItem = (Invitemlst) iterator.next();
 				InvoiceItem invoiceItem = new InvoiceItem();

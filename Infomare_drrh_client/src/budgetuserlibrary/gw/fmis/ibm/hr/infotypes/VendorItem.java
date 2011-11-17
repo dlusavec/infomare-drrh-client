@@ -3,6 +3,8 @@ package budgetuserlibrary.gw.fmis.ibm.hr.infotypes;
 import hr.infomare.drrh.dao.VendorVeznaDAO;
 import hr.infomare.drrh.pojo.Invoicemsg;
 import hr.infomare.drrh.pojo.VendorVezna;
+import hr.infomare.drrh.pomocni.Log;
+import hr.infomare.drrh.pomocni.PomocnaError;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -405,5 +407,14 @@ public class VendorItem {
 		instructionKey = StringUtils.trimToNull(invoiceMsg.getInstrkey());
 		referenceDetails = StringUtils.trimToNull(invoiceMsg.getRefdetail());
 		vendorAccountNumber = StringUtils.trimToNull(invoiceMsg.getVenaccnum());
+		try {
+			debitCreditIndicator = DebitCreditIndicatorType.valueOf(invoiceMsg
+					.getDebcreind());
+		} catch (Exception e) {
+			Log.loger.severe("Greška kod razmjene faktura "
+					+ PomocnaError.getErrorMessage(e));
+
+		}
+
 	};
 }
