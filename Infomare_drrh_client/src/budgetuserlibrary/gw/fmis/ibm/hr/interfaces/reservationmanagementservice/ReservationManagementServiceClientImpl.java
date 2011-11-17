@@ -170,7 +170,7 @@ public final class ReservationManagementServiceClientImpl {
 				// Samo ako response nema error-a
 				if (response.getResponseMessageType().equals(
 						ResponseMessageType.NOTIFICATION)) {
-					statNotif.postaviVrijednosti(statNotId, resMsg,
+					/*statNotif.postaviVrijednosti(statNotId, resMsg,
 							"createReservation", response
 									.getNotificationResponse()
 									.getCommitmentStatus(), response
@@ -185,7 +185,7 @@ public final class ReservationManagementServiceClientImpl {
 									.getCommitmentStatus(), resMsg);
 					docHead.postaviVrijednosti(response
 							.getNotificationResponse().getHeader(), response
-							.getMessageHeader());
+							.getMessageHeader());*/
 				}
 
 				// Upis u bazu
@@ -196,10 +196,10 @@ public final class ReservationManagementServiceClientImpl {
 				session.update(budComMsg);
 				if (response.getResponseMessageType().equals(
 						ResponseMessageType.NOTIFICATION)) {
-					session.save(statNotif);
+					/*session.save(statNotif);
 					session.save(notifHead);
 					session.saveOrUpdate(budCom);
-					session.update(docHead);
+					session.update(docHead);*/
 				}
 				sessionPomocna.commitTransakcije();
 				++reqMsgId;

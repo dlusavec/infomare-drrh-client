@@ -168,11 +168,11 @@ public final class VendorManagementInterfaceClientImpl {
 					// Upis u bazu
 					if (response.getResponseMessageType().equals(
 							ResponseMessageType.NOTIFICATION)) {
-						vendorVezna.postaviVrijednosti(reqMsg, PomocnaDatum
+					/*	vendorVezna.postaviVrijednosti(reqMsg, PomocnaDatum
 								.XMLDatumUDate(response.getMessageHeader()
 										.getSubmitionTimestamp()), response
 								.getVendor(), vendorMsg);
-						session.save(vendorVezna);
+						session.save(vendorVezna);*/
 					}
 					session.save(resMsg);
 					Pomocna.obradaGresaka(session, response.getErrorResponse(),

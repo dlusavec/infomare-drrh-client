@@ -297,9 +297,9 @@ public class Vendormsg implements java.io.Serializable {
 		this.status = status;
 		this.reqmsg = reqMsg;
 		this.datetimews = dateTimeWS;
-		if (response != null && response.getVendor() != null) {
+		/*if (response != null && response.getVendor() != null) {
 			this.sapvendori = response.getVendor().getSapVendorId();
 			this.vendorid = Long.toString(response.getVendor().getVendorId());
-		}
+		}*/
 	}
 }
