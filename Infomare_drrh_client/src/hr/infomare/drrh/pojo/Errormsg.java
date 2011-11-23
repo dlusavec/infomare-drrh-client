@@ -51,7 +51,7 @@ public class Errormsg implements java.io.Serializable {
 		this.errorid = errorid;
 	}
 
-	@Column(name = "TARGET", nullable = false, length = 120)
+	@Column(name = "TARGET", nullable = true, length = 500)
 	public String getTarget() {
 		return this.target;
 	}
@@ -60,7 +60,7 @@ public class Errormsg implements java.io.Serializable {
 		this.target = target;
 	}
 
-	@Column(name = "VALUE", nullable = false, length = 120)
+	@Column(name = "VALUE", nullable = true, length = 500)
 	public String getValue() {
 		return this.value;
 	}
@@ -69,7 +69,7 @@ public class Errormsg implements java.io.Serializable {
 		this.value = value;
 	}
 
-	@Column(name = "ERRORCODE", nullable = false, length = 120)
+	@Column(name = "ERRORCODE", nullable = true, length = 120)
 	public String getErrorcode() {
 		return this.errorcode;
 	}
@@ -78,7 +78,7 @@ public class Errormsg implements java.io.Serializable {
 		this.errorcode = errorcode;
 	}
 
-	@Column(name = "DESCRIPTIO", nullable = false, length = 2000)
+	@Column(name = "DESCRIPTIO", nullable = true, length = 2000)
 	public String getDescriptio() {
 		return this.descriptio;
 	}
