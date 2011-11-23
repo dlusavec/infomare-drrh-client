@@ -190,7 +190,7 @@ public class Bankmsg implements java.io.Serializable {
 		this.datetimews = datetimews;
 	}
 
-	public void postaviVrijednosti(byte status, Reqmsg reqMsg, Date dateTimeWS) {
+	public void postaviVrijednosti(byte status,Reqmsg reqMsg, Date dateTimeWS) {
 		this.status = status;
 		this.reqmsg = reqMsg;
 		this.datetimews = dateTimeWS;
