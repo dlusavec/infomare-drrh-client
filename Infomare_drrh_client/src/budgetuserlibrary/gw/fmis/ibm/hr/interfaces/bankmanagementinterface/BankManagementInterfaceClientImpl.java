@@ -120,14 +120,11 @@ public final class BankManagementInterfaceClientImpl {
 				bank = new Bank();
 				bank.postaviVrijednosti(bankMsg);
 				request.setMessageHeader(messageHeader);
-				request.setBank(bank);				
+				request.setBank(bank);
 				try {
 					response = port.createBank(request);
-					if (response.getResponseMessageType().equals(
-							ResponseMessageType.ERROR)) {
-						response.setMessageHeader(Pomocna
-								.getNewMessageHeader(session));
-					}
+					response.setMessageHeader(Pomocna
+							.getNewMessageHeader(session));
 				} catch (Exception e) {
 					if (response == null) {
 						response = new BankResponseMsg();
@@ -228,14 +225,11 @@ public final class BankManagementInterfaceClientImpl {
 				bank = new Bank();
 				bank.postaviVrijednosti(bankMsg);
 				request.setMessageHeader(messageHeader);
-				request.setBank(bank);				
+				request.setBank(bank);
 				try {
 					response = port.changeBank(request);
-					if (response.getResponseMessageType().equals(
-							ResponseMessageType.ERROR)) {
 						response.setMessageHeader(Pomocna
-								.getNewMessageHeader(session));
-					}
+								.getNewMessageHeader(session));				
 				} catch (Exception e) {
 					if (response == null) {
 						response = new BankResponseMsg();

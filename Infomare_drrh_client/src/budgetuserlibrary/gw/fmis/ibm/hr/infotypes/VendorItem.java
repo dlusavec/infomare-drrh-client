@@ -407,6 +407,7 @@ public class VendorItem {
 		instructionKey = StringUtils.trimToNull(invoiceMsg.getInstrkey());
 		referenceDetails = StringUtils.trimToNull(invoiceMsg.getRefdetail());
 		vendorAccountNumber = StringUtils.trimToNull(invoiceMsg.getVenaccnum());
+		lineItemNumber=invoiceMsg.getVenitemid();
 		try {
 			debitCreditIndicator = DebitCreditIndicatorType.valueOf(invoiceMsg
 					.getDebcreind());

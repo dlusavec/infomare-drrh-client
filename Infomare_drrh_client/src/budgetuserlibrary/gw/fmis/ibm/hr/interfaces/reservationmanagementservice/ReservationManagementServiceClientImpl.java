@@ -115,7 +115,7 @@ public final class ReservationManagementServiceClientImpl {
 		ReservationResponseMsg response = null;
 		BudgetCommitment budgetCommitment = null;
 		Statnotif statNotif = null;
-		Budcom budCom = null;
+		//Budcom budCom = null;
 		Notifhead notifHead = null;
 		List rezervacije = budcomMsgDAO.getBudcommsg(BudcommsgType.RESERVATION,
 				(byte) 1);
@@ -137,11 +137,8 @@ public final class ReservationManagementServiceClientImpl {
 				request.setBudgetCommitment(budgetCommitment);
 				try {
 					response = port.createReservation(request);
-					if (response.getResponseMessageType().equals(
-							ResponseMessageType.ERROR)) {
 						response.setMessageHeader(Pomocna
 								.getNewMessageHeader(session));
-					}
 				} catch (Exception e) {
 					if (response == null) {
 						response = new ReservationResponseMsg();
@@ -156,7 +153,7 @@ public final class ReservationManagementServiceClientImpl {
 				resMsg = new Resmsg();
 				reqMsg = new Reqmsg();
 				statNotif = new Statnotif();
-				budCom = new Budcom();
+				//budCom = new Budcom();
 				notifHead = new Notifhead();
 				resMsg.postaviVrijednosti(response.getMessageHeader(),
 						"createReservation", response.getResponseMessageType());
@@ -241,11 +238,11 @@ public final class ReservationManagementServiceClientImpl {
 								"Pojo_notifhead_"
 										+ Integer.toString(budComMsg
 												.getBcmsgid()));
-						debug.ispisUXML(
+						/*debug.ispisUXML(
 								budCom,
 								"Pojo_budcom_"
 										+ Integer.toString(budComMsg
-												.getBcmsgid()));
+												.getBcmsgid()));*/
 						debug.ispisUXML(
 								docHead,
 								"Pojo_dochead_"
@@ -288,7 +285,7 @@ public final class ReservationManagementServiceClientImpl {
 		ReservationResponseMsg response = null;
 		BudgetCommitment budgetCommitment = null;
 		Statnotif statNotif = null;
-		Budcom budCom = null;
+		//Budcom budCom = null;
 		Notifhead notifHead = null;
 		List rezervacije = budcomMsgDAO.getBudcommsg(BudcommsgType.RESERVATION,
 				(byte) 2);
@@ -309,12 +306,9 @@ public final class ReservationManagementServiceClientImpl {
 				request.setMessageHeader(messageHeader);
 				request.setBudgetCommitment(budgetCommitment);
 				try {
-					response = port.changeReservation(request);
-					if (response.getResponseMessageType().equals(
-							ResponseMessageType.ERROR)) {
+					response = port.changeReservation(request);			
 						response.setMessageHeader(Pomocna
 								.getNewMessageHeader(session));
-					}
 				} catch (Exception e) {
 					if (response == null) {
 						response = new ReservationResponseMsg();
@@ -329,7 +323,7 @@ public final class ReservationManagementServiceClientImpl {
 				resMsg = new Resmsg();
 				reqMsg = new Reqmsg();
 				statNotif = new Statnotif();
-				budCom = new Budcom();
+				//budCom = new Budcom();
 				notifHead = new Notifhead();
 				resMsg.postaviVrijednosti(response.getMessageHeader(),
 						"changeReservation", response.getResponseMessageType());
@@ -343,7 +337,7 @@ public final class ReservationManagementServiceClientImpl {
 				// Samo ako response nema error-a
 				if (response.getResponseMessageType().equals(
 						ResponseMessageType.NOTIFICATION)) {
-					statNotif.postaviVrijednosti(statNotId, resMsg,
+				/*	statNotif.postaviVrijednosti(statNotId, resMsg,
 							"changeReservation", response
 									.getNotificationResponse()
 									.getCommitmentStatus(), response
@@ -361,7 +355,7 @@ public final class ReservationManagementServiceClientImpl {
 									.getCommitmentStatus(), resMsg);
 					docHead.postaviVrijednosti(response
 							.getNotificationResponse().getHeader(), response
-							.getMessageHeader());
+							.getMessageHeader());*/
 				}
 
 				// Upis u bazu
@@ -372,10 +366,10 @@ public final class ReservationManagementServiceClientImpl {
 				session.update(budComMsg);
 				if (response.getResponseMessageType().equals(
 						ResponseMessageType.NOTIFICATION)) {
-					session.save(statNotif);
+				/*	session.save(statNotif);
 					session.save(notifHead);
 					session.saveOrUpdate(budCom);
-					session.update(docHead);
+					session.update(docHead);*/
 				}
 				sessionPomocna.commitTransakcije();
 				++reqMsgId;
@@ -416,11 +410,11 @@ public final class ReservationManagementServiceClientImpl {
 								"Pojo_notifhead_"
 										+ Integer.toString(budComMsg
 												.getBcmsgid()));
-						debug.ispisUXML(
+						/*debug.ispisUXML(
 								budCom,
 								"Pojo_budcom_"
 										+ Integer.toString(budComMsg
-												.getBcmsgid()));
+												.getBcmsgid()));*/
 						debug.ispisUXML(
 								docHead,
 								"Pojo_dochead_"
@@ -462,7 +456,7 @@ public final class ReservationManagementServiceClientImpl {
 		ReservationResponseMsg response = null;
 		BudgetCommitment budgetCommitment = null;
 		Statnotif statNotif = null;
-		Budcom budCom = null;
+		//Budcom budCom = null;
 		Notifhead notifHead = null;
 		List rezervacije = budcomMsgDAO.getBudcommsg(BudcommsgType.RESERVATION,
 				(byte) 9);
@@ -484,11 +478,8 @@ public final class ReservationManagementServiceClientImpl {
 				request.setBudgetCommitment(budgetCommitment);
 				try {
 					response = port.closeReservation(request);
-					if (response.getResponseMessageType().equals(
-							ResponseMessageType.ERROR)) {
 						response.setMessageHeader(Pomocna
 								.getNewMessageHeader(session));
-					}
 				} catch (Exception e) {
 					if (response == null) {
 						response = new ReservationResponseMsg();
@@ -503,7 +494,7 @@ public final class ReservationManagementServiceClientImpl {
 				resMsg = new Resmsg();
 				reqMsg = new Reqmsg();
 				statNotif = new Statnotif();
-				budCom = new Budcom();
+				//budCom = new Budcom();
 				notifHead = new Notifhead();
 				resMsg.postaviVrijednosti(response.getMessageHeader(),
 						"closeReservation", response.getResponseMessageType());
@@ -517,7 +508,7 @@ public final class ReservationManagementServiceClientImpl {
 				// Samo ako response nema error-a
 				if (response.getResponseMessageType().equals(
 						ResponseMessageType.NOTIFICATION)) {
-					statNotif.postaviVrijednosti(statNotId, resMsg,
+				/*	statNotif.postaviVrijednosti(statNotId, resMsg,
 							"closeReservation", response
 									.getNotificationResponse()
 									.getCommitmentStatus(), response
@@ -535,7 +526,7 @@ public final class ReservationManagementServiceClientImpl {
 									.getCommitmentStatus(), resMsg);
 					docHead.postaviVrijednosti(response
 							.getNotificationResponse().getHeader(), response
-							.getMessageHeader());
+							.getMessageHeader());*/
 				}
 
 				// Upis u bazu
@@ -546,10 +537,10 @@ public final class ReservationManagementServiceClientImpl {
 				session.update(budComMsg);
 				if (response.getResponseMessageType().equals(
 						ResponseMessageType.NOTIFICATION)) {
-					session.save(statNotif);
+				/*	session.save(statNotif);
 					session.save(notifHead);
 					session.saveOrUpdate(budCom);
-					session.update(docHead);
+					session.update(docHead);*/
 				}
 				sessionPomocna.commitTransakcije();
 				++reqMsgId;
@@ -590,11 +581,11 @@ public final class ReservationManagementServiceClientImpl {
 								"Pojo_notifhead_"
 										+ Integer.toString(budComMsg
 												.getBcmsgid()));
-						debug.ispisUXML(
+						/*debug.ispisUXML(
 								budCom,
 								"Pojo_budcom_"
 										+ Integer.toString(budComMsg
-												.getBcmsgid()));
+												.getBcmsgid()));*/
 						debug.ispisUXML(
 								docHead,
 								"Pojo_dochead_"

@@ -78,8 +78,8 @@ public final class VendorManagementInterfaceClientImpl {
 					VendorManagementInterfaceExportVendorManagementInterfaceHttpService.SERVIS);
 			otvoriPortISesiju();
 			createVendor();
-			// changeVendor();
-			// addNewBankAccount();
+			changeVendor();
+			addNewBankAccount();
 			Log.loger.info("Završetak razmjene partnera.");
 		} catch (Exception e) {
 			Log.loger.severe("Greška kod razmjene partnera "
@@ -137,15 +137,12 @@ public final class VendorManagementInterfaceClientImpl {
 					client.getInInterceptors().add(new LoggingInInterceptor());
 					client.getOutInterceptors()
 							.add(new LoggingOutInterceptor());
-					Thread.sleep(5000);*/
+					*/
 
 					try {
-						response = port.createVendor(request);
-						if (response.getResponseMessageType().equals(
-								ResponseMessageType.ERROR)) {
+						response = port.createVendor(request);						
 							response.setMessageHeader(Pomocna
-									.getNewMessageHeader(session));
-						}
+									.getNewMessageHeader(session));					
 					} catch (Exception e) {
 						if (response == null) {
 							response = new VendorResponseMsg();
@@ -275,11 +272,8 @@ public final class VendorManagementInterfaceClientImpl {
 				reqMsg = new Reqmsg();
 				try {
 					response = port.changeVendor(request);
-					if (response.getResponseMessageType().equals(
-							ResponseMessageType.ERROR)) {
 						response.setMessageHeader(Pomocna
 								.getNewMessageHeader(session));
-					}
 				} catch (Exception e) {
 					if (response == null) {
 						response = new VendorResponseMsg();
@@ -429,11 +423,8 @@ public final class VendorManagementInterfaceClientImpl {
 					reqMsg = new Reqmsg();
 					try {
 						response = port.addNewBankAccount(request);
-						if (response.getResponseMessageType().equals(
-								ResponseMessageType.ERROR)) {
 							response.setMessageHeader(Pomocna
 									.getNewMessageHeader(session));
-						}
 					} catch (Exception e) {
 						if (response == null) {
 							response = new BankAccountResponseMsg();

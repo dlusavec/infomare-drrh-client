@@ -198,7 +198,8 @@ public class Budcommsg implements java.io.Serializable {
 		this.status = status;
 		this.reqmsg = reqMsg;
 		this.datetimews = dateTimeWS;
-		this.statnotty = notificationResponse.getCommitmentStatus() != null ? notificationResponse
-				.getCommitmentStatus().name() : null;
+		// Privremeno iskljuceno
+		//this.statnotty = notificationResponse.getCommitmentStatus() != null ? notificationResponse
+			//	.getCommitmentStatus().name() : null;
 	}
 }

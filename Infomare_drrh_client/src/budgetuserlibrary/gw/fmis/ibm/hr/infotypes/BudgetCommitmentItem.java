@@ -281,7 +281,7 @@ public class BudgetCommitmentItem {
 			VendorVeznaDAO vendorVeznaDAO, DocheadDAO docHeadDAO)
 			throws Exception {
 		amount = bctItem.getAmount();
-		localCurrencyAmount=bctItem.getAmount();
+		localCurrencyAmount = bctItem.getAmount();
 		itemDueDate = PomocnaDatum.numDatumUXMLDatum(bctItem.getItduedat());
 		budgetStructure = new BudgetStructure();
 		budgetStructure.postaviVrijednosti(bctItem);
@@ -289,8 +289,10 @@ public class BudgetCommitmentItem {
 			VendorVezna vendorVezna = vendorVeznaDAO.getVendorVeznaByPK(bctItem
 					.getVendorid());
 			if (vendorVezna != null) {
-				bufmisVendorId = StringUtils.trimToNull(vendorVezna.getF41ctr());
-				masterVendorId = StringUtils.trimToNull(vendorVezna.getF41vid());
+				bufmisVendorId = StringUtils
+						.trimToNull(vendorVezna.getF41ctr());
+				masterVendorId = StringUtils
+						.trimToNull(vendorVezna.getF41vid());
 				sapVendorId = StringUtils.trimToNull(vendorVezna.getF41svi());
 			}
 		}
@@ -299,7 +301,10 @@ public class BudgetCommitmentItem {
 			referencedDocumentItem.postaviVrijednosti(bctItem, docHeadDAO);
 		}
 		lineItemNumber = bctItem.getBcitemid();
-		location = new Location();
-		location.setLocationName(StringUtils.trimToNull(bctItem.getLocationbc()));
+		if (StringUtils.isNotBlank(bctItem.getLocationbc())) {
+			location = new Location();
+			location.setLocationName(StringUtils.trimToNull(bctItem
+					.getLocationbc()));
+		}
 	}
 }

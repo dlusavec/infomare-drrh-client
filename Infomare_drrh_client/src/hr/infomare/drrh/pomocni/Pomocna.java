@@ -6,6 +6,7 @@ import hr.infomare.drrh.pojo.Errormsg;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.hibernate.Session;
 
 import budgetuserlibrary.gw.fmis.ibm.hr.infotypes.Error;
@@ -19,8 +20,10 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 public class Pomocna {
 
 	public static byte getStatus(ResponseMessageType responseMessageType) {
-		return (byte) (responseMessageType
-				.equals(ResponseMessageType.NOTIFICATION) ? 3 : 2);
+		return (byte) 2;
+		// Nije onako kako smo mislili u pocetku, status je uvijek 2 poslano...
+		/*return (byte) (responseMessageType
+				.equals(ResponseMessageType.NOTIFICATION) ? 3 : 2);*/
 	}
 
 	public static void obradaGresaka(Session session,
@@ -34,10 +37,10 @@ public class Pomocna {
 					Errormsg errorRes = new Errormsg();
 					errorRes.setResmesid(messageHeader.getResponseMsgId());
 					errorRes.setErrorid(++errorId);
-					errorRes.setTarget(error.getTarget());
-					errorRes.setValue(error.getValue());
-					errorRes.setErrorcode(error.getErrorCode());
-					errorRes.setDescriptio(error.getDescription());
+					errorRes.setTarget(StringUtils.left(StringUtils.trimToNull(error.getTarget()),500));
+					errorRes.setValue(StringUtils.left(StringUtils.defaultString(error.getValue()),500));
+					errorRes.setErrorcode(StringUtils.leftPad(StringUtils.trimToNull(error.getErrorCode()),120));
+					errorRes.setDescriptio(StringUtils.trimToNull(error.getDescription()));
 					errorRes.setSubmdati(PomocnaDatum
 							.XMLDatumUDate(messageHeader
 									.getSubmitionTimestamp()));

@@ -28,17 +28,17 @@ public class Start {
 		//VendorManagementInterfaceClientImpl klijentV = new VendorManagementInterfaceClientImpl();
 		//klijentV.razmjenaPartnera();
 		// Rezervacije
-		 ReservationManagementServiceClientImpl klijentR=new
+		/* ReservationManagementServiceClientImpl klijentR=new
 		 ReservationManagementServiceClientImpl();
-		 klijentR.razmjenaRezervacija();
+		 klijentR.razmjenaRezervacija();*/
 		// Ugovori
 		 ContractManagementServiceClientImpl klijentC=new
 		 ContractManagementServiceClientImpl();
 		 klijentC.razmjenaUgovora();
 		// Narudzbenice
-		// PurchaseOrderManagementServiceClientImpl klijentPO = new
-		// PurchaseOrderManagementServiceClientImpl();
-		// klijentPO.razmjenaNarudzbenica();
+	/*	 PurchaseOrderManagementServiceClientImpl klijentPO = new
+		 PurchaseOrderManagementServiceClientImpl();
+		klijentPO.razmjenaNarudzbenica();*/
 		// Fakture
 		// InvoiceManagementServiceClientImpl klijentI=new
 		 //InvoiceManagementServiceClientImpl();

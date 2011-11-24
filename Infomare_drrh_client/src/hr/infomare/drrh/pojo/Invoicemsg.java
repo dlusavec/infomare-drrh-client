@@ -345,7 +345,7 @@ public class Invoicemsg implements java.io.Serializable {
 		this.status = status;
 		this.reqmsg = reqMsg;
 		this.datetimews = dateTimeWS;
-		this.invststy = notificationResponse.getInvoiceStatus() != null ? notificationResponse
-				.getInvoiceStatus().name() : null;
+		/*this.invststy = notificationResponse.getInvoiceStatus() != null ? notificationResponse
+				.getInvoiceStatus().name() : null;*/
 	}
 }

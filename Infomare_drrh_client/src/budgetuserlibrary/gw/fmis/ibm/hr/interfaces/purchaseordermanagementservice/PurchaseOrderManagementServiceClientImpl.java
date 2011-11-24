@@ -115,7 +115,7 @@ public final class PurchaseOrderManagementServiceClientImpl {
 		PurchaseOrderResponseMsg response = null;
 		BudgetCommitment budgetCommitment = null;
 		Statnotif statNotif = null;
-		Budcom budCom = null;
+		//Budcom budCom = null;
 		Notifhead notifHead = null;
 		List narudzbenice = budcomMsgDAO.getBudcommsg(
 				BudcommsgType.PURCHASE_ORDER, (byte) 1);
@@ -137,11 +137,8 @@ public final class PurchaseOrderManagementServiceClientImpl {
 				request.setBudgetCommitment(budgetCommitment);
 				try {
 					response = port.createPurchaseOrder(request);
-					if (response.getResponseMessageType().equals(
-							ResponseMessageType.ERROR)) {
 						response.setMessageHeader(Pomocna
 								.getNewMessageHeader(session));
-					}
 				} catch (Exception e) {
 					if (response == null) {
 						response = new PurchaseOrderResponseMsg();
@@ -156,7 +153,7 @@ public final class PurchaseOrderManagementServiceClientImpl {
 				resMsg = new Resmsg();
 				reqMsg = new Reqmsg();
 				statNotif = new Statnotif();
-				budCom = new Budcom();
+				//budCom = new Budcom();
 				notifHead = new Notifhead();
 				resMsg.postaviVrijednosti(response.getMessageHeader(),
 						"createPurchaseOrder",
@@ -171,7 +168,7 @@ public final class PurchaseOrderManagementServiceClientImpl {
 				// Samo ako response nema error-a
 				if (response.getResponseMessageType().equals(
 						ResponseMessageType.NOTIFICATION)) {
-					statNotif.postaviVrijednosti(statNotId, resMsg,
+				/*	statNotif.postaviVrijednosti(statNotId, resMsg,
 							"createPurchaseOrder", response
 									.getNotificationResponse()
 									.getCommitmentStatus(), response
@@ -186,7 +183,7 @@ public final class PurchaseOrderManagementServiceClientImpl {
 									.getCommitmentStatus(), resMsg);
 					docHead.postaviVrijednosti(response
 							.getNotificationResponse().getHeader(), response
-							.getMessageHeader());
+							.getMessageHeader());*/
 				}
 
 				// Upis u bazu
@@ -197,10 +194,10 @@ public final class PurchaseOrderManagementServiceClientImpl {
 				session.update(budComMsg);
 				if (response.getResponseMessageType().equals(
 						ResponseMessageType.NOTIFICATION)) {
-					session.save(statNotif);
+				/*	session.save(statNotif);
 					session.save(notifHead);
 					session.saveOrUpdate(budCom);
-					session.update(docHead);
+					session.update(docHead);*/
 				}
 				sessionPomocna.commitTransakcije();
 				++reqMsgId;
@@ -242,11 +239,11 @@ public final class PurchaseOrderManagementServiceClientImpl {
 								"Pojo_notifhead_"
 										+ Integer.toString(budComMsg
 												.getBcmsgid()));
-						debug.ispisUXML(
+					/*	debug.ispisUXML(
 								budCom,
 								"Pojo_budcom_"
 										+ Integer.toString(budComMsg
-												.getBcmsgid()));
+												.getBcmsgid()));*/
 						debug.ispisUXML(
 								docHead,
 								"Pojo_dochead_"
@@ -289,7 +286,7 @@ public final class PurchaseOrderManagementServiceClientImpl {
 		PurchaseOrderResponseMsg response = null;
 		BudgetCommitment budgetCommitment = null;
 		Statnotif statNotif = null;
-		Budcom budCom = null;
+		//Budcom budCom = null;
 		Notifhead notifHead = null;
 		List ugovori = budcomMsgDAO.getBudcommsg(BudcommsgType.PURCHASE_ORDER,
 				(byte) 2);
@@ -311,11 +308,8 @@ public final class PurchaseOrderManagementServiceClientImpl {
 				request.setBudgetCommitment(budgetCommitment);
 				try {
 					response = port.changePurchaseOrder(request);
-					if (response.getResponseMessageType().equals(
-							ResponseMessageType.ERROR)) {
 						response.setMessageHeader(Pomocna
 								.getNewMessageHeader(session));
-					}
 				} catch (Exception e) {
 					if (response == null) {
 						response = new PurchaseOrderResponseMsg();
@@ -330,7 +324,7 @@ public final class PurchaseOrderManagementServiceClientImpl {
 				resMsg = new Resmsg();
 				reqMsg = new Reqmsg();
 				statNotif = new Statnotif();
-				budCom = new Budcom();
+				//budCom = new Budcom();
 				notifHead = new Notifhead();
 				resMsg.postaviVrijednosti(response.getMessageHeader(),
 						"changePurchaseOrder",
@@ -345,7 +339,7 @@ public final class PurchaseOrderManagementServiceClientImpl {
 				// Samo ako response nema error-a
 				if (response.getResponseMessageType().equals(
 						ResponseMessageType.NOTIFICATION)) {
-					statNotif.postaviVrijednosti(statNotId, resMsg,
+				/*	statNotif.postaviVrijednosti(statNotId, resMsg,
 							"changePurchaseOrder", response
 									.getNotificationResponse()
 									.getCommitmentStatus(), response
@@ -363,7 +357,7 @@ public final class PurchaseOrderManagementServiceClientImpl {
 									.getCommitmentStatus(), resMsg);
 					docHead.postaviVrijednosti(response
 							.getNotificationResponse().getHeader(), response
-							.getMessageHeader());
+							.getMessageHeader());*/
 				}
 
 				// Upis u bazu
@@ -374,10 +368,10 @@ public final class PurchaseOrderManagementServiceClientImpl {
 				session.update(budComMsg);
 				if (response.getResponseMessageType().equals(
 						ResponseMessageType.NOTIFICATION)) {
-					session.save(statNotif);
+					/*session.save(statNotif);
 					session.save(notifHead);
 					session.saveOrUpdate(budCom);
-					session.update(docHead);
+					session.update(docHead);*/
 				}
 				sessionPomocna.commitTransakcije();
 				++reqMsgId;
@@ -418,11 +412,11 @@ public final class PurchaseOrderManagementServiceClientImpl {
 								"Pojo_notifhead_"
 										+ Integer.toString(budComMsg
 												.getBcmsgid()));
-						debug.ispisUXML(
+						/*debug.ispisUXML(
 								budCom,
 								"Pojo_budcom_"
 										+ Integer.toString(budComMsg
-												.getBcmsgid()));
+												.getBcmsgid()));*/
 						debug.ispisUXML(
 								docHead,
 								"Pojo_dochead_"
@@ -464,7 +458,7 @@ public final class PurchaseOrderManagementServiceClientImpl {
 		PurchaseOrderResponseMsg response = null;
 		BudgetCommitment budgetCommitment = null;
 		Statnotif statNotif = null;
-		Budcom budCom = null;
+		//Budcom budCom = null;
 		Notifhead notifHead = null;
 		List narudzbenice = budcomMsgDAO.getBudcommsg(
 				BudcommsgType.PURCHASE_ORDER, (byte) 9);
@@ -486,11 +480,8 @@ public final class PurchaseOrderManagementServiceClientImpl {
 				request.setBudgetCommitment(budgetCommitment);
 				try {
 					response = port.closePurchaseOrder(request);
-					if (response.getResponseMessageType().equals(
-							ResponseMessageType.ERROR)) {
 						response.setMessageHeader(Pomocna
 								.getNewMessageHeader(session));
-					}
 				} catch (Exception e) {
 					if (response == null) {
 						response = new PurchaseOrderResponseMsg();
@@ -505,7 +496,7 @@ public final class PurchaseOrderManagementServiceClientImpl {
 				resMsg = new Resmsg();
 				reqMsg = new Reqmsg();
 				statNotif = new Statnotif();
-				budCom = new Budcom();
+				//budCom = new Budcom();
 				notifHead = new Notifhead();
 				resMsg.postaviVrijednosti(response.getMessageHeader(),
 						"closePurchaseOrder", response.getResponseMessageType());
@@ -519,7 +510,7 @@ public final class PurchaseOrderManagementServiceClientImpl {
 				// Samo ako response nema error-a
 				if (response.getResponseMessageType().equals(
 						ResponseMessageType.NOTIFICATION)) {
-					statNotif.postaviVrijednosti(statNotId, resMsg,
+				/*	statNotif.postaviVrijednosti(statNotId, resMsg,
 							"closePurchaseOrder", response
 									.getNotificationResponse()
 									.getCommitmentStatus(), response
@@ -537,7 +528,7 @@ public final class PurchaseOrderManagementServiceClientImpl {
 									.getCommitmentStatus(), resMsg);
 					docHead.postaviVrijednosti(response
 							.getNotificationResponse().getHeader(), response
-							.getMessageHeader());
+							.getMessageHeader());*/
 				}
 
 				// Upis u bazu
@@ -548,10 +539,10 @@ public final class PurchaseOrderManagementServiceClientImpl {
 				session.update(budComMsg);
 				if (response.getResponseMessageType().equals(
 						ResponseMessageType.NOTIFICATION)) {
-					session.save(statNotif);
+					/*session.save(statNotif);
 					session.save(notifHead);
 					session.saveOrUpdate(budCom);
-					session.update(docHead);
+					session.update(docHead);*/
 				}
 				sessionPomocna.commitTransakcije();
 				++reqMsgId;
@@ -592,7 +583,7 @@ public final class PurchaseOrderManagementServiceClientImpl {
 								"Pojo_notifhead_"
 										+ Integer.toString(budComMsg
 												.getBcmsgid()));
-						debug.ispisUXML(
+					/*	debug.ispisUXML(
 								budCom,
 								"Pojo_budcom_"
 										+ Integer.toString(budComMsg
@@ -601,7 +592,7 @@ public final class PurchaseOrderManagementServiceClientImpl {
 								docHead,
 								"Pojo_dochead_"
 										+ Integer.toString(budComMsg
-												.getBcmsgid()));
+												.getBcmsgid()));*/
 
 					}
 					if (Postavke.DEBUG_PORUKA) {

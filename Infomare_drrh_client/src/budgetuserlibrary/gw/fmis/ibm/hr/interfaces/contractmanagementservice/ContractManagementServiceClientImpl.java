@@ -116,7 +116,7 @@ public final class ContractManagementServiceClientImpl {
 		ContractResponseMsg response = null;
 		BudgetCommitment budgetCommitment = null;
 		Statnotif statNotif = null;
-		Budcom budCom = null;
+		//Budcom budCom = null;
 		Notifhead notifHead = null;
 		List ugovori = budcomMsgDAO.getBudcommsg(BudcommsgType.CONTRACT,
 				(byte) 1);
@@ -137,12 +137,9 @@ public final class ContractManagementServiceClientImpl {
 				request.setMessageHeader(messageHeader);
 				request.setBudgetCommitment(budgetCommitment);
 				try {
-					response = port.createContract(request);
-					if (response.getResponseMessageType().equals(
-							ResponseMessageType.ERROR)) {
+					response = port.createContract(request);			
 						response.setMessageHeader(Pomocna
-								.getNewMessageHeader(session));
-					}
+								.getNewMessageHeader(session));		
 				} catch (Exception e) {
 					if (response == null) {
 						response = new ContractResponseMsg();
@@ -157,7 +154,7 @@ public final class ContractManagementServiceClientImpl {
 				resMsg = new Resmsg();
 				reqMsg = new Reqmsg();
 				statNotif = new Statnotif();
-				budCom = new Budcom();
+				//budCom = new Budcom();
 				notifHead = new Notifhead();
 				resMsg.postaviVrijednosti(response.getMessageHeader(),
 						"createContract", response.getResponseMessageType());
@@ -171,7 +168,7 @@ public final class ContractManagementServiceClientImpl {
 				// Samo ako response nema error-a
 				if (response.getResponseMessageType().equals(
 						ResponseMessageType.NOTIFICATION)) {
-					statNotif.postaviVrijednosti(statNotId, resMsg,
+					/*statNotif.postaviVrijednosti(statNotId, resMsg,
 							"createContract", response
 									.getNotificationResponse()
 									.getCommitmentStatus(), response
@@ -186,7 +183,7 @@ public final class ContractManagementServiceClientImpl {
 									.getCommitmentStatus(), resMsg);
 					docHead.postaviVrijednosti(response
 							.getNotificationResponse().getHeader(), response
-							.getMessageHeader());
+							.getMessageHeader());*/
 				}
 
 				// Upis u bazu
@@ -197,10 +194,10 @@ public final class ContractManagementServiceClientImpl {
 				session.update(budComMsg);
 				if (response.getResponseMessageType().equals(
 						ResponseMessageType.NOTIFICATION)) {
-					session.save(statNotif);
+				/*	session.save(statNotif);
 					session.save(notifHead);
 					session.saveOrUpdate(budCom);
-					session.update(docHead);
+					session.update(docHead);*/
 				}
 				sessionPomocna.commitTransakcije();
 				++reqMsgId;
@@ -244,7 +241,7 @@ public final class ContractManagementServiceClientImpl {
 								"Pojo_notifhead_"
 										+ Integer.toString(budComMsg
 												.getBcmsgid()));
-						debug.ispisUXML(
+						/*debug.ispisUXML(
 								budCom,
 								"Pojo_budcom_"
 										+ Integer.toString(budComMsg
@@ -253,7 +250,7 @@ public final class ContractManagementServiceClientImpl {
 								docHead,
 								"Pojo_dochead_"
 										+ Integer.toString(budComMsg
-												.getBcmsgid()));
+												.getBcmsgid()));*/
 
 					}
 					if (Postavke.DEBUG_PORUKA) {
@@ -290,7 +287,7 @@ public final class ContractManagementServiceClientImpl {
 		ContractResponseMsg response = null;
 		BudgetCommitment budgetCommitment = null;
 		Statnotif statNotif = null;
-		Budcom budCom = null;
+		//Budcom budCom = null;
 		Notifhead notifHead = null;
 		List ugovori = budcomMsgDAO.getBudcommsg(BudcommsgType.CONTRACT,
 				(byte) 2);
@@ -312,11 +309,8 @@ public final class ContractManagementServiceClientImpl {
 				request.setBudgetCommitment(budgetCommitment);				
 				try {
 					response = port.changeContract(request);
-					if (response.getResponseMessageType().equals(
-							ResponseMessageType.ERROR)) {
 						response.setMessageHeader(Pomocna
 								.getNewMessageHeader(session));
-					}
 				} catch (Exception e) {
 					if (response == null) {
 						response = new ContractResponseMsg();
@@ -331,7 +325,7 @@ public final class ContractManagementServiceClientImpl {
 				resMsg = new Resmsg();
 				reqMsg = new Reqmsg();
 				statNotif = new Statnotif();
-				budCom = new Budcom();
+				//budCom = new Budcom();
 				notifHead = new Notifhead();
 				resMsg.postaviVrijednosti(response.getMessageHeader(),
 						"changeContract", response.getResponseMessageType());
@@ -345,7 +339,7 @@ public final class ContractManagementServiceClientImpl {
 				// Samo ako response nema error-a
 				if (response.getResponseMessageType().equals(
 						ResponseMessageType.NOTIFICATION)) {
-					statNotif.postaviVrijednosti(statNotId, resMsg,
+				/*	statNotif.postaviVrijednosti(statNotId, resMsg,
 							"changeContract", response
 									.getNotificationResponse()
 									.getCommitmentStatus(), response
@@ -363,7 +357,7 @@ public final class ContractManagementServiceClientImpl {
 									.getCommitmentStatus(), resMsg);
 					docHead.postaviVrijednosti(response
 							.getNotificationResponse().getHeader(), response
-							.getMessageHeader());
+							.getMessageHeader());*/
 				}
 
 				// Upis u bazu
@@ -374,10 +368,10 @@ public final class ContractManagementServiceClientImpl {
 				session.update(budComMsg);
 				if (response.getResponseMessageType().equals(
 						ResponseMessageType.NOTIFICATION)) {
-					session.save(statNotif);
+					/*session.save(statNotif);
 					session.save(notifHead);
 					session.saveOrUpdate(budCom);
-					session.update(docHead);
+					session.update(docHead);*/
 				}
 				sessionPomocna.commitTransakcije();
 				++reqMsgId;
@@ -421,7 +415,7 @@ public final class ContractManagementServiceClientImpl {
 								"Pojo_notifhead_"
 										+ Integer.toString(budComMsg
 												.getBcmsgid()));
-						debug.ispisUXML(
+					/*	debug.ispisUXML(
 								budCom,
 								"Pojo_budcom_"
 										+ Integer.toString(budComMsg
@@ -430,7 +424,7 @@ public final class ContractManagementServiceClientImpl {
 								docHead,
 								"Pojo_dochead_"
 										+ Integer.toString(budComMsg
-												.getBcmsgid()));
+												.getBcmsgid()));*/
 
 					}
 					if (Postavke.DEBUG_PORUKA) {
@@ -467,7 +461,7 @@ public final class ContractManagementServiceClientImpl {
 		ContractResponseMsg response = null;
 		BudgetCommitment budgetCommitment = null;
 		Statnotif statNotif = null;
-		Budcom budCom = null;
+		//Budcom budCom = null;
 		Notifhead notifHead = null;
 		List ugovori = budcomMsgDAO.getBudcommsg(BudcommsgType.CONTRACT,
 				(byte) 9);
@@ -488,12 +482,9 @@ public final class ContractManagementServiceClientImpl {
 				request.setMessageHeader(messageHeader);
 				request.setBudgetCommitment(budgetCommitment);				
 				try {
-					response = port.closeContract(request);
-					if (response.getResponseMessageType().equals(
-							ResponseMessageType.ERROR)) {
+					response = port.closeContract(request);				
 						response.setMessageHeader(Pomocna
-								.getNewMessageHeader(session));
-					}
+								.getNewMessageHeader(session));					
 				} catch (Exception e) {
 					if (response == null) {
 						response = new ContractResponseMsg();
@@ -508,7 +499,7 @@ public final class ContractManagementServiceClientImpl {
 				resMsg = new Resmsg();
 				reqMsg = new Reqmsg();
 				statNotif = new Statnotif();
-				budCom = new Budcom();
+				//budCom = new Budcom();
 				notifHead = new Notifhead();
 				resMsg.postaviVrijednosti(response.getMessageHeader(),
 						"closeContract", response.getResponseMessageType());
@@ -522,7 +513,7 @@ public final class ContractManagementServiceClientImpl {
 				// Samo ako response nema error-a
 				if (response.getResponseMessageType().equals(
 						ResponseMessageType.NOTIFICATION)) {
-					statNotif.postaviVrijednosti(statNotId, resMsg,
+				/*	statNotif.postaviVrijednosti(statNotId, resMsg,
 							"closeContract", response.getNotificationResponse()
 									.getCommitmentStatus(), response
 									.getMessageHeader());
@@ -539,7 +530,7 @@ public final class ContractManagementServiceClientImpl {
 									.getCommitmentStatus(), resMsg);
 					docHead.postaviVrijednosti(response
 							.getNotificationResponse().getHeader(), response
-							.getMessageHeader());
+							.getMessageHeader());*/
 				}
 
 				// Upis u bazu
@@ -550,10 +541,10 @@ public final class ContractManagementServiceClientImpl {
 				session.update(budComMsg);
 				if (response.getResponseMessageType().equals(
 						ResponseMessageType.NOTIFICATION)) {
-					session.save(statNotif);
+				/*	session.save(statNotif);
 					session.save(notifHead);
 					session.saveOrUpdate(budCom);
-					session.update(docHead);
+					session.update(docHead);*/
 				}
 				sessionPomocna.commitTransakcije();
 				++reqMsgId;
@@ -597,7 +588,7 @@ public final class ContractManagementServiceClientImpl {
 								"Pojo_notifhead_"
 										+ Integer.toString(budComMsg
 												.getBcmsgid()));
-						debug.ispisUXML(
+						/*debug.ispisUXML(
 								budCom,
 								"Pojo_budcom_"
 										+ Integer.toString(budComMsg
@@ -606,7 +597,7 @@ public final class ContractManagementServiceClientImpl {
 								docHead,
 								"Pojo_dochead_"
 										+ Integer.toString(budComMsg
-												.getBcmsgid()));
+												.getBcmsgid()));*/
 
 					}
 					if (Postavke.DEBUG_PORUKA) {
