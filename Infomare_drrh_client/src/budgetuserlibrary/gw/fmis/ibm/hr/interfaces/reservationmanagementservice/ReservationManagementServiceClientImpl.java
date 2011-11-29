@@ -70,13 +70,11 @@ public final class ReservationManagementServiceClientImpl {
 	}
 
 	public void razmjenaRezervacija() {
-		try {
-			Log.loger.info("Poèetak razmjene rezervacija.");
+		try {			
 			otvoriPortISesiju();
 			createReservation();
 			changeReservation();
-			closeReservation();
-			Log.loger.info("Završetak razmjene rezervacija.");
+			closeReservation();			
 		} catch (Exception e) {
 			Log.loger.severe("Greška kod razmjene rezervacija "
 					+ PomocnaError.getErrorMessage(e));

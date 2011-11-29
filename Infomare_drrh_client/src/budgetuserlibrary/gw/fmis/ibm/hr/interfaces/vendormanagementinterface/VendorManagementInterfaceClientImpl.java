@@ -71,16 +71,14 @@ public final class VendorManagementInterfaceClientImpl {
 	}
 
 	public void razmjenaPartnera() {
-		try {
-			Log.loger.info("Poèetak razmjene partnera.");
+		try {			
 			SERVICE_NAME = new QName(
 					VendorManagementInterfaceExportVendorManagementInterfaceHttpService.TARGET_NAMESPACE,
 					VendorManagementInterfaceExportVendorManagementInterfaceHttpService.SERVIS);
 			otvoriPortISesiju();
 			createVendor();
 			changeVendor();
-			addNewBankAccount();
-			Log.loger.info("Završetak razmjene partnera.");
+			addNewBankAccount();			
 		} catch (Exception e) {
 			Log.loger.severe("Greška kod razmjene partnera "
 					+ PomocnaError.getErrorMessage(e));

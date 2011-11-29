@@ -71,13 +71,11 @@ public final class InvoiceManagementServiceClientImpl {
 	}
 
 	public void razmjenaFaktura() {
-		try {
-			Log.loger.info("Poèetak razmjene faktura.");
+		try {			
 			otvoriPortISesiju();
 			createInvoice();
 			changeInvoice();
-			reverseInvoice();
-			Log.loger.info("Završetak razmjene faktura.");
+			reverseInvoice();			
 		} catch (Exception e) {
 			Log.loger.severe("Greška kod razmjene faktura "
 					+ PomocnaError.getErrorMessage(e));

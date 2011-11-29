@@ -286,11 +286,10 @@ public class BudgetCommitmentItem {
 		budgetStructure = new BudgetStructure();
 		budgetStructure.postaviVrijednosti(bctItem);
 		if (StringUtils.isNotBlank(bctItem.getVendorid())) {
+			bufmisVendorId = StringUtils.trimToNull(bctItem.getVendorid());
 			VendorVezna vendorVezna = vendorVeznaDAO.getVendorVeznaByPK(bctItem
 					.getVendorid());
 			if (vendorVezna != null) {
-				bufmisVendorId = StringUtils
-						.trimToNull(vendorVezna.getF41ctr());
 				masterVendorId = StringUtils
 						.trimToNull(vendorVezna.getF41vid());
 				sapVendorId = StringUtils.trimToNull(vendorVezna.getF41svi());

@@ -70,13 +70,11 @@ public final class PurchaseOrderManagementServiceClientImpl {
 	}
 
 	public void razmjenaNarudzbenica() {
-		try {
-			Log.loger.info("Poèetak razmjene naruðbenica.");
+		try {			
 			otvoriPortISesiju();
 			createPurchaseOrder();
 			changePurchaseOrder();
-			closePurchaseOrder();
-			Log.loger.info("Završetak razmjene naruðbenica.");
+			closePurchaseOrder();			
 		} catch (Exception e) {
 			Log.loger.severe("Greška kod razmjene naruðbenica "
 					+ PomocnaError.getErrorMessage(e));

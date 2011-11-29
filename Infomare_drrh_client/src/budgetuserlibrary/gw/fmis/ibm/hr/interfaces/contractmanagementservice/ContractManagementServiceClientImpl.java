@@ -72,12 +72,10 @@ public final class ContractManagementServiceClientImpl {
 
 	public void razmjenaUgovora() {
 		try {
-			Log.loger.info("Poèetak razmjene ugovora.");
 			otvoriPortISesiju();
 			createContract();
 			changeContract();
-			closeContract();
-			Log.loger.info("Završetak razmjene ugovora.");
+			closeContract();			
 		} catch (Exception e) {
 			Log.loger.severe("Greška kod razmjene ugovora "
 					+ PomocnaError.getErrorMessage(e));

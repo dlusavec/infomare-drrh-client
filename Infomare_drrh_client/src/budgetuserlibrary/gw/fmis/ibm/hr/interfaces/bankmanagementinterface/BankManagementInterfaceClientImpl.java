@@ -57,12 +57,10 @@ public final class BankManagementInterfaceClientImpl {
 	}
 
 	public void razmjenaBanaka() {
-		try {
-			Log.loger.info("Poèetak razmjene banaka.");
+		try {		
 			otvoriPortISesiju();
 			createBank();
-			changeBank();
-			Log.loger.info("Završetak razmjene banaka.");
+			changeBank();			
 		} catch (Exception e) {
 			Log.loger.severe("Greška kod razmjene banaka "
 					+ PomocnaError.getErrorMessage(e));
