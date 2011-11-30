@@ -44,6 +44,7 @@ public class ServletInit implements ServletContextListener {
 			job.scheduleAtFixedRate(
 					new TimerTask() {
 						public void run() {
+							Log.loger.info("Pocetak razmjene");
 							if (StringUtils.isNotBlank(Postavke.WSDL_BANK)) {
 								BankManagementInterfaceClientImpl bankManagement = new BankManagementInterfaceClientImpl();
 								bankManagement.razmjenaBanaka();
@@ -73,6 +74,7 @@ public class ServletInit implements ServletContextListener {
 								InvoiceManagementServiceClientImpl invoiceManagement=new InvoiceManagementServiceClientImpl();
 								invoiceManagement.razmjenaFaktura();
 							}
+							Log.loger.info("Zavrsetak razmjene");
 						}
 					}, NumberUtils.toInt(Postavke.WS_ODGODA) * 1000 * 60,
 					NumberUtils.toInt(Postavke.WS_INTERVAL) * 1000 * 60);

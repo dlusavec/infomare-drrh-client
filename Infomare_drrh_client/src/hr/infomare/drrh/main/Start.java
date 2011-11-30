@@ -21,9 +21,9 @@ public class Start {
 		 * ********* POZIVI ZA TESTIRANJE *********
 		 */
 		// Banke
-		 //BankManagementInterfaceClientImpl klijentB = new
-		 //BankManagementInterfaceClientImpl();
-		 //klijentB.razmjenaBanaka();
+		 BankManagementInterfaceClientImpl klijentB = new
+		 BankManagementInterfaceClientImpl();
+		 klijentB.razmjenaBanaka();
 		// Partneri
 		//VendorManagementInterfaceClientImpl klijentV = new VendorManagementInterfaceClientImpl();
 		//klijentV.razmjenaPartnera();
@@ -32,9 +32,9 @@ public class Start {
 		 ReservationManagementServiceClientImpl();
 		 klijentR.razmjenaRezervacija();*/
 		// Ugovori
-		 ContractManagementServiceClientImpl klijentC=new
+	/*	 ContractManagementServiceClientImpl klijentC=new
 		 ContractManagementServiceClientImpl();
-		 klijentC.razmjenaUgovora();
+		 klijentC.razmjenaUgovora();*/
 		// Narudzbenice
 	/*	 PurchaseOrderManagementServiceClientImpl klijentPO = new
 		 PurchaseOrderManagementServiceClientImpl();

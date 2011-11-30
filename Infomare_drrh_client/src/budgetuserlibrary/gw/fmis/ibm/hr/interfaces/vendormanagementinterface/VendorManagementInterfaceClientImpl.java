@@ -21,6 +21,7 @@ import hr.infomare.drrh.pomocni.Log;
 import hr.infomare.drrh.pomocni.Pomocna;
 import hr.infomare.drrh.pomocni.PomocnaDatum;
 import hr.infomare.drrh.pomocni.PomocnaError;
+import hr.infomare.drrh.pomocni.PomocnaKlijent;
 import hr.infomare.drrh.postavke.Postavke;
 
 import java.net.URL;
@@ -91,6 +92,7 @@ public final class VendorManagementInterfaceClientImpl {
 				wsdlURL, SERVICE_NAME);
 		port = servis
 				.getVendorManagementInterfaceExportVendorManagementInterfaceHttpPort();
+		PomocnaKlijent.postavkeKlijenta(port);
 		sessionPomocna = new SessionPomocna();
 		session = sessionPomocna.getSession();
 		vendorMsgDAO = new VendormsgDAO(session);
@@ -129,27 +131,18 @@ public final class VendorManagementInterfaceClientImpl {
 					// Response
 					resMsg = new Resmsg();
 					reqMsg = new Reqmsg();
-					vendorVezna = new VendorVezna();
-					// Stavi gore kod otvaranja port-a
-					/*Client client = ClientProxy.getClient(port);
-					client.getInInterceptors().add(new LoggingInInterceptor());
-					client.getOutInterceptors()
-							.add(new LoggingOutInterceptor());
-					*/
-
+					vendorVezna = new VendorVezna();					
 					try {
 						response = port.createVendor(request);						
 							response.setMessageHeader(Pomocna
 									.getNewMessageHeader(session));					
-					} catch (Exception e) {
-						if (response == null) {
+					} catch (Exception e) {						
 							response = new VendorResponseMsg();
 							response.setMessageHeader(Pomocna
 									.getNewMessageHeader(session));
 							response.setResponseMessageType(ResponseMessageType.ERROR);
 							response.setErrorResponse(PomocnaError
-									.getErrorResponse("Vendor", e));
-						}
+									.getErrorResponse("Vendor", e));						
 					}
 					resMsg.postaviVrijednosti(response.getMessageHeader(),
 							"createVendor", response.getResponseMessageType());
@@ -272,15 +265,13 @@ public final class VendorManagementInterfaceClientImpl {
 					response = port.changeVendor(request);
 						response.setMessageHeader(Pomocna
 								.getNewMessageHeader(session));
-				} catch (Exception e) {
-					if (response == null) {
+				} catch (Exception e) {					
 						response = new VendorResponseMsg();
 						response.setMessageHeader(Pomocna
 								.getNewMessageHeader(session));
 						response.setResponseMessageType(ResponseMessageType.ERROR);
 						response.setErrorResponse(PomocnaError
-								.getErrorResponse("Vendor", e));
-					}
+								.getErrorResponse("Vendor", e));					
 				}
 				resMsg.postaviVrijednosti(response.getMessageHeader(),
 						"changeVendor", response.getResponseMessageType());
@@ -423,15 +414,13 @@ public final class VendorManagementInterfaceClientImpl {
 						response = port.addNewBankAccount(request);
 							response.setMessageHeader(Pomocna
 									.getNewMessageHeader(session));
-					} catch (Exception e) {
-						if (response == null) {
+					} catch (Exception e) {						
 							response = new BankAccountResponseMsg();
 							response.setMessageHeader(Pomocna
 									.getNewMessageHeader(session));
 							response.setResponseMessageType(ResponseMessageType.ERROR);
 							response.setErrorResponse(PomocnaError
-									.getErrorResponse("VEN_BANK_ACC", e));
-						}
+									.getErrorResponse("VEN_BANK_ACC", e));						
 					}
 					resMsg.postaviVrijednosti(response.getMessageHeader(),
 							"addNewBankAccount",

@@ -12,6 +12,7 @@ import hr.infomare.drrh.pomocni.Log;
 import hr.infomare.drrh.pomocni.Pomocna;
 import hr.infomare.drrh.pomocni.PomocnaDatum;
 import hr.infomare.drrh.pomocni.PomocnaError;
+import hr.infomare.drrh.pomocni.PomocnaKlijent;
 import hr.infomare.drrh.postavke.Postavke;
 
 import java.net.URL;
@@ -24,6 +25,8 @@ import org.apache.cxf.endpoint.Client;
 import org.apache.cxf.frontend.ClientProxy;
 import org.apache.cxf.interceptor.LoggingInInterceptor;
 import org.apache.cxf.interceptor.LoggingOutInterceptor;
+import org.apache.cxf.transport.http.HTTPConduit;
+import org.apache.cxf.transports.http.configuration.HTTPClientPolicy;
 import org.hibernate.Session;
 
 import budgetuserlibrary.gw.fmis.ibm.hr.infotypes.Bank;
@@ -57,10 +60,10 @@ public final class BankManagementInterfaceClientImpl {
 	}
 
 	public void razmjenaBanaka() {
-		try {		
+		try {
 			otvoriPortISesiju();
 			createBank();
-			changeBank();			
+		//	changeBank();
 		} catch (Exception e) {
 			Log.loger.severe("Greška kod razmjene banaka "
 					+ PomocnaError.getErrorMessage(e));
@@ -76,29 +79,12 @@ public final class BankManagementInterfaceClientImpl {
 				wsdlURL, serviceName);
 		port = servis
 				.getBankManagementInterfaceExportBankManagementInterfaceHttpPort();
-		/*
-		 * Client client = ClientProxy.getClient(port);
-		 * client.getInInterceptors().add(new LoggingInInterceptor());
-		 * client.getOutInterceptors().add(new LoggingOutInterceptor());
-		 * Thread.sleep(10000);
-		 */
+		PomocnaKlijent.postavkeKlijenta(port);		
 		sessionPomocna = new SessionPomocna();
 		session = sessionPomocna.getSession();
 		bankMsgDAO = new BankmsgDAO(session);
 		reqMsgDAO = new ReqmsgDAO(session);
-	}
-
-	//
-	/*
-	 * public void retrieveBankRequestMSG() { BankRetrieveRequestMsg request =
-	 * new BankRetrieveRequestMsg(); MessageHeader messageHeader = new
-	 * MessageHeader(); Bank bank = new Bank();
-	 * request.setMessageHeader(messageHeader); // To do setiranje banke, vidi
-	 * obavezna polja BankResponseMsg response = port.retrieveBank(request);
-	 * 
-	 * IspisObjekta ispis = new IspisObjekta(); ispis.ispis(response.getBank());
-	 * }
-	 */
+	}	
 
 	private void createBank() {
 		Integer reqMsgId = reqMsgDAO.getIduciRbr();
@@ -123,15 +109,13 @@ public final class BankManagementInterfaceClientImpl {
 					response = port.createBank(request);
 					response.setMessageHeader(Pomocna
 							.getNewMessageHeader(session));
-				} catch (Exception e) {
-					if (response == null) {
+				} catch (Exception e) {					
 						response = new BankResponseMsg();
 						response.setMessageHeader(Pomocna
 								.getNewMessageHeader(session));
 						response.setResponseMessageType(ResponseMessageType.ERROR);
 						response.setErrorResponse(PomocnaError
-								.getErrorResponse("Bank", e));
-					}
+								.getErrorResponse("Bank", e));					
 				}
 				// Response
 				resMsg = new Resmsg();
@@ -226,17 +210,15 @@ public final class BankManagementInterfaceClientImpl {
 				request.setBank(bank);
 				try {
 					response = port.changeBank(request);
-						response.setMessageHeader(Pomocna
-								.getNewMessageHeader(session));				
-				} catch (Exception e) {
-					if (response == null) {
+					response.setMessageHeader(Pomocna
+							.getNewMessageHeader(session));
+				} catch (Exception e) {					
 						response = new BankResponseMsg();
 						response.setMessageHeader(Pomocna
 								.getNewMessageHeader(session));
 						response.setResponseMessageType(ResponseMessageType.ERROR);
 						response.setErrorResponse(PomocnaError
-								.getErrorResponse("Bank", e));
-					}
+								.getErrorResponse("Bank", e));					
 				}
 				// Response
 				resMsg = new Resmsg();

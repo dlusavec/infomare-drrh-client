@@ -24,6 +24,7 @@ import hr.infomare.drrh.pomocni.Log;
 import hr.infomare.drrh.pomocni.Pomocna;
 import hr.infomare.drrh.pomocni.PomocnaDatum;
 import hr.infomare.drrh.pomocni.PomocnaError;
+import hr.infomare.drrh.pomocni.PomocnaKlijent;
 import hr.infomare.drrh.postavke.Postavke;
 
 import java.net.URL;
@@ -90,6 +91,7 @@ public final class ReservationManagementServiceClientImpl {
 				wsdlURL, serviceName);
 		port = servis
 				.getManageReservationExportReservationManagementServiceHttpPort();
+		PomocnaKlijent.postavkeKlijenta(port);
 		sessionPomocna = new SessionPomocna();
 		session = sessionPomocna.getSession();
 		budcomMsgDAO = new BudcommsgDAO(session);
@@ -137,15 +139,13 @@ public final class ReservationManagementServiceClientImpl {
 					response = port.createReservation(request);
 						response.setMessageHeader(Pomocna
 								.getNewMessageHeader(session));
-				} catch (Exception e) {
-					if (response == null) {
+				} catch (Exception e) {					
 						response = new ReservationResponseMsg();
 						response.setMessageHeader(Pomocna
 								.getNewMessageHeader(session));
 						response.setResponseMessageType(ResponseMessageType.ERROR);
 						response.setErrorResponse(PomocnaError
-								.getErrorResponse("Reservation", e));
-					}
+								.getErrorResponse("Reservation", e));					
 				}
 				// Response
 				resMsg = new Resmsg();
@@ -307,15 +307,13 @@ public final class ReservationManagementServiceClientImpl {
 					response = port.changeReservation(request);			
 						response.setMessageHeader(Pomocna
 								.getNewMessageHeader(session));
-				} catch (Exception e) {
-					if (response == null) {
+				} catch (Exception e) {					
 						response = new ReservationResponseMsg();
 						response.setMessageHeader(Pomocna
 								.getNewMessageHeader(session));
 						response.setResponseMessageType(ResponseMessageType.ERROR);
 						response.setErrorResponse(PomocnaError
-								.getErrorResponse("Reservation", e));
-					}
+								.getErrorResponse("Reservation", e));					
 				}
 				// Response
 				resMsg = new Resmsg();
@@ -478,15 +476,13 @@ public final class ReservationManagementServiceClientImpl {
 					response = port.closeReservation(request);
 						response.setMessageHeader(Pomocna
 								.getNewMessageHeader(session));
-				} catch (Exception e) {
-					if (response == null) {
+				} catch (Exception e) {					
 						response = new ReservationResponseMsg();
 						response.setMessageHeader(Pomocna
 								.getNewMessageHeader(session));
 						response.setResponseMessageType(ResponseMessageType.ERROR);
 						response.setErrorResponse(PomocnaError
-								.getErrorResponse("Reservation", e));
-					}
+								.getErrorResponse("Reservation", e));					
 				}
 				// Response
 				resMsg = new Resmsg();
