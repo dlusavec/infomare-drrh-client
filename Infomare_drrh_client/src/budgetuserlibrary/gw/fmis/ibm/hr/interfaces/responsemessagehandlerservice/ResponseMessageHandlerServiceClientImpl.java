@@ -25,11 +25,11 @@ import javax.xml.ws.ResponseWrapper;
  * Generated source version: 2.4.0
  * 
  */
-public final class ResponseMessageHandlerService_ResponseMessageHandlerServiceExportResponseMessageHandlerServiceHttpPort_Client {
+public final class ResponseMessageHandlerServiceClientImpl {
 
     private static final QName SERVICE_NAME = new QName("http://hr.ibm.fmis.gw.BudgetUserLibrary/interfaces/ResponseMessageHandlerService/Binding2", "ResponseMessageHandlerServiceExport_ResponseMessageHandlerServiceHttpService");
 
-    private ResponseMessageHandlerService_ResponseMessageHandlerServiceExportResponseMessageHandlerServiceHttpPort_Client() {
+    private ResponseMessageHandlerServiceClientImpl() {
     }
 
     public static void main(String args[]) throws Exception {

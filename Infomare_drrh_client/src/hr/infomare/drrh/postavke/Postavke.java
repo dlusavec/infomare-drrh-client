@@ -38,6 +38,7 @@ public class Postavke {
 	public static String WSDL_CONTRACT;
 	public static String WSDL_PURCHASE_ORDER;
 	public static String WSDL_INVOICE;
+	public static String WSDL_RESPONSE;
 
 	public Postavke() {
 		try {
@@ -66,6 +67,7 @@ public class Postavke {
 			WSDL_CONTRACT=postavke.getProperty("WSDL_CONTRACT");
 			WSDL_PURCHASE_ORDER=postavke.getProperty("WSDL_PURCHASE_ORDER");
 			WSDL_INVOICE=postavke.getProperty("WSDL_INVOICE");
+			WSDL_RESPONSE=postavke.getProperty("WSDL_RESPONSE");
 		} catch (IOException e) {
 			System.err.println(e.getMessage());
 
@@ -100,6 +102,7 @@ public class Postavke {
 			WSDL_CONTRACT=postavke.getProperty("WSDL_CONTRACT");
 			WSDL_PURCHASE_ORDER=postavke.getProperty("WSDL_PURCHASE_ORDER");
 			WSDL_INVOICE=postavke.getProperty("WSDL_INVOICE");
+			WSDL_RESPONSE=postavke.getProperty("WSDL_RESPONSE");
 		} catch (IOException e) {
 			System.err.println(e.getMessage());
 		}
@@ -116,6 +119,7 @@ public class Postavke {
 			new File(DEBUG_MAPA + "CONTRACT").mkdir();
 			new File(DEBUG_MAPA + "PURCHASE_ORDER").mkdir();
 			new File(DEBUG_MAPA + "INVOICE").mkdir();
+			new File(DEBUG_MAPA + "RESPONSE").mkdir();
 		}
 	}
 }
