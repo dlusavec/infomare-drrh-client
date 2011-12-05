@@ -19,11 +19,10 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 
 public class Pomocna {
 
-	public static byte getStatus(ResponseMessageType responseMessageType) {
-		return (byte) 2;
-		// Nije onako kako smo mislili u pocetku, status je uvijek 2 poslano...
-		/*return (byte) (responseMessageType
-				.equals(ResponseMessageType.NOTIFICATION) ? 3 : 2);*/
+	public static byte getStatus(ResponseMessageType responseMessageType) {		
+
+		return (byte) (responseMessageType
+				.equals(ResponseMessageType.NOTIFICATION) ? 2 : 9);
 	}
 
 	public static void obradaGresaka(Session session,
