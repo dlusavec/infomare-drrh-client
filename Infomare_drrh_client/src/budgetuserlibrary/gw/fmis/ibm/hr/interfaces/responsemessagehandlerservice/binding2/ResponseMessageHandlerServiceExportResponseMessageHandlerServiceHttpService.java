@@ -46,7 +46,7 @@ public class ResponseMessageHandlerServiceExportResponseMessageHandlerServiceHtt
 				TARGET_NAMESPACE, PORT);
 		URL url = null;
 		try {
-			url = new URL(Postavke.WSDL_CONTRACT);
+			url = new URL(Postavke.WSDL_RESPONSE);
 		} catch (MalformedURLException e) {
 			Log.loger.severe(PomocnaError.getErrorMessage(e));
 		}

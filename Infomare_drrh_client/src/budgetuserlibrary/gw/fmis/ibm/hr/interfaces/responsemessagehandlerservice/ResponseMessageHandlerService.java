@@ -16,7 +16,9 @@ import javax.xml.ws.ResponseWrapper;
  */
  
 @WebService(targetNamespace = "http://hr.ibm.fmis.gw.BudgetUserLibrary/interfaces/ResponseMessageHandlerService/", name = "ResponseMessageHandlerService")
-@XmlSeeAlso({ObjectFactory.class})
+@XmlSeeAlso({ budgetuserlibrary.gw.fmis.ibm.hr.interfaces.responsemessagehandlerservice.ObjectFactory.class,
+	budgetuserlibrary.gw.fmis.ibm.hr.interfaces.contractmanagementservice.ObjectFactory.class,
+	budgetuserlibrary.gw.fmis.ibm.hr.messages.ObjectFactory.class})
 public interface ResponseMessageHandlerService {
 
     @WebResult(name = "distributionMessageList", targetNamespace = "")

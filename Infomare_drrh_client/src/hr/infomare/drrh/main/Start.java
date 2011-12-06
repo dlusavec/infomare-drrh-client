@@ -3,12 +3,7 @@ package hr.infomare.drrh.main;
 import hr.infomare.drrh.hibernate.HibernatePomocna;
 import hr.infomare.drrh.pomocni.Log;
 import hr.infomare.drrh.postavke.Postavke;
-import budgetuserlibrary.gw.fmis.ibm.hr.interfaces.bankmanagementinterface.BankManagementInterfaceClientImpl;
-import budgetuserlibrary.gw.fmis.ibm.hr.interfaces.contractmanagementservice.ContractManagementServiceClientImpl;
-import budgetuserlibrary.gw.fmis.ibm.hr.interfaces.invoicemanagementservice.InvoiceManagementServiceClientImpl;
-import budgetuserlibrary.gw.fmis.ibm.hr.interfaces.purchaseordermanagementservice.PurchaseOrderManagementServiceClientImpl;
-import budgetuserlibrary.gw.fmis.ibm.hr.interfaces.reservationmanagementservice.ReservationManagementServiceClientImpl;
-import budgetuserlibrary.gw.fmis.ibm.hr.interfaces.vendormanagementinterface.VendorManagementInterfaceClientImpl;
+import budgetuserlibrary.gw.fmis.ibm.hr.interfaces.responsemessagehandlerservice.ResponseMessageHandlerServiceClientImpl;
 
 public class Start {
 
@@ -21,9 +16,9 @@ public class Start {
 		 * ********* POZIVI ZA TESTIRANJE *********
 		 */
 		// Banke
-		 BankManagementInterfaceClientImpl klijentB = new
+		/* BankManagementInterfaceClientImpl klijentB = new
 		 BankManagementInterfaceClientImpl();
-		 klijentB.razmjenaBanaka();
+		 klijentB.razmjenaBanaka();*/
 		// Partneri
 		//VendorManagementInterfaceClientImpl klijentV = new VendorManagementInterfaceClientImpl();
 		//klijentV.razmjenaPartnera();
@@ -43,5 +38,8 @@ public class Start {
 		// InvoiceManagementServiceClientImpl klijentI=new
 		 //InvoiceManagementServiceClientImpl();
 		 //klijentI.razmjenaFaktura();
+	// Odgovori
+		ResponseMessageHandlerServiceClientImpl klijentO= new ResponseMessageHandlerServiceClientImpl();
+		klijentO.razmjenaOdgovora();
 	}
 }

@@ -19,14 +19,16 @@ import hr.infomare.drrh.pomocni.Debug;
 import hr.infomare.drrh.pomocni.Log;
 import hr.infomare.drrh.pomocni.PomocnaError;
 import hr.infomare.drrh.pomocni.PomocnaKlijent;
+import hr.infomare.drrh.postavke.Postavke;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.namespace.QName;
 
 import org.hibernate.Session;
 
-import budgetuserlibrary.gw.fmis.ibm.hr.interfaces.contractmanagementservice.binding.ManageContractExportContractManagementServiceHttpService;
 import budgetuserlibrary.gw.fmis.ibm.hr.interfaces.responsemessagehandlerservice.binding2.ResponseMessageHandlerServiceExportResponseMessageHandlerServiceHttpService;
 
 /**
@@ -52,12 +54,14 @@ public class ResponseMessageHandlerServiceClientImpl {
 	private BudcomDAO budComDAO;
 	private Debug debug = new Debug("Response");    
 
-    private ResponseMessageHandlerServiceClientImpl() {
+    public ResponseMessageHandlerServiceClientImpl() {
     }
      
-        public void razmjenaUgovora() {
+        public void razmjenaOdgovora() {
     		try {
     			otvoriPortISesiju();
+    			//getContractResponseListStartingWithMessageId();
+    			getContractResponseList();
     			//createContract();
     			//changeContract();
     			//closeContract();			
@@ -71,7 +75,7 @@ public class ResponseMessageHandlerServiceClientImpl {
     		serviceName = new QName(
     				ResponseMessageHandlerServiceExportResponseMessageHandlerServiceHttpService.TARGET_NAMESPACE,
     				ResponseMessageHandlerServiceExportResponseMessageHandlerServiceHttpService.SERVIS);
-    		wsdlURL = ManageContractExportContractManagementServiceHttpService.WSDL_LOCATION;
+    		wsdlURL = ResponseMessageHandlerServiceExportResponseMessageHandlerServiceHttpService.WSDL_LOCATION;
     		servis = new ResponseMessageHandlerServiceExportResponseMessageHandlerServiceHttpService(
     				wsdlURL, serviceName);
     		port = servis
@@ -89,6 +93,20 @@ public class ResponseMessageHandlerServiceClientImpl {
     		budComDAO = new BudcomDAO(session);
     	}
 
+    	public void getContractResponseList(){
+    	    System.out.println("Invoking getContractResponseList...");	        
+	        java.lang.Object response = port.getContractResponseList(Postavke.LOGICAL_SYSTEM_NAME);
+	        System.out.println(response.getClass().getName());
+	        System.out.println("getContractResponseList.result=" + response);
+    		
+    	}
+    	public void getContractResponseListStartingWithMessageId(){
+    		System.out.println("Invoking getContractResponseListStartingWithMessageId..."); 	        
+ 	        java.lang.Long messageId = Long.valueOf(4005418455449478403l);
+ 	        java.lang.Object response = port.getContractResponseListStartingWithMessageId(Postavke.LOGICAL_SYSTEM_NAME, messageId);
+ 	        System.out.println("getContractResponseListStartingWithMessageId.result=" + response);
+    	}    	     	       	  
+    	
  /*       
         ResponseMessageHandlerServiceExportResponseMessageHandlerServiceHttpService ss = new ResponseMessageHandlerServiceExportResponseMessageHandlerServiceHttpService(wsdlURL, SERVICE_NAME);
         ResponseMessageHandlerService port = ss.getResponseMessageHandlerServiceExportResponseMessageHandlerServiceHttpPort();  
@@ -128,15 +146,7 @@ public class ResponseMessageHandlerServiceClientImpl {
         System.out.println("getReservationResponseListStartingWithMessageId.result=" + _getReservationResponseListStartingWithMessageId__return);
 
 
-        }
-        {
-        System.out.println("Invoking getContractResponseList...");
-        java.lang.String _getContractResponseList_logicalSystemName = "_getContractResponseList_logicalSystemName103292902";
-        java.lang.Object _getContractResponseList__return = port.getContractResponseList(_getContractResponseList_logicalSystemName);
-        System.out.println("getContractResponseList.result=" + _getContractResponseList__return);
-
-
-        }
+        }    
         {
         System.out.println("Invoking getBankUpdatesList...");
         java.lang.String _getBankUpdatesList_logicalSystemName = "_getBankUpdatesList_logicalSystemName1390253176";
@@ -195,15 +205,7 @@ public class ResponseMessageHandlerServiceClientImpl {
 
 
         }
-        {
-        System.out.println("Invoking getContractResponseListStartingWithMessageId...");
-        java.lang.String _getContractResponseListStartingWithMessageId_logicalSystemName = "_getContractResponseListStartingWithMessageId_logicalSystemName1493212423";
-        java.lang.Long _getContractResponseListStartingWithMessageId_messageId = Long.valueOf(4005418455449478403l);
-        java.lang.Object _getContractResponseListStartingWithMessageId__return = port.getContractResponseListStartingWithMessageId(_getContractResponseListStartingWithMessageId_logicalSystemName, _getContractResponseListStartingWithMessageId_messageId);
-        System.out.println("getContractResponseListStartingWithMessageId.result=" + _getContractResponseListStartingWithMessageId__return);
-
-
-        }
+        
         {
         System.out.println("Invoking getPurchaseOrderResponseList...");
         java.lang.String _getPurchaseOrderResponseList_logicalSystemName = "_getPurchaseOrderResponseList_logicalSystemName1186393356";
