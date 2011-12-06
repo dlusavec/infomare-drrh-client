@@ -94,8 +94,9 @@ public class ResponseMessageHandlerServiceClientImpl {
     	}
 
     	public void getContractResponseList(){
-    	    System.out.println("Invoking getContractResponseList...");	        
+    	    System.out.println("Invoking getContractResponseList...");    	    
 	        java.lang.Object response = port.getContractResponseList(Postavke.LOGICAL_SYSTEM_NAME);
+	        
 	        System.out.println(response.getClass().getName());
 	        System.out.println("getContractResponseList.result=" + response);
     		

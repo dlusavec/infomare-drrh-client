@@ -11,6 +11,10 @@ import javax.xml.bind.annotation.XmlType;
 
 
 
+/*@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "contractResponseList", propOrder = {
+    "AnyTypeElement"
+})*/
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "contractResponseList", propOrder = {
     "AnyTypeElement"
