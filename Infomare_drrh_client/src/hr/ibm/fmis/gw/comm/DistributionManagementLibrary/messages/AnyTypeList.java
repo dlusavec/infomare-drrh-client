@@ -1,5 +1,4 @@
-
-package budgetuserlibrary.gw.fmis.ibm.hr.messages;
+package hr.ibm.fmis.gw.comm.DistributionManagementLibrary.messages;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,14 +8,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
-
-
-/*@XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "contractResponseList", propOrder = {
-    "AnyTypeElement"
-})*/
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "contractResponseList", propOrder = {
+@XmlType(name = "AnyTypeList", propOrder = {
     "AnyTypeElement"
 })
 public class AnyTypeList {

@@ -227,12 +227,5 @@ public class ObjectFactory {
      */
     public BankAccountCreationRequestMsg createBankAccountCreationRequestMsg() {
         return new BankAccountCreationRequestMsg();
-    }
-    /**
-     * Create an instance of {@link AnyTypeList }
-     * 
-     */
-    public AnyTypeList createAnyTypeList(){    	
-    	return new AnyTypeList();
-    }
+    }    
 }
