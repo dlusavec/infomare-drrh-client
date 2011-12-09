@@ -93,7 +93,7 @@ public class Notifhead implements java.io.Serializable {
 		this.notlosysna = notlosysna;
 	}
 
-	@Column(name = "FMISGWNID", nullable = false, length = 50)
+	@Column(name = "FMISGWNID", nullable = true, length = 50)
 	public String getFmisgwnid() {
 		return this.fmisgwnid;
 	}
@@ -120,7 +120,7 @@ public class Notifhead implements java.io.Serializable {
 		this.orsapdocid = orsapdocid;
 	}
 
-	@Column(name = "NOTIFDATE", nullable = false, length = 50)
+	@Column(name = "NOTIFDATE", nullable = true, length = 50)
 	public String getNotifdate() {
 		return this.notifdate;
 	}

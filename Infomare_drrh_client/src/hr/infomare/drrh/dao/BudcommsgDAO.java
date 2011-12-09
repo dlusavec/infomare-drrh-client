@@ -45,7 +45,7 @@ public class BudcommsgDAO extends AbstraktDAO {
 		try {
 			Criteria kriterij = session.createCriteria(Budcommsg.class);
 			kriterij.add(Restrictions.eq("refdocid", NumberUtils.toInt(refdocid)));
-			//kriterij.add(Restrictions.eq("status", (byte) 2));
+			kriterij.add(Restrictions.eq("status", (byte) 2));
 			kriterij.addOrder(Order.desc("bcmsgid"));
 			List lista=kriterij.list();			
 			Budcommsg budcommsg = (Budcommsg) (lista != null ? lista.get(0) : null);

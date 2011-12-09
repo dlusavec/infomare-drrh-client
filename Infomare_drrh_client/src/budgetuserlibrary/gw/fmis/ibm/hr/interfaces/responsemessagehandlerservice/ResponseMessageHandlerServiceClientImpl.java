@@ -10,6 +10,8 @@ import hr.infomare.drrh.dao.BcitemlstDAO;
 import hr.infomare.drrh.dao.BudcomDAO;
 import hr.infomare.drrh.dao.BudcommsgDAO;
 import hr.infomare.drrh.dao.DocheadDAO;
+import hr.infomare.drrh.dao.InvoiceDAO;
+import hr.infomare.drrh.dao.InvoicemsgDAO;
 import hr.infomare.drrh.dao.NotifheadDAO;
 import hr.infomare.drrh.dao.ReqmsgDAO;
 import hr.infomare.drrh.dao.StatnotifDAO;
@@ -18,6 +20,7 @@ import hr.infomare.drrh.hibernate.SessionPomocna;
 import hr.infomare.drrh.pojo.Budcom;
 import hr.infomare.drrh.pojo.Budcommsg;
 import hr.infomare.drrh.pojo.Dochead;
+import hr.infomare.drrh.pojo.Invoicemsg;
 import hr.infomare.drrh.pojo.Notifhead;
 import hr.infomare.drrh.pojo.Reqmsg;
 import hr.infomare.drrh.pojo.Resmsg;
@@ -29,22 +32,20 @@ import hr.infomare.drrh.pomocni.PomocnaDatum;
 import hr.infomare.drrh.pomocni.PomocnaError;
 import hr.infomare.drrh.pomocni.PomocnaKlijent;
 import hr.infomare.drrh.postavke.Postavke;
-
 import java.net.URL;
 import java.util.Iterator;
 import java.util.List;
-
 import javax.xml.namespace.QName;
-
 import org.hibernate.Session;
-
 import budgetuserlibrary.gw.fmis.ibm.hr.infotypes.BudgetCommitmentStatusNotification;
-import budgetuserlibrary.gw.fmis.ibm.hr.infotypes.BudgetCommitmentStatusType;
 import budgetuserlibrary.gw.fmis.ibm.hr.infotypes.ErrorResponse;
+import budgetuserlibrary.gw.fmis.ibm.hr.infotypes.InvoiceStatusNotification;
 import budgetuserlibrary.gw.fmis.ibm.hr.infotypes.MessageHeader;
 import budgetuserlibrary.gw.fmis.ibm.hr.infotypes.ResponseMessageType;
 import budgetuserlibrary.gw.fmis.ibm.hr.interfaces.responsemessagehandlerservice.binding2.ResponseMessageHandlerServiceExportResponseMessageHandlerServiceHttpService;
 import budgetuserlibrary.gw.fmis.ibm.hr.messages.ContractResponseMsg;
+import budgetuserlibrary.gw.fmis.ibm.hr.messages.InvoiceResponseMsg;
+import budgetuserlibrary.gw.fmis.ibm.hr.messages.PurchaseOrderResponseMsg;
 import budgetuserlibrary.gw.fmis.ibm.hr.messages.ReservationResponseMsg;
 
 /**
@@ -60,6 +61,8 @@ public class ResponseMessageHandlerServiceClientImpl {
 	private SessionPomocna sessionPomocna;
 	private Session session;
 	private BudcommsgDAO budcomMsgDAO;
+	private InvoicemsgDAO invoiceMsgDAO;
+	private InvoiceDAO invoiceDAO;
 	private BcitemlstDAO bctItemLstDAO;
 	private DocheadDAO docHeadDAO;
 	private ReqmsgDAO reqMsgDAO;
@@ -75,11 +78,12 @@ public class ResponseMessageHandlerServiceClientImpl {
 	public void razmjenaOdgovora() {
 		try {
 			otvoriPortISesiju();
-			// preuzmiContractResponseMessageId();
-			preuzmiReservationResponseMessageId();
+			preuzmiContractResponseMessageId();
+			// preuzmiReservationResponseMessageId();
+			// preuzmiPurchaseOrderResponseMessageId();
 
 		} catch (Exception e) {
-			Log.loger.severe("Greška kod razmjene odgovora "
+			Log.loger.severe("Greška kod preuzimanja odgovora "
 					+ PomocnaError.getErrorMessage(e));
 		}
 	}
@@ -104,6 +108,8 @@ public class ResponseMessageHandlerServiceClientImpl {
 		notifHeadDAO = new NotifheadDAO(session);
 		vendorVeznaDAO = new VendorVeznaDAO(session);
 		budComDAO = new BudcomDAO(session);
+		invoiceMsgDAO = new InvoicemsgDAO(session);
+		invoiceDAO = new InvoiceDAO(session);
 	}
 
 	private void obradaBudComMsg(AnyTypeList anyTypeLista, String messageName) {
@@ -124,6 +130,7 @@ public class ResponseMessageHandlerServiceClientImpl {
 		List responseLista = anyTypeLista.getAnyTypeElement();
 		for (Iterator iterator = responseLista.iterator(); iterator.hasNext();) {
 			Object object = iterator.next();
+
 			if (object instanceof ContractResponseMsg) {
 				ContractResponseMsg response = (ContractResponseMsg) object;
 				messageHeader = response.getMessageHeader();
@@ -135,6 +142,15 @@ public class ResponseMessageHandlerServiceClientImpl {
 
 			if (object instanceof ReservationResponseMsg) {
 				ReservationResponseMsg response = (ReservationResponseMsg) object;
+				messageHeader = response.getMessageHeader();
+				responseMessageType = response.getResponseMessageType();
+				budgetCommitmentStatusNotification = response
+						.getNotificationResponse();
+				errorResponse = response.getErrorResponse();
+			}
+
+			if (object instanceof PurchaseOrderResponseMsg) {
+				PurchaseOrderResponseMsg response = (PurchaseOrderResponseMsg) object;
 				messageHeader = response.getMessageHeader();
 				responseMessageType = response.getResponseMessageType();
 				budgetCommitmentStatusNotification = response
@@ -154,14 +170,14 @@ public class ResponseMessageHandlerServiceClientImpl {
 					resMsg.postaviVrijednosti(messageHeader, messageName,
 							responseMessageType);
 					reqMsg.postaviVrijednosti(messageHeader, reqMsgId,
-							messageName);					
+							messageName);
 					budComMsg.postaviVrijednosti(Pomocna
 							.getStatusRetrive(responseMessageType), reqMsg,
 							PomocnaDatum.XMLDatumUDate(messageHeader
 									.getSubmitionTimestamp()),
 							budgetCommitmentStatusNotification);
 					if (responseMessageType
-							.equals(ResponseMessageType.NOTIFICATION)) {						
+							.equals(ResponseMessageType.NOTIFICATION)) {
 						docHead = docHeadDAO.getDocHeadByPK(budComMsg
 								.getRefdocid());
 						statNotif = new Statnotif();
@@ -175,21 +191,21 @@ public class ResponseMessageHandlerServiceClientImpl {
 						notifHead.postaviVrijednosti(notHeadId, statNotId,
 								resMsg, messageHeader,
 								budgetCommitmentStatusNotification.getHeader(),
-								budgetCommitmentStatusNotification);						
+								budgetCommitmentStatusNotification);
 						budCom = budComDAO.getBudcomByPK(budComMsg.getCurlib(),
 								budComMsg.getR95upr(), budComMsg.getR95god(),
 								budComMsg.getR95rbr());
-						if(budCom==null){							
-							budCom=new Budcom();
+						if (budCom == null) {
+							budCom = new Budcom();
 						}
 						budCom.postaviVrijednosti(budComMsg, notHeadId,
 								statNotId, budgetCommitmentStatusNotification
 										.getHeader(),
 								budgetCommitmentStatusNotification
-										.getCommitmentStatus(), resMsg);												
+										.getCommitmentStatus(), resMsg);
 						docHead.postaviVrijednosti(
 								budgetCommitmentStatusNotification.getHeader(),
-								messageHeader);						
+								messageHeader);
 					}
 					session.save(resMsg);
 					session.save(reqMsg);
@@ -209,12 +225,118 @@ public class ResponseMessageHandlerServiceClientImpl {
 				}
 			} catch (Exception e) {
 				sessionPomocna.rollbackTransakcije();
-				Log.loger
-						.severe("Greška kod preuzimanja odgovora ugovora, poruka: "
-								+ Integer.toString(budComMsg.getBcmsgid())
-								+ PomocnaError.getErrorMessage(e)
-								+ "--"
-								+ messageHeader.getResponseMsgId());
+				Log.loger.severe("Greška kod preuzimanja odgovora "
+						+ messageName + " , poruka: "
+						+ Integer.toString(budComMsg.getBcmsgid())
+						+ PomocnaError.getErrorMessage(e));
+			}
+
+			finally {
+				/*
+				 * try { ResxmlDAO.spremiResponse(response.getMessageHeader()
+				 * .getResponseMsgId(), response, session, sessionPomocna); }
+				 */
+			}
+		}
+
+	}
+
+	private void obradaInvoiceMsg(AnyTypeList anyTypeLista, String messageName) {
+		Integer reqMsgId = reqMsgDAO.getIduciRbr();
+		Integer statNotId = statusNotifDAO.getIduciRbr();
+		Integer notHeadId = notifHeadDAO.getIduciRbr();
+		Invoicemsg invoiceMsg = null;
+		Reqmsg reqMsg = null;
+		Resmsg resMsg = null;
+		Statnotif statNotif = null;
+		hr.infomare.drrh.pojo.Invoice faktura = null;
+		Notifhead notifHead = null;
+		Dochead docHead = null;
+		MessageHeader messageHeader = null;
+		ResponseMessageType responseMessageType = null;
+		InvoiceStatusNotification invoiceStatusNotification = null;
+		ErrorResponse errorResponse = null;
+		List responseLista = anyTypeLista.getAnyTypeElement();
+		for (Iterator iterator = responseLista.iterator(); iterator.hasNext();) {
+			InvoiceResponseMsg response = (InvoiceResponseMsg) iterator.next();
+			messageHeader = response.getMessageHeader();
+			responseMessageType = response.getResponseMessageType();
+			invoiceStatusNotification = response.getNotificationResponse();
+			errorResponse = response.getErrorResponse();
+
+			try {
+				invoiceMsg = invoiceMsgDAO
+						.getInvoicemsgByDocumentId(invoiceStatusNotification
+								.getHeader().getOriginatingBuFmisDocumentID());
+				if (invoiceMsg != null) {
+					sessionPomocna.otvoriTransakciju();
+					messageHeader.postaviVrijednosti();
+					reqMsg = new Reqmsg();
+					resMsg = new Resmsg();
+					resMsg.postaviVrijednosti(messageHeader, messageName,
+							responseMessageType);
+					reqMsg.postaviVrijednosti(messageHeader, reqMsgId,
+							messageName);
+					invoiceMsg.postaviVrijednosti(Pomocna
+							.getStatusRetrive(responseMessageType), reqMsg,
+							PomocnaDatum.XMLDatumUDate(messageHeader
+									.getSubmitionTimestamp()),
+							invoiceStatusNotification);
+					if (responseMessageType
+							.equals(ResponseMessageType.NOTIFICATION)) {
+						docHead = docHeadDAO.getDocHeadByPK(invoiceMsg
+								.getRefdocid());
+						statNotif = new Statnotif();
+						notifHead = new Notifhead();
+						invoiceMsg.setInvststy(invoiceStatusNotification
+								.getInvoiceStatus().name());
+						statNotif.postaviVrijednosti(statNotId, resMsg,
+								messageName,
+								invoiceStatusNotification.getInvoiceStatus(),
+								messageHeader);
+						notifHead.postaviVrijednosti(notHeadId, statNotId,
+								resMsg, messageHeader,
+								invoiceStatusNotification.getHeader(),
+								invoiceStatusNotification);
+						faktura = invoiceDAO.getInvoiceByPK(
+								invoiceMsg.getF17upr(), invoiceMsg.getF17god(),
+								invoiceMsg.getF17vpr(), invoiceMsg.getF17rbr(),
+								invoiceMsg.getF17dod());
+
+						if (faktura == null) {
+							faktura = new hr.infomare.drrh.pojo.Invoice();
+						}
+						faktura.postaviVrijednosti(invoiceMsg, notHeadId,
+								statNotId,
+								invoiceStatusNotification.getHeader(),
+								invoiceStatusNotification.getInvoiceStatus(),
+								resMsg);
+						docHead.postaviVrijednosti(
+								invoiceStatusNotification.getHeader(),
+								messageHeader);
+					}
+					session.save(resMsg);
+					session.save(reqMsg);
+					session.update(invoiceMsg);
+					if (responseMessageType
+							.equals(ResponseMessageType.NOTIFICATION)) {
+						session.save(statNotif);
+						session.save(notifHead);
+						session.saveOrUpdate(faktura);
+						session.update(docHead);
+					}
+					Pomocna.obradaGresaka(session, errorResponse, messageHeader);
+					sessionPomocna.commitTransakcije();
+					++reqMsgId;
+					++statNotId;
+					++notHeadId;
+				}
+			} catch (Exception e) {
+				sessionPomocna.rollbackTransakcije();
+				Log.loger.severe("Greška kod preuzimanja odgovora "
+						+ messageName + " , poruka: "
+						+ Integer.toString(invoiceMsg.getInvmsgid())
+						+ PomocnaError.getErrorMessage(e));
 			}
 
 			finally {
@@ -255,6 +377,34 @@ public class ResponseMessageHandlerServiceClientImpl {
 				"retriveResponseMessageId");
 	}
 
+	public void preuzmiPurchaseOrderResponse() {
+		obradaBudComMsg(
+				(AnyTypeList) port
+						.getPurchaseOrderResponseList(Postavke.LOGICAL_SYSTEM_NAME),
+				"retrivePurchaseOrder");
+	}
+
+	public void preuzmiPurchaseOrderResponseMessageId() {
+		obradaBudComMsg(
+				(AnyTypeList) port.getPurchaseOrderResponseListStartingWithMessageId(
+						Postavke.LOGICAL_SYSTEM_NAME, Long.valueOf(0)),
+				"retrivePurchaseOrderMessageId");
+	}
+
+	public void preuzmiInvoiceResponse() {
+		obradaBudComMsg(
+				(AnyTypeList) port
+						.getInvoiceResponseList(Postavke.LOGICAL_SYSTEM_NAME),
+				"retriveInvoice");
+	}
+
+	public void preuzmiInvoiceResponseMessageId() {
+		obradaBudComMsg(
+				(AnyTypeList) port.getInvoiceResponseListStartingWithMessageId(
+						Postavke.LOGICAL_SYSTEM_NAME, Long.valueOf(0)),
+				"retriveInvoiceMessageId");
+	}
+
 	/*
 	 * 
 	 * 
@@ -271,23 +421,6 @@ public class ResponseMessageHandlerServiceClientImpl {
 	 * _getPaymentExecutionListStartingWithMessageId_messageId);
 	 * System.out.println("getPaymentExecutionListStartingWithMessageId.result="
 	 * + _getPaymentExecutionListStartingWithMessageId__return);
-	 * 
-	 * 
-	 * } { System.out.println(
-	 * "Invoking getPurchaseOrderResponseListStartingWithMessageId...");
-	 * java.lang.String
-	 * _getPurchaseOrderResponseListStartingWithMessageId_logicalSystemName =
-	 * "_getPurchaseOrderResponseListStartingWithMessageId_logicalSystemName1882240435"
-	 * ; java.lang.Long
-	 * _getPurchaseOrderResponseListStartingWithMessageId_messageId =
-	 * Long.valueOf(3285879925812762154l); java.lang.Object
-	 * _getPurchaseOrderResponseListStartingWithMessageId__return =
-	 * port.getPurchaseOrderResponseListStartingWithMessageId
-	 * (_getPurchaseOrderResponseListStartingWithMessageId_logicalSystemName,
-	 * _getPurchaseOrderResponseListStartingWithMessageId_messageId);
-	 * System.out.
-	 * println("getPurchaseOrderResponseListStartingWithMessageId.result=" +
-	 * _getPurchaseOrderResponseListStartingWithMessageId__return);
 	 * 
 	 * 
 	 * } {

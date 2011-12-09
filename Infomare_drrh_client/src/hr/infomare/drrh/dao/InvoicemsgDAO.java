@@ -3,9 +3,8 @@ package hr.infomare.drrh.dao;
 import hr.infomare.drrh.pojo.Invoicemsg;
 import hr.infomare.drrh.pomocni.Log;
 import hr.infomare.drrh.pomocni.PomocnaError;
-
 import java.util.List;
-
+import org.apache.commons.lang.math.NumberUtils;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -32,6 +31,20 @@ public class InvoicemsgDAO extends AbstraktDAO {
 			kriterij.addOrder(Order.asc("invmsgid"));			
 			List lista = kriterij.list();
 			return lista;
+		} catch (HibernateException e) {
+			Log.loger.severe(PomocnaError.getErrorMessage(e));
+			return null;
+		}
+	}
+	public Invoicemsg getInvoicemsgByDocumentId(String refdocid) {
+		try {
+			Criteria kriterij = session.createCriteria(Invoicemsg.class);
+			kriterij.add(Restrictions.eq("refdocid", NumberUtils.toInt(refdocid)));
+			kriterij.add(Restrictions.eq("status", (byte) 2));
+			kriterij.addOrder(Order.desc("invmsgid"));
+			List lista=kriterij.list();			
+			Invoicemsg invoiceMsg = (Invoicemsg) (lista != null ? lista.get(0) : null);
+			return invoiceMsg;
 		} catch (HibernateException e) {
 			Log.loger.severe(PomocnaError.getErrorMessage(e));
 			return null;

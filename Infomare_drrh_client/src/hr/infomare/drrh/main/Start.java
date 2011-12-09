@@ -39,7 +39,7 @@ public class Start {
 		 //InvoiceManagementServiceClientImpl();
 		 //klijentI.razmjenaFaktura();
 	// Odgovori
-		ResponseMessageHandlerServiceClientImpl klijentO= new ResponseMessageHandlerServiceClientImpl();
+	ResponseMessageHandlerServiceClientImpl klijentO= new ResponseMessageHandlerServiceClientImpl();
 		klijentO.razmjenaOdgovora();
 	}
 }
