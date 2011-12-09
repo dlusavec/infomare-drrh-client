@@ -6,6 +6,7 @@ package budgetuserlibrary.gw.fmis.ibm.hr.interfaces.responsemessagehandlerservic
  */
 
 import hr.ibm.fmis.gw.comm.DistributionManagementLibrary.messages.AnyTypeList;
+import hr.infomare.drrh.dao.BankmsgDAO;
 import hr.infomare.drrh.dao.BudcomDAO;
 import hr.infomare.drrh.dao.BudcommsgDAO;
 import hr.infomare.drrh.dao.DocheadDAO;
@@ -15,9 +16,9 @@ import hr.infomare.drrh.dao.NotifheadDAO;
 import hr.infomare.drrh.dao.ReqmsgDAO;
 import hr.infomare.drrh.dao.StatnotifDAO;
 import hr.infomare.drrh.dao.VenbanaccmDAO;
-import hr.infomare.drrh.dao.VendorVeznaDAO;
 import hr.infomare.drrh.dao.VendormsgDAO;
 import hr.infomare.drrh.hibernate.SessionPomocna;
+import hr.infomare.drrh.pojo.Bankmsg;
 import hr.infomare.drrh.pojo.Budcom;
 import hr.infomare.drrh.pojo.Budcommsg;
 import hr.infomare.drrh.pojo.Dochead;
@@ -51,6 +52,7 @@ import budgetuserlibrary.gw.fmis.ibm.hr.infotypes.InvoiceStatusNotification;
 import budgetuserlibrary.gw.fmis.ibm.hr.infotypes.MessageHeader;
 import budgetuserlibrary.gw.fmis.ibm.hr.infotypes.ResponseMessageType;
 import budgetuserlibrary.gw.fmis.ibm.hr.interfaces.responsemessagehandlerservice.binding2.ResponseMessageHandlerServiceExportResponseMessageHandlerServiceHttpService;
+import budgetuserlibrary.gw.fmis.ibm.hr.messages.BankResponseMsg;
 import budgetuserlibrary.gw.fmis.ibm.hr.messages.ContractResponseMsg;
 import budgetuserlibrary.gw.fmis.ibm.hr.messages.InvoiceResponseMsg;
 import budgetuserlibrary.gw.fmis.ibm.hr.messages.PurchaseOrderResponseMsg;
@@ -69,12 +71,12 @@ public class ResponseMessageHandlerServiceClientImpl {
 	private ResponseMessageHandlerService port;
 	private SessionPomocna sessionPomocna;
 	private Session session;
+	private BankmsgDAO bankMsgDAO;
 	private BudcommsgDAO budcomMsgDAO;
 	private InvoicemsgDAO invoiceMsgDAO;
 	private InvoiceDAO invoiceDAO;
 	private DocheadDAO docHeadDAO;
 	private ReqmsgDAO reqMsgDAO;
-	private VendorVeznaDAO vendorVeznaDAO;
 	private StatnotifDAO statusNotifDAO;
 	private NotifheadDAO notifHeadDAO;
 	private BudcomDAO budComDAO;
@@ -88,11 +90,11 @@ public class ResponseMessageHandlerServiceClientImpl {
 	public void razmjenaOdgovora() {
 		try {
 			otvoriPortISesiju();
-			// preuzmiContractResponseMessageId();
-			// preuzmiReservationResponseMessageId();
-			// preuzmiPurchaseOrderResponseMessageId();
-			// preuzmiInvoiceResponseMessageId();
-
+			preuzmiVendorResponseMessageId();
+			preuzmiReservationResponseMessageId();
+			preuzmiContractResponseMessageId();
+			preuzmiPurchaseOrderResponseMessageId();
+			preuzmiInvoiceResponseMessageId(); 			
 		} catch (Exception e) {
 			Log.loger.severe("Greška kod preuzimanja odgovora "
 					+ PomocnaError.getErrorMessage(e));
@@ -111,17 +113,66 @@ public class ResponseMessageHandlerServiceClientImpl {
 		PomocnaKlijent.postavkeKlijenta(port);
 		sessionPomocna = new SessionPomocna();
 		session = sessionPomocna.getSession();
+		bankMsgDAO = new BankmsgDAO(session);
 		budcomMsgDAO = new BudcommsgDAO(session);
 		docHeadDAO = new DocheadDAO(session);
 		reqMsgDAO = new ReqmsgDAO(session);
 		statusNotifDAO = new StatnotifDAO(session);
 		notifHeadDAO = new NotifheadDAO(session);
-		vendorVeznaDAO = new VendorVeznaDAO(session);
 		budComDAO = new BudcomDAO(session);
 		invoiceMsgDAO = new InvoicemsgDAO(session);
 		invoiceDAO = new InvoiceDAO(session);
 		vendorMsgDAO = new VendormsgDAO(session);
 		venBanAccMDAO = new VenbanaccmDAO(session);
+	}
+
+	private void obradaBankMsg(AnyTypeList anyTypeLista, String messageName) {
+		Integer reqMsgId = reqMsgDAO.getIduciRbr();
+		Bankmsg bankMsg = null;
+		Reqmsg reqMsg = null;
+		Resmsg resMsg = null;
+		MessageHeader messageHeader = null;
+		ResponseMessageType responseMessageType = null;
+		ErrorResponse errorResponse = null;		
+		List responseLista = anyTypeLista.getAnyTypeElement();
+		for (Iterator iterator = responseLista.iterator(); iterator.hasNext();) {
+			BankResponseMsg response = (BankResponseMsg) iterator.next();
+			messageHeader = response.getMessageHeader();
+			responseMessageType = response.getResponseMessageType();
+			errorResponse = response.getErrorResponse();
+			messageHeader.postaviVrijednostiRetrive();
+			try {
+				bankMsg = bankMsgDAO
+						.getBankByPK((response.getBank().getVbdi()));			
+				if (bankMsg != null) {
+					sessionPomocna.otvoriTransakciju();
+
+					reqMsg = new Reqmsg();
+					resMsg = new Resmsg();
+					resMsg.postaviVrijednosti(messageHeader, messageName,
+							responseMessageType);
+					reqMsg.postaviVrijednosti(messageHeader, reqMsgId,
+							messageName);
+					bankMsg.postaviVrijednosti(Pomocna
+							.getStatusRetrive(responseMessageType), reqMsg,
+							PomocnaDatum.XMLDatumUDate(messageHeader
+									.getSubmitionTimestamp()));
+					session.save(resMsg);
+					session.save(reqMsg);
+					session.update(bankMsg);
+
+					Pomocna.obradaGresaka(session, errorResponse, messageHeader);
+					sessionPomocna.commitTransakcije();
+					++reqMsgId;
+				}
+			} catch (Exception e) {
+				sessionPomocna.rollbackTransakcije();
+				Log.loger.severe("Greška kod preuzimanja odgovora "
+						+ messageName + " , poruka: " + bankMsg.getIdBankmsg()
+						+ PomocnaError.getErrorMessage(e));
+			}
+
+		}
 	}
 
 	private void obradaVendorMsg(AnyTypeList anyTypeLista, String messageName) {
@@ -140,6 +191,7 @@ public class ResponseMessageHandlerServiceClientImpl {
 			messageHeader = response.getMessageHeader();
 			responseMessageType = response.getResponseMessageType();
 			errorResponse = response.getErrorResponse();
+			messageHeader.postaviVrijednostiRetrive();
 			try {
 				vendorMsg = vendorMsgDAO.getVendorByPK(response.getVendor()
 						.getLogicalSystemVendorID());
@@ -150,7 +202,6 @@ public class ResponseMessageHandlerServiceClientImpl {
 							.getVenBanAccMByVendorAndRequest(vendorMsg
 									.getF41ctr(), vendorMsg.getReqmsg()
 									.getReqmsgid());
-					messageHeader.postaviVrijednosti();
 					reqMsg = new Reqmsg();
 					resMsg = new Resmsg();
 					resMsg.postaviVrijednosti(messageHeader, messageName,
@@ -194,7 +245,6 @@ public class ResponseMessageHandlerServiceClientImpl {
 									null);
 					if (vendorAccountsLista != null) {
 						sessionPomocna.otvoriTransakciju();
-						messageHeader.postaviVrijednosti();
 						reqMsg = new Reqmsg();
 						resMsg = new Resmsg();
 						resMsg.postaviVrijednosti(messageHeader, messageName,
@@ -284,7 +334,7 @@ public class ResponseMessageHandlerServiceClientImpl {
 								.getHeader().getOriginatingBuFmisDocumentID());
 				if (budComMsg != null) {
 					sessionPomocna.otvoriTransakciju();
-					messageHeader.postaviVrijednosti();
+					messageHeader.postaviVrijednostiRetrive();
 					reqMsg = new Reqmsg();
 					resMsg = new Resmsg();
 					resMsg.postaviVrijednosti(messageHeader, messageName,
@@ -383,7 +433,7 @@ public class ResponseMessageHandlerServiceClientImpl {
 								.getHeader().getOriginatingBuFmisDocumentID());
 				if (invoiceMsg != null) {
 					sessionPomocna.otvoriTransakciju();
-					messageHeader.postaviVrijednosti();
+					messageHeader.postaviVrijednostiRetrive();
 					reqMsg = new Reqmsg();
 					resMsg = new Resmsg();
 					resMsg.postaviVrijednosti(messageHeader, messageName,
@@ -456,18 +506,32 @@ public class ResponseMessageHandlerServiceClientImpl {
 
 	}
 
+	public void preuzmiBankResponse() {
+		obradaBankMsg(
+				(AnyTypeList) port
+						.getBankUpdatesList(Postavke.LOGICAL_SYSTEM_NAME),
+				"retriveBankUpdates");
+	}
+
+	public void preuzmiBankResponseMessageId() {
+		obradaBankMsg(
+				(AnyTypeList) port.getBankUpdatesListStartingWithMessageId(
+						Postavke.LOGICAL_SYSTEM_NAME, Long.valueOf(0)),
+				"retriveBankUpdatesMessageId");
+	}
+
 	public void preuzmiVendorResponse() {
-		obradaBudComMsg(
+		obradaVendorMsg(
 				(AnyTypeList) port
 						.getVendorUpdatesList(Postavke.LOGICAL_SYSTEM_NAME),
-				"retriveVendor");
+				"retriveVendorChange");
 	}
 
 	public void preuzmiVendorResponseMessageId() {
-		obradaBudComMsg(
+		obradaVendorMsg(
 				(AnyTypeList) port.getVendorUpdatesListStartingWithMessageId(
 						Postavke.LOGICAL_SYSTEM_NAME, Long.valueOf(0)),
-				"retriveVendorMessageId");
+				"retriveVendorChangeMessageId");
 	}
 
 	public void preuzmiContractResponse() {
@@ -544,32 +608,8 @@ public class ResponseMessageHandlerServiceClientImpl {
 	 * + _getPaymentExecutionListStartingWithMessageId__return);
 	 * 
 	 * 
-	 * } { System.out.println("Invoking getBankUpdatesList...");
-	 * java.lang.String _getBankUpdatesList_logicalSystemName =
-	 * "_getBankUpdatesList_logicalSystemName1390253176"; java.lang.Object
-	 * _getBankUpdatesList__return =
-	 * port.getBankUpdatesList(_getBankUpdatesList_logicalSystemName);
-	 * System.out.println("getBankUpdatesList.result=" +
-	 * _getBankUpdatesList__return);
-	 * 
-	 * 
-	 * } {
-	 * System.out.println("Invoking getBankUpdatesListStartingWithMessageId..."
-	 * ); java.lang.String
-	 * _getBankUpdatesListStartingWithMessageId_logicalSystemName =
-	 * "_getBankUpdatesListStartingWithMessageId_logicalSystemName-809029705";
-	 * java.lang.Long _getBankUpdatesListStartingWithMessageId_messageId =
-	 * Long.valueOf(7976208711176604334l); java.lang.Object
-	 * _getBankUpdatesListStartingWithMessageId__return =
-	 * port.getBankUpdatesListStartingWithMessageId
-	 * (_getBankUpdatesListStartingWithMessageId_logicalSystemName,
-	 * _getBankUpdatesListStartingWithMessageId_messageId);
-	 * System.out.println("getBankUpdatesListStartingWithMessageId.result=" +
-	 * _getBankUpdatesListStartingWithMessageId__return);
-	 * 
-	 * 
-	 * }{ System.out.println("Invoking getAllResponseList..."); java.lang.String
-	 * _getAllResponseList_logicalSystemName =
+	 * } { System.out.println("Invoking getAllResponseList...");
+	 * java.lang.String _getAllResponseList_logicalSystemName =
 	 * "_getAllResponseList_logicalSystemName-972104159"; java.lang.Object
 	 * _getAllResponseList__return =
 	 * port.getAllResponseList(_getAllResponseList_logicalSystemName);

@@ -6,6 +6,7 @@ import hr.infomare.drrh.pomocni.PomocnaError;
 
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -32,6 +33,20 @@ public class BankmsgDAO extends AbstraktDAO {
 			kriterij.addOrder(Order.asc("idBankmsg"));
 			List lista = kriterij.list();
 			return lista;
+		} catch (HibernateException e) {
+			Log.loger.severe(PomocnaError.getErrorMessage(e));
+			return null;
+		}
+	}
+	public Bankmsg getBankByPK(String vbdi) {
+		try {
+			Criteria kriterij = session.createCriteria(Bankmsg.class);
+			kriterij.add(Restrictions.eq("vbdi", StringUtils.trimToEmpty(vbdi)));
+			kriterij.add(Restrictions.eq("status", (byte) 2));
+			kriterij.addOrder(Order.desc("idBankmsg"));
+			List lista=kriterij.list();			
+			Bankmsg bankMsg = (Bankmsg) (lista != null ? lista.get(0) : null);
+			return bankMsg;
 		} catch (HibernateException e) {
 			Log.loger.severe(PomocnaError.getErrorMessage(e));
 			return null;
