@@ -143,12 +143,13 @@ public class ResponseMessageHandlerServiceClientImpl {
 			try {
 				vendorMsg = vendorMsgDAO.getVendorByPK(response.getVendor()
 						.getLogicalSystemVendorID());
+				// Prijava novog partnera
 				if (vendorMsg != null) {
 					sessionPomocna.otvoriTransakciju();
 					vendorAccountsLista = venBanAccMDAO
-							.getVenBanAccMByVendorAndRequest(
-									vendorMsg.getF41ctr(),
-									vendorMsg.getReqmsg().getReqmsgid());
+							.getVenBanAccMByVendorAndRequest(vendorMsg
+									.getF41ctr(), vendorMsg.getReqmsg()
+									.getReqmsgid());
 					messageHeader.postaviVrijednosti();
 					reqMsg = new Reqmsg();
 					resMsg = new Resmsg();
@@ -163,6 +164,7 @@ public class ResponseMessageHandlerServiceClientImpl {
 
 					session.save(resMsg);
 					session.save(reqMsg);
+					session.update(vendorMsg);
 					for (Iterator iteratorVenBanAcc = vendorAccountsLista
 							.iterator(); iteratorVenBanAcc.hasNext();) {
 						Venbanaccm venBanAccM = (Venbanaccm) iteratorVenBanAcc
@@ -182,6 +184,42 @@ public class ResponseMessageHandlerServiceClientImpl {
 					Pomocna.obradaGresaka(session, errorResponse, messageHeader);
 					sessionPomocna.commitTransakcije();
 					++reqMsgId;
+				}
+
+				// Ako je samo prijava zira, logika pretpostavljam da je dobra
+				else {
+					vendorAccountsLista = venBanAccMDAO
+							.getVenBanAccMByVendorAndRequest(response
+									.getVendor().getLogicalSystemVendorID(),
+									null);
+					if (vendorAccountsLista != null) {
+						sessionPomocna.otvoriTransakciju();
+						messageHeader.postaviVrijednosti();
+						reqMsg = new Reqmsg();
+						resMsg = new Resmsg();
+						resMsg.postaviVrijednosti(messageHeader, messageName,
+								responseMessageType);
+						reqMsg.postaviVrijednosti(messageHeader, reqMsgId,
+								messageName);
+
+						session.save(resMsg);
+						session.save(reqMsg);
+						for (Iterator iteratorVenBanAcc = vendorAccountsLista
+								.iterator(); iteratorVenBanAcc.hasNext();) {
+							Venbanaccm venBanAccM = (Venbanaccm) iteratorVenBanAcc
+									.next();
+							venBanAccM.postaviVrijednosti(Pomocna
+									.getStatusRetrive(responseMessageType),
+									reqMsg, PomocnaDatum
+											.XMLDatumUDate(messageHeader
+													.getSubmitionTimestamp()));
+							session.update(venBanAccM);
+						}
+						Pomocna.obradaGresaka(session, errorResponse,
+								messageHeader);
+						sessionPomocna.commitTransakcije();
+						++reqMsgId;
+					}
 				}
 			} catch (Exception e) {
 				sessionPomocna.rollbackTransakcije();
@@ -506,21 +544,6 @@ public class ResponseMessageHandlerServiceClientImpl {
 	 * + _getPaymentExecutionListStartingWithMessageId__return);
 	 * 
 	 * 
-	 * } {
-	 * System.out.println("Invoking getVendorUpdatesListStartingWithMessageId..."
-	 * ); java.lang.String
-	 * _getVendorUpdatesListStartingWithMessageId_logicalSystemName =
-	 * "_getVendorUpdatesListStartingWithMessageId_logicalSystemName-1736969764"
-	 * ; java.lang.Long _getVendorUpdatesListStartingWithMessageId_messageId =
-	 * Long.valueOf(1572614188513467936l); java.lang.Object
-	 * _getVendorUpdatesListStartingWithMessageId__return =
-	 * port.getVendorUpdatesListStartingWithMessageId
-	 * (_getVendorUpdatesListStartingWithMessageId_logicalSystemName,
-	 * _getVendorUpdatesListStartingWithMessageId_messageId);
-	 * System.out.println("getVendorUpdatesListStartingWithMessageId.result=" +
-	 * _getVendorUpdatesListStartingWithMessageId__return);
-	 * 
-	 * 
 	 * } { System.out.println("Invoking getBankUpdatesList...");
 	 * java.lang.String _getBankUpdatesList_logicalSystemName =
 	 * "_getBankUpdatesList_logicalSystemName1390253176"; java.lang.Object
@@ -543,15 +566,6 @@ public class ResponseMessageHandlerServiceClientImpl {
 	 * _getBankUpdatesListStartingWithMessageId_messageId);
 	 * System.out.println("getBankUpdatesListStartingWithMessageId.result=" +
 	 * _getBankUpdatesListStartingWithMessageId__return);
-	 * 
-	 * 
-	 * } { System.out.println("Invoking getVendorUpdatesList...");
-	 * java.lang.String _getVendorUpdatesList_logicalSystemName =
-	 * "_getVendorUpdatesList_logicalSystemName1474709840"; java.lang.Object
-	 * _getVendorUpdatesList__return =
-	 * port.getVendorUpdatesList(_getVendorUpdatesList_logicalSystemName);
-	 * System.out.println("getVendorUpdatesList.result=" +
-	 * _getVendorUpdatesList__return);
 	 * 
 	 * 
 	 * }{ System.out.println("Invoking getAllResponseList..."); java.lang.String
