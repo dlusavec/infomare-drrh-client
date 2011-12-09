@@ -3,6 +3,7 @@ package hr.infomare.drrh.pojo;
 // Generated 16.06.2011. 15:40:00 by Hibernate Tools 3.2.1.GA
 
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,7 +14,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import budgetuserlibrary.gw.fmis.ibm.hr.infotypes.Vendor;
+import budgetuserlibrary.gw.fmis.ibm.hr.infotypes.ResponseMessageType;
 import budgetuserlibrary.gw.fmis.ibm.hr.messages.VendorResponseMsg;
 
 /**
@@ -297,9 +298,22 @@ public class Vendormsg implements java.io.Serializable {
 		this.status = status;
 		this.reqmsg = reqMsg;
 		this.datetimews = dateTimeWS;
-		/*if (response != null && response.getVendor() != null) {
+		/*
+		 * if (response != null && response.getVendor() != null) {
+		 * this.sapvendori = response.getVendor().getSapVendorId();
+		 * this.vendorid = Long.toString(response.getVendor().getVendorId()); }
+		 */
+	}
+
+	public void postaviVrijednostiRetrive(byte status, Reqmsg reqMsg,
+			Date dateTimeWS, VendorResponseMsg response) {
+		this.status = status;
+		this.reqmsg = reqMsg;
+		this.datetimews = dateTimeWS;
+		if (response.getResponseMessageType().equals(
+				ResponseMessageType.NOTIFICATION)) {
 			this.sapvendori = response.getVendor().getSapVendorId();
 			this.vendorid = Long.toString(response.getVendor().getVendorId());
-		}*/
+		}
 	}
 }

@@ -40,6 +40,21 @@ public class VenbanaccmDAO extends AbstraktDAO {
 			Log.loger.severe(PomocnaError.getErrorMessage(e));
 			return null;
 		}
+	}
 
+	public List getVenBanAccMByVendorAndRequest(String vendorId, int reqMsgId) {
+		try {
+			Criteria kriterij = session.createCriteria(Venbanaccm.class);
+			kriterij.add(Restrictions.eq("f46f41",
+					StringUtils.trimToEmpty(vendorId)));
+			kriterij.add(Restrictions.eq("reqmsgid", reqMsgId));
+			kriterij.add(Restrictions.eq("status", (byte) 2));
+			kriterij.addOrder(Order.desc("idVebaacm"));
+			List lista = kriterij.list();			
+			return lista;
+		} catch (HibernateException e) {
+			Log.loger.severe(PomocnaError.getErrorMessage(e));
+			return null;
+		}
 	}
 }

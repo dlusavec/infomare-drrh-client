@@ -4,6 +4,8 @@ package hr.infomare.drrh.pojo;
  * Generirano ruèno
  */
 
+import hr.infomare.drrh.pomocni.PomocnaDatum;
+
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -16,7 +18,10 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.apache.commons.lang.StringUtils;
+
 import budgetuserlibrary.gw.fmis.ibm.hr.infotypes.Vendor;
+import budgetuserlibrary.gw.fmis.ibm.hr.messages.VendorResponseMsg;
 
 @SuppressWarnings("serial")
 @Entity
@@ -81,14 +86,15 @@ public class VendorVezna implements java.io.Serializable {
 		this.datetimews = datetimews;
 	}
 
-	public void postaviVrijednosti(Reqmsg reqMsg, Date dateTimeWS,
-			Vendor vendor, Vendormsg vendorMsg) {
-		this.f41ctr = vendorMsg.getF41ctr();
+	public void postaviVrijednosti(Reqmsg reqMsg,
+			VendorResponseMsg vendorResponseMsg) {
+		this.f41ctr = StringUtils.trimToEmpty(vendorResponseMsg.getVendor()
+				.getLogicalSystemVendorID());
 		this.reqmsg = reqMsg;
-		this.datetimews = dateTimeWS;
-		if (vendor != null) {
-			this.f41svi = vendor.getSapVendorId();
-			this.f41vid = Long.toString(vendor.getVendorId());
-		}
+		this.datetimews = PomocnaDatum.XMLDatumUDate(vendorResponseMsg
+				.getMessageHeader().getSubmitionTimestamp());
+		this.f41svi = vendorResponseMsg.getVendor().getSapVendorId();
+		this.f41vid = Long
+				.toString(vendorResponseMsg.getVendor().getVendorId());
 	}
 }
