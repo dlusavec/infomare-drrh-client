@@ -74,6 +74,10 @@ public class ServletInit implements ServletContextListener {
 								InvoiceManagementServiceClientImpl invoiceManagement=new InvoiceManagementServiceClientImpl();
 								invoiceManagement.razmjenaFaktura();
 							}
+							if (StringUtils
+									.isNotBlank(Postavke.WSDL_RESPONSE)) {
+								// To do
+							}
 							Log.loger.info("Zavrsetak razmjene");
 						}
 					}, NumberUtils.toInt(Postavke.WS_ODGODA) * 1000 * 60,
