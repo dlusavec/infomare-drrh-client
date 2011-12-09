@@ -305,7 +305,7 @@ public class Vendormsg implements java.io.Serializable {
 		 */
 	}
 
-	public void postaviVrijednostiRetrive(byte status, Reqmsg reqMsg,
+	public void postaviVrijednostiRetrieve(byte status, Reqmsg reqMsg,
 			Date dateTimeWS, VendorResponseMsg response) {
 		this.status = status;
 		this.reqmsg = reqMsg;

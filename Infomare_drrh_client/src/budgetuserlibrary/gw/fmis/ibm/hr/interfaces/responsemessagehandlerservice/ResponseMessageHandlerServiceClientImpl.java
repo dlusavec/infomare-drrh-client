@@ -140,13 +140,12 @@ public class ResponseMessageHandlerServiceClientImpl {
 			messageHeader = response.getMessageHeader();
 			responseMessageType = response.getResponseMessageType();
 			errorResponse = response.getErrorResponse();
-			messageHeader.postaviVrijednostiRetrive();
+			messageHeader.postaviVrijednostiRetrieve();
 			try {
 				bankMsg = bankMsgDAO
 						.getBankByPK((response.getBank().getVbdi()));			
 				if (bankMsg != null) {
 					sessionPomocna.otvoriTransakciju();
-
 					reqMsg = new Reqmsg();
 					resMsg = new Resmsg();
 					resMsg.postaviVrijednosti(messageHeader, messageName,
@@ -154,13 +153,13 @@ public class ResponseMessageHandlerServiceClientImpl {
 					reqMsg.postaviVrijednosti(messageHeader, reqMsgId,
 							messageName);
 					bankMsg.postaviVrijednosti(Pomocna
-							.getStatusRetrive(responseMessageType), reqMsg,
+							.getStatusRetrieve(responseMessageType), reqMsg,
 							PomocnaDatum.XMLDatumUDate(messageHeader
 									.getSubmitionTimestamp()));
+					
 					session.save(resMsg);
 					session.save(reqMsg);
 					session.update(bankMsg);
-
 					Pomocna.obradaGresaka(session, errorResponse, messageHeader);
 					sessionPomocna.commitTransakcije();
 					++reqMsgId;
@@ -191,7 +190,7 @@ public class ResponseMessageHandlerServiceClientImpl {
 			messageHeader = response.getMessageHeader();
 			responseMessageType = response.getResponseMessageType();
 			errorResponse = response.getErrorResponse();
-			messageHeader.postaviVrijednostiRetrive();
+			messageHeader.postaviVrijednostiRetrieve();
 			try {
 				vendorMsg = vendorMsgDAO.getVendorByPK(response.getVendor()
 						.getLogicalSystemVendorID());
@@ -208,8 +207,8 @@ public class ResponseMessageHandlerServiceClientImpl {
 							responseMessageType);
 					reqMsg.postaviVrijednosti(messageHeader, reqMsgId,
 							messageName);
-					vendorMsg.postaviVrijednostiRetrive(Pomocna
-							.getStatusRetrive(responseMessageType), reqMsg,
+					vendorMsg.postaviVrijednostiRetrieve(Pomocna
+							.getStatusRetrieve(responseMessageType), reqMsg,
 							PomocnaDatum.XMLDatumUDate(messageHeader
 									.getSubmitionTimestamp()), response);
 
@@ -221,7 +220,7 @@ public class ResponseMessageHandlerServiceClientImpl {
 						Venbanaccm venBanAccM = (Venbanaccm) iteratorVenBanAcc
 								.next();
 						venBanAccM.postaviVrijednosti(Pomocna
-								.getStatusRetrive(responseMessageType), reqMsg,
+								.getStatusRetrieve(responseMessageType), reqMsg,
 								PomocnaDatum.XMLDatumUDate(messageHeader
 										.getSubmitionTimestamp()));
 						session.update(venBanAccM);
@@ -259,7 +258,7 @@ public class ResponseMessageHandlerServiceClientImpl {
 							Venbanaccm venBanAccM = (Venbanaccm) iteratorVenBanAcc
 									.next();
 							venBanAccM.postaviVrijednosti(Pomocna
-									.getStatusRetrive(responseMessageType),
+									.getStatusRetrieve(responseMessageType),
 									reqMsg, PomocnaDatum
 											.XMLDatumUDate(messageHeader
 													.getSubmitionTimestamp()));
@@ -334,7 +333,7 @@ public class ResponseMessageHandlerServiceClientImpl {
 								.getHeader().getOriginatingBuFmisDocumentID());
 				if (budComMsg != null) {
 					sessionPomocna.otvoriTransakciju();
-					messageHeader.postaviVrijednostiRetrive();
+					messageHeader.postaviVrijednostiRetrieve();
 					reqMsg = new Reqmsg();
 					resMsg = new Resmsg();
 					resMsg.postaviVrijednosti(messageHeader, messageName,
@@ -342,7 +341,7 @@ public class ResponseMessageHandlerServiceClientImpl {
 					reqMsg.postaviVrijednosti(messageHeader, reqMsgId,
 							messageName);
 					budComMsg.postaviVrijednosti(Pomocna
-							.getStatusRetrive(responseMessageType), reqMsg,
+							.getStatusRetrieve(responseMessageType), reqMsg,
 							PomocnaDatum.XMLDatumUDate(messageHeader
 									.getSubmitionTimestamp()),
 							budgetCommitmentStatusNotification);
@@ -433,7 +432,7 @@ public class ResponseMessageHandlerServiceClientImpl {
 								.getHeader().getOriginatingBuFmisDocumentID());
 				if (invoiceMsg != null) {
 					sessionPomocna.otvoriTransakciju();
-					messageHeader.postaviVrijednostiRetrive();
+					messageHeader.postaviVrijednostiRetrieve();
 					reqMsg = new Reqmsg();
 					resMsg = new Resmsg();
 					resMsg.postaviVrijednosti(messageHeader, messageName,
@@ -441,7 +440,7 @@ public class ResponseMessageHandlerServiceClientImpl {
 					reqMsg.postaviVrijednosti(messageHeader, reqMsgId,
 							messageName);
 					invoiceMsg.postaviVrijednosti(Pomocna
-							.getStatusRetrive(responseMessageType), reqMsg,
+							.getStatusRetrieve(responseMessageType), reqMsg,
 							PomocnaDatum.XMLDatumUDate(messageHeader
 									.getSubmitionTimestamp()),
 							invoiceStatusNotification);
@@ -510,84 +509,84 @@ public class ResponseMessageHandlerServiceClientImpl {
 		obradaBankMsg(
 				(AnyTypeList) port
 						.getBankUpdatesList(Postavke.LOGICAL_SYSTEM_NAME),
-				"retriveBankUpdates");
+				"retrieveBankUpdates");
 	}
 
 	public void preuzmiBankResponseMessageId() {
 		obradaBankMsg(
 				(AnyTypeList) port.getBankUpdatesListStartingWithMessageId(
 						Postavke.LOGICAL_SYSTEM_NAME, Long.valueOf(0)),
-				"retriveBankUpdatesMessageId");
+				"retrieveBankUpdatesMessageId");
 	}
 
 	public void preuzmiVendorResponse() {
 		obradaVendorMsg(
 				(AnyTypeList) port
 						.getVendorUpdatesList(Postavke.LOGICAL_SYSTEM_NAME),
-				"retriveVendorChange");
+				"retrieveVendorChange");
 	}
 
 	public void preuzmiVendorResponseMessageId() {
 		obradaVendorMsg(
 				(AnyTypeList) port.getVendorUpdatesListStartingWithMessageId(
 						Postavke.LOGICAL_SYSTEM_NAME, Long.valueOf(0)),
-				"retriveVendorChangeMessageId");
+				"retrieveVendorChangeMessageId");
 	}
 
 	public void preuzmiContractResponse() {
 		obradaBudComMsg(
 				(AnyTypeList) port
 						.getContractResponseList(Postavke.LOGICAL_SYSTEM_NAME),
-				"retriveContract");
+				"retrieveContract");
 	}
 
 	public void preuzmiReservationResponse() {
 		obradaBudComMsg(
 				(AnyTypeList) port
 						.getReservationResponseList(Postavke.LOGICAL_SYSTEM_NAME),
-				"retriveResponse");
+				"retrieveReservation");
 	}
 
 	public void preuzmiReservationResponseMessageId() {
 		obradaBudComMsg(
 				(AnyTypeList) port.getReservationResponseListStartingWithMessageId(
 						Postavke.LOGICAL_SYSTEM_NAME, Long.valueOf(0)),
-				"retriveResponseMessageId");
+				"retrieveReservationMessageId");
 	}
 
 	public void preuzmiContractResponseMessageId() {
 		obradaBudComMsg(
 				(AnyTypeList) port.getContractResponseListStartingWithMessageId(
 						Postavke.LOGICAL_SYSTEM_NAME, Long.valueOf(0)),
-				"retriveContractMessageId");
+				"retrieveContractMessageId");
 	}
 
 	public void preuzmiPurchaseOrderResponse() {
 		obradaBudComMsg(
 				(AnyTypeList) port
 						.getPurchaseOrderResponseList(Postavke.LOGICAL_SYSTEM_NAME),
-				"retrivePurchaseOrder");
+				"retrievePurchaseOrder");
 	}
 
 	public void preuzmiPurchaseOrderResponseMessageId() {
 		obradaBudComMsg(
 				(AnyTypeList) port.getPurchaseOrderResponseListStartingWithMessageId(
 						Postavke.LOGICAL_SYSTEM_NAME, Long.valueOf(0)),
-				"retrivePurchaseOrderMessageId");
+				"retrievePurchaseOrderMessageId");
 	}
 
 	public void preuzmiInvoiceResponse() {
 		obradaInvoiceMsg(
 				(AnyTypeList) port
 						.getInvoiceResponseList(Postavke.LOGICAL_SYSTEM_NAME),
-				"retriveInvoice");
+				"retrieveInvoice");
 	}
 
 	public void preuzmiInvoiceResponseMessageId() {
 		obradaInvoiceMsg(
 				(AnyTypeList) port.getInvoiceResponseListStartingWithMessageId(
 						Postavke.LOGICAL_SYSTEM_NAME, Long.valueOf(0)),
-				"retriveInvoiceMessageId");
+				"retrieveInvoiceMessageId");
 	}
 
 	/*

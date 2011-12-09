@@ -117,7 +117,7 @@ public class MessageHeader {
 	public void setEventId(Long eventId) {
 		this.eventId = eventId;
 	}
-	public void postaviVrijednostiRetrive() {
+	public void postaviVrijednostiRetrieve() {
 		this.submitionTimestamp = this.submitionTimestamp == null ? PomocnaDatum
 				.getTrenutniDatumXML() : this.submitionTimestamp;
 		this.eventId = this.eventId == null ? Long.valueOf(0) : this.eventId;

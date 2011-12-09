@@ -24,7 +24,7 @@ public class Pomocna {
 				.equals(ResponseMessageType.NOTIFICATION) ? 2 : 9);
 	}
 	
-	public static byte getStatusRetrive(ResponseMessageType responseMessageType) {		
+	public static byte getStatusRetrieve(ResponseMessageType responseMessageType) {		
 		return (byte) (responseMessageType
 				.equals(ResponseMessageType.NOTIFICATION) ? 3 : 9);
 	}
