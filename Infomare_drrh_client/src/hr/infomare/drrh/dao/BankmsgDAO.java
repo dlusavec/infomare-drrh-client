@@ -45,7 +45,7 @@ public class BankmsgDAO extends AbstraktDAO {
 			kriterij.add(Restrictions.eq("status", (byte) 2));
 			kriterij.addOrder(Order.desc("idBankmsg"));
 			List lista=kriterij.list();			
-			Bankmsg bankMsg = (Bankmsg) (lista != null ? lista.get(0) : null);
+			Bankmsg bankMsg = (lista != null && lista.size()>0 ? (Bankmsg) lista.get(0) : null);
 			return bankMsg;
 		} catch (HibernateException e) {
 			Log.loger.severe(PomocnaError.getErrorMessage(e));

@@ -90,11 +90,21 @@ public class ResponseMessageHandlerServiceClientImpl {
 	public void razmjenaOdgovora() {
 		try {
 			otvoriPortISesiju();
-			preuzmiVendorResponseMessageId();
-			preuzmiReservationResponseMessageId();
-			preuzmiContractResponseMessageId();
-			preuzmiPurchaseOrderResponseMessageId();
-			preuzmiInvoiceResponseMessageId(); 			
+			
+			preuzmiBankResponse();
+			preuzmiVendorResponse();
+			preuzmiReservationResponse();
+			preuzmiContractResponse();
+			preuzmiPurchaseOrderResponse();
+			preuzmiInvoiceResponse();			
+			
+			// preuzmiBankResponseMessageId();
+			//preuzmiVendorResponseMessageId();
+			// preuzmiReservationResponseMessageId();
+			// preuzmiContractResponseMessageId();
+			// preuzmiPurchaseOrderResponseMessageId();
+			// preuzmiInvoiceResponseMessageId();
+ 
 		} catch (Exception e) {
 			Log.loger.severe("Greška kod preuzimanja odgovora "
 					+ PomocnaError.getErrorMessage(e));
@@ -133,7 +143,7 @@ public class ResponseMessageHandlerServiceClientImpl {
 		Resmsg resMsg = null;
 		MessageHeader messageHeader = null;
 		ResponseMessageType responseMessageType = null;
-		ErrorResponse errorResponse = null;		
+		ErrorResponse errorResponse = null;
 		List responseLista = anyTypeLista.getAnyTypeElement();
 		for (Iterator iterator = responseLista.iterator(); iterator.hasNext();) {
 			BankResponseMsg response = (BankResponseMsg) iterator.next();
@@ -143,7 +153,7 @@ public class ResponseMessageHandlerServiceClientImpl {
 			messageHeader.postaviVrijednostiRetrieve();
 			try {
 				bankMsg = bankMsgDAO
-						.getBankByPK((response.getBank().getVbdi()));			
+						.getBankByPK((response.getBank().getVbdi()));
 				if (bankMsg != null) {
 					sessionPomocna.otvoriTransakciju();
 					reqMsg = new Reqmsg();
@@ -156,7 +166,7 @@ public class ResponseMessageHandlerServiceClientImpl {
 							.getStatusRetrieve(responseMessageType), reqMsg,
 							PomocnaDatum.XMLDatumUDate(messageHeader
 									.getSubmitionTimestamp()));
-					
+
 					session.save(resMsg);
 					session.save(reqMsg);
 					session.update(bankMsg);
@@ -211,19 +221,22 @@ public class ResponseMessageHandlerServiceClientImpl {
 							.getStatusRetrieve(responseMessageType), reqMsg,
 							PomocnaDatum.XMLDatumUDate(messageHeader
 									.getSubmitionTimestamp()), response);
-
 					session.save(resMsg);
 					session.save(reqMsg);
 					session.update(vendorMsg);
-					for (Iterator iteratorVenBanAcc = vendorAccountsLista
-							.iterator(); iteratorVenBanAcc.hasNext();) {
-						Venbanaccm venBanAccM = (Venbanaccm) iteratorVenBanAcc
-								.next();
-						venBanAccM.postaviVrijednosti(Pomocna
-								.getStatusRetrieve(responseMessageType), reqMsg,
-								PomocnaDatum.XMLDatumUDate(messageHeader
-										.getSubmitionTimestamp()));
-						session.update(venBanAccM);
+					if (vendorAccountsLista != null
+							&& vendorAccountsLista.size() > 0) {
+						for (Iterator iteratorVenBanAcc = vendorAccountsLista
+								.iterator(); iteratorVenBanAcc.hasNext();) {
+							Venbanaccm venBanAccM = (Venbanaccm) iteratorVenBanAcc
+									.next();
+							venBanAccM.postaviVrijednosti(Pomocna
+									.getStatusRetrieve(responseMessageType),
+									reqMsg, PomocnaDatum
+											.XMLDatumUDate(messageHeader
+													.getSubmitionTimestamp()));
+							session.update(venBanAccM);
+						}
 					}
 					if (responseMessageType
 							.equals(ResponseMessageType.NOTIFICATION)) {
@@ -242,7 +255,8 @@ public class ResponseMessageHandlerServiceClientImpl {
 							.getVenBanAccMByVendorAndRequest(response
 									.getVendor().getLogicalSystemVendorID(),
 									null);
-					if (vendorAccountsLista != null) {
+					if (vendorAccountsLista != null
+							&& vendorAccountsLista.size() > 0) {
 						sessionPomocna.otvoriTransakciju();
 						reqMsg = new Reqmsg();
 						resMsg = new Resmsg();

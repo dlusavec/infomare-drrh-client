@@ -46,7 +46,7 @@ public class VendormsgDAO extends AbstraktDAO {
 			kriterij.add(Restrictions.eq("status", (byte) 2));
 			kriterij.addOrder(Order.desc("idVendorm"));
 			List lista=kriterij.list();			
-			Vendormsg vendorMsg = (Vendormsg) (lista != null ? lista.get(0) : null);
+			Vendormsg vendorMsg = (lista != null && lista.size()>0 ? (Vendormsg) lista.get(0) : null);
 			return vendorMsg;
 		} catch (HibernateException e) {
 			Log.loger.severe(PomocnaError.getErrorMessage(e));

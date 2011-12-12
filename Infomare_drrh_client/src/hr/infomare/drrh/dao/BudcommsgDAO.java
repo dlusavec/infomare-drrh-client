@@ -48,7 +48,7 @@ public class BudcommsgDAO extends AbstraktDAO {
 			kriterij.add(Restrictions.eq("status", (byte) 2));
 			kriterij.addOrder(Order.desc("bcmsgid"));
 			List lista=kriterij.list();			
-			Budcommsg budcommsg = (Budcommsg) (lista != null ? lista.get(0) : null);
+			Budcommsg budcommsg = (lista != null && lista.size()>0 ? (Budcommsg) lista.get(0) : null);
 			return budcommsg;
 		} catch (HibernateException e) {
 			Log.loger.severe(PomocnaError.getErrorMessage(e));

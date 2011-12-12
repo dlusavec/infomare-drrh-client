@@ -394,9 +394,7 @@ public class VendorItem {
 		VendorVezna vendorVezna = vendorVeznaDAO.getVendorVeznaByPK(StringUtils
 				.trimToNull(invoiceMsg.getBufmisven()));
 		if (vendorVezna != null) {
-			masterVendorId = Long.parseLong(vendorVezna.getF41ctr().trim());
-			// Citam iz InvoiceMSG
-			// buFmisVendorId = vendorVezna.getF41vid();
+			masterVendorId = Long.parseLong(vendorVezna.getF41vid().trim());			
 			sapVendorId = StringUtils.trimToNull(vendorVezna.getF41svi());
 		}
 		buFmisVendorId = StringUtils.trimToNull(invoiceMsg.getBufmisven());

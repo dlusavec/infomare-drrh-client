@@ -49,7 +49,7 @@ public class VenbanaccmDAO extends AbstraktDAO {
 			kriterij.add(Restrictions.eq("f46f41",
 					StringUtils.trimToEmpty(vendorId)));
 			if (reqMsgId != null) {
-				kriterij.add(Restrictions.eq("reqmsgid", reqMsgId));
+				kriterij.add(Restrictions.eq("reqmsg.reqmsgid", reqMsgId));
 			}
 			kriterij.add(Restrictions.eq("status", (byte) 2));
 			kriterij.addOrder(Order.desc("idVebaacm"));

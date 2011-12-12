@@ -16,6 +16,7 @@ public class Postavke {
 	public static String DEBUG_MAPA;
 	public static boolean DEBUG_POJO;
 	public static boolean DEBUG_PORUKA;
+	public static boolean JOB_RUNNING = false;
 
 	// RDBMS i HIBERNATE
 	public static String DB_USER;
@@ -46,8 +47,8 @@ public class Postavke {
 			LOGICAL_SYSTEM_NAME = postavke.getProperty("LOGICAL_SYSTEM_NAME");
 			LOG_DATOTEKA = postavke.getProperty("LOG_DATOTEKA");
 			DEBUG_MAPA = postavke.getProperty("DEBUG_MAPA");
-			DEBUG_POJO=postavke.getProperty("DEBUG_POJO").equals("1");
-			DEBUG_PORUKA=postavke.getProperty("DEBUG_PORUKA").equals("1");
+			DEBUG_POJO = postavke.getProperty("DEBUG_POJO").equals("1");
+			DEBUG_PORUKA = postavke.getProperty("DEBUG_PORUKA").equals("1");
 			kreirajDebugMape();
 			DB_USER = postavke.getProperty("DB_USER");
 			DB_PASSWORD = postavke.getProperty("DB_PASSWORD");
@@ -63,11 +64,11 @@ public class Postavke {
 			WS_INTERVAL = postavke.getProperty("WS_INTERVAL");
 			WSDL_BANK = postavke.getProperty("WSDL_BANK");
 			WSDL_VENDOR = postavke.getProperty("WSDL_VENDOR");
-			WSDL_RESERVATION=postavke.getProperty("WSDL_RESERVATION");
-			WSDL_CONTRACT=postavke.getProperty("WSDL_CONTRACT");
-			WSDL_PURCHASE_ORDER=postavke.getProperty("WSDL_PURCHASE_ORDER");
-			WSDL_INVOICE=postavke.getProperty("WSDL_INVOICE");
-			WSDL_RESPONSE=postavke.getProperty("WSDL_RESPONSE");
+			WSDL_RESERVATION = postavke.getProperty("WSDL_RESERVATION");
+			WSDL_CONTRACT = postavke.getProperty("WSDL_CONTRACT");
+			WSDL_PURCHASE_ORDER = postavke.getProperty("WSDL_PURCHASE_ORDER");
+			WSDL_INVOICE = postavke.getProperty("WSDL_INVOICE");
+			WSDL_RESPONSE = postavke.getProperty("WSDL_RESPONSE");
 		} catch (IOException e) {
 			System.err.println(e.getMessage());
 
@@ -81,8 +82,8 @@ public class Postavke {
 			LOGICAL_SYSTEM_NAME = postavke.getProperty("LOGICAL_SYSTEM_NAME");
 			LOG_DATOTEKA = postavke.getProperty("LOG_DATOTEKA");
 			DEBUG_MAPA = postavke.getProperty("DEBUG_MAPA");
-			DEBUG_POJO=postavke.getProperty("DEBUG_POJO").equals("1");
-			DEBUG_PORUKA=postavke.getProperty("DEBUG_PORUKA").equals("1");
+			DEBUG_POJO = postavke.getProperty("DEBUG_POJO").equals("1");
+			DEBUG_PORUKA = postavke.getProperty("DEBUG_PORUKA").equals("1");
 			kreirajDebugMape();
 			DB_USER = postavke.getProperty("DB_USER");
 			DB_PASSWORD = postavke.getProperty("DB_PASSWORD");
@@ -98,11 +99,11 @@ public class Postavke {
 			WS_INTERVAL = postavke.getProperty("WS_INTERVAL");
 			WSDL_BANK = postavke.getProperty("WSDL_BANK");
 			WSDL_VENDOR = postavke.getProperty("WSDL_VENDOR");
-			WSDL_RESERVATION=postavke.getProperty("WSDL_RESERVATION");
-			WSDL_CONTRACT=postavke.getProperty("WSDL_CONTRACT");
-			WSDL_PURCHASE_ORDER=postavke.getProperty("WSDL_PURCHASE_ORDER");
-			WSDL_INVOICE=postavke.getProperty("WSDL_INVOICE");
-			WSDL_RESPONSE=postavke.getProperty("WSDL_RESPONSE");
+			WSDL_RESERVATION = postavke.getProperty("WSDL_RESERVATION");
+			WSDL_CONTRACT = postavke.getProperty("WSDL_CONTRACT");
+			WSDL_PURCHASE_ORDER = postavke.getProperty("WSDL_PURCHASE_ORDER");
+			WSDL_INVOICE = postavke.getProperty("WSDL_INVOICE");
+			WSDL_RESPONSE = postavke.getProperty("WSDL_RESPONSE");
 		} catch (IOException e) {
 			System.err.println(e.getMessage());
 		}
