@@ -29,9 +29,10 @@ public class Postavke {
 	public static String HB_AUTO_COMMIT;
 	public static String HB_SHOW_SQL;
 	public static String HB_FORMAT_SQL;
-	// JOB
+	// JOB i WS
 	public static String WS_ODGODA;
 	public static String WS_INTERVAL;
+	public static String WS_TIMEOUT;
 	// WSDL lokacije
 	public static String WSDL_BANK;
 	public static String WSDL_VENDOR;
@@ -62,6 +63,7 @@ public class Postavke {
 			HB_FORMAT_SQL = postavke.getProperty("HB_FORMAT_SQL");
 			WS_ODGODA = postavke.getProperty("WS_ODGODA");
 			WS_INTERVAL = postavke.getProperty("WS_INTERVAL");
+			WS_TIMEOUT = postavke.getProperty("WS_TIMEOUT");
 			WSDL_BANK = postavke.getProperty("WSDL_BANK");
 			WSDL_VENDOR = postavke.getProperty("WSDL_VENDOR");
 			WSDL_RESERVATION = postavke.getProperty("WSDL_RESERVATION");
@@ -97,6 +99,7 @@ public class Postavke {
 			HB_FORMAT_SQL = postavke.getProperty("HB_FORMAT_SQL");
 			WS_ODGODA = postavke.getProperty("WS_ODGODA");
 			WS_INTERVAL = postavke.getProperty("WS_INTERVAL");
+			WS_TIMEOUT = postavke.getProperty("WS_TIMEOUT");
 			WSDL_BANK = postavke.getProperty("WSDL_BANK");
 			WSDL_VENDOR = postavke.getProperty("WSDL_VENDOR");
 			WSDL_RESERVATION = postavke.getProperty("WSDL_RESERVATION");

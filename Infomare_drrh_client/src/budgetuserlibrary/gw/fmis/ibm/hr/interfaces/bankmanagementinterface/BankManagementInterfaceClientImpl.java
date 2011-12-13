@@ -63,7 +63,7 @@ public final class BankManagementInterfaceClientImpl {
 		try {
 			otvoriPortISesiju();
 			createBank();
-		//	changeBank();
+			changeBank();
 		} catch (Exception e) {
 			Log.loger.severe("Greška kod razmjene banaka "
 					+ PomocnaError.getErrorMessage(e));

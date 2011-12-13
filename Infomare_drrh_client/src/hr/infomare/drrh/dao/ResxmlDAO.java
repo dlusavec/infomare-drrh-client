@@ -16,7 +16,7 @@ public class ResxmlDAO {
 
 	public static void spremiResponse(Long resMsgId, Object objekt,
 			Session session, SessionPomocna sessionPomocna) {
-		if (objekt != null && resMsgId > 0) {
+		if (objekt != null && resMsgId != null && resMsgId > 0) {
 			try {
 				sessionPomocna.otvoriTransakciju();
 				Resxml resXML = new Resxml();

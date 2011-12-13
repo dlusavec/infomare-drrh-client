@@ -15,6 +15,7 @@ import hr.infomare.drrh.dao.InvoicemsgDAO;
 import hr.infomare.drrh.dao.NotifheadDAO;
 import hr.infomare.drrh.dao.PayexecDAO;
 import hr.infomare.drrh.dao.ReqmsgDAO;
+import hr.infomare.drrh.dao.ResxmlDAO;
 import hr.infomare.drrh.dao.StatnotifDAO;
 import hr.infomare.drrh.dao.VenbanaccmDAO;
 import hr.infomare.drrh.dao.VendormsgDAO;
@@ -285,6 +286,7 @@ public class ResponseMessageHandlerServiceClientImpl {
 			}
 
 		}
+		obradaResponseXML(anyTypeLista, messageName);
 	}
 
 	private void obradaVendorMsg(AnyTypeList anyTypeLista, String messageName) {
@@ -395,7 +397,7 @@ public class ResponseMessageHandlerServiceClientImpl {
 						+ PomocnaError.getErrorMessage(e));
 			}
 		}
-
+		obradaResponseXML(anyTypeLista, messageName);
 	}
 
 	private void obradaBudComMsg(AnyTypeList anyTypeLista, String messageName) {
@@ -517,7 +519,7 @@ public class ResponseMessageHandlerServiceClientImpl {
 						+ PomocnaError.getErrorMessage(e));
 			}
 		}
-
+		obradaResponseXML(anyTypeLista, messageName);
 	}
 
 	private void obradaInvoiceMsg(AnyTypeList anyTypeLista, String messageName) {
@@ -619,7 +621,7 @@ public class ResponseMessageHandlerServiceClientImpl {
 			}
 
 		}
-
+		obradaResponseXML(anyTypeLista, messageName);
 	}
 
 	private void obradaPaymentExecutionMsg(AnyTypeList anyTypeLista,
@@ -658,7 +660,77 @@ public class ResponseMessageHandlerServiceClientImpl {
 			}
 
 		}
+		obradaResponseXML(anyTypeLista, messageName);
+	}
 
+	private void obradaResponseXML(AnyTypeList anyTypeLista, String messageName) {
+		MessageHeader messageHeader = null;
+		List responseLista = anyTypeLista.getAnyTypeElement();
+		for (Iterator iterator = responseLista.iterator(); iterator.hasNext();) {
+			Object object = iterator.next();
+
+			if (object instanceof BankResponseMsg) {
+				BankResponseMsg response = (BankResponseMsg) object;
+				messageHeader = response.getMessageHeader();
+			}
+
+			if (object instanceof VendorResponseMsg) {
+				VendorResponseMsg response = (VendorResponseMsg) object;
+				messageHeader = response.getMessageHeader();
+			}
+
+			if (object instanceof ReservationResponseMsg) {
+				ReservationResponseMsg response = (ReservationResponseMsg) object;
+				messageHeader = response.getMessageHeader();
+			}
+
+			if (object instanceof ContractResponseMsg) {
+				ContractResponseMsg response = (ContractResponseMsg) object;
+				messageHeader = response.getMessageHeader();
+			}
+
+			if (object instanceof PurchaseOrderResponseMsg) {
+				PurchaseOrderResponseMsg response = (PurchaseOrderResponseMsg) object;
+				messageHeader = response.getMessageHeader();
+			}
+
+			if (object instanceof InvoiceResponseMsg) {
+				InvoiceResponseMsg response = (InvoiceResponseMsg) object;
+				messageHeader = response.getMessageHeader();
+			}
+
+			if (object instanceof PaymentExecutionNotificationEventMsg) {
+				PaymentExecutionNotificationEventMsg response = (PaymentExecutionNotificationEventMsg) object;
+				messageHeader = response.getMessageHeader();
+			}
+
+			try {
+				if (object != null) {
+					sessionPomocna.otvoriTransakciju();
+					ResxmlDAO.spremiResponse(messageHeader.getResponseMsgId(),
+							object, session, sessionPomocna);
+					sessionPomocna.commitTransakcije();
+				}
+
+			} catch (Exception e) {
+				sessionPomocna.rollbackTransakcije();
+				Log.loger
+						.severe("Greška kod preuzimanja odgovora, ResXML obrada "
+								+ messageName
+								+ " , poruka: "
+								+ Long.toString(messageHeader
+										.getResponseMsgId())
+								+ PomocnaError.getErrorMessage(e));
+			} finally {
+				if (Postavke.DEBUG_PORUKA) {
+					debug.ispisUXML(
+							object,
+							"Message_response_"
+									+ Long.toString(messageHeader
+											.getResponseMsgId()));
+				}
+			}
+		}
 	}
 	// Nije implementirano
 	/*

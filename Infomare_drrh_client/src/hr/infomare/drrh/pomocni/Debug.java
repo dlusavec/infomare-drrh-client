@@ -19,7 +19,7 @@ public class Debug {
 			FileOutputStream fos = null;
 			fos = new FileOutputStream(mapa + datoteka + ".xml");
 			XStream xStream = new XStream(new DomDriver());
-			xStream.toXML(objekt, fos);
+			xStream.toXML(objekt, fos);			
 			fos.flush();
 			fos.close();
 		} catch (Exception e) {
