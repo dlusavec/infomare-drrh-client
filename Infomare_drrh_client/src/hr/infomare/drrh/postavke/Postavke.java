@@ -8,6 +8,7 @@ import java.util.Properties;
 import javax.servlet.ServletContext;
 
 public class Postavke {
+
 	// RAZNO
 	public static String KONFIG_DATOTEKA = "C:/Konfiguracija.properties";
 	public static Properties postavke = new Properties();
@@ -16,7 +17,6 @@ public class Postavke {
 	public static String DEBUG_MAPA;
 	public static boolean DEBUG_POJO;
 	public static boolean DEBUG_PORUKA;
-	public static boolean JOB_RUNNING = false;
 
 	// RDBMS i HIBERNATE
 	public static String DB_USER;
@@ -29,10 +29,14 @@ public class Postavke {
 	public static String HB_AUTO_COMMIT;
 	public static String HB_SHOW_SQL;
 	public static String HB_FORMAT_SQL;
-	// JOB i WS
+
+	// WS i JOB
 	public static String WS_ODGODA;
 	public static String WS_INTERVAL;
-	public static String WS_TIMEOUT;
+	public static String WS_TIMEOUT;	
+	public static boolean JOB_RUNNING = false;
+	public static String JOB_SLEEP;
+
 	// WSDL lokacije
 	public static String WSDL_BANK;
 	public static String WSDL_VENDOR;
@@ -64,6 +68,7 @@ public class Postavke {
 			WS_ODGODA = postavke.getProperty("WS_ODGODA");
 			WS_INTERVAL = postavke.getProperty("WS_INTERVAL");
 			WS_TIMEOUT = postavke.getProperty("WS_TIMEOUT");
+			JOB_SLEEP = postavke.getProperty("JOB_SLEEP");			
 			WSDL_BANK = postavke.getProperty("WSDL_BANK");
 			WSDL_VENDOR = postavke.getProperty("WSDL_VENDOR");
 			WSDL_RESERVATION = postavke.getProperty("WSDL_RESERVATION");
@@ -100,6 +105,7 @@ public class Postavke {
 			WS_ODGODA = postavke.getProperty("WS_ODGODA");
 			WS_INTERVAL = postavke.getProperty("WS_INTERVAL");
 			WS_TIMEOUT = postavke.getProperty("WS_TIMEOUT");
+			JOB_SLEEP = postavke.getProperty("JOB_SLEEP");
 			WSDL_BANK = postavke.getProperty("WSDL_BANK");
 			WSDL_VENDOR = postavke.getProperty("WSDL_VENDOR");
 			WSDL_RESERVATION = postavke.getProperty("WSDL_RESERVATION");

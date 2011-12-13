@@ -25,6 +25,6 @@
 	<context-param>
 		<description>Lokacija konfiguracijske datoteke</description>
 		<param-name>konfig_datoteka</param-name>
-		<param-value>C:\\Konfiguracija.properties</param-value>
+		<param-value>C:/Infomare_drrh_client/Konfiguracija.properties</param-value>
 	</context-param>
 </web-app>

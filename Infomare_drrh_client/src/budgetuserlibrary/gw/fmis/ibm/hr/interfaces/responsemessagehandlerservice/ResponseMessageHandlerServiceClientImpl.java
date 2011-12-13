@@ -87,7 +87,7 @@ public class ResponseMessageHandlerServiceClientImpl {
 	private VendormsgDAO vendorMsgDAO;
 	private VenbanaccmDAO venBanAccMDAO;
 	private PayexecDAO payExecDAO;
-	private Debug debug = new Debug("Response");
+	private Debug debug = new Debug("RESPONSE");
 
 	public ResponseMessageHandlerServiceClientImpl() {
 	}
@@ -102,20 +102,31 @@ public class ResponseMessageHandlerServiceClientImpl {
 			preuzmiContractResponse();
 			preuzmiPurchaseOrderResponse();
 			preuzmiInvoiceResponse();
-
-			// preuzmiBankResponseMessageId();
-			// preuzmiVendorResponseMessageId();
-			// preuzmiReservationResponseMessageId();
-			// preuzmiContractResponseMessageId();
-			// preuzmiPurchaseOrderResponseMessageId();
-			// preuzmiInvoiceResponseMessageId();
-
+			preuzmiPayementExecutionResponse();
 		} catch (Exception e) {
 			Log.loger.severe("Greška kod preuzimanja odgovora "
 					+ PomocnaError.getErrorMessage(e));
 		}
 	}
 
+	public void razmjenaOdgovoraMessageId() {
+		try {
+			otvoriPortISesiju();
+
+			preuzmiBankResponseMessageId();
+			preuzmiVendorResponseMessageId();
+			preuzmiReservationResponseMessageId();
+			preuzmiContractResponseMessageId();
+			preuzmiPurchaseOrderResponseMessageId();
+			preuzmiInvoiceResponseMessageId();
+			preuzmiPayementExecutionMessageId();
+		} catch (Exception e) {
+			Log.loger.severe("Greška kod preuzimanja odgovora "
+					+ PomocnaError.getErrorMessage(e));
+		}
+	}
+
+	
 	private void otvoriPortISesiju() {
 		serviceName = new QName(
 				ResponseMessageHandlerServiceExportResponseMessageHandlerServiceHttpService.TARGET_NAMESPACE,
@@ -717,7 +728,7 @@ public class ResponseMessageHandlerServiceClientImpl {
 				Log.loger
 						.severe("Greška kod preuzimanja odgovora, ResXML obrada "
 								+ messageName
-								+ " , poruka: "
+								+ " ,poruka: "
 								+ Long.toString(messageHeader
 										.getResponseMsgId())
 								+ PomocnaError.getErrorMessage(e));

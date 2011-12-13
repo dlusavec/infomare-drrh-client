@@ -18,10 +18,12 @@ public class PomocnaKlijent {
 	public static void postavkeKlijenta(Object port) {
 		Client klijent = ClientProxy.getClient(port);
 		HTTPConduit http = (HTTPConduit) klijent.getConduit();
-		HTTPClientPolicy httpClientPolicy = new HTTPClientPolicy();		
-		httpClientPolicy.setConnectionTimeout(NumberUtils.toInt(Postavke.WS_TIMEOUT));
-		httpClientPolicy.setReceiveTimeout(NumberUtils.toInt(Postavke.WS_TIMEOUT));
-		http.setClient(httpClientPolicy);	
+		HTTPClientPolicy httpClientPolicy = new HTTPClientPolicy();
+		httpClientPolicy.setConnectionTimeout(NumberUtils
+				.toInt(Postavke.WS_TIMEOUT) * 60000);
+		httpClientPolicy.setReceiveTimeout(NumberUtils
+				.toInt(Postavke.WS_TIMEOUT) * 60000);
+		http.setClient(httpClientPolicy);
 		klijent.getInInterceptors().add(new LoggingInInterceptor());
 		klijent.getOutInterceptors().add(new LoggingOutInterceptor());
 	}

@@ -18,6 +18,7 @@ import budgetuserlibrary.gw.fmis.ibm.hr.interfaces.contractmanagementservice.Con
 import budgetuserlibrary.gw.fmis.ibm.hr.interfaces.invoicemanagementservice.InvoiceManagementServiceClientImpl;
 import budgetuserlibrary.gw.fmis.ibm.hr.interfaces.purchaseordermanagementservice.PurchaseOrderManagementServiceClientImpl;
 import budgetuserlibrary.gw.fmis.ibm.hr.interfaces.reservationmanagementservice.ReservationManagementServiceClientImpl;
+import budgetuserlibrary.gw.fmis.ibm.hr.interfaces.responsemessagehandlerservice.ResponseMessageHandlerServiceClientImpl;
 import budgetuserlibrary.gw.fmis.ibm.hr.interfaces.vendormanagementinterface.VendorManagementInterfaceClientImpl;
 
 public class ServletInit implements ServletContextListener {
@@ -41,50 +42,62 @@ public class ServletInit implements ServletContextListener {
 			new Log();
 			HibernatePomocna.buildSessionFactory();
 			Log.loger.info("Aplikacija pokrenuta.");
-			job.scheduleAtFixedRate(
-					new TimerTask() {
-						public void run() {
-							Log.loger.info("Pocetak razmjene");
-							if (StringUtils.isNotBlank(Postavke.WSDL_BANK)) {
-								BankManagementInterfaceClientImpl bankManagement = new BankManagementInterfaceClientImpl();
-								bankManagement.razmjenaBanaka();
-								bankManagement = null;
-							}
-							if (StringUtils.isNotBlank(Postavke.WSDL_VENDOR)) {
-								VendorManagementInterfaceClientImpl vendorManagement = new VendorManagementInterfaceClientImpl();
-								vendorManagement.razmjenaPartnera();
-								vendorManagement = null;
-							}
-							if (StringUtils
-									.isNotBlank(Postavke.WSDL_RESERVATION)) {
-								ReservationManagementServiceClientImpl reservationManagement = new ReservationManagementServiceClientImpl();
-								reservationManagement.razmjenaRezervacija();
-							}
-							if (StringUtils.isNotBlank(Postavke.WSDL_CONTRACT)) {
-								ContractManagementServiceClientImpl contractManagement = new ContractManagementServiceClientImpl();
-								contractManagement.razmjenaUgovora();
-							}
-							if (StringUtils
-									.isNotBlank(Postavke.WSDL_PURCHASE_ORDER)) {
-								PurchaseOrderManagementServiceClientImpl purchaseOrderMnagement = new PurchaseOrderManagementServiceClientImpl();
-								purchaseOrderMnagement.razmjenaNarudzbenica();
-							}
-							if (StringUtils
-									.isNotBlank(Postavke.WSDL_INVOICE)) {
-								InvoiceManagementServiceClientImpl invoiceManagement=new InvoiceManagementServiceClientImpl();
-								invoiceManagement.razmjenaFaktura();
-							}
-							if (StringUtils
-									.isNotBlank(Postavke.WSDL_RESPONSE)) {
-								// To do
-							}
-							Log.loger.info("Zavrsetak razmjene");
-						}
-					}, NumberUtils.toInt(Postavke.WS_ODGODA) * 1000 * 60,
+			job.scheduleAtFixedRate(new TimerTask() {
+				public void run() {
+					razmjena();
+				}
+			}, NumberUtils.toInt(Postavke.WS_ODGODA) * 1000 * 60,
 					NumberUtils.toInt(Postavke.WS_INTERVAL) * 1000 * 60);
 
 		} catch (Exception e) {
 			System.exit(0);
+		}
+
+	}
+
+	public void razmjena() {
+		if (!Postavke.JOB_RUNNING ) {
+			try {
+				Log.loger.info("Pocetak razmjene");
+				if (StringUtils.isNotBlank(Postavke.WSDL_BANK)) {
+					BankManagementInterfaceClientImpl bankManagement = new BankManagementInterfaceClientImpl();
+					bankManagement.razmjenaBanaka();
+					bankManagement = null;
+				}
+				if (StringUtils.isNotBlank(Postavke.WSDL_VENDOR)) {
+					VendorManagementInterfaceClientImpl vendorManagement = new VendorManagementInterfaceClientImpl();
+					vendorManagement.razmjenaPartnera();
+					vendorManagement = null;
+				}
+				if (StringUtils.isNotBlank(Postavke.WSDL_RESERVATION)) {
+					ReservationManagementServiceClientImpl reservationManagement = new ReservationManagementServiceClientImpl();
+					reservationManagement.razmjenaRezervacija();
+				}
+				if (StringUtils.isNotBlank(Postavke.WSDL_CONTRACT)) {
+					ContractManagementServiceClientImpl contractManagement = new ContractManagementServiceClientImpl();
+					contractManagement.razmjenaUgovora();
+				}
+				if (StringUtils.isNotBlank(Postavke.WSDL_PURCHASE_ORDER)) {
+					PurchaseOrderManagementServiceClientImpl purchaseOrderMnagement = new PurchaseOrderManagementServiceClientImpl();
+					purchaseOrderMnagement.razmjenaNarudzbenica();
+				}
+				if (StringUtils.isNotBlank(Postavke.WSDL_INVOICE)) {
+					InvoiceManagementServiceClientImpl invoiceManagement = new InvoiceManagementServiceClientImpl();
+					invoiceManagement.razmjenaFaktura();
+				}
+				// Spavaj nakon slanja
+				Thread.sleep(NumberUtils.toInt(Postavke.JOB_SLEEP)*60000);
+				
+				if (StringUtils.isNotBlank(Postavke.WSDL_RESPONSE)) {
+					ResponseMessageHandlerServiceClientImpl responseManagement = new ResponseMessageHandlerServiceClientImpl();
+					responseManagement.razmjenaOdgovora();
+				}
+				Log.loger.info("Zavrsetak razmjene");
+			} catch (Exception e) {
+
+			} finally {
+				Postavke.JOB_RUNNING = false;
+			}
 		}
 
 	}
