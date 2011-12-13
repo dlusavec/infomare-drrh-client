@@ -225,4 +225,12 @@ public class ObjectFactory {
 	public VendorItem createVendorItem() {
 		return new VendorItem();
 	}
+	
+	/**
+     * Create an instance of {@link PaymentExecution }
+     * 
+     */
+    public PaymentExecution createPaymentExecution() {
+        return new PaymentExecution();
+    }
 }

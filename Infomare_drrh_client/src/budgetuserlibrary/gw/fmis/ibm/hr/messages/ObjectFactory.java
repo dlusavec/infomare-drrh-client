@@ -2,6 +2,8 @@ package budgetuserlibrary.gw.fmis.ibm.hr.messages;
 
 import javax.xml.bind.annotation.XmlRegistry;
 
+import budgetuserlibrary.gw.fmis.ibm.hr.interfaces.responsemessagehandlerservice.PaymentExecutionNotificationEventMsg;
+
 /**
  * This object contains factory methods for each Java content interface and Java
  * element interface generated in the budgetuserlibrary.gw.fmis.ibm.hr.messages
@@ -241,5 +243,11 @@ public class ObjectFactory {
 	public BankRetrieveRequestMsg createBankRetrieveRequestMsg() {
 		return new BankRetrieveRequestMsg();
 	}
-
+	/**
+     * Create an instance of {@link PaymentExecutionNotificationEventMsg }
+     * 
+     */
+    public PaymentExecutionNotificationEventMsg createPaymentExecutionNotificationEventMsg() {
+        return new PaymentExecutionNotificationEventMsg();
+    }
 }
