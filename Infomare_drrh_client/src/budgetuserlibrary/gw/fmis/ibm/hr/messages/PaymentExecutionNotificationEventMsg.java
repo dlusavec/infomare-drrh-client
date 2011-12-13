@@ -1,5 +1,5 @@
 
-package budgetuserlibrary.gw.fmis.ibm.hr.interfaces.responsemessagehandlerservice;
+package budgetuserlibrary.gw.fmis.ibm.hr.messages;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

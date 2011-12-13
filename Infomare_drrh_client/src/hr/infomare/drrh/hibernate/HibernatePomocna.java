@@ -88,6 +88,8 @@ public class HibernatePomocna {
 		config.addAnnotatedClass(hr.infomare.drrh.pojo.Invoicemsg.class);
 		config.addAnnotatedClass(hr.infomare.drrh.pojo.Invoice.class);
 		config.addAnnotatedClass(hr.infomare.drrh.pojo.Invitemlst.class);
+		//Placanja
+		config.addAnnotatedClass(hr.infomare.drrh.pojo.Payexec.class);
 	}
 
 	/*

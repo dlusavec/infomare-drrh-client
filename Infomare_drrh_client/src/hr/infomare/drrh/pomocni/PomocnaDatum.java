@@ -9,6 +9,8 @@ import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 
+import org.apache.commons.lang.math.NumberUtils;
+
 public class PomocnaDatum {
 	private static SimpleDateFormat simpleDateFormatBroj = new SimpleDateFormat(
 			"yyyyMMDD");
@@ -54,6 +56,16 @@ public class PomocnaDatum {
 	public static Date XMLDatumUDate(XMLGregorianCalendar xmlDatum) {
 		if (xmlDatum != null) {
 			return xmlDatum.toGregorianCalendar().getTime();
+		} else {
+			return null;
+		}
+
+	}
+
+	public static Integer XMLDatumUNumDatum(XMLGregorianCalendar xmlDatum) {
+		if (xmlDatum != null) {
+			return NumberUtils.toInt(simpleDateFormatBroj.format(xmlDatum
+					.toGregorianCalendar().getTime()));
 		} else {
 			return null;
 		}

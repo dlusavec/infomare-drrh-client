@@ -13,6 +13,7 @@ import hr.infomare.drrh.dao.DocheadDAO;
 import hr.infomare.drrh.dao.InvoiceDAO;
 import hr.infomare.drrh.dao.InvoicemsgDAO;
 import hr.infomare.drrh.dao.NotifheadDAO;
+import hr.infomare.drrh.dao.PayexecDAO;
 import hr.infomare.drrh.dao.ReqmsgDAO;
 import hr.infomare.drrh.dao.StatnotifDAO;
 import hr.infomare.drrh.dao.VenbanaccmDAO;
@@ -24,6 +25,7 @@ import hr.infomare.drrh.pojo.Budcommsg;
 import hr.infomare.drrh.pojo.Dochead;
 import hr.infomare.drrh.pojo.Invoicemsg;
 import hr.infomare.drrh.pojo.Notifhead;
+import hr.infomare.drrh.pojo.Payexec;
 import hr.infomare.drrh.pojo.Reqmsg;
 import hr.infomare.drrh.pojo.Resmsg;
 import hr.infomare.drrh.pojo.Statnotif;
@@ -55,6 +57,7 @@ import budgetuserlibrary.gw.fmis.ibm.hr.interfaces.responsemessagehandlerservice
 import budgetuserlibrary.gw.fmis.ibm.hr.messages.BankResponseMsg;
 import budgetuserlibrary.gw.fmis.ibm.hr.messages.ContractResponseMsg;
 import budgetuserlibrary.gw.fmis.ibm.hr.messages.InvoiceResponseMsg;
+import budgetuserlibrary.gw.fmis.ibm.hr.messages.PaymentExecutionNotificationEventMsg;
 import budgetuserlibrary.gw.fmis.ibm.hr.messages.PurchaseOrderResponseMsg;
 import budgetuserlibrary.gw.fmis.ibm.hr.messages.ReservationResponseMsg;
 import budgetuserlibrary.gw.fmis.ibm.hr.messages.VendorResponseMsg;
@@ -82,6 +85,7 @@ public class ResponseMessageHandlerServiceClientImpl {
 	private BudcomDAO budComDAO;
 	private VendormsgDAO vendorMsgDAO;
 	private VenbanaccmDAO venBanAccMDAO;
+	private PayexecDAO payExecDAO;
 	private Debug debug = new Debug("Response");
 
 	public ResponseMessageHandlerServiceClientImpl() {
@@ -90,21 +94,21 @@ public class ResponseMessageHandlerServiceClientImpl {
 	public void razmjenaOdgovora() {
 		try {
 			otvoriPortISesiju();
-			
+
 			preuzmiBankResponse();
 			preuzmiVendorResponse();
 			preuzmiReservationResponse();
 			preuzmiContractResponse();
 			preuzmiPurchaseOrderResponse();
-			preuzmiInvoiceResponse();			
-			
+			preuzmiInvoiceResponse();
+
 			// preuzmiBankResponseMessageId();
-			//preuzmiVendorResponseMessageId();
+			// preuzmiVendorResponseMessageId();
 			// preuzmiReservationResponseMessageId();
 			// preuzmiContractResponseMessageId();
 			// preuzmiPurchaseOrderResponseMessageId();
 			// preuzmiInvoiceResponseMessageId();
- 
+
 		} catch (Exception e) {
 			Log.loger.severe("Greška kod preuzimanja odgovora "
 					+ PomocnaError.getErrorMessage(e));
@@ -134,6 +138,105 @@ public class ResponseMessageHandlerServiceClientImpl {
 		invoiceDAO = new InvoiceDAO(session);
 		vendorMsgDAO = new VendormsgDAO(session);
 		venBanAccMDAO = new VenbanaccmDAO(session);
+		payExecDAO = new PayexecDAO(session);
+	}
+
+	public void preuzmiBankResponse() {
+		obradaBankMsg(
+				(AnyTypeList) port
+						.getBankUpdatesList(Postavke.LOGICAL_SYSTEM_NAME),
+				"retrieveBankUpdates");
+	}
+
+	public void preuzmiBankResponseMessageId() {
+		obradaBankMsg(
+				(AnyTypeList) port.getBankUpdatesListStartingWithMessageId(
+						Postavke.LOGICAL_SYSTEM_NAME, Long.valueOf(0)),
+				"retrieveBankUpdatesMessageId");
+	}
+
+	public void preuzmiVendorResponse() {
+		obradaVendorMsg(
+				(AnyTypeList) port
+						.getVendorUpdatesList(Postavke.LOGICAL_SYSTEM_NAME),
+				"retrieveVendorChange");
+	}
+
+	public void preuzmiVendorResponseMessageId() {
+		obradaVendorMsg(
+				(AnyTypeList) port.getVendorUpdatesListStartingWithMessageId(
+						Postavke.LOGICAL_SYSTEM_NAME, Long.valueOf(0)),
+				"retrieveVendorChangeMessageId");
+	}
+
+	public void preuzmiContractResponse() {
+		obradaBudComMsg(
+				(AnyTypeList) port
+						.getContractResponseList(Postavke.LOGICAL_SYSTEM_NAME),
+				"retrieveContract");
+	}
+
+	public void preuzmiReservationResponse() {
+		obradaBudComMsg(
+				(AnyTypeList) port
+						.getReservationResponseList(Postavke.LOGICAL_SYSTEM_NAME),
+				"retrieveReservation");
+	}
+
+	public void preuzmiReservationResponseMessageId() {
+		obradaBudComMsg(
+				(AnyTypeList) port.getReservationResponseListStartingWithMessageId(
+						Postavke.LOGICAL_SYSTEM_NAME, Long.valueOf(0)),
+				"retrieveReservationMessageId");
+	}
+
+	public void preuzmiContractResponseMessageId() {
+		obradaBudComMsg(
+				(AnyTypeList) port.getContractResponseListStartingWithMessageId(
+						Postavke.LOGICAL_SYSTEM_NAME, Long.valueOf(0)),
+				"retrieveContractMessageId");
+	}
+
+	public void preuzmiPurchaseOrderResponse() {
+		obradaBudComMsg(
+				(AnyTypeList) port
+						.getPurchaseOrderResponseList(Postavke.LOGICAL_SYSTEM_NAME),
+				"retrievePurchaseOrder");
+	}
+
+	public void preuzmiPurchaseOrderResponseMessageId() {
+		obradaBudComMsg(
+				(AnyTypeList) port.getPurchaseOrderResponseListStartingWithMessageId(
+						Postavke.LOGICAL_SYSTEM_NAME, Long.valueOf(0)),
+				"retrievePurchaseOrderMessageId");
+	}
+
+	public void preuzmiInvoiceResponse() {
+		obradaInvoiceMsg(
+				(AnyTypeList) port
+						.getInvoiceResponseList(Postavke.LOGICAL_SYSTEM_NAME),
+				"retrieveInvoice");
+	}
+
+	public void preuzmiInvoiceResponseMessageId() {
+		obradaInvoiceMsg(
+				(AnyTypeList) port.getInvoiceResponseListStartingWithMessageId(
+						Postavke.LOGICAL_SYSTEM_NAME, Long.valueOf(0)),
+				"retrieveInvoiceMessageId");
+	}
+
+	public void preuzmiPayementExecutionResponse() {
+		obradaPaymentExecutionMsg(
+				(AnyTypeList) port
+						.getPaymentExecutionList(Postavke.LOGICAL_SYSTEM_NAME),
+				"retrievePayementExecution");
+	}
+
+	public void preuzmiPayementExecutionMessageId() {
+		obradaPaymentExecutionMsg(
+				(AnyTypeList) port.getPaymentExecutionListStartingWithMessageId(
+						Postavke.LOGICAL_SYSTEM_NAME, Long.valueOf(0)),
+				"retrievePayementExecutionMessageId");
 	}
 
 	private void obradaBankMsg(AnyTypeList anyTypeLista, String messageName) {
@@ -519,124 +622,55 @@ public class ResponseMessageHandlerServiceClientImpl {
 
 	}
 
-	public void preuzmiBankResponse() {
-		obradaBankMsg(
-				(AnyTypeList) port
-						.getBankUpdatesList(Postavke.LOGICAL_SYSTEM_NAME),
-				"retrieveBankUpdates");
-	}
+	private void obradaPaymentExecutionMsg(AnyTypeList anyTypeLista,
+			String messageName) {
+		Payexec payExec = null;
+		Resmsg resMsg = null;
+		MessageHeader messageHeader = null;
+		List responseLista = anyTypeLista.getAnyTypeElement();
+		for (Iterator iterator = responseLista.iterator(); iterator.hasNext();) {
+			PaymentExecutionNotificationEventMsg response = (PaymentExecutionNotificationEventMsg) iterator
+					.next();
+			messageHeader = response.getMessageHeader();
+			messageHeader.postaviVrijednostiRetrieve();
+			try {
+				if (response != null) {
+					sessionPomocna.otvoriTransakciju();
+					payExec = payExecDAO.getPayexecByPK(response
+							.getPaymentExecution().getDocumentHeader()
+							.getBuFmisDocumentId());
+					if (payExec == null) {
+						payExec = new Payexec();
+					}
+					resMsg = new Resmsg();
+					resMsg.postaviVrijednosti(messageHeader, messageName,
+							ResponseMessageType.NOTIFICATION);
+					session.save(resMsg);
+					session.saveOrUpdate(payExec);
+					sessionPomocna.commitTransakcije();
+				}
+			} catch (Exception e) {
+				sessionPomocna.rollbackTransakcije();
+				Log.loger.severe("Greška kod preuzimanja odgovora "
+						+ messageName + " , poruka: "
+						+ Integer.toString(payExec.getBufmisdoc())
+						+ PomocnaError.getErrorMessage(e));
+			}
 
-	public void preuzmiBankResponseMessageId() {
-		obradaBankMsg(
-				(AnyTypeList) port.getBankUpdatesListStartingWithMessageId(
-						Postavke.LOGICAL_SYSTEM_NAME, Long.valueOf(0)),
-				"retrieveBankUpdatesMessageId");
-	}
+		}
 
-	public void preuzmiVendorResponse() {
-		obradaVendorMsg(
-				(AnyTypeList) port
-						.getVendorUpdatesList(Postavke.LOGICAL_SYSTEM_NAME),
-				"retrieveVendorChange");
 	}
-
-	public void preuzmiVendorResponseMessageId() {
-		obradaVendorMsg(
-				(AnyTypeList) port.getVendorUpdatesListStartingWithMessageId(
-						Postavke.LOGICAL_SYSTEM_NAME, Long.valueOf(0)),
-				"retrieveVendorChangeMessageId");
-	}
-
-	public void preuzmiContractResponse() {
-		obradaBudComMsg(
-				(AnyTypeList) port
-						.getContractResponseList(Postavke.LOGICAL_SYSTEM_NAME),
-				"retrieveContract");
-	}
-
-	public void preuzmiReservationResponse() {
-		obradaBudComMsg(
-				(AnyTypeList) port
-						.getReservationResponseList(Postavke.LOGICAL_SYSTEM_NAME),
-				"retrieveReservation");
-	}
-
-	public void preuzmiReservationResponseMessageId() {
-		obradaBudComMsg(
-				(AnyTypeList) port.getReservationResponseListStartingWithMessageId(
-						Postavke.LOGICAL_SYSTEM_NAME, Long.valueOf(0)),
-				"retrieveReservationMessageId");
-	}
-
-	public void preuzmiContractResponseMessageId() {
-		obradaBudComMsg(
-				(AnyTypeList) port.getContractResponseListStartingWithMessageId(
-						Postavke.LOGICAL_SYSTEM_NAME, Long.valueOf(0)),
-				"retrieveContractMessageId");
-	}
-
-	public void preuzmiPurchaseOrderResponse() {
-		obradaBudComMsg(
-				(AnyTypeList) port
-						.getPurchaseOrderResponseList(Postavke.LOGICAL_SYSTEM_NAME),
-				"retrievePurchaseOrder");
-	}
-
-	public void preuzmiPurchaseOrderResponseMessageId() {
-		obradaBudComMsg(
-				(AnyTypeList) port.getPurchaseOrderResponseListStartingWithMessageId(
-						Postavke.LOGICAL_SYSTEM_NAME, Long.valueOf(0)),
-				"retrievePurchaseOrderMessageId");
-	}
-
-	public void preuzmiInvoiceResponse() {
-		obradaInvoiceMsg(
-				(AnyTypeList) port
-						.getInvoiceResponseList(Postavke.LOGICAL_SYSTEM_NAME),
-				"retrieveInvoice");
-	}
-
-	public void preuzmiInvoiceResponseMessageId() {
-		obradaInvoiceMsg(
-				(AnyTypeList) port.getInvoiceResponseListStartingWithMessageId(
-						Postavke.LOGICAL_SYSTEM_NAME, Long.valueOf(0)),
-				"retrieveInvoiceMessageId");
-	}
-
+	// Nije implementirano
 	/*
 	 * 
 	 * 
-	 * {
-	 * System.out.println("Invoking getPaymentExecutionListStartingWithMessageId..."
-	 * ); java.lang.String
-	 * _getPaymentExecutionListStartingWithMessageId_logicalSystemName =
-	 * "_getPaymentExecutionListStartingWithMessageId_logicalSystemName848007126"
-	 * ; java.lang.Long _getPaymentExecutionListStartingWithMessageId_messageId
-	 * = Long.valueOf(2259185400731745442l); java.lang.Object
-	 * _getPaymentExecutionListStartingWithMessageId__return =
-	 * port.getPaymentExecutionListStartingWithMessageId
-	 * (_getPaymentExecutionListStartingWithMessageId_logicalSystemName,
-	 * _getPaymentExecutionListStartingWithMessageId_messageId);
-	 * System.out.println("getPaymentExecutionListStartingWithMessageId.result="
-	 * + _getPaymentExecutionListStartingWithMessageId__return);
-	 * 
-	 * 
-	 * } { System.out.println("Invoking getAllResponseList...");
-	 * java.lang.String _getAllResponseList_logicalSystemName =
+	 * { System.out.println("Invoking getAllResponseList..."); java.lang.String
+	 * _getAllResponseList_logicalSystemName =
 	 * "_getAllResponseList_logicalSystemName-972104159"; java.lang.Object
 	 * _getAllResponseList__return =
 	 * port.getAllResponseList(_getAllResponseList_logicalSystemName);
 	 * System.out.println("getAllResponseList.result=" +
 	 * _getAllResponseList__return);
-	 * 
-	 * 
-	 * } { System.out.println("Invoking getPaymentExecutionList...");
-	 * java.lang.String _getPaymentExecutionList_logicalSystemName =
-	 * "_getPaymentExecutionList_logicalSystemName-743724591"; java.lang.Object
-	 * _getPaymentExecutionList__return =
-	 * port.getPaymentExecutionList(_getPaymentExecutionList_logicalSystemName);
-	 * System.out.println("getPaymentExecutionList.result=" +
-	 * _getPaymentExecutionList__return);
 	 * 
 	 * 
 	 * } {

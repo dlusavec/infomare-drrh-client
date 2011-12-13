@@ -20,6 +20,8 @@ public class Debug {
 			fos = new FileOutputStream(mapa + datoteka + ".xml");
 			XStream xStream = new XStream(new DomDriver());
 			xStream.toXML(objekt, fos);
+			fos.flush();
+			fos.close();
 		} catch (Exception e) {
 			Log.loger.severe("Greška kod kreiranja debug datoteke"
 					+ e.getMessage());
