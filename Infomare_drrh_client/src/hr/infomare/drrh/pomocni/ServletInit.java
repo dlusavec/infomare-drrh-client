@@ -59,6 +59,7 @@ public class ServletInit implements ServletContextListener {
 		if (!Postavke.JOB_RUNNING ) {
 			try {
 				Log.loger.info("Pocetak razmjene");
+				Postavke.JOB_RUNNING = true;
 				if (StringUtils.isNotBlank(Postavke.WSDL_BANK)) {
 					BankManagementInterfaceClientImpl bankManagement = new BankManagementInterfaceClientImpl();
 					bankManagement.razmjenaBanaka();
