@@ -56,7 +56,7 @@ public class ServletInit implements ServletContextListener {
 	}
 
 	public void razmjena() {
-		if (!Postavke.JOB_RUNNING ) {
+		if (!Postavke.JOB_RUNNING) {
 			try {
 				Log.loger.info("Pocetak razmjene");
 				Postavke.JOB_RUNNING = true;
@@ -87,15 +87,15 @@ public class ServletInit implements ServletContextListener {
 					invoiceManagement.razmjenaFaktura();
 				}
 				// Spavaj nakon slanja
-				Thread.sleep(NumberUtils.toInt(Postavke.JOB_SLEEP)*60000);
-				
+				Thread.sleep(NumberUtils.toInt(Postavke.JOB_SLEEP) * 60000);
+
 				if (StringUtils.isNotBlank(Postavke.WSDL_RESPONSE)) {
 					ResponseMessageHandlerServiceClientImpl responseManagement = new ResponseMessageHandlerServiceClientImpl();
 					responseManagement.razmjenaOdgovora();
 				}
 				Log.loger.info("Zavrsetak razmjene");
 			} catch (Exception e) {
-
+				Log.loger.severe(PomocnaError.getErrorMessage(e));
 			} finally {
 				Postavke.JOB_RUNNING = false;
 			}

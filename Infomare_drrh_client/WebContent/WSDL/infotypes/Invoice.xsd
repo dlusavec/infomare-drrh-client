@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes"
+  xmlns:bons0="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes"
+  xmlns:bons1="http://hr.ibm.fmis.gw.BUFMISBudgetExecution/infotypes/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:include schemaLocation="VendorItemList.xsd"></xsd:include>
+  <xsd:include schemaLocation="IncoiceItemList.xsd"></xsd:include>
+
+
+  <xsd:import namespace="http://hr.ibm.fmis.gw.BUFMISBudgetExecution/infotypes/" schemaLocation="DocumentHeader.xsd" />
+  <xsd:include schemaLocation="InvoiceStatusType.xsd" />
+  <xsd:complexType name="Invoice">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="invoiceStatus" type="bons0:InvoiceStatusType" />
+      <xsd:element minOccurs="0" name="documentHeader" type="bons1:DocumentHeader" />
+      <xsd:element maxOccurs="1" minOccurs="0" name="invoiceItemList" type="bons0:IncoiceItemList" />
+      <xsd:element minOccurs="0" name="dueDate" type="xsd:date" />
+      <xsd:element minOccurs="0" name="amount" type="xsd:decimal" />
+      <xsd:element minOccurs="0" name="localCurrencyAmount" type="xsd:decimal" />
+      <xsd:element maxOccurs="1" minOccurs="0" name="vendorItemList" type="bons0:VendorItemList" />
+      <xsd:element minOccurs="0" name="isCession" type="xsd:boolean"></xsd:element>
+      <xsd:element minOccurs="0" name="documentBlock">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:length value="1"></xsd:length>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="creditMemoBuFmisDocumentId">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="10"></xsd:maxLength>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+
+
+
+
+
+
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>
