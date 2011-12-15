@@ -1,9 +1,11 @@
 package hr.infomare.drrh.main;
 
+import hr.infomare.drrh.dao.ResxmlDAO;
 import hr.infomare.drrh.hibernate.HibernatePomocna;
+import hr.infomare.drrh.hibernate.SessionPomocna;
+import hr.infomare.drrh.pojo.Resxml;
 import hr.infomare.drrh.pomocni.Log;
 import hr.infomare.drrh.postavke.Postavke;
-import budgetuserlibrary.gw.fmis.ibm.hr.interfaces.responsemessagehandlerservice.ResponseMessageHandlerServiceClientImpl;
 
 public class Start {
 
@@ -39,7 +41,13 @@ public class Start {
 		 //InvoiceManagementServiceClientImpl();
 		 //klijentI.razmjenaFaktura();
 	// Odgovori
-	ResponseMessageHandlerServiceClientImpl klijentO= new ResponseMessageHandlerServiceClientImpl();
-		klijentO.razmjenaOdgovora();
+	/*ResponseMessageHandlerServiceClientImpl klijentO= new ResponseMessageHandlerServiceClientImpl();
+		klijentO.razmjenaOdgovora();*/
+		Resxml objekt= new Resxml();
+		objekt.setResmsgid(Long.valueOf(5000));
+		objekt.setResxml("test1");
+		SessionPomocna sp= new SessionPomocna();
+		ResxmlDAO.spremiResponse(Long.valueOf(5000),
+				objekt, sp.getSession(), sp);
 	}
 }

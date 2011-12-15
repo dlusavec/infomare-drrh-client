@@ -21,7 +21,7 @@ public class ResxmlDAO {
 				sessionPomocna.otvoriTransakciju();
 				Resxml resXML = new Resxml();
 				resXML.postaviVrijednosti(resMsgId, objekt);
-				session.save(resXML);
+				session.saveOrUpdate(resXML);
 				sessionPomocna.commitTransakcije();
 			} catch (HibernateException e) {
 				Log.loger.severe(PomocnaError.getErrorMessage(e));

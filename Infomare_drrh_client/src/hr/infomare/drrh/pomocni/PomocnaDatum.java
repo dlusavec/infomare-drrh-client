@@ -13,7 +13,7 @@ import org.apache.commons.lang.math.NumberUtils;
 
 public class PomocnaDatum {
 	private static SimpleDateFormat simpleDateFormatBroj = new SimpleDateFormat(
-			"yyyyMMDD");
+			"yyyyMMdd");
 
 	public PomocnaDatum() {
 	}

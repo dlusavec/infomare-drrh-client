@@ -126,7 +126,6 @@ public class ResponseMessageHandlerServiceClientImpl {
 		}
 	}
 
-	
 	private void otvoriPortISesiju() {
 		serviceName = new QName(
 				ResponseMessageHandlerServiceExportResponseMessageHandlerServiceHttpService.TARGET_NAMESPACE,
@@ -560,7 +559,8 @@ public class ResponseMessageHandlerServiceClientImpl {
 				invoiceMsg = invoiceMsgDAO
 						.getInvoicemsgByDocumentId(invoiceStatusNotification
 								.getHeader().getOriginatingBuFmisDocumentID());
-				if (invoiceMsg != null) {
+				if (invoiceMsg != null && responseMessageType
+						.equals(ResponseMessageType.NOTIFICATION)) {
 					sessionPomocna.otvoriTransakciju();
 					messageHeader.postaviVrijednostiRetrieve();
 					reqMsg = new Reqmsg();
@@ -580,8 +580,11 @@ public class ResponseMessageHandlerServiceClientImpl {
 								.getRefdocid());
 						statNotif = new Statnotif();
 						notifHead = new Notifhead();
-						invoiceMsg.setInvststy(invoiceStatusNotification
-								.getInvoiceStatus().name());
+						invoiceMsg
+								.setInvststy(invoiceStatusNotification
+										.getInvoiceStatus() != null ? invoiceStatusNotification
+										.getInvoiceStatus().name() : null);
+
 						statNotif.postaviVrijednosti(statNotId, resMsg,
 								messageName,
 								invoiceStatusNotification.getInvoiceStatus(),
@@ -590,6 +593,7 @@ public class ResponseMessageHandlerServiceClientImpl {
 								resMsg, messageHeader,
 								invoiceStatusNotification.getHeader(),
 								invoiceStatusNotification);
+
 						faktura = invoiceDAO.getInvoiceByPK(
 								invoiceMsg.getF17upr(), invoiceMsg.getF17god(),
 								invoiceMsg.getF17vpr(), invoiceMsg.getF17rbr(),
@@ -607,7 +611,7 @@ public class ResponseMessageHandlerServiceClientImpl {
 								invoiceStatusNotification.getHeader(),
 								messageHeader);
 					}
-					session.save(resMsg);
+					session.saveOrUpdate(resMsg);
 					session.save(reqMsg);
 					session.update(invoiceMsg);
 					if (responseMessageType

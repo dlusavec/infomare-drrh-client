@@ -25,10 +25,10 @@ public class InvoicemsgDAO extends AbstraktDAO {
 
 	public List getInvoicemsgDAO(byte opcija) {
 		try {
-			Criteria kriterij = session.createCriteria(Invoicemsg.class);								
+			Criteria kriterij = session.createCriteria(Invoicemsg.class);
 			kriterij.add(Restrictions.eq("opt", opcija));
 			kriterij.add(Restrictions.eq("status", (byte) 1));
-			kriterij.addOrder(Order.asc("invmsgid"));			
+			kriterij.addOrder(Order.asc("invmsgid"));
 			List lista = kriterij.list();
 			return lista;
 		} catch (HibernateException e) {
@@ -36,14 +36,17 @@ public class InvoicemsgDAO extends AbstraktDAO {
 			return null;
 		}
 	}
+
 	public Invoicemsg getInvoicemsgByDocumentId(String refdocid) {
 		try {
 			Criteria kriterij = session.createCriteria(Invoicemsg.class);
-			kriterij.add(Restrictions.eq("refdocid", NumberUtils.toInt(refdocid)));
+			kriterij.add(Restrictions.eq("refdocid",
+					NumberUtils.toInt(refdocid)));
 			kriterij.add(Restrictions.eq("status", (byte) 2));
 			kriterij.addOrder(Order.desc("invmsgid"));
-			List lista=kriterij.list();			
-			Invoicemsg invoiceMsg = (Invoicemsg) (lista != null ? lista.get(0) : null);
+			List lista = kriterij.list();
+			Invoicemsg invoiceMsg = (lista != null && lista.size() > 0 ? (Invoicemsg) lista
+					.get(0) : null);
 			return invoiceMsg;
 		} catch (HibernateException e) {
 			Log.loger.severe(PomocnaError.getErrorMessage(e));

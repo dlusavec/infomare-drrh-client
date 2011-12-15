@@ -16,6 +16,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.apache.commons.lang.StringUtils;
+
 import budgetuserlibrary.gw.fmis.ibm.hr.infotypes.BudgetCommitmentStatusNotification;
 import budgetuserlibrary.gw.fmis.ibm.hr.infotypes.InvoiceStatusNotification;
 import budgetuserlibrary.gw.fmis.ibm.hr.infotypes.MessageHeader;
@@ -172,11 +174,11 @@ public class Notifhead implements java.io.Serializable {
 		notheadid = statNotId;
 		resmsg = resMsg;
 		statnotid = statNotId;
-		notbuduser = notificationHeader.getNotifiedBudgetUser();
-		notlosysna = notificationHeader.getNotifiedLogicalSystemName();
-		fmisgwnid = notificationHeader.getFmisGwNotificationId();
-		orsapdocid = notificationHeader.getSapDocumentId();
-		orbufmisid = notificationHeader.getOriginatingBuFmisDocumentID();
+		notbuduser = StringUtils.trimToEmpty(notificationHeader.getNotifiedBudgetUser());
+		notlosysna = StringUtils.trimToEmpty(notificationHeader.getNotifiedLogicalSystemName());
+		fmisgwnid = StringUtils.trimToEmpty(notificationHeader.getFmisGwNotificationId());
+		orsapdocid = StringUtils.trimToEmpty(notificationHeader.getSapDocumentId());
+		orbufmisid = StringUtils.trimToEmpty(notificationHeader.getOriginatingBuFmisDocumentID());
 		notifdate = notificationHeader.getNotificationDate();
 		descript = notificationResponse.getDescription();
 		submdati = PomocnaDatum.XMLDatumUDate(messageHeader

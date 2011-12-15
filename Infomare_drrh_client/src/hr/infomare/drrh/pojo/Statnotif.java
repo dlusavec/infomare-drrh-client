@@ -99,8 +99,8 @@ public class Statnotif implements java.io.Serializable {
 			String msgName, InvoiceStatusType invoiceStatusType, MessageHeader messageHeader) {
 		statnotid = statNotId;
 		resmsg = resMsg;
-		msgname = msgName;
-		statnotty = invoiceStatusType.name();
+		msgname = msgName;		
+		statnotty = invoiceStatusType != null ? invoiceStatusType.name() : " ";		
 		submdati = PomocnaDatum.XMLDatumUDate(messageHeader
 				.getSubmitionTimestamp());
 	}
