@@ -43,11 +43,11 @@ public class Start {
 	// Odgovori
 	/*ResponseMessageHandlerServiceClientImpl klijentO= new ResponseMessageHandlerServiceClientImpl();
 		klijentO.razmjenaOdgovora();*/
-		Resxml objekt= new Resxml();
+	/*	Resxml objekt= new Resxml();
 		objekt.setResmsgid(Long.valueOf(5000));
 		objekt.setResxml("test1");
 		SessionPomocna sp= new SessionPomocna();
 		ResxmlDAO.spremiResponse(Long.valueOf(5000),
-				objekt, sp.getSession(), sp);
+				objekt, sp.getSession(), sp);*/
 	}
 }

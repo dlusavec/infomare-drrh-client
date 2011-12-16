@@ -40,7 +40,7 @@ public class Notifhead implements java.io.Serializable {
 	private String notlosysna;
 	private String fmisgwnid;
 	private String orsapdocid;
-	private String orbufmisid;	
+	private String orbufmisid;
 	private String notifdate;
 	private String descript;
 	private Date submdati;
@@ -157,16 +157,24 @@ public class Notifhead implements java.io.Serializable {
 		notheadid = statNotId;
 		resmsg = resMsg;
 		statnotid = statNotId;
-		notbuduser = notificationHeader.getNotifiedBudgetUser();
-		notlosysna = notificationHeader.getNotifiedLogicalSystemName();
-		fmisgwnid = notificationHeader.getFmisGwNotificationId();
-		orsapdocid = notificationHeader.getSapDocumentId();
-		orbufmisid = notificationHeader.getOriginatingBuFmisDocumentID();
-		notifdate = notificationHeader.getNotificationDate();
+		notbuduser = StringUtils.trimToEmpty(notificationHeader
+				.getNotifiedBudgetUser());
+		notlosysna = StringUtils
+				.trimToEmpty(StringUtils.trimToEmpty(notificationHeader
+						.getNotifiedLogicalSystemName()));
+		fmisgwnid = StringUtils.trimToEmpty(notificationHeader
+				.getFmisGwNotificationId());
+		orsapdocid = StringUtils.trimToEmpty(notificationHeader
+				.getSapDocumentId());
+		orbufmisid = StringUtils.trimToEmpty(notificationHeader
+				.getOriginatingBuFmisDocumentID());
+		notifdate = StringUtils.trimToEmpty(notificationHeader
+				.getNotificationDate());
 		descript = notificationResponse.getDescription();
 		submdati = PomocnaDatum.XMLDatumUDate(messageHeader
 				.getSubmitionTimestamp());
 	}
+
 	public void postaviVrijednosti(Integer notHeadId, Integer statNotId,
 			Resmsg resMsg, MessageHeader messageHeader,
 			NotificationHeader notificationHeader,
@@ -174,11 +182,16 @@ public class Notifhead implements java.io.Serializable {
 		notheadid = statNotId;
 		resmsg = resMsg;
 		statnotid = statNotId;
-		notbuduser = StringUtils.trimToEmpty(notificationHeader.getNotifiedBudgetUser());
-		notlosysna = StringUtils.trimToEmpty(notificationHeader.getNotifiedLogicalSystemName());
-		fmisgwnid = StringUtils.trimToEmpty(notificationHeader.getFmisGwNotificationId());
-		orsapdocid = StringUtils.trimToEmpty(notificationHeader.getSapDocumentId());
-		orbufmisid = StringUtils.trimToEmpty(notificationHeader.getOriginatingBuFmisDocumentID());
+		notbuduser = StringUtils.trimToEmpty(notificationHeader
+				.getNotifiedBudgetUser());
+		notlosysna = StringUtils.trimToEmpty(notificationHeader
+				.getNotifiedLogicalSystemName());
+		fmisgwnid = StringUtils.trimToEmpty(notificationHeader
+				.getFmisGwNotificationId());
+		orsapdocid = StringUtils.trimToEmpty(notificationHeader
+				.getSapDocumentId());
+		orbufmisid = StringUtils.trimToEmpty(notificationHeader
+				.getOriginatingBuFmisDocumentID());
 		notifdate = notificationHeader.getNotificationDate();
 		descript = notificationResponse.getDescription();
 		submdati = PomocnaDatum.XMLDatumUDate(messageHeader
