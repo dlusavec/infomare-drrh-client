@@ -167,24 +167,29 @@ public class Budcom implements java.io.Serializable {
 
 	public void postaviVrijednosti(Budcommsg budComMsg, Integer notHeadId,
 			Integer statNotId, NotificationHeader notificationHeader,
-			BudgetCommitmentStatusType budgetCommitmentStatusType, Resmsg resMsg) {		
+			BudgetCommitmentStatusType budgetCommitmentStatusType, Resmsg resMsg) {
 		if (this.curlib == null) {
 			curlib = budComMsg.getCurlib();
 			r95upr = budComMsg.getR95upr();
 			r95god = budComMsg.getR95god();
 			r95rbr = budComMsg.getR95rbr();
-		}		
+		}
 		notheadid = notHeadId;
 		resmsgid = resMsg.getResmsgid();
 		bcstatid = statNotId;
-		bufmisdoc = budComMsg.getBcmsgid();		
-		fmisgwnid = StringUtils.isBlank(notificationHeader.getFmisGwNotificationId()) ? " " : notificationHeader.getFmisGwNotificationId();		
-		orsapdocid = StringUtils.isBlank(notificationHeader.getSapDocumentId()) ? orsapdocid
-				: notificationHeader.getSapDocumentId();
-		orbufmisid = StringUtils.isBlank(notificationHeader
-				.getOriginatingBuFmisDocumentID()) ? orbufmisid
-				: notificationHeader.getOriginatingBuFmisDocumentID();		
-		bcstattype = budgetCommitmentStatusType.name();
+		bufmisdoc = budComMsg.getBcmsgid();
+		fmisgwnid = StringUtils.isBlank(notificationHeader
+				.getFmisGwNotificationId()) ? " " : notificationHeader
+				.getFmisGwNotificationId();
+		orsapdocid = StringUtils.defaultString(StringUtils
+				.isBlank(notificationHeader.getSapDocumentId()) ? orsapdocid
+				: notificationHeader.getSapDocumentId());
+		orbufmisid = StringUtils
+				.defaultString(StringUtils.isBlank(notificationHeader
+						.getOriginatingBuFmisDocumentID()) ? orbufmisid
+						: notificationHeader.getOriginatingBuFmisDocumentID());
+		bcstattype = budgetCommitmentStatusType != null ? budgetCommitmentStatusType
+				.name() : " ";
 		datetimews = resMsg.getSubmdati();
 	}
 }

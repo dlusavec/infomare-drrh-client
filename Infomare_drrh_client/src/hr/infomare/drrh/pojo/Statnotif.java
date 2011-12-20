@@ -87,22 +87,27 @@ public class Statnotif implements java.io.Serializable {
 	}
 
 	public void postaviVrijednosti(Integer statNotId, Resmsg resMsg,
-			String msgName, BudgetCommitmentStatusType budgetCommitmentStatusType, MessageHeader messageHeader) {
+			String msgName,
+			BudgetCommitmentStatusType budgetCommitmentStatusType,
+			MessageHeader messageHeader) {
 		statnotid = statNotId;
 		resmsg = resMsg;
 		msgname = msgName;
-		statnotty = budgetCommitmentStatusType.name();
+		statnotty = budgetCommitmentStatusType != null ? budgetCommitmentStatusType
+				.name() : " ";
 		submdati = PomocnaDatum.XMLDatumUDate(messageHeader
 				.getSubmitionTimestamp());
 	}
+
 	public void postaviVrijednosti(Integer statNotId, Resmsg resMsg,
-			String msgName, InvoiceStatusType invoiceStatusType, MessageHeader messageHeader) {
+			String msgName, InvoiceStatusType invoiceStatusType,
+			MessageHeader messageHeader) {
 		statnotid = statNotId;
 		resmsg = resMsg;
-		msgname = msgName;		
-		statnotty = invoiceStatusType != null ? invoiceStatusType.name() : " ";		
+		msgname = msgName;
+		statnotty = invoiceStatusType != null ? invoiceStatusType.name() : " ";
 		submdati = PomocnaDatum.XMLDatumUDate(messageHeader
 				.getSubmitionTimestamp());
 	}
-	
+
 }

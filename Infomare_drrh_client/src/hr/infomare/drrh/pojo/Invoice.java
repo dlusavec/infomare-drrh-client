@@ -188,15 +188,18 @@ public class Invoice implements java.io.Serializable {
 		resmsgid = resMsg.getResmsgid();
 		bcstatid = statNotId;
 		bufmisdoc = invoiceMsg.getInvmsgid();
-		fmisgwnid = StringUtils.isBlank(notificationHeader
-				.getFmisGwNotificationId()) ? " " : notificationHeader
-				.getFmisGwNotificationId();		
-		orsapdocid = StringUtils.isBlank(notificationHeader.getSapDocumentId()) ? orsapdocid
-				: notificationHeader.getSapDocumentId();
-		orbufmisid = StringUtils.isBlank(notificationHeader
-				.getOriginatingBuFmisDocumentID()) ? orbufmisid
-				: notificationHeader.getOriginatingBuFmisDocumentID();
-		bcstattype = invoiceStatusType.name();
+		fmisgwnid = StringUtils.defaultString(StringUtils
+				.isBlank(notificationHeader.getFmisGwNotificationId()) ? " "
+				: notificationHeader.getFmisGwNotificationId());
+		orsapdocid = StringUtils.defaultString(StringUtils
+				.isBlank(notificationHeader.getSapDocumentId()) ? orsapdocid
+				: notificationHeader.getSapDocumentId());
+		orbufmisid = StringUtils
+				.defaultString(StringUtils.isBlank(notificationHeader
+						.getOriginatingBuFmisDocumentID()) ? orbufmisid
+						: notificationHeader.getOriginatingBuFmisDocumentID());
+		bcstattype = invoiceStatusType != null ? invoiceStatusType.name()
+				: "APPROVED";
 		datetimews = resMsg.getSubmdati();
 	}
 }

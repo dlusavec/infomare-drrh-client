@@ -113,12 +113,14 @@ public class ResponseMessageHandlerServiceClientImpl {
 		try {
 			otvoriPortISesiju();
 
-			preuzmiBankResponseMessageId();
-			preuzmiVendorResponseMessageId();
-			preuzmiReservationResponseMessageId();
-			preuzmiContractResponseMessageId();
-			preuzmiPurchaseOrderResponseMessageId();
-			preuzmiInvoiceResponseMessageId();
+			// preuzmiBankResponseMessageId();
+			// preuzmiVendorResponseMessageId();
+
+			// preuzmiReservationResponseMessageId();
+			// preuzmiContractResponseMessageId();
+			// preuzmiPurchaseOrderResponseMessageId();
+
+			// preuzmiInvoiceResponseMessageId();
 			preuzmiPayementExecutionMessageId();
 		} catch (Exception e) {
 			Log.loger.severe("Greška kod preuzimanja odgovora "
@@ -482,7 +484,8 @@ public class ResponseMessageHandlerServiceClientImpl {
 						notifHead = new Notifhead();
 						budComMsg
 								.setStatnotty(budgetCommitmentStatusNotification
-										.getCommitmentStatus().name());
+										.getCommitmentStatus() != null ? budgetCommitmentStatusNotification
+										.getCommitmentStatus().name() : null);
 						statNotif.postaviVrijednosti(statNotId, resMsg,
 								messageName, budgetCommitmentStatusNotification
 										.getCommitmentStatus(), messageHeader);
@@ -559,8 +562,9 @@ public class ResponseMessageHandlerServiceClientImpl {
 				invoiceMsg = invoiceMsgDAO
 						.getInvoicemsgByDocumentId(invoiceStatusNotification
 								.getHeader().getOriginatingBuFmisDocumentID());
-				if (invoiceMsg != null && responseMessageType
-						.equals(ResponseMessageType.NOTIFICATION)) {
+				if (invoiceMsg != null
+						&& responseMessageType
+								.equals(ResponseMessageType.NOTIFICATION)) {
 					sessionPomocna.otvoriTransakciju();
 					messageHeader.postaviVrijednostiRetrieve();
 					reqMsg = new Reqmsg();
@@ -651,17 +655,21 @@ public class ResponseMessageHandlerServiceClientImpl {
 			messageHeader = response.getMessageHeader();
 			messageHeader.postaviVrijednostiRetrieve();
 			try {
+
 				if (response != null) {
 					sessionPomocna.otvoriTransakciju();
+					resMsg = new Resmsg();
+					resMsg.postaviVrijednosti(messageHeader, messageName,
+							ResponseMessageType.NOTIFICATION);
 					payExec = payExecDAO.getPayexecByPK(response
-							.getPaymentExecution().getDocumentHeader()
+							.getPaymentExecution()
+							.getReferencedDocumentHeader()
 							.getBuFmisDocumentId());
 					if (payExec == null) {
 						payExec = new Payexec();
 					}
-					resMsg = new Resmsg();
-					resMsg.postaviVrijednosti(messageHeader, messageName,
-							ResponseMessageType.NOTIFICATION);
+					payExec.postaviVrijednosti(response.getPaymentExecution(),
+							messageHeader, resMsg);
 					session.save(resMsg);
 					session.saveOrUpdate(payExec);
 					sessionPomocna.commitTransakcije();

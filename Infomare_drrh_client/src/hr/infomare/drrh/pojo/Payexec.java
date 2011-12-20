@@ -25,9 +25,7 @@ import budgetuserlibrary.gw.fmis.ibm.hr.infotypes.PaymentExecution;
  */
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "PAYEXEC"
-
-)
+@Table(name = "PAYEXEC")
 @org.hibernate.annotations.Entity(dynamicInsert = true, dynamicUpdate = true)
 public class Payexec implements java.io.Serializable {
 
@@ -179,8 +177,12 @@ public class Payexec implements java.io.Serializable {
 
 	public void postaviVrijednosti(PaymentExecution paymentExecution,
 			MessageHeader messageHeader, Resmsg resMsg) {
-		bufmisdoc = bufmisdoc == null ? NumberUtils.toInt(paymentExecution
-				.getDocumentHeader().getBuFmisDocumentId()) : bufmisdoc;
+		/*
+		 * bufmisdoc = bufmisdoc == null ? NumberUtils.toInt(paymentExecution
+		 * .getReferencedDocumentHeader().getBuFmisDocumentId()) : bufmisdoc;
+		 */
+		bufmisdoc = NumberUtils.toInt(paymentExecution
+				.getReferencedDocumentHeader().getBuFmisDocumentId());
 		refdocid = NumberUtils.toInt(paymentExecution
 				.getReferencedDocumentHeader().getBuFmisDocumentId());
 		bufmisven = StringUtils.trimToEmpty(paymentExecution
@@ -194,7 +196,10 @@ public class Payexec implements java.io.Serializable {
 				.trimToEmpty(paymentExecution.getPaymentReference());
 		paydate = PomocnaDatum.XMLDatumUNumDatum(paymentExecution
 				.getPaymentDate());
-		payecstty=paymentExecution.getPaymentExecutionStatusType().name();
+		payecstty = paymentExecution.getPaymentExecutionStatusType() != null ? paymentExecution
+				.getPaymentExecutionStatusType().name() : " ";
+		paydesc = StringUtils.trimToEmpty(paymentExecution
+				.getReferencedDocumentHeader().getDescription());
 		resmsgid = resMsg.getResmsgid();
 		iscess = paymentExecution.isIsCession() ? "1" : "0";
 		datetimews = PomocnaDatum.XMLDatumUDate(messageHeader

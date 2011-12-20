@@ -170,7 +170,7 @@ public class Notifhead implements java.io.Serializable {
 				.getOriginatingBuFmisDocumentID());
 		notifdate = StringUtils.trimToEmpty(notificationHeader
 				.getNotificationDate());
-		descript = notificationResponse.getDescription();
+		descript = StringUtils.trimToEmpty(notificationResponse.getDescription());
 		submdati = PomocnaDatum.XMLDatumUDate(messageHeader
 				.getSubmitionTimestamp());
 	}
@@ -192,8 +192,8 @@ public class Notifhead implements java.io.Serializable {
 				.getSapDocumentId());
 		orbufmisid = StringUtils.trimToEmpty(notificationHeader
 				.getOriginatingBuFmisDocumentID());
-		notifdate = notificationHeader.getNotificationDate();
-		descript = notificationResponse.getDescription();
+		notifdate = StringUtils.trimToEmpty(notificationHeader.getNotificationDate());
+		descript = StringUtils.trimToEmpty(notificationResponse.getDescription());
 		submdati = PomocnaDatum.XMLDatumUDate(messageHeader
 				.getSubmitionTimestamp());
 	}
