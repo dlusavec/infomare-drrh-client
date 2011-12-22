@@ -66,7 +66,7 @@ public class Payexec implements java.io.Serializable {
 		this.refdocid = refdocid;
 	}
 
-	@Column(name = "BUFMISVEN", nullable = false, length = 7)
+	@Column(name = "BUFMISVEN", length = 7)
 	public String getBufmisven() {
 		return this.bufmisven;
 	}
@@ -75,7 +75,7 @@ public class Payexec implements java.io.Serializable {
 		this.bufmisven = bufmisven;
 	}
 
-	@Column(name = "F41VID", nullable = false, length = 50)
+	@Column(name = "F41VID", length = 50)
 	public String getF41vid() {
 		return this.f41vid;
 	}
@@ -111,7 +111,7 @@ public class Payexec implements java.io.Serializable {
 		this.invlcam = invlcam;
 	}
 
-	@Column(name = "PAYREF", nullable = false, length = 50)
+	@Column(name = "PAYREF", length = 50)
 	public String getPayref() {
 		return this.payref;
 	}
@@ -120,7 +120,7 @@ public class Payexec implements java.io.Serializable {
 		this.payref = payref;
 	}
 
-	@Column(name = "PAYDESC", nullable = false, length = 120)
+	@Column(name = "PAYDESC", length = 120)
 	public String getPaydesc() {
 		return this.paydesc;
 	}
@@ -129,7 +129,7 @@ public class Payexec implements java.io.Serializable {
 		this.paydesc = paydesc;
 	}
 
-	@Column(name = "PAYECSTTY", nullable = false, length = 50)
+	@Column(name = "PAYECSTTY", length = 50)
 	public String getPayecstty() {
 		return this.payecstty;
 	}
@@ -177,12 +177,9 @@ public class Payexec implements java.io.Serializable {
 
 	public void postaviVrijednosti(PaymentExecution paymentExecution,
 			MessageHeader messageHeader, Resmsg resMsg) {
-		/*
-		 * bufmisdoc = bufmisdoc == null ? NumberUtils.toInt(paymentExecution
-		 * .getReferencedDocumentHeader().getBuFmisDocumentId()) : bufmisdoc;
-		 */
-		bufmisdoc = NumberUtils.toInt(paymentExecution
-				.getReferencedDocumentHeader().getBuFmisDocumentId());
+		bufmisdoc = bufmisdoc == null ? NumberUtils.toInt(paymentExecution
+				.getReferencedDocumentHeader().getBuFmisDocumentId())
+				: bufmisdoc;
 		refdocid = NumberUtils.toInt(paymentExecution
 				.getReferencedDocumentHeader().getBuFmisDocumentId());
 		bufmisven = StringUtils.trimToEmpty(paymentExecution

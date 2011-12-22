@@ -5,6 +5,7 @@ import hr.infomare.drrh.hibernate.HibernatePomocna;
 import hr.infomare.drrh.hibernate.SessionPomocna;
 import hr.infomare.drrh.pojo.Resxml;
 import hr.infomare.drrh.pomocni.Log;
+import hr.infomare.drrh.pomocni.PomocnaDatum;
 import hr.infomare.drrh.postavke.Postavke;
 
 public class Start {
@@ -49,5 +50,6 @@ public class Start {
 		SessionPomocna sp= new SessionPomocna();
 		ResxmlDAO.spremiResponse(Long.valueOf(5000),
 				objekt, sp.getSession(), sp);*/
+		//System.out.println(PomocnaDatum.XMLDatumUNumDatum(PomocnaDatum.getTrenutniDatumXML()));
 	}
 }
