@@ -393,23 +393,23 @@ public class VendorItem {
 			VendorVeznaDAO vendorVeznaDAO) {
 		VendorVezna vendorVezna = vendorVeznaDAO.getVendorVeznaByPK(StringUtils
 				.trimToNull(invoiceMsg.getBufmisven()));
-
+		buFmisVendorId = StringUtils.trimToNull(invoiceMsg.getBufmisven());
 		if (vendorVezna != null) {
 			masterVendorId = Long.parseLong(vendorVezna.getF41vid().trim());
 			sapVendorId = StringUtils.trimToEmpty(vendorVezna.getF41svi());
 		}
+
+		// Cesija
+		alternativeBuFmisVendorId = invoiceMsg.getAlbufmven() != null ? invoiceMsg
+				.getAlbufmven() : null;
 		VendorVezna vendorVeznaAlter = vendorVeznaDAO
 				.getVendorVeznaByPK(StringUtils.trimToEmpty(invoiceMsg
 						.getAlbufmven()));
-		
-		alternativeBuFmisVendorId = invoiceMsg.getAlbufmven() != null ? invoiceMsg
-				.getAlbufmven() : null;				
 		if (vendorVeznaAlter != null) {
 			masterVendorId = Long
 					.parseLong(vendorVeznaAlter.getF41vid().trim());
 			sapVendorId = StringUtils.trimToEmpty(vendorVeznaAlter.getF41svi());
 		}
-		buFmisVendorId = StringUtils.trimToNull(invoiceMsg.getBufmisven());
 		paymentReference = StringUtils.trimToNull(invoiceMsg.getPayref());
 		description = StringUtils.trimToNull(invoiceMsg.getPaydesc());
 		houseBank = StringUtils.trimToNull(invoiceMsg.getHousebank());
