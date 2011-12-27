@@ -42,6 +42,7 @@ public class Invoicemsg implements java.io.Serializable {
 	private String docbloc;
 	private int cmbufmisid;	
 	private String bufmisven;
+	private String albufmven;
 	private String payref;
 	private String paydesc;
 	private String housebank;
@@ -216,13 +217,23 @@ public class Invoicemsg implements java.io.Serializable {
 
 	@Column(name = "BUFMISVEN", nullable = false, length = 7)
 	public String getBufmisven() {
-		return this.bufmisven;
+		return this.albufmven;
 	}
 
 	public void setBufmisven(String bufmisven) {
 		this.bufmisven = bufmisven;
 	}
+	
+	@Column(name = "ALBUFMVEN", length = 7)
+	public String getAlbufmven() {
+		return this.albufmven;
+	}
 
+	public void setAlbufmven(String albufmven) {
+		this.albufmven = albufmven;
+	}
+
+	
 	@Column(name = "PAYREF", nullable = false, length = 50)
 	public String getPayref() {
 		return this.payref;
