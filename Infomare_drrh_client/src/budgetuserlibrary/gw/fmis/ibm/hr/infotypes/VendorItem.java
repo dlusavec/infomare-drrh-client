@@ -406,9 +406,9 @@ public class VendorItem {
 				.getVendorVeznaByPK(StringUtils.trimToEmpty(invoiceMsg
 						.getAlbufmven()));
 		if (vendorVeznaAlter != null) {
-			masterVendorId = Long
+			alternativeMasterVendorId = Long
 					.parseLong(vendorVeznaAlter.getF41vid().trim());
-			sapVendorId = StringUtils.trimToEmpty(vendorVeznaAlter.getF41svi());
+			alternativeSapVendorId = StringUtils.trimToEmpty(vendorVeznaAlter.getF41svi());
 		}
 		paymentReference = StringUtils.trimToNull(invoiceMsg.getPayref());
 		description = StringUtils.trimToNull(invoiceMsg.getPaydesc());
