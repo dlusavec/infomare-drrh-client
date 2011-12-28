@@ -232,7 +232,6 @@ public class Invoicemsg implements java.io.Serializable {
 	public void setAlbufmven(String albufmven) {
 		this.albufmven = albufmven;
 	}
-
 	
 	@Column(name = "PAYREF", nullable = false, length = 50)
 	public String getPayref() {
