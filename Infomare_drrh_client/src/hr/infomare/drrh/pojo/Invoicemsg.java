@@ -217,7 +217,7 @@ public class Invoicemsg implements java.io.Serializable {
 
 	@Column(name = "BUFMISVEN", nullable = false, length = 7)
 	public String getBufmisven() {
-		return this.albufmven;
+		return this.bufmisven;
 	}
 
 	public void setBufmisven(String bufmisven) {
