@@ -72,11 +72,11 @@ public final class InvoiceManagementServiceClientImpl {
 	}
 
 	public void razmjenaFaktura() {
-		try {			
+		try {
 			otvoriPortISesiju();
 			createInvoice();
 			changeInvoice();
-			reverseInvoice();			
+			reverseInvoice();
 		} catch (Exception e) {
 			Log.loger.severe("Greška kod razmjene faktura "
 					+ PomocnaError.getErrorMessage(e));
@@ -116,7 +116,7 @@ public final class InvoiceManagementServiceClientImpl {
 		budgetuserlibrary.gw.fmis.ibm.hr.infotypes.Invoice invoice = null;
 		Statnotif statNotif = null;
 		Notifhead notifHead = null;
-		//hr.infomare.drrh.pojo.Invoice faktura = null;
+		// hr.infomare.drrh.pojo.Invoice faktura = null;
 		List fakture = invoiceMsgDAO.getInvoicemsgDAO((byte) 1);
 		List invItemLst;
 		Dochead docHead = null;
@@ -135,26 +135,27 @@ public final class InvoiceManagementServiceClientImpl {
 				request.setInvoice(invoice);
 				try {
 					response = port.createInvoice(request);
-						response.setMessageHeader(Pomocna
-								.getNewMessageHeader(session));
-				} catch (Exception e) {					
-						response = new InvoiceResponseMsg();
-						response.setMessageHeader(Pomocna
-								.getNewMessageHeader(session));
-						response.setResponseMessageType(ResponseMessageType.ERROR);
-						response.setErrorResponse(PomocnaError
-								.getErrorResponse("Invoice", e));					
+					response.setMessageHeader(Pomocna
+							.getNewMessageHeader(session));
+				} catch (Exception e) {
+					response = new InvoiceResponseMsg();
+					response.setMessageHeader(Pomocna
+							.getNewMessageHeader(session));
+					response.setResponseMessageType(ResponseMessageType.ERROR);
+					response.setErrorResponse(PomocnaError.getErrorResponse(
+							"Invoice", e));
 				}
 				// Response
 				resMsg = new Resmsg();
 				reqMsg = new Reqmsg();
 				statNotif = new Statnotif();
-				//faktura = new hr.infomare.drrh.pojo.Invoice();
+				// faktura = new hr.infomare.drrh.pojo.Invoice();
 				notifHead = new Notifhead();
-				resMsg.postaviVrijednosti(response.getMessageHeader(),
-						"createInvoice", response.getResponseMessageType());
 				reqMsg.postaviVrijednosti(response.getMessageHeader(),
 						reqMsgId, "createInvoice");
+				resMsg.postaviVrijednosti(response.getMessageHeader(),
+						"createInvoice", response.getResponseMessageType(),
+						reqMsg);
 				invoiceMsg.postaviVrijednosti(Pomocna.getStatus(response
 						.getResponseMessageType()), reqMsg, PomocnaDatum
 						.XMLDatumUDate(response.getMessageHeader()
@@ -164,23 +165,24 @@ public final class InvoiceManagementServiceClientImpl {
 				// Samo ako response nema error-a
 				if (response.getResponseMessageType().equals(
 						ResponseMessageType.NOTIFICATION)) {
-					//statNotif.postaviVrijednosti(statNotId, resMsg,
-					//		"createInvoice", response.getNotificationResponse()
-					//				.getInvoiceStatus(), response
-					//				.getMessageHeader());
-					//notifHead.postaviVrijednosti(notHeadId, statNotId, resMsg,
-					//		response.getMessageHeader(), response
-					//				.getNotificationResponse().getHeader(),
-					//		response.getNotificationResponse());
+					// statNotif.postaviVrijednosti(statNotId, resMsg,
+					// "createInvoice", response.getNotificationResponse()
+					// .getInvoiceStatus(), response
+					// .getMessageHeader());
+					// notifHead.postaviVrijednosti(notHeadId, statNotId,
+					// resMsg,
+					// response.getMessageHeader(), response
+					// .getNotificationResponse().getHeader(),
+					// response.getNotificationResponse());
 
-					//faktura.postaviVrijednosti(invoiceMsg, notHeadId,
-						//	statNotId, response.getNotificationResponse()
-						//			.getHeader(), response
-						//			.getNotificationResponse()
-						//			.getInvoiceStatus(), resMsg);
-					//docHead.postaviVrijednosti(response
-					//		.getNotificationResponse().getHeader(), response
-					//		.getMessageHeader());
+					// faktura.postaviVrijednosti(invoiceMsg, notHeadId,
+					// statNotId, response.getNotificationResponse()
+					// .getHeader(), response
+					// .getNotificationResponse()
+					// .getInvoiceStatus(), resMsg);
+					// docHead.postaviVrijednosti(response
+					// .getNotificationResponse().getHeader(), response
+					// .getMessageHeader());
 				}
 
 				// Upis u bazu
@@ -191,10 +193,10 @@ public final class InvoiceManagementServiceClientImpl {
 				session.update(invoiceMsg);
 				if (response.getResponseMessageType().equals(
 						ResponseMessageType.NOTIFICATION)) {
-					//session.save(statNotif);
-					//session.save(notifHead);
-					//session.saveOrUpdate(faktura);
-					//session.update(docHead);
+					// session.save(statNotif);
+					// session.save(notifHead);
+					// session.saveOrUpdate(faktura);
+					// session.update(docHead);
 				}
 				sessionPomocna.commitTransakcije();
 				++reqMsgId;
@@ -235,11 +237,10 @@ public final class InvoiceManagementServiceClientImpl {
 								"Pojo_notifhead_"
 										+ Integer.toString(invoiceMsg
 												.getInvmsgid()));
-					/*	debug.ispisUXML(
-								faktura,
-								"Pojo_invoice_"
-										+ Integer.toString(invoiceMsg
-												.getInvmsgid()));*/
+						/*
+						 * debug.ispisUXML( faktura, "Pojo_invoice_" +
+						 * Integer.toString(invoiceMsg .getInvmsgid()));
+						 */
 						debug.ispisUXML(
 								docHead,
 								"Pojo_dochead_"
@@ -282,7 +283,7 @@ public final class InvoiceManagementServiceClientImpl {
 		budgetuserlibrary.gw.fmis.ibm.hr.infotypes.Invoice invoice = null;
 		Statnotif statNotif = null;
 		Notifhead notifHead = null;
-		//hr.infomare.drrh.pojo.Invoice faktura = null;
+		// hr.infomare.drrh.pojo.Invoice faktura = null;
 		List fakture = invoiceMsgDAO.getInvoicemsgDAO((byte) 2);
 		List invItemLst;
 		Dochead docHead = null;
@@ -301,26 +302,27 @@ public final class InvoiceManagementServiceClientImpl {
 				request.setInvoice(invoice);
 				try {
 					response = port.changeInvoice(request);
-						response.setMessageHeader(Pomocna
-								.getNewMessageHeader(session));
-				} catch (Exception e) {					
-						response = new InvoiceResponseMsg();
-						response.setMessageHeader(Pomocna
-								.getNewMessageHeader(session));
-						response.setResponseMessageType(ResponseMessageType.ERROR);
-						response.setErrorResponse(PomocnaError
-								.getErrorResponse("Invoice", e));					
+					response.setMessageHeader(Pomocna
+							.getNewMessageHeader(session));
+				} catch (Exception e) {
+					response = new InvoiceResponseMsg();
+					response.setMessageHeader(Pomocna
+							.getNewMessageHeader(session));
+					response.setResponseMessageType(ResponseMessageType.ERROR);
+					response.setErrorResponse(PomocnaError.getErrorResponse(
+							"Invoice", e));
 				}
 				// Response
 				resMsg = new Resmsg();
 				reqMsg = new Reqmsg();
 				statNotif = new Statnotif();
-				//faktura = new hr.infomare.drrh.pojo.Invoice();
+				// faktura = new hr.infomare.drrh.pojo.Invoice();
 				notifHead = new Notifhead();
-				resMsg.postaviVrijednosti(response.getMessageHeader(),
-						"changeInvoice", response.getResponseMessageType());
 				reqMsg.postaviVrijednosti(response.getMessageHeader(),
 						reqMsgId, "changeInvoice");
+				resMsg.postaviVrijednosti(response.getMessageHeader(),
+						"changeInvoice", response.getResponseMessageType(),
+						reqMsg);
 				invoiceMsg.postaviVrijednosti(Pomocna.getStatus(response
 						.getResponseMessageType()), reqMsg, PomocnaDatum
 						.XMLDatumUDate(response.getMessageHeader()
@@ -330,25 +332,25 @@ public final class InvoiceManagementServiceClientImpl {
 				// Samo ako response nema error-a
 				if (response.getResponseMessageType().equals(
 						ResponseMessageType.NOTIFICATION)) {
-					/*statNotif.postaviVrijednosti(statNotId, resMsg,
-							"changeInvoice", response.getNotificationResponse()
-									.getInvoiceStatus(), response
-									.getMessageHeader());
-					notifHead.postaviVrijednosti(notHeadId, statNotId, resMsg,
-							response.getMessageHeader(), response
-									.getNotificationResponse().getHeader(),
-							response.getNotificationResponse());
-					faktura = invoiceDAO.getInvoiceByPK(invoiceMsg.getF17upr(),
-							invoiceMsg.getF17god(), invoiceMsg.getF17vpr(),
-							invoiceMsg.getF17rbr(), invoiceMsg.getF17dod());
-					faktura.postaviVrijednosti(invoiceMsg, notHeadId,
-							statNotId, response.getNotificationResponse()
-									.getHeader(), response
-									.getNotificationResponse()
-									.getInvoiceStatus(), resMsg);
-					docHead.postaviVrijednosti(response
-							.getNotificationResponse().getHeader(), response
-							.getMessageHeader());*/
+					/*
+					 * statNotif.postaviVrijednosti(statNotId, resMsg,
+					 * "changeInvoice", response.getNotificationResponse()
+					 * .getInvoiceStatus(), response .getMessageHeader());
+					 * notifHead.postaviVrijednosti(notHeadId, statNotId,
+					 * resMsg, response.getMessageHeader(), response
+					 * .getNotificationResponse().getHeader(),
+					 * response.getNotificationResponse()); faktura =
+					 * invoiceDAO.getInvoiceByPK(invoiceMsg.getF17upr(),
+					 * invoiceMsg.getF17god(), invoiceMsg.getF17vpr(),
+					 * invoiceMsg.getF17rbr(), invoiceMsg.getF17dod());
+					 * faktura.postaviVrijednosti(invoiceMsg, notHeadId,
+					 * statNotId, response.getNotificationResponse()
+					 * .getHeader(), response .getNotificationResponse()
+					 * .getInvoiceStatus(), resMsg);
+					 * docHead.postaviVrijednosti(response
+					 * .getNotificationResponse().getHeader(), response
+					 * .getMessageHeader());
+					 */
 				}
 
 				// Upis u bazu
@@ -359,10 +361,10 @@ public final class InvoiceManagementServiceClientImpl {
 				session.update(invoiceMsg);
 				if (response.getResponseMessageType().equals(
 						ResponseMessageType.NOTIFICATION)) {
-				/*	session.save(statNotif);
-					session.save(notifHead);
-					session.saveOrUpdate(faktura);
-					session.update(docHead);*/
+					/*
+					 * session.save(statNotif); session.save(notifHead);
+					 * session.saveOrUpdate(faktura); session.update(docHead);
+					 */
 				}
 				sessionPomocna.commitTransakcije();
 				++reqMsgId;
@@ -403,11 +405,10 @@ public final class InvoiceManagementServiceClientImpl {
 								"Pojo_notifhead_"
 										+ Integer.toString(invoiceMsg
 												.getInvmsgid()));
-						/*debug.ispisUXML(
-								faktura,
-								"Pojo_invoice_"
-										+ Integer.toString(invoiceMsg
-												.getInvmsgid()));*/
+						/*
+						 * debug.ispisUXML( faktura, "Pojo_invoice_" +
+						 * Integer.toString(invoiceMsg .getInvmsgid()));
+						 */
 						debug.ispisUXML(
 								docHead,
 								"Pojo_dochead_"
@@ -450,7 +451,7 @@ public final class InvoiceManagementServiceClientImpl {
 		DocumentHeader documentHeader = null;
 		Statnotif statNotif = null;
 		Notifhead notifHead = null;
-		//hr.infomare.drrh.pojo.Invoice faktura = null;
+		// hr.infomare.drrh.pojo.Invoice faktura = null;
 		List fakture = invoiceMsgDAO.getInvoicemsgDAO((byte) 9);
 		Dochead docHead = null;
 		for (Iterator iterator = fakture.iterator(); iterator.hasNext();) {
@@ -466,29 +467,30 @@ public final class InvoiceManagementServiceClientImpl {
 				request.setMessageHeader(messageHeader);
 				request.setInvoice(documentHeader);
 				request.setBuFmisDocumentIdToReverse(invoiceMsg.getBufmisrev()
-						.toString());				
+						.toString());
 				try {
 					response = port.reverseInvoice(request);
-						response.setMessageHeader(Pomocna
-								.getNewMessageHeader(session));
-				} catch (Exception e) {					
-						response = new InvoiceResponseMsg();
-						response.setMessageHeader(Pomocna
-								.getNewMessageHeader(session));
-						response.setResponseMessageType(ResponseMessageType.ERROR);
-						response.setErrorResponse(PomocnaError
-								.getErrorResponse("Invoice", e));					
+					response.setMessageHeader(Pomocna
+							.getNewMessageHeader(session));
+				} catch (Exception e) {
+					response = new InvoiceResponseMsg();
+					response.setMessageHeader(Pomocna
+							.getNewMessageHeader(session));
+					response.setResponseMessageType(ResponseMessageType.ERROR);
+					response.setErrorResponse(PomocnaError.getErrorResponse(
+							"Invoice", e));
 				}
 				// Response
 				resMsg = new Resmsg();
 				reqMsg = new Reqmsg();
 				statNotif = new Statnotif();
-				//faktura = new hr.infomare.drrh.pojo.Invoice();
+				// faktura = new hr.infomare.drrh.pojo.Invoice();
 				notifHead = new Notifhead();
-				resMsg.postaviVrijednosti(response.getMessageHeader(),
-						"reverseInvoice", response.getResponseMessageType());
 				reqMsg.postaviVrijednosti(response.getMessageHeader(),
 						reqMsgId, "reverseInvoice");
+				resMsg.postaviVrijednosti(response.getMessageHeader(),
+						"reverseInvoice", response.getResponseMessageType(),
+						reqMsg);
 				invoiceMsg.postaviVrijednosti(Pomocna.getStatus(response
 						.getResponseMessageType()), reqMsg, PomocnaDatum
 						.XMLDatumUDate(response.getMessageHeader()
@@ -498,26 +500,25 @@ public final class InvoiceManagementServiceClientImpl {
 				// Samo ako response nema error-a
 				if (response.getResponseMessageType().equals(
 						ResponseMessageType.NOTIFICATION)) {
-					/*statNotif.postaviVrijednosti(statNotId, resMsg,
-							"reverseInvoice", response
-									.getNotificationResponse()
-									.getInvoiceStatus(), response
-									.getMessageHeader());
-					notifHead.postaviVrijednosti(notHeadId, statNotId, resMsg,
-							response.getMessageHeader(), response
-									.getNotificationResponse().getHeader(),
-							response.getNotificationResponse());
-					faktura = invoiceDAO.getInvoiceByPK(invoiceMsg.getF17upr(),
-							invoiceMsg.getF17god(), invoiceMsg.getF17vpr(),
-							invoiceMsg.getF17rbr(), invoiceMsg.getF17dod());
-					faktura.postaviVrijednosti(invoiceMsg, notHeadId,
-							statNotId, response.getNotificationResponse()
-									.getHeader(), response
-									.getNotificationResponse()
-									.getInvoiceStatus(), resMsg);
-					docHead.postaviVrijednosti(response
-							.getNotificationResponse().getHeader(), response
-							.getMessageHeader());*/
+					/*
+					 * statNotif.postaviVrijednosti(statNotId, resMsg,
+					 * "reverseInvoice", response .getNotificationResponse()
+					 * .getInvoiceStatus(), response .getMessageHeader());
+					 * notifHead.postaviVrijednosti(notHeadId, statNotId,
+					 * resMsg, response.getMessageHeader(), response
+					 * .getNotificationResponse().getHeader(),
+					 * response.getNotificationResponse()); faktura =
+					 * invoiceDAO.getInvoiceByPK(invoiceMsg.getF17upr(),
+					 * invoiceMsg.getF17god(), invoiceMsg.getF17vpr(),
+					 * invoiceMsg.getF17rbr(), invoiceMsg.getF17dod());
+					 * faktura.postaviVrijednosti(invoiceMsg, notHeadId,
+					 * statNotId, response.getNotificationResponse()
+					 * .getHeader(), response .getNotificationResponse()
+					 * .getInvoiceStatus(), resMsg);
+					 * docHead.postaviVrijednosti(response
+					 * .getNotificationResponse().getHeader(), response
+					 * .getMessageHeader());
+					 */
 				}
 
 				// Upis u bazu
@@ -528,10 +529,10 @@ public final class InvoiceManagementServiceClientImpl {
 				session.update(invoiceMsg);
 				if (response.getResponseMessageType().equals(
 						ResponseMessageType.NOTIFICATION)) {
-					/*session.save(statNotif);
-					session.save(notifHead);
-					session.saveOrUpdate(faktura);
-					session.update(docHead);*/
+					/*
+					 * session.save(statNotif); session.save(notifHead);
+					 * session.saveOrUpdate(faktura); session.update(docHead);
+					 */
 				}
 				sessionPomocna.commitTransakcije();
 				++reqMsgId;
@@ -572,11 +573,10 @@ public final class InvoiceManagementServiceClientImpl {
 								"Pojo_notifhead_"
 										+ Integer.toString(invoiceMsg
 												.getInvmsgid()));
-						/*debug.ispisUXML(
-								faktura,
-								"Pojo_invoice_"
-										+ Integer.toString(invoiceMsg
-												.getInvmsgid()));*/
+						/*
+						 * debug.ispisUXML( faktura, "Pojo_invoice_" +
+						 * Integer.toString(invoiceMsg .getInvmsgid()));
+						 */
 						debug.ispisUXML(
 								docHead,
 								"Pojo_dochead_"

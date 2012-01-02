@@ -26,7 +26,7 @@ import budgetuserlibrary.gw.fmis.ibm.hr.infotypes.BudgetCommitmentStatusNotifica
 public class Budcommsg implements java.io.Serializable {
 
 	private int bcmsgid;
-	
+
 	private Reqmsg reqmsg;
 	private String curlib;
 	private String r95upr;
@@ -42,6 +42,7 @@ public class Budcommsg implements java.io.Serializable {
 	private String user;
 	private int datetime;
 	private Date datetimews;
+	private Date timews;
 
 	public Budcommsg() {
 	}
@@ -127,7 +128,7 @@ public class Budcommsg implements java.io.Serializable {
 
 	public void setDuedate(int duedate) {
 		this.duedate = duedate;
-	}	
+	}
 
 	@Column(name = "COMPLETED", length = 1)
 	public String getCompleted() {
@@ -193,12 +194,22 @@ public class Budcommsg implements java.io.Serializable {
 		this.datetimews = datetimews;
 	}
 
+	@Temporal(TemporalType.TIME)
+	@Column(name = "TIMEWS", length = 8)
+	public Date getTimews() {
+		return this.timews;
+	}
+
+	public void setTimews(Date timews) {
+		this.timews = timews;
+	}
+
 	public void postaviVrijednosti(byte status, Reqmsg reqMsg, Date dateTimeWS,
 			BudgetCommitmentStatusNotification notificationResponse) {
 		this.status = status;
 		this.reqmsg = reqMsg;
 		this.datetimews = dateTimeWS;
-		// Privremeno iskljuceno
+		this.timews = dateTimeWS;
 		this.statnotty = notificationResponse.getCommitmentStatus() != null ? notificationResponse
 				.getCommitmentStatus().name() : null;
 	}

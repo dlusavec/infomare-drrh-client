@@ -30,6 +30,8 @@ public class Resmsg implements java.io.Serializable {
 	private String resmsgtype;
 	private Long eventlid;
 	private Date submdati;
+	private Date submtime;
+	private Integer reqmsgid;
 
 	public Resmsg() {
 	}
@@ -81,13 +83,36 @@ public class Resmsg implements java.io.Serializable {
 		this.submdati = submdati;
 	}
 
+	@Temporal(TemporalType.TIME)
+	@Column(name = "SUBMTIME", nullable = false, length = 8)
+	public Date getSubmtime() {
+		return this.submtime;
+	}
+
+	public void setSubmtime(Date submtime) {
+		this.submtime = submtime;
+	}
+
+	@Column(name = "REQMSGID", precision = 9, scale = 0)
+	public Integer getReqmsgid() {
+		return this.reqmsgid;
+	}
+
+	public void setReqmsgid(Integer reqmsgid) {
+		this.reqmsgid = reqmsgid;
+	}
+
 	public void postaviVrijednosti(MessageHeader messageHeader, String msgname,
-			ResponseMessageType resMsgType) {
+			ResponseMessageType resMsgType, Reqmsg reqMsg) {
 		this.resmsgid = messageHeader.getResponseMsgId();
 		this.msgname = msgname;
 		this.resmsgtype = resMsgType.value();
 		this.eventlid = messageHeader.getEventId();
+		if (reqMsg != null) {
+			reqmsgid = reqMsg.getReqmsgid();
+		}
 		this.submdati = PomocnaDatum.XMLDatumUDate(messageHeader
 				.getSubmitionTimestamp());
-	}
+		this.submtime = PomocnaDatum.XMLDatumUDate(messageHeader.getSubmitionTimestamp());		
+	}	
 }

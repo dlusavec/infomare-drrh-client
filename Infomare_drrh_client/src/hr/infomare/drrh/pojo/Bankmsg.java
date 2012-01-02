@@ -39,6 +39,7 @@ public class Bankmsg implements java.io.Serializable {
 	private String user;
 	private int datetime;
 	private Date datetimews;
+	private Date timews;
 
 	public Bankmsg() {
 	}
@@ -190,10 +191,20 @@ public class Bankmsg implements java.io.Serializable {
 		this.datetimews = datetimews;
 	}
 
-	public void postaviVrijednosti(byte status,Reqmsg reqMsg, Date dateTimeWS) {
+	@Temporal(TemporalType.TIME)
+	@Column(name = "TIMEWS", length = 8)
+	public Date getTimews() {
+		return this.timews;
+	}
+
+	public void setTimews(Date timews) {
+		this.timews = timews;
+	}
+
+	public void postaviVrijednosti(byte status, Reqmsg reqMsg, Date dateTimeWS) {
 		this.status = status;
 		this.reqmsg = reqMsg;
 		this.datetimews = dateTimeWS;
-
+		this.timews = dateTimeWS;
 	}
 }

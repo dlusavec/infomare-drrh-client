@@ -40,7 +40,7 @@ public class Invoicemsg implements java.io.Serializable {
 	private BigDecimal invlcam;
 	private String iscess;
 	private String docbloc;
-	private int cmbufmisid;	
+	private int cmbufmisid;
 	private String bufmisven;
 	private String albufmven;
 	private String payref;
@@ -56,6 +56,7 @@ public class Invoicemsg implements java.io.Serializable {
 	private String user;
 	private int datetime;
 	private Date datetimews;
+	private Date timews;
 
 	public Invoicemsg() {
 	}
@@ -142,7 +143,7 @@ public class Invoicemsg implements java.io.Serializable {
 	public void setBufmisrev(Integer bufmisrev) {
 		this.bufmisrev = bufmisrev;
 	}
-	
+
 	@Column(name = "REFDOCID", precision = 9, scale = 0)
 	public Integer getRefdocid() {
 		return refdocid;
@@ -223,7 +224,7 @@ public class Invoicemsg implements java.io.Serializable {
 	public void setBufmisven(String bufmisven) {
 		this.bufmisven = bufmisven;
 	}
-	
+
 	@Column(name = "ALBUFMVEN", length = 7)
 	public String getAlbufmven() {
 		return this.albufmven;
@@ -232,7 +233,7 @@ public class Invoicemsg implements java.io.Serializable {
 	public void setAlbufmven(String albufmven) {
 		this.albufmven = albufmven;
 	}
-	
+
 	@Column(name = "PAYREF", nullable = false, length = 50)
 	public String getPayref() {
 		return this.payref;
@@ -350,12 +351,24 @@ public class Invoicemsg implements java.io.Serializable {
 	public void setDatetimews(Date datetimews) {
 		this.datetimews = datetimews;
 	}
+
+	@Temporal(TemporalType.TIME)
+	@Column(name = "TIMEWS", length = 8)
+	public Date getTimews() {
+		return this.timews;
+	}
+
+	public void setTimews(Date timews) {
+		this.timews = timews;
+	}
+
 	public void postaviVrijednosti(byte status, Reqmsg reqMsg, Date dateTimeWS,
-			InvoiceStatusNotification notificationResponse) {		
+			InvoiceStatusNotification notificationResponse) {
 		this.status = status;
 		this.reqmsg = reqMsg;
 		this.datetimews = dateTimeWS;
-		/*this.invststy = notificationResponse.getInvoiceStatus() != null ? notificationResponse
-				.getInvoiceStatus().name() : null;*/
+		this.timews = dateTimeWS;
+//		this.invststy = notificationResponse.getInvoiceStatus() != null ? notificationResponse
+	//			.getInvoiceStatus().name() : null;
 	}
 }

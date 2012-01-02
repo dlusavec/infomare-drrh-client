@@ -144,10 +144,10 @@ public final class VendorManagementInterfaceClientImpl {
 							response.setErrorResponse(PomocnaError
 									.getErrorResponse("Vendor", e));						
 					}
-					resMsg.postaviVrijednosti(response.getMessageHeader(),
-							"createVendor", response.getResponseMessageType());
 					reqMsg.postaviVrijednosti(response.getMessageHeader(),
 							reqMsgId, "createVendor");
+					resMsg.postaviVrijednosti(response.getMessageHeader(),
+							"createVendor", response.getResponseMessageType(), reqMsg);					
 					vendorMsg.postaviVrijednosti(Pomocna.getStatus(response
 							.getResponseMessageType()), reqMsg, PomocnaDatum
 							.XMLDatumUDate(response.getMessageHeader()
@@ -273,10 +273,10 @@ public final class VendorManagementInterfaceClientImpl {
 						response.setErrorResponse(PomocnaError
 								.getErrorResponse("Vendor", e));					
 				}
-				resMsg.postaviVrijednosti(response.getMessageHeader(),
-						"changeVendor", response.getResponseMessageType());
 				reqMsg.postaviVrijednosti(response.getMessageHeader(),
 						reqMsgId, "changeVendor");
+				resMsg.postaviVrijednosti(response.getMessageHeader(),
+						"changeVendor", response.getResponseMessageType(), reqMsg);				
 				vendorMsg.postaviVrijednosti(Pomocna.getStatus(response
 						.getResponseMessageType()), reqMsg, PomocnaDatum
 						.XMLDatumUDate(response.getMessageHeader()
@@ -422,11 +422,11 @@ public final class VendorManagementInterfaceClientImpl {
 							response.setErrorResponse(PomocnaError
 									.getErrorResponse("VEN_BANK_ACC", e));						
 					}
-					resMsg.postaviVrijednosti(response.getMessageHeader(),
-							"addNewBankAccount",
-							response.getResponseMessageType());
 					reqMsg.postaviVrijednosti(response.getMessageHeader(),
 							reqMsgId, "addNewBankAccount");
+					resMsg.postaviVrijednosti(response.getMessageHeader(),
+							"addNewBankAccount",
+							response.getResponseMessageType(), reqMsg);					
 					venBanAccM.postaviVrijednosti(Pomocna.getStatus(response
 							.getResponseMessageType()), reqMsg, PomocnaDatum
 							.XMLDatumUDate(response.getMessageHeader()

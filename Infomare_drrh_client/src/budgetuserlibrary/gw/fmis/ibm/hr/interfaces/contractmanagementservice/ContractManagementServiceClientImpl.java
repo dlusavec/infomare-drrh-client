@@ -154,10 +154,10 @@ public final class ContractManagementServiceClientImpl {
 				statNotif = new Statnotif();
 				//budCom = new Budcom();
 				notifHead = new Notifhead();
-				resMsg.postaviVrijednosti(response.getMessageHeader(),
-						"createContract", response.getResponseMessageType());
 				reqMsg.postaviVrijednosti(response.getMessageHeader(),
 						reqMsgId, "createContract");
+				resMsg.postaviVrijednosti(response.getMessageHeader(),
+						"createContract", response.getResponseMessageType(),reqMsg);			
 				budComMsg.postaviVrijednosti(Pomocna.getStatus(response
 						.getResponseMessageType()), reqMsg, PomocnaDatum
 						.XMLDatumUDate(response.getMessageHeader()
@@ -323,10 +323,10 @@ public final class ContractManagementServiceClientImpl {
 				statNotif = new Statnotif();
 				//budCom = new Budcom();
 				notifHead = new Notifhead();
-				resMsg.postaviVrijednosti(response.getMessageHeader(),
-						"changeContract", response.getResponseMessageType());
 				reqMsg.postaviVrijednosti(response.getMessageHeader(),
 						reqMsgId, "changeContract");
+				resMsg.postaviVrijednosti(response.getMessageHeader(),
+						"changeContract", response.getResponseMessageType(),reqMsg);				
 				budComMsg.postaviVrijednosti(Pomocna.getStatus(response
 						.getResponseMessageType()), reqMsg, PomocnaDatum
 						.XMLDatumUDate(response.getMessageHeader()
@@ -495,10 +495,10 @@ public final class ContractManagementServiceClientImpl {
 				statNotif = new Statnotif();
 				//budCom = new Budcom();
 				notifHead = new Notifhead();
-				resMsg.postaviVrijednosti(response.getMessageHeader(),
-						"closeContract", response.getResponseMessageType());
 				reqMsg.postaviVrijednosti(response.getMessageHeader(),
 						reqMsgId, "closeContract");
+				resMsg.postaviVrijednosti(response.getMessageHeader(),
+						"closeContract", response.getResponseMessageType(), reqMsg);				
 				budComMsg.postaviVrijednosti(Pomocna.getStatus(response
 						.getResponseMessageType()), reqMsg, PomocnaDatum
 						.XMLDatumUDate(response.getMessageHeader()

@@ -52,6 +52,7 @@ public class Vendormsg implements java.io.Serializable {
 	private String user;
 	private int datetime;
 	private Date datetimews;
+	private Date timews;
 
 	public Vendormsg() {
 	}
@@ -293,11 +294,22 @@ public class Vendormsg implements java.io.Serializable {
 		this.datetimews = datetimews;
 	}
 
+	@Temporal(TemporalType.TIME)
+	@Column(name = "TIMEWS", length = 8)
+	public Date getTimews() {
+		return this.timews;
+	}
+
+	public void setTimews(Date timews) {
+		this.timews = timews;
+	}
+
 	public void postaviVrijednosti(byte status, Reqmsg reqMsg, Date dateTimeWS,
 			VendorResponseMsg response) {
 		this.status = status;
 		this.reqmsg = reqMsg;
 		this.datetimews = dateTimeWS;
+		this.timews = dateTimeWS;
 		/*
 		 * if (response != null && response.getVendor() != null) {
 		 * this.sapvendori = response.getVendor().getSapVendorId();
@@ -310,6 +322,7 @@ public class Vendormsg implements java.io.Serializable {
 		this.status = status;
 		this.reqmsg = reqMsg;
 		this.datetimews = dateTimeWS;
+		this.timews = dateTimeWS;
 		if (response.getResponseMessageType().equals(
 				ResponseMessageType.NOTIFICATION)) {
 			this.sapvendori = response.getVendor().getSapVendorId();

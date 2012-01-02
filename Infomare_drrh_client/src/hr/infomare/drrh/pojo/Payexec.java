@@ -43,6 +43,7 @@ public class Payexec implements java.io.Serializable {
 	private String iscess;
 	private Long resmsgid;
 	private Date datetimews;
+	private Date timews;
 
 	public Payexec() {
 	}
@@ -173,6 +174,16 @@ public class Payexec implements java.io.Serializable {
 
 	public void setDatetimews(Date datetimews) {
 		this.datetimews = datetimews;
+	}
+
+	@Temporal(TemporalType.TIME)
+	@Column(name = "TIMEWS", length = 8)
+	public Date getTimews() {
+		return this.timews;
+	}
+
+	public void setTimews(Date timews) {
+		this.timews = timews;
 	}
 
 	public void postaviVrijednosti(PaymentExecution paymentExecution,

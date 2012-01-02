@@ -113,10 +113,10 @@ public final class BankManagementInterfaceClientImpl {
 				// Response
 				resMsg = new Resmsg();
 				reqMsg = new Reqmsg();
-				resMsg.postaviVrijednosti(response.getMessageHeader(),
-						"createBank", response.getResponseMessageType());
 				reqMsg.postaviVrijednosti(response.getMessageHeader(),
 						reqMsgId, "createBank");
+				resMsg.postaviVrijednosti(response.getMessageHeader(),
+						"createBank", response.getResponseMessageType(),reqMsg);				
 				bankMsg.postaviVrijednosti(Pomocna.getStatus(response
 						.getResponseMessageType()), reqMsg, PomocnaDatum
 						.XMLDatumUDate(response.getMessageHeader()
@@ -216,10 +216,10 @@ public final class BankManagementInterfaceClientImpl {
 				// Response
 				resMsg = new Resmsg();
 				reqMsg = new Reqmsg();
-				resMsg.postaviVrijednosti(response.getMessageHeader(),
-						"changeBank", response.getResponseMessageType());
 				reqMsg.postaviVrijednosti(response.getMessageHeader(),
-						reqMsgId, "changeBank");
+						reqMsgId, "changeBank");				
+				resMsg.postaviVrijednosti(response.getMessageHeader(),
+						"changeBank", response.getResponseMessageType(),reqMsg);				
 				bankMsg.postaviVrijednosti(Pomocna.getStatus(response
 						.getResponseMessageType()), reqMsg, PomocnaDatum
 						.XMLDatumUDate(response.getMessageHeader()

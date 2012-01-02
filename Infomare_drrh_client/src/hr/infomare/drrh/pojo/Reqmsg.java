@@ -90,4 +90,8 @@ public class Reqmsg implements java.io.Serializable {
 		this.eventlid = messageHeader.getEventId();
 
 	}
+
+	public void postaviVrijednosti(MessageHeader messageHeader) {
+		this.resmsgid = messageHeader.getResponseMsgId();
+	}
 }

@@ -1,12 +1,16 @@
 package hr.infomare.drrh.main;
 
-import hr.infomare.drrh.dao.ResxmlDAO;
 import hr.infomare.drrh.hibernate.HibernatePomocna;
 import hr.infomare.drrh.hibernate.SessionPomocna;
-import hr.infomare.drrh.pojo.Resxml;
+import hr.infomare.drrh.pojo.Resmsg;
 import hr.infomare.drrh.pomocni.Log;
-import hr.infomare.drrh.pomocni.PomocnaDatum;
+import hr.infomare.drrh.pomocni.Pomocna;
 import hr.infomare.drrh.postavke.Postavke;
+
+import org.hibernate.Session;
+
+import budgetuserlibrary.gw.fmis.ibm.hr.infotypes.MessageHeader;
+import budgetuserlibrary.gw.fmis.ibm.hr.infotypes.ResponseMessageType;
 
 public class Start {
 
@@ -50,6 +54,6 @@ public class Start {
 		SessionPomocna sp= new SessionPomocna();
 		ResxmlDAO.spremiResponse(Long.valueOf(5000),
 				objekt, sp.getSession(), sp);*/
-		//System.out.println(PomocnaDatum.XMLDatumUNumDatum(PomocnaDatum.getTrenutniDatumXML()));
+		//System.out.println(PomocnaDatum.XMLDatumUNumDatum(PomocnaDatum.getTrenutniDatumXML()));				
 	}
 }

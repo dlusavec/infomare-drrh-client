@@ -153,10 +153,10 @@ public final class ReservationManagementServiceClientImpl {
 				statNotif = new Statnotif();
 				//budCom = new Budcom();
 				notifHead = new Notifhead();
-				resMsg.postaviVrijednosti(response.getMessageHeader(),
-						"createReservation", response.getResponseMessageType());
 				reqMsg.postaviVrijednosti(response.getMessageHeader(),
 						reqMsgId, "createReservation");
+				resMsg.postaviVrijednosti(response.getMessageHeader(),
+						"createReservation", response.getResponseMessageType(), reqMsg);				
 				budComMsg.postaviVrijednosti(Pomocna.getStatus(response
 						.getResponseMessageType()), reqMsg, PomocnaDatum
 						.XMLDatumUDate(response.getMessageHeader()
@@ -321,10 +321,10 @@ public final class ReservationManagementServiceClientImpl {
 				statNotif = new Statnotif();
 				//budCom = new Budcom();
 				notifHead = new Notifhead();
-				resMsg.postaviVrijednosti(response.getMessageHeader(),
-						"changeReservation", response.getResponseMessageType());
 				reqMsg.postaviVrijednosti(response.getMessageHeader(),
 						reqMsgId, "changeReservation");
+				resMsg.postaviVrijednosti(response.getMessageHeader(),
+						"changeReservation", response.getResponseMessageType(), reqMsg);				
 				budComMsg.postaviVrijednosti(Pomocna.getStatus(response
 						.getResponseMessageType()), reqMsg, PomocnaDatum
 						.XMLDatumUDate(response.getMessageHeader()
@@ -490,10 +490,10 @@ public final class ReservationManagementServiceClientImpl {
 				statNotif = new Statnotif();
 				//budCom = new Budcom();
 				notifHead = new Notifhead();
-				resMsg.postaviVrijednosti(response.getMessageHeader(),
-						"closeReservation", response.getResponseMessageType());
 				reqMsg.postaviVrijednosti(response.getMessageHeader(),
 						reqMsgId, "closeReservation");
+				resMsg.postaviVrijednosti(response.getMessageHeader(),
+						"closeReservation", response.getResponseMessageType(), reqMsg);				
 				budComMsg.postaviVrijednosti(Pomocna.getStatus(response
 						.getResponseMessageType()), reqMsg, PomocnaDatum
 						.XMLDatumUDate(response.getMessageHeader()
