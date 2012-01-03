@@ -72,14 +72,14 @@ public final class VendorManagementInterfaceClientImpl {
 	}
 
 	public void razmjenaPartnera() {
-		try {			
+		try {
 			SERVICE_NAME = new QName(
 					VendorManagementInterfaceExportVendorManagementInterfaceHttpService.TARGET_NAMESPACE,
 					VendorManagementInterfaceExportVendorManagementInterfaceHttpService.SERVIS);
 			otvoriPortISesiju();
 			createVendor();
 			changeVendor();
-			addNewBankAccount();			
+			addNewBankAccount();
 		} catch (Exception e) {
 			Log.loger.severe("Greška kod razmjene partnera "
 					+ PomocnaError.getErrorMessage(e));
@@ -131,23 +131,24 @@ public final class VendorManagementInterfaceClientImpl {
 					// Response
 					resMsg = new Resmsg();
 					reqMsg = new Reqmsg();
-					vendorVezna = new VendorVezna();					
+					vendorVezna = new VendorVezna();
 					try {
-						response = port.createVendor(request);						
-							response.setMessageHeader(Pomocna
-									.getNewMessageHeader(session));					
-					} catch (Exception e) {						
-							response = new VendorResponseMsg();
-							response.setMessageHeader(Pomocna
-									.getNewMessageHeader(session));
-							response.setResponseMessageType(ResponseMessageType.ERROR);
-							response.setErrorResponse(PomocnaError
-									.getErrorResponse("Vendor", e));						
+						response = port.createVendor(request);
+						response.setMessageHeader(Pomocna
+								.getNewMessageHeader(session));
+					} catch (Exception e) {
+						response = new VendorResponseMsg();
+						response.setMessageHeader(Pomocna
+								.getNewMessageHeader(session));
+						response.setResponseMessageType(ResponseMessageType.ERROR);
+						response.setErrorResponse(PomocnaError
+								.getErrorResponse("Vendor", e));
 					}
 					reqMsg.postaviVrijednosti(response.getMessageHeader(),
 							reqMsgId, "createVendor");
 					resMsg.postaviVrijednosti(response.getMessageHeader(),
-							"createVendor", response.getResponseMessageType(), reqMsg);					
+							"createVendor", response.getResponseMessageType(),
+							reqMsg);
 					vendorMsg.postaviVrijednosti(Pomocna.getStatus(response
 							.getResponseMessageType()), reqMsg, PomocnaDatum
 							.XMLDatumUDate(response.getMessageHeader()
@@ -156,11 +157,12 @@ public final class VendorManagementInterfaceClientImpl {
 					// Upis u bazu
 					if (response.getResponseMessageType().equals(
 							ResponseMessageType.NOTIFICATION)) {
-					/*	vendorVezna.postaviVrijednosti(reqMsg, PomocnaDatum
-								.XMLDatumUDate(response.getMessageHeader()
-										.getSubmitionTimestamp()), response
-								.getVendor(), vendorMsg);
-						session.save(vendorVezna);*/
+						/*
+						 * vendorVezna.postaviVrijednosti(reqMsg, PomocnaDatum
+						 * .XMLDatumUDate(response.getMessageHeader()
+						 * .getSubmitionTimestamp()), response .getVendor(),
+						 * vendorMsg); session.save(vendorVezna);
+						 */
 					}
 					session.save(resMsg);
 					Pomocna.obradaGresaka(session, response.getErrorResponse(),
@@ -263,20 +265,21 @@ public final class VendorManagementInterfaceClientImpl {
 				reqMsg = new Reqmsg();
 				try {
 					response = port.changeVendor(request);
-						response.setMessageHeader(Pomocna
-								.getNewMessageHeader(session));
-				} catch (Exception e) {					
-						response = new VendorResponseMsg();
-						response.setMessageHeader(Pomocna
-								.getNewMessageHeader(session));
-						response.setResponseMessageType(ResponseMessageType.ERROR);
-						response.setErrorResponse(PomocnaError
-								.getErrorResponse("Vendor", e));					
+					response.setMessageHeader(Pomocna
+							.getNewMessageHeader(session));
+				} catch (Exception e) {
+					response = new VendorResponseMsg();
+					response.setMessageHeader(Pomocna
+							.getNewMessageHeader(session));
+					response.setResponseMessageType(ResponseMessageType.ERROR);
+					response.setErrorResponse(PomocnaError.getErrorResponse(
+							"Vendor", e));
 				}
 				reqMsg.postaviVrijednosti(response.getMessageHeader(),
 						reqMsgId, "changeVendor");
 				resMsg.postaviVrijednosti(response.getMessageHeader(),
-						"changeVendor", response.getResponseMessageType(), reqMsg);				
+						"changeVendor", response.getResponseMessageType(),
+						reqMsg);
 				vendorMsg.postaviVrijednosti(Pomocna.getStatus(response
 						.getResponseMessageType()), reqMsg, PomocnaDatum
 						.XMLDatumUDate(response.getMessageHeader()
@@ -412,21 +415,21 @@ public final class VendorManagementInterfaceClientImpl {
 					reqMsg = new Reqmsg();
 					try {
 						response = port.addNewBankAccount(request);
-							response.setMessageHeader(Pomocna
-									.getNewMessageHeader(session));
-					} catch (Exception e) {						
-							response = new BankAccountResponseMsg();
-							response.setMessageHeader(Pomocna
-									.getNewMessageHeader(session));
-							response.setResponseMessageType(ResponseMessageType.ERROR);
-							response.setErrorResponse(PomocnaError
-									.getErrorResponse("VEN_BANK_ACC", e));						
+						response.setMessageHeader(Pomocna
+								.getNewMessageHeader(session));
+					} catch (Exception e) {
+						response = new BankAccountResponseMsg();
+						response.setMessageHeader(Pomocna
+								.getNewMessageHeader(session));
+						response.setResponseMessageType(ResponseMessageType.ERROR);
+						response.setErrorResponse(PomocnaError
+								.getErrorResponse("VEN_BANK_ACC", e));
 					}
 					reqMsg.postaviVrijednosti(response.getMessageHeader(),
 							reqMsgId, "addNewBankAccount");
 					resMsg.postaviVrijednosti(response.getMessageHeader(),
 							"addNewBankAccount",
-							response.getResponseMessageType(), reqMsg);					
+							response.getResponseMessageType(), reqMsg);
 					venBanAccM.postaviVrijednosti(Pomocna.getStatus(response
 							.getResponseMessageType()), reqMsg, PomocnaDatum
 							.XMLDatumUDate(response.getMessageHeader()
@@ -508,4 +511,17 @@ public final class VendorManagementInterfaceClientImpl {
 	 * }
 	 */
 
+	/*
+	 * Nije implementirano 
+	 * { System.out.println("Invoking retrieveVendorBankAccount...");
+	 * budgetuserlibrary.gw.fmis.ibm.hr.messages.BankAccountRetrieveRequestMsg
+	 * _retrieveVendorBankAccount_bankAccountRetrieveRequestMsg = null;
+	 * budgetuserlibrary.gw.fmis.ibm.hr.messages.BankAccountResponseMsg
+	 * _retrieveVendorBankAccount__return = port.retrieveVendorBankAccount(
+	 * _retrieveVendorBankAccount_bankAccountRetrieveRequestMsg);
+	 * System.out.println("retrieveVendorBankAccount.result=" +
+	 * _retrieveVendorBankAccount__return);
+	 * 
+	 * }
+	 */
 }

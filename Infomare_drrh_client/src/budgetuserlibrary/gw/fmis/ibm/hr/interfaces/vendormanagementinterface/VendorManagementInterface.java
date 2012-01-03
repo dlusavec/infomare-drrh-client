@@ -72,4 +72,13 @@ public interface VendorManagementInterface {
         @WebParam(name = "bankAccountDeactivateRequestMsg", targetNamespace = "")
         budgetuserlibrary.gw.fmis.ibm.hr.messages.BankAccountDeactivateRequestMsg bankAccountDeactivateRequestMsg
     );
+    @WebResult(name = "bankAccountResponseMsg", targetNamespace = "")
+    @RequestWrapper(localName = "retrieveVendorBankAccount", targetNamespace = "http://hr.ibm.fmis.gw.BudgetUserLibrary/interfaces/VendorManagementInterface", className = "budgetuserlibrary.gw.fmis.ibm.hr.interfaces.vendormanagementinterface.RetrieveVendorBankAccount")
+    @WebMethod
+    @ResponseWrapper(localName = "retrieveVendorBankAccountResponse", targetNamespace = "http://hr.ibm.fmis.gw.BudgetUserLibrary/interfaces/VendorManagementInterface", className = "budgetuserlibrary.gw.fmis.ibm.hr.interfaces.vendormanagementinterface.RetrieveVendorBankAccountResponse")
+    public budgetuserlibrary.gw.fmis.ibm.hr.messages.BankAccountResponseMsg retrieveVendorBankAccount(
+        @WebParam(name = "bankAccountRetrieveRequestMsg", targetNamespace = "")
+        budgetuserlibrary.gw.fmis.ibm.hr.messages.BankAccountRetrieveRequestMsg bankAccountRetrieveRequestMsg
+    );
+    
 }

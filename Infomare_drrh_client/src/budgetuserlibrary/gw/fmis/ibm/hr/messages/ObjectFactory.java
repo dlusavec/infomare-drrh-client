@@ -193,6 +193,15 @@ public class ObjectFactory {
 	public BankAccountDeactivateRequestMsg createBankAccountDeactivateRequestMsg() {
 		return new BankAccountDeactivateRequestMsg();
 	}
+	
+	/**
+	 * Create an instance of {@link BankAccountRetrieveRequestMsg }
+	 * 
+	 */
+	public BankAccountRetrieveRequestMsg createBankAccountRetrieveRequestMsg() {
+		return new BankAccountRetrieveRequestMsg();
+	}
+	
 
 	/**
 	 * Create an instance of {@link VendorChangeRequestMsg }
