@@ -28,8 +28,8 @@ public class VendormsgDAO extends AbstraktDAO {
 			Criteria kriterij = session.createCriteria(Vendormsg.class);
 			kriterij.add(Restrictions.eq("opt", opcija));
 			kriterij.add(Restrictions.eq("status", (byte) 1));
-			//Za testiranja
-			//kriterij.add(Restrictions.le("f41ctr", "1005500"));
+			// Za testiranja
+			// kriterij.add(Restrictions.le("f41ctr", "1005500"));
 			kriterij.addOrder(Order.asc("idVendorm"));
 			List lista = kriterij.list();
 			return lista;
@@ -38,15 +38,33 @@ public class VendormsgDAO extends AbstraktDAO {
 			return null;
 		}
 	}
-	
+
+	public List getVendormsg(byte opcija, byte status) {
+		try {
+			Criteria kriterij = session.createCriteria(Vendormsg.class);
+			kriterij.add(Restrictions.eq("opt", opcija));
+			kriterij.add(Restrictions.eq("status", status));
+			// Za testiranja
+			// kriterij.add(Restrictions.le("f41ctr", "1005500"));
+			kriterij.addOrder(Order.asc("idVendorm"));
+			List lista = kriterij.list();
+			return lista;
+		} catch (HibernateException e) {
+			Log.loger.severe(PomocnaError.getErrorMessage(e));
+			return null;
+		}
+	}
+
 	public Vendormsg getVendorByPK(String vendorId) {
 		try {
 			Criteria kriterij = session.createCriteria(Vendormsg.class);
-			kriterij.add(Restrictions.eq("f41ctr", StringUtils.trimToEmpty(vendorId)));
+			kriterij.add(Restrictions.eq("f41ctr",
+					StringUtils.trimToEmpty(vendorId)));
 			kriterij.add(Restrictions.eq("status", (byte) 2));
 			kriterij.addOrder(Order.desc("idVendorm"));
-			List lista=kriterij.list();			
-			Vendormsg vendorMsg = (lista != null && lista.size()>0 ? (Vendormsg) lista.get(0) : null);
+			List lista = kriterij.list();
+			Vendormsg vendorMsg = (lista != null && lista.size() > 0 ? (Vendormsg) lista
+					.get(0) : null);
 			return vendorMsg;
 		} catch (HibernateException e) {
 			Log.loger.severe(PomocnaError.getErrorMessage(e));

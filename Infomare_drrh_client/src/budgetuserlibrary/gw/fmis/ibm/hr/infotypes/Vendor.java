@@ -592,4 +592,12 @@ public class Vendor {
 			sapVendorId = StringUtils.trimToNull(vendorVezna.getF41svi());
 		}
 	}
+
+	public void postaviVrijednosti(Vendormsg vendorMsg) {
+		logicalSystemName = StringUtils
+				.trimToNull(Postavke.LOGICAL_SYSTEM_NAME);
+		logicalSystemVendorID = StringUtils.trimToNull(vendorMsg.getF41ctr());
+		oib = StringUtils.trimToNull(vendorMsg.getOib());
+
+	}
 }
