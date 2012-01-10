@@ -320,7 +320,9 @@ public class ResponseMessageHandlerServiceClientImpl {
 				vendorMsg = vendorMsgDAO.getVendorByPK(response.getVendor()
 						.getLogicalSystemVendorID());
 				// Prijava novog partnera
-				if (vendorMsg != null) {
+				if ((vendorMsg != null && responseMessageType
+						.equals(ResponseMessageType.NOTIFICATION) && StringUtils.isNotBlank(response.getVendor().getSapVendorId())) || responseMessageType
+						.equals(ResponseMessageType.ERROR) ) {
 					sessionPomocna.otvoriTransakciju();
 					vendorAccountsLista = venBanAccMDAO
 							.getVenBanAccMByVendorAndRequest(vendorMsg
@@ -353,7 +355,7 @@ public class ResponseMessageHandlerServiceClientImpl {
 						}
 					}
 					if (responseMessageType
-							.equals(ResponseMessageType.NOTIFICATION) && StringUtils.isNotBlank(response.getVendor().getSapVendorId())) {
+							.equals(ResponseMessageType.NOTIFICATION)) {
 						vendorVezna = new VendorVezna();
 						vendorVezna.postaviVrijednosti(reqMsg, response);
 						session.save(vendorVezna);
