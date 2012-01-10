@@ -84,6 +84,19 @@ public final class VendorManagementInterfaceClientImpl {
 		}
 	}
 
+	public void retrievePartnera() {
+		try {
+			SERVICE_NAME = new QName(
+					VendorManagementInterfaceExportVendorManagementInterfaceHttpService.TARGET_NAMESPACE,
+					VendorManagementInterfaceExportVendorManagementInterfaceHttpService.SERVIS);
+			otvoriPortISesiju();
+			retrieveVendor();
+		} catch (Exception e) {
+			Log.loger.severe("Greška kod razmjene partnera "
+					+ PomocnaError.getErrorMessage(e));
+		}
+	}
+
 	private void otvoriPortISesiju() {
 		wsdlURL = VendorManagementInterfaceExportVendorManagementInterfaceHttpService.WSDL_LOCATION;
 		servis = new VendorManagementInterfaceExportVendorManagementInterfaceHttpService(
@@ -332,93 +345,105 @@ public final class VendorManagementInterfaceClientImpl {
 
 	}
 
-	public void retrieveVendor() {		
+	private void retrieveVendor() {
 		VendorRetrieveRequestMsg request = new VendorRetrieveRequestMsg();
 		MessageHeader messageHeader;
 		Vendor vendor;
-		VendorVezna vendorVezna;
+		VendorVezna vendorVezna = null;
 		Reqmsg reqMsg = null;
+		Reqmsg reqMsgAccM = null;
 		Resmsg resMsg = null;
 		VendorRetrieveResponseMsg response = null;
-		Venbanaccm venBanAccM;
 		// Samo partneri koji su poslani i koji su prosli formalnu kontrolu
 		List vendori = vendorMsgDAO.getVendormsg((byte) 1, (byte) 2);
 		List<Venbanaccm> venBanAccounti = null;
 		for (Iterator iterator = vendori.iterator(); iterator.hasNext();) {
 			Vendormsg vendorMsg = (Vendormsg) iterator.next();
 			try {
-				venBanAccounti = venBanAccMDAO.getVenbanaccm((byte) 1,
-						vendorMsg.getF41ctr());				
+				// Request
+				messageHeader = new MessageHeader();
+				vendor = new Vendor();
+				vendor.postaviVrijednosti(vendorMsg);
+				request.setMessageHeader(messageHeader);
+				request.setVendor(vendor);
+				// Response
+				try {
+					response = port.retrieveVendor(request);
+					response.setMessageHeader(Pomocna
+							.getNewMessageHeader(session));
+					messageHeader = response.getMessageHeader();
+				} catch (Exception e) {
+					response = new VendorRetrieveResponseMsg();
+					response.setMessageHeader(Pomocna
+							.getNewMessageHeader(session));
+					response.setResponseMessageType(ResponseMessageType.ERROR);
+					response.setErrorResponse(PomocnaError.getErrorResponse(
+							"Vendor", e));
+				}
+
+				if (response.getResponseMessageType().equals(
+						ResponseMessageType.NOTIFICATION)
+						&& response.getVendor() != null
+						&& response.getVendor().getSapVendorId() != null) {
 					sessionPomocna.otvoriTransakciju();
-					// Request
-					messageHeader = new MessageHeader();
-					vendor = new Vendor();
-					vendor.postaviVrijednosti(vendorMsg);
-					request.setMessageHeader(messageHeader);
-					request.setVendor(vendor);
-					// Response
-					try {
-						response = port.retrieveVendor(request);
-						messageHeader=response.getMessageHeader();
-						//response.setMessageHeader(Pomocna
-							//	.getNewMessageHeader(session));
-					} catch (Exception e) {
-						response = new VendorRetrieveResponseMsg();
-						response.setMessageHeader(Pomocna
-								.getNewMessageHeader(session));
-						response.setResponseMessageType(ResponseMessageType.ERROR);
-						response.setErrorResponse(PomocnaError
-								.getErrorResponse("Vendor", e));
-					}		
-					/*
-					 * 
-					 * OVJDE TREBA KRENUTI LOGIKA DA LI IMA CEGA, DA LI JE NOTIFICATION, PA AZURIRANJE PODATAKA...PRVO VIDJETI STO VRACA U LOGU
-					 * 
-					 */
-					reqMsg=reqMsgDAO.getReqMsgByPK(vendorMsg.getReqmsg().getReqmsgid());
-					resMsg = new Resmsg();					
-					vendorVezna = new VendorVezna();					
-					resMsg.postaviVrijednosti(messageHeader,
-							"retrieveVendor", response.getResponseMessageType(),
-							reqMsg);
+					List<VendorAccountData> vendorAccountDataLista = response
+							.getVendor().getVendorAccountDataList()
+							.getVendorAccountData();
+					reqMsg = reqMsgDAO.getReqMsgByPK(vendorMsg.getReqmsg()
+							.getReqmsgid());
+					reqMsg.postaviVrijednosti(response.getMessageHeader());
+					resMsg = new Resmsg();
+					vendorVezna = new VendorVezna();
+					resMsg.postaviVrijednosti(response.getMessageHeader(),
+							"retrieveVendor",
+							response.getResponseMessageType(), reqMsg);
 					vendorMsg.postaviVrijednostiRetrieve(Pomocna
-							.getStatusRetrieve(response.getResponseMessageType()), reqMsg,
+							.getStatusRetrieve(response
+									.getResponseMessageType()), reqMsg,
 							PomocnaDatum.XMLDatumUDate(messageHeader
-									.getSubmitionTimestamp()), response);							
-					// Upis u bazu
-					if (response.getResponseMessageType().equals(
-							ResponseMessageType.NOTIFICATION)) {
-						//reqMsg.postaviVrijednosti(messageHeader);
-						/*
-						 * vendorVezna.postaviVrijednosti(reqMsg, PomocnaDatum
-						 * .XMLDatumUDate(response.getMessageHeader()
-						 * .getSubmitionTimestamp()), response .getVendor(),
-						 * vendorMsg); session.save(vendorVezna);
-						 */
-					}
-					/*session.save(resMsg);
-					Pomocna.obradaGresaka(session, response.getErrorResponse(),
-							response.getMessageHeader());
+									.getSubmitionTimestamp()), response);
+					vendorVezna.postaviVrijednosti(reqMsg, response);
+					session.save(resMsg);
 					session.update(reqMsg);
-					session.update(vendorMsg);*/
-					for (Iterator iteratorAccounti = venBanAccounti.iterator(); iteratorAccounti
-							.hasNext();) {
-						venBanAccM = (Venbanaccm) iteratorAccounti.next();
-						venBanAccM.postaviVrijednosti(Pomocna
-								.getStatus(response.getResponseMessageType()),
-								reqMsg, PomocnaDatum.XMLDatumUDate(response
-										.getMessageHeader()
-										.getSubmitionTimestamp()));
-						session.update(venBanAccM);
+					session.update(vendorMsg);
+					session.saveOrUpdate(vendorVezna);
+					// Nadji sve zire u nasim tablicama i azuriraj
+					for (Iterator iteratorVAD = vendorAccountDataLista
+							.iterator(); iteratorVAD.hasNext();) {
+						VendorAccountData vendorAccountData = (VendorAccountData) iteratorVAD
+								.next();
+
+						venBanAccounti = venBanAccMDAO.getVenbanaccm(response
+								.getVendor().getLogicalSystemVendorID(),
+								vendorAccountData.getVBDI(), vendorAccountData
+										.getVendorBankAccount());
+
+						for (Iterator iteratorVBA = venBanAccounti.iterator(); iteratorVBA
+								.hasNext();) {
+							Venbanaccm venBanAccM = (Venbanaccm) iteratorVBA
+									.next();
+							venBanAccM.postaviVrijednosti(Pomocna
+									.getStatusRetrieve(response
+											.getResponseMessageType()), reqMsg,
+									PomocnaDatum.XMLDatumUDate(response
+											.getMessageHeader()
+											.getSubmitionTimestamp()));
+							reqMsgAccM = reqMsgDAO.getReqMsgByPK(venBanAccM
+									.getReqmsg().getReqmsgid());
+							reqMsgAccM.postaviVrijednosti(response
+									.getMessageHeader());
+							session.update(reqMsgAccM);
+							session.update(venBanAccM);
+						}
 					}
-					sessionPomocna.commitTransakcije();									
+					sessionPomocna.commitTransakcije();
+				}
 
 			} catch (Exception e) {
 				sessionPomocna.rollbackTransakcije();
-				Log.loger
-						.severe("Greška kod kreiranja novog partnera, poruka: "
-								+ Integer.toString(vendorMsg.getIdVendorm())
-								+ PomocnaError.getErrorMessage(e));
+				Log.loger.severe("Greška kod retrieve-a partnera, poruka: "
+						+ Integer.toString(vendorMsg.getIdVendorm())
+						+ PomocnaError.getErrorMessage(e));
 			} finally {
 				if (venBanAccounti != null && venBanAccounti.size() > 0) {
 					try {
@@ -467,7 +492,7 @@ public final class VendorManagementInterfaceClientImpl {
 			}
 		}
 	}
-	
+
 	/*
 	 * Ne koristi se private void deactivateVendor() { Integer reqMsgId =
 	 * reqMsgDAO.getIduciRbr(); VendorDeactivationRequestMsg request = new
@@ -645,8 +670,7 @@ public final class VendorManagementInterfaceClientImpl {
 	 * }
 	 */
 	/*
-	 *  Nije implementirano
-	 * { System.out.println("Invoking retrieveVendor...");
+	 * Nije implementirano { System.out.println("Invoking retrieveVendor...");
 	 * budgetuserlibrary.gw.fmis.ibm.hr.messages.VendorRetrieveRequestMsg
 	 * _retrieveVendor_vendorRetrieveRequestMsg = null;
 	 * budgetuserlibrary.gw.fmis.ibm.hr.messages.VendorRetrieveResponseMsg

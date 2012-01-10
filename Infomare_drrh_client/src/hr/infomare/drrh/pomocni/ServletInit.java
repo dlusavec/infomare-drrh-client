@@ -63,12 +63,10 @@ public class ServletInit implements ServletContextListener {
 				if (StringUtils.isNotBlank(Postavke.WSDL_BANK)) {
 					BankManagementInterfaceClientImpl bankManagement = new BankManagementInterfaceClientImpl();
 					bankManagement.razmjenaBanaka();
-					bankManagement = null;
 				}
 				if (StringUtils.isNotBlank(Postavke.WSDL_VENDOR)) {
 					VendorManagementInterfaceClientImpl vendorManagement = new VendorManagementInterfaceClientImpl();
 					vendorManagement.razmjenaPartnera();
-					vendorManagement = null;
 				}
 				if (StringUtils.isNotBlank(Postavke.WSDL_RESERVATION)) {
 					ReservationManagementServiceClientImpl reservationManagement = new ReservationManagementServiceClientImpl();
@@ -92,7 +90,11 @@ public class ServletInit implements ServletContextListener {
 				if (StringUtils.isNotBlank(Postavke.WSDL_RESPONSE)) {
 					ResponseMessageHandlerServiceClientImpl responseManagement = new ResponseMessageHandlerServiceClientImpl();
 					responseManagement.razmjenaOdgovora();
-				}
+				}				
+				if (StringUtils.isNotBlank(Postavke.WSDL_VENDOR)) {
+					VendorManagementInterfaceClientImpl vendorManagementR = new VendorManagementInterfaceClientImpl();
+					vendorManagementR.retrievePartnera();
+				}										
 				Log.loger.info("Zavrsetak razmjene");
 			} catch (Exception e) {
 				Log.loger.severe(PomocnaError.getErrorMessage(e));

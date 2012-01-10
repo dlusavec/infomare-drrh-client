@@ -20,8 +20,8 @@ import javax.persistence.TemporalType;
 
 import org.apache.commons.lang.StringUtils;
 
-import budgetuserlibrary.gw.fmis.ibm.hr.infotypes.Vendor;
 import budgetuserlibrary.gw.fmis.ibm.hr.messages.VendorResponseMsg;
+import budgetuserlibrary.gw.fmis.ibm.hr.messages.VendorRetrieveResponseMsg;
 
 @SuppressWarnings("serial")
 @Entity
@@ -97,4 +97,17 @@ public class VendorVezna implements java.io.Serializable {
 		this.f41vid = Long
 				.toString(vendorResponseMsg.getVendor().getVendorId());
 	}
+	
+	public void postaviVrijednosti(Reqmsg reqMsg,
+			VendorRetrieveResponseMsg vendorResponseMsg) {
+		this.f41ctr = StringUtils.trimToEmpty(vendorResponseMsg.getVendor()
+				.getLogicalSystemVendorID());
+		this.reqmsg = reqMsg;
+		this.datetimews = PomocnaDatum.XMLDatumUDate(vendorResponseMsg
+				.getMessageHeader().getSubmitionTimestamp());
+		this.f41svi = vendorResponseMsg.getVendor().getSapVendorId();
+		this.f41vid = Long
+				.toString(vendorResponseMsg.getVendor().getVendorId());
+	}
+	
 }

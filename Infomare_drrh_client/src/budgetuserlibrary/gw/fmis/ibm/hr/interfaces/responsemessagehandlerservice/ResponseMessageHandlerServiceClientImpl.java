@@ -47,6 +47,7 @@ import java.util.List;
 
 import javax.xml.namespace.QName;
 
+import org.apache.commons.lang.StringUtils;
 import org.hibernate.Session;
 
 import budgetuserlibrary.gw.fmis.ibm.hr.infotypes.BudgetCommitmentStatusNotification;
@@ -114,7 +115,7 @@ public class ResponseMessageHandlerServiceClientImpl {
 			otvoriPortISesiju();
 
 			// preuzmiBankResponseMessageId();
-			// preuzmiVendorResponseMessageId();
+			 preuzmiVendorResponseMessageId();
 
 			// preuzmiReservationResponseMessageId();
 			// preuzmiContractResponseMessageId();
@@ -352,7 +353,7 @@ public class ResponseMessageHandlerServiceClientImpl {
 						}
 					}
 					if (responseMessageType
-							.equals(ResponseMessageType.NOTIFICATION)) {
+							.equals(ResponseMessageType.NOTIFICATION) && StringUtils.isNotBlank(response.getVendor().getSapVendorId())) {
 						vendorVezna = new VendorVezna();
 						vendorVezna.postaviVrijednosti(reqMsg, response);
 						session.save(vendorVezna);
@@ -362,7 +363,7 @@ public class ResponseMessageHandlerServiceClientImpl {
 				}
 
 				// Ako je samo prijava zira, logika pretpostavljam da je dobra
-				else {
+				else if(vendorMsg == null ) {
 					vendorAccountsLista = venBanAccMDAO
 							.getVenBanAccMByVendorAndRequest(response
 									.getVendor().getLogicalSystemVendorID(),
