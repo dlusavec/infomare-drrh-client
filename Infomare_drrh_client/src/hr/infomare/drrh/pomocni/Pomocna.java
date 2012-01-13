@@ -42,7 +42,7 @@ public class Pomocna {
 					errorRes.setErrorid(++errorId);
 					errorRes.setTarget(StringUtils.left(StringUtils.trimToNull(error.getTarget()),500));
 					errorRes.setValue(StringUtils.left(StringUtils.defaultString(error.getValue()),500));
-					errorRes.setErrorcode(StringUtils.leftPad(StringUtils.trimToNull(error.getErrorCode()),120));
+					errorRes.setErrorcode(StringUtils.left(StringUtils.trimToNull(error.getErrorCode()),120));
 					errorRes.setDescriptio(StringUtils.trimToNull(error.getDescription()));
 					errorRes.setSubmdati(PomocnaDatum
 							.XMLDatumUDate(messageHeader

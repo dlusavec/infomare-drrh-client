@@ -669,19 +669,7 @@ public final class VendorManagementInterfaceClientImpl {
 	 * 
 	 * }
 	 */
-	/*
-	 * Nije implementirano { System.out.println("Invoking retrieveVendor...");
-	 * budgetuserlibrary.gw.fmis.ibm.hr.messages.VendorRetrieveRequestMsg
-	 * _retrieveVendor_vendorRetrieveRequestMsg = null;
-	 * budgetuserlibrary.gw.fmis.ibm.hr.messages.VendorRetrieveResponseMsg
-	 * _retrieveVendor__return =
-	 * port.retrieveVendor(_retrieveVendor_vendorRetrieveRequestMsg);
-	 * System.out.println("retrieveVendor.result=" + _retrieveVendor__return);
-	 * 
-	 * 
-	 * }
-	 */
-
+	
 	/*
 	 * Nije implementirano {
 	 * System.out.println("Invoking retrieveVendorBankAccount...");

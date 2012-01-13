@@ -87,7 +87,7 @@ public class ResponseMessageHandlerServiceClientImpl {
 	private BudcomDAO budComDAO;
 	private VendormsgDAO vendorMsgDAO;
 	private VenbanaccmDAO venBanAccMDAO;
-	private PayexecDAO payExecDAO;	
+	private PayexecDAO payExecDAO;
 	private Debug debug = new Debug("RESPONSE");
 
 	public ResponseMessageHandlerServiceClientImpl() {
@@ -115,7 +115,7 @@ public class ResponseMessageHandlerServiceClientImpl {
 			otvoriPortISesiju();
 
 			// preuzmiBankResponseMessageId();
-			 preuzmiVendorResponseMessageId();
+			preuzmiVendorResponseMessageId();
 
 			// preuzmiReservationResponseMessageId();
 			// preuzmiContractResponseMessageId();
@@ -254,7 +254,7 @@ public class ResponseMessageHandlerServiceClientImpl {
 	}
 
 	private void obradaBankMsg(AnyTypeList anyTypeLista, String messageName) {
-		
+
 		Bankmsg bankMsg = null;
 		Reqmsg reqMsg = null;
 		Resmsg resMsg = null;
@@ -273,11 +273,12 @@ public class ResponseMessageHandlerServiceClientImpl {
 						.getBankByPK((response.getBank().getVbdi()));
 				if (bankMsg != null) {
 					sessionPomocna.otvoriTransakciju();
-					reqMsg = reqMsgDAO.getReqMsgByPK(bankMsg.getReqmsg().getReqmsgid());
+					reqMsg = reqMsgDAO.getReqMsgByPK(bankMsg.getReqmsg()
+							.getReqmsgid());
 					resMsg = new Resmsg();
 					reqMsg.postaviVrijednosti(messageHeader);
 					resMsg.postaviVrijednosti(messageHeader, messageName,
-							responseMessageType, reqMsg);					
+							responseMessageType, reqMsg);
 					bankMsg.postaviVrijednosti(Pomocna
 							.getStatusRetrieve(responseMessageType), reqMsg,
 							PomocnaDatum.XMLDatumUDate(messageHeader
@@ -287,7 +288,7 @@ public class ResponseMessageHandlerServiceClientImpl {
 					session.update(reqMsg);
 					session.update(bankMsg);
 					Pomocna.obradaGresaka(session, errorResponse, messageHeader);
-					sessionPomocna.commitTransakcije();			
+					sessionPomocna.commitTransakcije();
 				}
 			} catch (Exception e) {
 				sessionPomocna.rollbackTransakcije();
@@ -300,7 +301,7 @@ public class ResponseMessageHandlerServiceClientImpl {
 		obradaResponseXML(anyTypeLista, messageName);
 	}
 
-	private void obradaVendorMsg(AnyTypeList anyTypeLista, String messageName) {		
+	private void obradaVendorMsg(AnyTypeList anyTypeLista, String messageName) {
 		Vendormsg vendorMsg = null;
 		Reqmsg reqMsg = null;
 		Resmsg resMsg = null;
@@ -320,19 +321,23 @@ public class ResponseMessageHandlerServiceClientImpl {
 				vendorMsg = vendorMsgDAO.getVendorByPK(response.getVendor()
 						.getLogicalSystemVendorID());
 				// Prijava novog partnera
-				if ((vendorMsg != null && responseMessageType
-						.equals(ResponseMessageType.NOTIFICATION) && StringUtils.isNotBlank(response.getVendor().getSapVendorId())) || responseMessageType
-						.equals(ResponseMessageType.ERROR) ) {
+				if ((vendorMsg != null
+						&& responseMessageType
+								.equals(ResponseMessageType.NOTIFICATION) && StringUtils
+						.isNotBlank(response.getVendor().getSapVendorId()))
+						|| responseMessageType
+								.equals(ResponseMessageType.ERROR)) {
 					sessionPomocna.otvoriTransakciju();
 					vendorAccountsLista = venBanAccMDAO
 							.getVenBanAccMByVendorAndRequest(vendorMsg
 									.getF41ctr(), vendorMsg.getReqmsg()
 									.getReqmsgid());
-					reqMsg = reqMsgDAO.getReqMsgByPK(vendorMsg.getReqmsg().getReqmsgid());
+					reqMsg = reqMsgDAO.getReqMsgByPK(vendorMsg.getReqmsg()
+							.getReqmsgid());
 					resMsg = new Resmsg();
 					reqMsg.postaviVrijednosti(messageHeader);
 					resMsg.postaviVrijednosti(messageHeader, messageName,
-							responseMessageType, reqMsg);					
+							responseMessageType, reqMsg);
 					vendorMsg.postaviVrijednostiRetrieve(Pomocna
 							.getStatusRetrieve(responseMessageType), reqMsg,
 							PomocnaDatum.XMLDatumUDate(messageHeader
@@ -361,11 +366,11 @@ public class ResponseMessageHandlerServiceClientImpl {
 						session.save(vendorVezna);
 					}
 					Pomocna.obradaGresaka(session, errorResponse, messageHeader);
-					sessionPomocna.commitTransakcije();			
+					sessionPomocna.commitTransakcije();
 				}
 
 				// Ako je samo prijava zira, logika pretpostavljam da je dobra
-				else if(vendorMsg == null ) {
+				else if (vendorMsg == null) {
 					vendorAccountsLista = venBanAccMDAO
 							.getVenBanAccMByVendorAndRequest(response
 									.getVendor().getLogicalSystemVendorID(),
@@ -373,10 +378,13 @@ public class ResponseMessageHandlerServiceClientImpl {
 					if (vendorAccountsLista != null
 							&& vendorAccountsLista.size() > 0) {
 						sessionPomocna.otvoriTransakciju();
-						reqMsg = reqMsgDAO.getReqMsgByPK(((Venbanaccm)vendorAccountsLista.get(0)).getReqmsg().getReqmsgid());						
+						reqMsg = reqMsgDAO
+								.getReqMsgByPK(((Venbanaccm) vendorAccountsLista
+										.get(0)).getReqmsg().getReqmsgid());
 						resMsg = new Resmsg();
 						reqMsg.postaviVrijednosti(messageHeader);
-						resMsg.postaviVrijednosti(messageHeader, messageName, responseMessageType, reqMsg);						
+						resMsg.postaviVrijednosti(messageHeader, messageName,
+								responseMessageType, reqMsg);
 						session.save(resMsg);
 						session.update(reqMsg);
 						for (Iterator iteratorVenBanAcc = vendorAccountsLista
@@ -392,7 +400,7 @@ public class ResponseMessageHandlerServiceClientImpl {
 						}
 						Pomocna.obradaGresaka(session, errorResponse,
 								messageHeader);
-						sessionPomocna.commitTransakcije();						
+						sessionPomocna.commitTransakcije();
 					}
 				}
 			} catch (Exception e) {
@@ -406,7 +414,7 @@ public class ResponseMessageHandlerServiceClientImpl {
 		obradaResponseXML(anyTypeLista, messageName);
 	}
 
-	private void obradaBudComMsg(AnyTypeList anyTypeLista, String messageName) {		
+	private void obradaBudComMsg(AnyTypeList anyTypeLista, String messageName) {
 		Integer statNotId = statusNotifDAO.getIduciRbr();
 		Integer notHeadId = notifHeadDAO.getIduciRbr();
 		Budcommsg budComMsg = null;
@@ -458,11 +466,12 @@ public class ResponseMessageHandlerServiceClientImpl {
 				if (budComMsg != null) {
 					sessionPomocna.otvoriTransakciju();
 					messageHeader.postaviVrijednostiRetrieve();
-					reqMsg = reqMsgDAO.getReqMsgByPK(budComMsg.getReqmsg().getReqmsgid());
+					reqMsg = reqMsgDAO.getReqMsgByPK(budComMsg.getReqmsg()
+							.getReqmsgid());
 					resMsg = new Resmsg();
 					reqMsg.postaviVrijednosti(messageHeader);
 					resMsg.postaviVrijednosti(messageHeader, messageName,
-							responseMessageType, reqMsg);					
+							responseMessageType, reqMsg);
 					budComMsg.postaviVrijednosti(Pomocna
 							.getStatusRetrieve(responseMessageType), reqMsg,
 							PomocnaDatum.XMLDatumUDate(messageHeader
@@ -511,7 +520,7 @@ public class ResponseMessageHandlerServiceClientImpl {
 						session.update(docHead);
 					}
 					Pomocna.obradaGresaka(session, errorResponse, messageHeader);
-					sessionPomocna.commitTransakcije();					
+					sessionPomocna.commitTransakcije();
 					++statNotId;
 					++notHeadId;
 				}
@@ -526,7 +535,7 @@ public class ResponseMessageHandlerServiceClientImpl {
 		obradaResponseXML(anyTypeLista, messageName);
 	}
 
-	private void obradaInvoiceMsg(AnyTypeList anyTypeLista, String messageName) {		
+	private void obradaInvoiceMsg(AnyTypeList anyTypeLista, String messageName) {
 		Integer statNotId = statusNotifDAO.getIduciRbr();
 		Integer notHeadId = notifHeadDAO.getIduciRbr();
 		Invoicemsg invoiceMsg = null;
@@ -555,11 +564,12 @@ public class ResponseMessageHandlerServiceClientImpl {
 				if (invoiceMsg != null) {
 					sessionPomocna.otvoriTransakciju();
 					messageHeader.postaviVrijednostiRetrieve();
-					reqMsg = reqMsgDAO.getReqMsgByPK(invoiceMsg.getReqmsg().getReqmsgid());
+					reqMsg = reqMsgDAO.getReqMsgByPK(invoiceMsg.getReqmsg()
+							.getReqmsgid());
 					resMsg = new Resmsg();
 					reqMsg.postaviVrijednosti(messageHeader);
 					resMsg.postaviVrijednosti(messageHeader, messageName,
-							responseMessageType, reqMsg);					
+							responseMessageType, reqMsg);
 					invoiceMsg.postaviVrijednosti(Pomocna
 							.getStatusRetrieve(responseMessageType), reqMsg,
 							PomocnaDatum.XMLDatumUDate(messageHeader
@@ -613,7 +623,7 @@ public class ResponseMessageHandlerServiceClientImpl {
 						session.update(docHead);
 					}
 					Pomocna.obradaGresaka(session, errorResponse, messageHeader);
-					sessionPomocna.commitTransakcije();			
+					sessionPomocna.commitTransakcije();
 					++statNotId;
 					++notHeadId;
 				}

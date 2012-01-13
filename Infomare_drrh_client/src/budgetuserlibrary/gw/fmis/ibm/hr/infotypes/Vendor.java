@@ -562,7 +562,7 @@ public class Vendor {
 		naturalPerson = Character.toString(vendorMsg.getNaturalpe())
 				.equals("1") ? "true" : "false";
 		language = StringUtils
-				.trimToNull(vendorMsg.getLanguage().toLowerCase());
+				.trimToNull(vendorMsg.getLanguage());
 		// Upis ziro racuna, samo kod upisa novog partnera
 		if (((int) vendorMsg.getOpt()) == 1 && venBanAccounti != null
 				&& venBanAccounti.size() > 0) {
