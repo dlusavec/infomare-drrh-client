@@ -212,5 +212,7 @@ public class Payexec implements java.io.Serializable {
 		iscess = paymentExecution.isIsCession() ? "1" : "0";
 		datetimews = PomocnaDatum.XMLDatumUDate(messageHeader
 				.getSubmitionTimestamp());
+		timews = PomocnaDatum.XMLDatumUDate(messageHeader
+				.getSubmitionTimestamp());
 	}
 }

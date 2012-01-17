@@ -400,15 +400,18 @@ public class VendorItem {
 		}
 
 		// Cesija
+		VendorVezna vendorVeznaAlter = null;
 		alternativeBuFmisVendorId = invoiceMsg.getAlbufmven() != null ? invoiceMsg
 				.getAlbufmven() : null;
-		VendorVezna vendorVeznaAlter = vendorVeznaDAO
-				.getVendorVeznaByPK(StringUtils.trimToEmpty(invoiceMsg
-						.getAlbufmven()));
-		if (vendorVeznaAlter != null) {
-			alternativeMasterVendorId = Long
-					.parseLong(vendorVeznaAlter.getF41vid().trim());
-			alternativeSapVendorId = StringUtils.trimToEmpty(vendorVeznaAlter.getF41svi());
+		if (invoiceMsg.getAlbufmven() != null) {
+			vendorVeznaAlter = vendorVeznaDAO.getVendorVeznaByPK(StringUtils
+					.trimToEmpty(invoiceMsg.getAlbufmven()));
+		}
+		if (invoiceMsg.getAlbufmven() != null && vendorVeznaAlter != null) {
+			alternativeMasterVendorId = Long.parseLong(vendorVeznaAlter
+					.getF41vid().trim());
+			alternativeSapVendorId = StringUtils.trimToEmpty(vendorVeznaAlter
+					.getF41svi());
 		}
 		paymentReference = StringUtils.trimToNull(invoiceMsg.getPayref());
 		description = StringUtils.trimToNull(invoiceMsg.getPaydesc());
