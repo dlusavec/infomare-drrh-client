@@ -56,7 +56,7 @@ public class ServletInit implements ServletContextListener {
 	}
 
 	public void razmjena() {
-		if (!Postavke.JOB_RUNNING) {
+		if (!Postavke.JOB_RUNNING && Pomocna.isRadnoVrijeme()) {
 			try {
 				Log.loger.info("Pocetak razmjene");
 				Postavke.JOB_RUNNING = true;

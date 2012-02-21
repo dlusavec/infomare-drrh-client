@@ -102,10 +102,10 @@ public class Resmsg implements java.io.Serializable {
 		this.reqmsgid = reqmsgid;
 	}
 
-	public void postaviVrijednosti(MessageHeader messageHeader, String msgname,
+	public void postaviVrijednosti(MessageHeader messageHeader, String msgName,
 			ResponseMessageType resMsgType, Reqmsg reqMsg) {
 		this.resmsgid = messageHeader.getResponseMsgId();
-		this.msgname = msgname;
+		this.msgname = msgName;
 		this.resmsgtype = resMsgType.value();
 		this.eventlid = messageHeader.getEventId();
 		if (reqMsg != null) {

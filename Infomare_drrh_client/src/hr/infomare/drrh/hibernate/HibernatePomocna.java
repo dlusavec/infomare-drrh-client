@@ -72,6 +72,7 @@ public class HibernatePomocna {
 		config.addAnnotatedClass(hr.infomare.drrh.pojo.Resmsg.class);
 		config.addAnnotatedClass(hr.infomare.drrh.pojo.Errormsg.class);
 		config.addAnnotatedClass(hr.infomare.drrh.pojo.Resxml.class);
+		config.addAnnotatedClass(hr.infomare.drrh.pojo.Retrive.class);
 		// Banke, partneri
 		config.addAnnotatedClass(hr.infomare.drrh.pojo.Bankmsg.class);
 		config.addAnnotatedClass(hr.infomare.drrh.pojo.Vendormsg.class);

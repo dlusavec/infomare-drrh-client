@@ -3,6 +3,7 @@ package hr.infomare.drrh.pomocni;
 import hr.infomare.drrh.dao.ResmsgDAO;
 import hr.infomare.drrh.pojo.Errormsg;
 
+import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
 
@@ -67,5 +68,20 @@ public class Pomocna {
 		MessageHeader messageHeader = new MessageHeader();		
 		messageHeader.setResponseMsgId(resMsgid);		
 		return messageHeader;
+	}
+	
+	public static boolean isRadnoVrijeme(){
+		Calendar calOd = Calendar.getInstance();
+		Calendar calDo = Calendar.getInstance();
+		Calendar calSad = Calendar.getInstance();
+
+		calOd.set(Calendar.HOUR_OF_DAY, 8);
+		calOd.set(Calendar.MINUTE, 0);
+		calOd.set(Calendar.SECOND, 0);
+		calDo.set(Calendar.HOUR_OF_DAY, 20);
+		calDo.set(Calendar.MINUTE, 0);
+		calDo.set(Calendar.SECOND, 0);
+		
+		return calSad.after(calOd) && calSad.before(calDo);
 	}
 }

@@ -243,14 +243,14 @@ public class ResponseMessageHandlerServiceClientImpl {
 		obradaPaymentExecutionMsg(
 				(AnyTypeList) port
 						.getPaymentExecutionList(Postavke.LOGICAL_SYSTEM_NAME),
-				"retrievePayementExecution");
+				"retrievePaymentExecution");
 	}
 
 	public void preuzmiPayementExecutionMessageId() {
 		obradaPaymentExecutionMsg(
 				(AnyTypeList) port.getPaymentExecutionListStartingWithMessageId(
 						Postavke.LOGICAL_SYSTEM_NAME, Long.valueOf(0)),
-				"retrievePayementExecutionMessageId");
+				"retrievePaymentExecutionMessageId");
 	}
 
 	private void obradaBankMsg(AnyTypeList anyTypeLista, String messageName) {
@@ -744,7 +744,7 @@ public class ResponseMessageHandlerServiceClientImpl {
 				if (Postavke.DEBUG_PORUKA) {
 					debug.ispisUXML(
 							object,
-							"Message_response_"
+							"Message_response_"+messageName
 									+ Long.toString(messageHeader
 											.getResponseMsgId()));
 				}
