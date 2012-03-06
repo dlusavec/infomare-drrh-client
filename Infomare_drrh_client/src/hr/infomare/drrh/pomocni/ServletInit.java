@@ -94,7 +94,11 @@ public class ServletInit implements ServletContextListener {
 				if (StringUtils.isNotBlank(Postavke.WSDL_VENDOR)) {
 					VendorManagementInterfaceClientImpl vendorManagementR = new VendorManagementInterfaceClientImpl();
 					vendorManagementR.retrievePartnera();
-				}										
+				}
+				if (StringUtils.isNotBlank(Postavke.WSDL_RESPONSE)) {
+					ResponseMessageHandlerServiceClientImpl responseManagementPonavljanje = new ResponseMessageHandlerServiceClientImpl();
+					responseManagementPonavljanje.razmjenaOdgovoraMessageId();
+				}
 				Log.loger.info("Zavrsetak razmjene");
 			} catch (Exception e) {
 				Log.loger.severe(PomocnaError.getErrorMessage(e));

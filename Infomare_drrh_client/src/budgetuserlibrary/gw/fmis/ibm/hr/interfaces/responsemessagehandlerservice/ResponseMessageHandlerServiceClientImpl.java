@@ -15,7 +15,9 @@ import hr.infomare.drrh.dao.InvoicemsgDAO;
 import hr.infomare.drrh.dao.NotifheadDAO;
 import hr.infomare.drrh.dao.PayexecDAO;
 import hr.infomare.drrh.dao.ReqmsgDAO;
+import hr.infomare.drrh.dao.ResmsgDAO;
 import hr.infomare.drrh.dao.ResxmlDAO;
+import hr.infomare.drrh.dao.RetriveDAO;
 import hr.infomare.drrh.dao.StatnotifDAO;
 import hr.infomare.drrh.dao.VenbanaccmDAO;
 import hr.infomare.drrh.dao.VendormsgDAO;
@@ -29,6 +31,7 @@ import hr.infomare.drrh.pojo.Notifhead;
 import hr.infomare.drrh.pojo.Payexec;
 import hr.infomare.drrh.pojo.Reqmsg;
 import hr.infomare.drrh.pojo.Resmsg;
+import hr.infomare.drrh.pojo.Retrive;
 import hr.infomare.drrh.pojo.Statnotif;
 import hr.infomare.drrh.pojo.Venbanaccm;
 import hr.infomare.drrh.pojo.VendorVezna;
@@ -82,12 +85,14 @@ public class ResponseMessageHandlerServiceClientImpl {
 	private InvoiceDAO invoiceDAO;
 	private DocheadDAO docHeadDAO;
 	private ReqmsgDAO reqMsgDAO;
+	private ResmsgDAO resMsgDAO;
 	private StatnotifDAO statusNotifDAO;
 	private NotifheadDAO notifHeadDAO;
 	private BudcomDAO budComDAO;
 	private VendormsgDAO vendorMsgDAO;
 	private VenbanaccmDAO venBanAccMDAO;
 	private PayexecDAO payExecDAO;
+	private RetriveDAO retriveDAO;
 	private Debug debug = new Debug("RESPONSE");
 
 	public ResponseMessageHandlerServiceClientImpl() {
@@ -96,7 +101,6 @@ public class ResponseMessageHandlerServiceClientImpl {
 	public void razmjenaOdgovora() {
 		try {
 			otvoriPortISesiju();
-
 			preuzmiBankResponse();
 			preuzmiVendorResponse();
 			preuzmiReservationResponse();
@@ -111,21 +115,35 @@ public class ResponseMessageHandlerServiceClientImpl {
 	}
 
 	public void razmjenaOdgovoraMessageId() {
+		Retrive retrive = null;
 		try {
 			otvoriPortISesiju();
-
-			// preuzmiBankResponseMessageId();
-			preuzmiVendorResponseMessageId();
-
-			// preuzmiReservationResponseMessageId();
-			// preuzmiContractResponseMessageId();
-			// preuzmiPurchaseOrderResponseMessageId();
-
-			// preuzmiInvoiceResponseMessageId();
-			preuzmiPayementExecutionMessageId();
+			retrive = retriveDAO.getRetrive();
+			if (retrive != null) {
+				// preuzmiReservationResponseMessageId();
+				// preuzmiContractResponseMessageId();
+				// preuzmiPurchaseOrderResponseMessageId();
+				// preuzmiInvoiceResponseMessageId();
+				if (retrive.getIdPayexec() != null
+						&& retrive.getIdPayexec() > 0) {
+					preuzmiPayementExecutionMessageId(retrive.getIdPayexec()
+							.longValue());
+				}
+				try {
+					sessionPomocna.otvoriTransakciju();
+					retrive.resetiraj();
+					session.update(retrive);
+					sessionPomocna.commitTransakcije();
+				} catch (Exception e) {
+					sessionPomocna.rollbackTransakcije();
+					Log.loger.severe("Greška kod preuzimanja odgovora, ponovno povlaæenje "
+							+ PomocnaError.getErrorMessage(e));
+				}
+			}
 		} catch (Exception e) {
-			Log.loger.severe("Greška kod preuzimanja odgovora "
-					+ PomocnaError.getErrorMessage(e));
+			Log.loger
+					.severe("Greška kod preuzimanja odgovora, ponovno povlaæenje "
+							+ PomocnaError.getErrorMessage(e));
 		}
 	}
 
@@ -145,6 +163,7 @@ public class ResponseMessageHandlerServiceClientImpl {
 		budcomMsgDAO = new BudcommsgDAO(session);
 		docHeadDAO = new DocheadDAO(session);
 		reqMsgDAO = new ReqmsgDAO(session);
+		resMsgDAO = new ResmsgDAO(session);
 		statusNotifDAO = new StatnotifDAO(session);
 		notifHeadDAO = new NotifheadDAO(session);
 		budComDAO = new BudcomDAO(session);
@@ -153,6 +172,7 @@ public class ResponseMessageHandlerServiceClientImpl {
 		vendorMsgDAO = new VendormsgDAO(session);
 		venBanAccMDAO = new VenbanaccmDAO(session);
 		payExecDAO = new PayexecDAO(session);
+		retriveDAO = new RetriveDAO(session);
 	}
 
 	public void preuzmiBankResponse() {
@@ -243,14 +263,14 @@ public class ResponseMessageHandlerServiceClientImpl {
 		obradaPaymentExecutionMsg(
 				(AnyTypeList) port
 						.getPaymentExecutionList(Postavke.LOGICAL_SYSTEM_NAME),
-				"retrievePaymentExecution");
+				"retrievePaymentExecution", false);
 	}
 
-	public void preuzmiPayementExecutionMessageId() {
+	public void preuzmiPayementExecutionMessageId(Long odPoruke) {
 		obradaPaymentExecutionMsg(
 				(AnyTypeList) port.getPaymentExecutionListStartingWithMessageId(
-						Postavke.LOGICAL_SYSTEM_NAME, Long.valueOf(0)),
-				"retrievePaymentExecutionMessageId");
+						Postavke.LOGICAL_SYSTEM_NAME, odPoruke),
+				"retrievePaymentExecutionMessageId", true);
 	}
 
 	private void obradaBankMsg(AnyTypeList anyTypeLista, String messageName) {
@@ -640,7 +660,7 @@ public class ResponseMessageHandlerServiceClientImpl {
 	}
 
 	private void obradaPaymentExecutionMsg(AnyTypeList anyTypeLista,
-			String messageName) {
+			String messageName, boolean ponavljanje) {
 		Payexec payExec = null;
 		Resmsg resMsg = null;
 		MessageHeader messageHeader = null;
@@ -651,9 +671,14 @@ public class ResponseMessageHandlerServiceClientImpl {
 			messageHeader = response.getMessageHeader();
 			messageHeader.postaviVrijednostiRetrieve();
 			try {
-
-				if (response != null) {
+				
+				if (ponavljanje) {					
+					resMsg = resMsgDAO.getResMsgByPK(messageHeader
+							.getResponseMsgId());
+				}
+				if (response != null && (!ponavljanje || ponavljanje && resMsg==null)) {
 					sessionPomocna.otvoriTransakciju();
+					
 					resMsg = new Resmsg();
 					resMsg.postaviVrijednosti(messageHeader, messageName,
 							ResponseMessageType.NOTIFICATION, null);
@@ -742,11 +767,8 @@ public class ResponseMessageHandlerServiceClientImpl {
 								+ PomocnaError.getErrorMessage(e));
 			} finally {
 				if (Postavke.DEBUG_PORUKA) {
-					debug.ispisUXML(
-							object,
-							"Message_response_"+messageName
-									+ Long.toString(messageHeader
-											.getResponseMsgId()));
+					debug.ispisUXML(object, "Message_response_" + messageName
+							+ Long.toString(messageHeader.getResponseMsgId()));
 				}
 			}
 		}

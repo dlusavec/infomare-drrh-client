@@ -4,7 +4,8 @@ import hr.infomare.drrh.pojo.Resmsg;
 import hr.infomare.drrh.pomocni.Log;
 import hr.infomare.drrh.pomocni.PomocnaError;
 
-import org.apache.commons.lang.math.NumberUtils;
+import java.util.List;
+
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -23,6 +24,20 @@ public class ResmsgDAO extends AbstraktDAO {
 		this.session = session;
 	}
 
+	public Resmsg getResMsgByPK(Long resMsgId) {
+		try {
+			Criteria kriterij = session.createCriteria(Resmsg.class);
+			kriterij.add(Restrictions.eq("resmsgid", resMsgId));					
+			List lista=kriterij.list();			
+			Resmsg resMsg = (lista.size()>0 ? (Resmsg) lista.get(0) : null);
+			return resMsg;
+		} catch (HibernateException e) {
+			Log.loger.severe(PomocnaError.getErrorMessage(e));
+			return null;
+		}
+	}
+	
+	
 	public Long getIduciRbrNegativni() {
 		try {
 			Criteria kriterij = session.createCriteria(Resmsg.class);

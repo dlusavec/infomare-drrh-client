@@ -101,4 +101,13 @@ public class Retrive implements java.io.Serializable {
 		this.idPayexec = idPayexec;
 	}
 
+	public void resetiraj() {
+		idVendor = null;
+		idVenbank = null;
+		idUgovor = null;
+		idNarudz = null;
+		idNajava = null;
+		idInvoice = null;
+		idPayexec = null;
+	}
 }
