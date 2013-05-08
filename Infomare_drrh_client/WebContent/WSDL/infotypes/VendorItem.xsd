@@ -1,26 +1,42 @@
-<?xml version="1.0" encoding="UTF-8"?><xsd:schema targetNamespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes/" xmlns:Q1="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema
+	targetNamespace="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes/"
+	xmlns:Q1="http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 
 
 
-    <xsd:include schemaLocation="DebitCreditIndicatorType.xsd"/>
-    <xsd:complexType name="VendorItem">
-    <xsd:sequence>
-      <xsd:element minOccurs="0" name="masterVendorId" type="xsd:long"/>
-      <xsd:element name="buFmisVendorId" type="xsd:string"/>
-      <xsd:element name="sapVendorId" type="xsd:string"/>
-      <xsd:element minOccurs="0" name="alternativeMasterVendorId" type="xsd:long"/>
-      <xsd:element minOccurs="0" name="alternativeBuFmisVendorId" type="xsd:string"/>
-      <xsd:element minOccurs="0" name="alternativeSapVendorId" type="xsd:string"/>
-      <xsd:element minOccurs="0" name="paymentReference" type="xsd:string"/>
-      <xsd:element minOccurs="0" name="description" type="xsd:string"/>
-      <xsd:element default="HNB" name="houseBank" type="xsd:string"/>
-      <xsd:element name="vendorBank" type="xsd:string"/>
+	<xsd:include schemaLocation="DebitCreditIndicatorType.xsd" />
+	<xsd:complexType name="VendorItem">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="masterVendorId"
+				type="xsd:long" />
+			<xsd:element name="buFmisVendorId" type="xsd:string" />
+			<xsd:element name="sapVendorId" type="xsd:string" />
+			<xsd:element minOccurs="0" name="alternativeMasterVendorId"
+				type="xsd:long" />
+			<xsd:element minOccurs="0" name="alternativeBuFmisVendorId"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="alternativeSapVendorId"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="paymentReference"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="description"
+				type="xsd:string" />
+			<xsd:element default="HNB" name="houseBank"
+				type="xsd:string" />
+			<xsd:element name="vendorBank" type="xsd:string" />
 
-      <xsd:element minOccurs="0" name="instructionKey" type="xsd:string"/>
-      <xsd:element minOccurs="0" name="referenceDetails" type="xsd:string"/>
-      <xsd:element minOccurs="0" name="vendorAccountNumber" type="xsd:string"/>
-      <xsd:element name="debitCreditIndicator" type="Q1:DebitCreditIndicatorType"/>
-      <xsd:element name="lineItemNumber" type="xsd:long"/>
-    </xsd:sequence>
-  </xsd:complexType>
+			<xsd:element minOccurs="0" name="instructionKey"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="referenceDetails"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="vendorAccountNumber"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="iban" type="xsd:string"></xsd:element>
+			<xsd:element name="debitCreditIndicator"
+				type="Q1:DebitCreditIndicatorType" />
+			<xsd:element name="lineItemNumber" type="xsd:long" />
+		</xsd:sequence>
+	</xsd:complexType>
 </xsd:schema>
