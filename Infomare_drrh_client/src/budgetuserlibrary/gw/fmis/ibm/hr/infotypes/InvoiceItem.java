@@ -1,3 +1,4 @@
+
 package budgetuserlibrary.gw.fmis.ibm.hr.infotypes;
 
 import hr.infomare.drrh.dao.DocheadDAO;
@@ -16,12 +17,9 @@ import javax.xml.bind.annotation.XmlType;
 import org.apache.commons.lang.StringUtils;
 
 /**
- * <p>
- * Java class for InvoiceItem complex type.
+ * <p>Java class for InvoiceItem complex type.
  * 
- * <p>
- * The following schema fragment specifies the expected content contained within
- * this class.
+ * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="InvoiceItem">
@@ -48,10 +46,19 @@ import org.apache.commons.lang.StringUtils;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "InvoiceItem", propOrder = { "budgetStructure", "glAccount",
-		"amount", "description", "lineItemNumber", "quantity", "quantityUnit",
-		"referencedDocumentItem", "location", "localCurrencyAmount",
-		"debitCreditIndicator" })
+@XmlType(name = "InvoiceItem", propOrder = {
+    "budgetStructure",
+    "glAccount",
+    "amount",
+    "description",
+    "lineItemNumber",
+    "quantity",
+    "quantityUnit",
+    "referencedDocumentItem",
+    "location",
+    "localCurrencyAmount",
+    "debitCreditIndicator"
+})
 public class InvoiceItem {
 
 	protected BudgetStructure budgetStructure;
@@ -67,232 +74,265 @@ public class InvoiceItem {
 	protected DebitCreditIndicatorType debitCreditIndicator;
 
 	/**
-	 * Gets the value of the budgetStructure property.
-	 * 
-	 * @return possible object is {@link BudgetStructure }
-	 * 
-	 */
+     * Gets the value of the budgetStructure property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link BudgetStructure }
+     *     
+     */
 	public BudgetStructure getBudgetStructure() {
 		return budgetStructure;
 	}
 
 	/**
-	 * Sets the value of the budgetStructure property.
-	 * 
-	 * @param value
-	 *            allowed object is {@link BudgetStructure }
-	 * 
-	 */
+     * Sets the value of the budgetStructure property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link BudgetStructure }
+     *     
+     */
 	public void setBudgetStructure(BudgetStructure value) {
 		this.budgetStructure = value;
 	}
 
 	/**
-	 * Gets the value of the glAccount property.
-	 * 
-	 * @return possible object is {@link String }
-	 * 
-	 */
+     * Gets the value of the glAccount property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
 	public String getGlAccount() {
 		return glAccount;
 	}
 
 	/**
-	 * Sets the value of the glAccount property.
-	 * 
-	 * @param value
-	 *            allowed object is {@link String }
-	 * 
-	 */
+     * Sets the value of the glAccount property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
 	public void setGlAccount(String value) {
 		this.glAccount = value;
 	}
 
 	/**
-	 * Gets the value of the amount property.
-	 * 
-	 * @return possible object is {@link BigDecimal }
-	 * 
-	 */
+     * Gets the value of the amount property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link BigDecimal }
+     *     
+     */
 	public BigDecimal getAmount() {
 		return amount;
 	}
 
 	/**
-	 * Sets the value of the amount property.
-	 * 
-	 * @param value
-	 *            allowed object is {@link BigDecimal }
-	 * 
-	 */
+     * Sets the value of the amount property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link BigDecimal }
+     *     
+     */
 	public void setAmount(BigDecimal value) {
 		this.amount = value;
 	}
 
 	/**
-	 * Gets the value of the description property.
-	 * 
-	 * @return possible object is {@link String }
-	 * 
-	 */
+     * Gets the value of the description property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
 	public String getDescription() {
 		return description;
 	}
 
 	/**
-	 * Sets the value of the description property.
-	 * 
-	 * @param value
-	 *            allowed object is {@link String }
-	 * 
-	 */
+     * Sets the value of the description property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
 	public void setDescription(String value) {
 		this.description = value;
 	}
 
 	/**
-	 * Gets the value of the lineItemNumber property.
-	 * 
-	 * @return possible object is {@link Long }
-	 * 
-	 */
+     * Gets the value of the lineItemNumber property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Long }
+     *     
+     */
 	public Long getLineItemNumber() {
 		return lineItemNumber;
 	}
 
 	/**
-	 * Sets the value of the lineItemNumber property.
-	 * 
-	 * @param value
-	 *            allowed object is {@link Long }
-	 * 
-	 */
+     * Sets the value of the lineItemNumber property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Long }
+     *     
+     */
 	public void setLineItemNumber(Long value) {
 		this.lineItemNumber = value;
 	}
 
 	/**
-	 * Gets the value of the quantity property.
-	 * 
-	 * @return possible object is {@link BigDecimal }
-	 * 
-	 */
+     * Gets the value of the quantity property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link BigDecimal }
+     *     
+     */
 	public BigDecimal getQuantity() {
 		return quantity;
 	}
 
 	/**
-	 * Sets the value of the quantity property.
-	 * 
-	 * @param value
-	 *            allowed object is {@link BigDecimal }
-	 * 
-	 */
+     * Sets the value of the quantity property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link BigDecimal }
+     *     
+     */
 	public void setQuantity(BigDecimal value) {
 		this.quantity = value;
 	}
 
 	/**
-	 * Gets the value of the quantityUnit property.
-	 * 
-	 * @return possible object is {@link QuantityUnitType }
-	 * 
-	 */
+     * Gets the value of the quantityUnit property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link QuantityUnitType }
+     *     
+     */
 	public QuantityUnitType getQuantityUnit() {
 		return quantityUnit;
 	}
 
 	/**
-	 * Sets the value of the quantityUnit property.
-	 * 
-	 * @param value
-	 *            allowed object is {@link QuantityUnitType }
-	 * 
-	 */
+     * Sets the value of the quantityUnit property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link QuantityUnitType }
+     *     
+     */
 	public void setQuantityUnit(QuantityUnitType value) {
 		this.quantityUnit = value;
 	}
 
 	/**
-	 * Gets the value of the referencedDocumentItem property.
-	 * 
-	 * @return possible object is {@link ReferencedDocumentItem }
-	 * 
-	 */
+     * Gets the value of the referencedDocumentItem property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link ReferencedDocumentItem }
+     *     
+     */
 	public ReferencedDocumentItem getReferencedDocumentItem() {
 		return referencedDocumentItem;
 	}
 
 	/**
-	 * Sets the value of the referencedDocumentItem property.
-	 * 
-	 * @param value
-	 *            allowed object is {@link ReferencedDocumentItem }
-	 * 
-	 */
+     * Sets the value of the referencedDocumentItem property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link ReferencedDocumentItem }
+     *     
+     */
 	public void setReferencedDocumentItem(ReferencedDocumentItem value) {
 		this.referencedDocumentItem = value;
 	}
 
 	/**
-	 * Gets the value of the location property.
-	 * 
-	 * @return possible object is {@link Location }
-	 * 
-	 */
+     * Gets the value of the location property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Location }
+     *     
+     */
 	public Location getLocation() {
 		return location;
 	}
 
 	/**
-	 * Sets the value of the location property.
-	 * 
-	 * @param value
-	 *            allowed object is {@link Location }
-	 * 
-	 */
+     * Sets the value of the location property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Location }
+     *     
+     */
 	public void setLocation(Location value) {
 		this.location = value;
 	}
 
 	/**
-	 * Gets the value of the localCurrencyAmount property.
-	 * 
-	 * @return possible object is {@link BigDecimal }
-	 * 
-	 */
+     * Gets the value of the localCurrencyAmount property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link BigDecimal }
+     *     
+     */
 	public BigDecimal getLocalCurrencyAmount() {
 		return localCurrencyAmount;
 	}
 
 	/**
-	 * Sets the value of the localCurrencyAmount property.
-	 * 
-	 * @param value
-	 *            allowed object is {@link BigDecimal }
-	 * 
-	 */
+     * Sets the value of the localCurrencyAmount property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link BigDecimal }
+     *     
+     */
 	public void setLocalCurrencyAmount(BigDecimal value) {
 		this.localCurrencyAmount = value;
 	}
 
 	/**
-	 * Gets the value of the debitCreditIndicator property.
-	 * 
-	 * @return possible object is {@link DebitCreditIndicatorType }
-	 * 
-	 */
+     * Gets the value of the debitCreditIndicator property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link DebitCreditIndicatorType }
+     *     
+     */
 	public DebitCreditIndicatorType getDebitCreditIndicator() {
 		return debitCreditIndicator;
 	}
 
 	/**
-	 * Sets the value of the debitCreditIndicator property.
-	 * 
-	 * @param value
-	 *            allowed object is {@link DebitCreditIndicatorType }
-	 * 
-	 */
+     * Sets the value of the debitCreditIndicator property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link DebitCreditIndicatorType }
+     *     
+     */
 	public void setDebitCreditIndicator(DebitCreditIndicatorType value) {
 		this.debitCreditIndicator = value;
 	}

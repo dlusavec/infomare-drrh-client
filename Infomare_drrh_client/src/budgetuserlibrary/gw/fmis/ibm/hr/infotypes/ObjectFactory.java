@@ -1,51 +1,52 @@
+
 package budgetuserlibrary.gw.fmis.ibm.hr.infotypes;
 
 import javax.xml.bind.annotation.XmlRegistry;
 
 /**
- * This object contains factory methods for each Java content interface and Java
- * element interface generated in the budgetuserlibrary.gw.fmis.ibm.hr.infotypes
- * package.
- * <p>
- * An ObjectFactory allows you to programatically construct new instances of the
- * Java representation for XML content. The Java representation of XML content
- * can consist of schema derived interfaces and classes representing the binding
- * of schema type definitions, element declarations and model groups. Factory
- * methods for each of these are provided in this class.
+ * This object contains factory methods for each 
+ * Java content interface and Java element interface 
+ * generated in the budgetuserlibrary.gw.fmis.ibm.hr.infotypes package. 
+ * <p>An ObjectFactory allows you to programatically 
+ * construct new instances of the Java representation 
+ * for XML content. The Java representation of XML 
+ * content can consist of schema derived interfaces 
+ * and classes representing the binding of schema 
+ * type definitions, element declarations and model 
+ * groups.  Factory methods for each of these are 
+ * provided in this class.
  * 
  */
 @XmlRegistry
 public class ObjectFactory {
 
 	/**
-	 * Create a new ObjectFactory that can be used to create new instances of
-	 * schema derived classes for package:
-	 * budgetuserlibrary.gw.fmis.ibm.hr.infotypes
-	 * 
-	 */
+     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: budgetuserlibrary.gw.fmis.ibm.hr.infotypes
+     * 
+     */
 	public ObjectFactory() {
 	}
 
 	/**
-	 * Create an instance of {@link CommitmentItem }
-	 * 
-	 */
+     * Create an instance of {@link CommitmentItem }
+     * 
+     */
 	public CommitmentItem createCommitmentItem() {
 		return new CommitmentItem();
 	}
 
 	/**
-	 * Create an instance of {@link VendorItemList }
-	 * 
-	 */
+     * Create an instance of {@link VendorItemList }
+     * 
+     */
 	public VendorItemList createVendorItemList() {
 		return new VendorItemList();
 	}
 
 	/**
-	 * Create an instance of {@link InvoiceStatusNotification }
-	 * 
-	 */
+     * Create an instance of {@link InvoiceStatusNotification }
+     * 
+     */
 	public InvoiceStatusNotification createInvoiceStatusNotification() {
 		return new InvoiceStatusNotification();
 	}
@@ -59,73 +60,73 @@ public class ObjectFactory {
 	}
 
 	/**
-	 * Create an instance of {@link Location }
-	 * 
-	 */
+     * Create an instance of {@link Location }
+     * 
+     */
 	public Location createLocation() {
 		return new Location();
 	}
 
 	/**
-	 * Create an instance of {@link InvoiceItem }
-	 * 
-	 */
+     * Create an instance of {@link InvoiceItem }
+     * 
+     */
 	public InvoiceItem createInvoiceItem() {
 		return new InvoiceItem();
 	}
 
 	/**
-	 * Create an instance of {@link Invoice }
-	 * 
-	 */
+     * Create an instance of {@link Invoice }
+     * 
+     */
 	public Invoice createInvoice() {
 		return new Invoice();
 	}
 
 	/**
-	 * Create an instance of {@link NotificationHeader }
-	 * 
-	 */
+     * Create an instance of {@link NotificationHeader }
+     * 
+     */
 	public NotificationHeader createNotificationHeader() {
 		return new NotificationHeader();
 	}
 
 	/**
-	 * Create an instance of {@link CommitmentItemType }
-	 * 
-	 */
+     * Create an instance of {@link CommitmentItemType }
+     * 
+     */
 	public CommitmentItemType createCommitmentItemType() {
 		return new CommitmentItemType();
 	}
 
 	/**
-	 * Create an instance of {@link MessageHeader }
-	 * 
-	 */
+     * Create an instance of {@link MessageHeader }
+     * 
+     */
 	public MessageHeader createMessageHeader() {
 		return new MessageHeader();
 	}
 
 	/**
-	 * Create an instance of {@link IncoiceItemList }
-	 * 
-	 */
+     * Create an instance of {@link IncoiceItemList }
+     * 
+     */
 	public IncoiceItemList createIncoiceItemList() {
 		return new IncoiceItemList();
 	}
 
 	/**
-	 * Create an instance of {@link DocumentClassCategoryType }
-	 * 
-	 */
+     * Create an instance of {@link DocumentClassCategoryType }
+     * 
+     */
 	public DocumentClassCategoryType createDocumentClassCategoryType() {
 		return new DocumentClassCategoryType();
 	}
 
 	/**
-	 * Create an instance of {@link ReferencedDocumentItem }
-	 * 
-	 */
+     * Create an instance of {@link ReferencedDocumentItem }
+     * 
+     */
 	public ReferencedDocumentItem createReferencedDocumentItem() {
 		return new ReferencedDocumentItem();
 	}
@@ -155,25 +156,25 @@ public class ObjectFactory {
 	}
 
 	/**
-	 * Create an instance of {@link ErrorResponse }
-	 * 
-	 */
+     * Create an instance of {@link ErrorResponse }
+     * 
+     */
 	public ErrorResponse createErrorResponse() {
 		return new ErrorResponse();
 	}
 
 	/**
-	 * Create an instance of {@link Currency }
-	 * 
-	 */
+     * Create an instance of {@link Currency }
+     * 
+     */
 	public Currency createCurrency() {
 		return new Currency();
 	}
 
 	/**
-	 * Create an instance of {@link BudgetStructure }
-	 * 
-	 */
+     * Create an instance of {@link BudgetStructure }
+     * 
+     */
 	public BudgetStructure createBudgetStructure() {
 		return new BudgetStructure();
 	}
@@ -211,17 +212,17 @@ public class ObjectFactory {
 	}
 
 	/**
-	 * Create an instance of {@link Error }
-	 * 
-	 */
+     * Create an instance of {@link Error }
+     * 
+     */
 	public Error createError() {
 		return new Error();
 	}
 
 	/**
-	 * Create an instance of {@link VendorItem }
-	 * 
-	 */
+     * Create an instance of {@link VendorItem }
+     * 
+     */
 	public VendorItem createVendorItem() {
 		return new VendorItem();
 	}

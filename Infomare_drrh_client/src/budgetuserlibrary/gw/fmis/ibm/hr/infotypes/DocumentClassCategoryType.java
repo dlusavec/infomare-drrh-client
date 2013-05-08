@@ -1,3 +1,4 @@
+
 package budgetuserlibrary.gw.fmis.ibm.hr.infotypes;
 
 import hr.infomare.drrh.pojo.Dochead;
@@ -12,12 +13,9 @@ import javax.xml.bind.annotation.XmlType;
 import org.apache.commons.lang.StringUtils;
 
 /**
- * <p>
- * Java class for DocumentClassCategoryType complex type.
+ * <p>Java class for DocumentClassCategoryType complex type.
  * 
- * <p>
- * The following schema fragment specifies the expected content contained within
- * this class.
+ * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="DocumentClassCategoryType">
@@ -36,8 +34,11 @@ import org.apache.commons.lang.StringUtils;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "DocumentClassCategoryType", propOrder = { "documentClass",
-		"documentCategory", "documentType" })
+@XmlType(name = "DocumentClassCategoryType", propOrder = {
+    "documentClass",
+    "documentCategory",
+    "documentType"
+})
 public class DocumentClassCategoryType {
 
 	@XmlElement(required = true)
@@ -48,64 +49,73 @@ public class DocumentClassCategoryType {
 	protected String documentType;
 
 	/**
-	 * Gets the value of the documentClass property.
-	 * 
-	 * @return possible object is {@link DocumentClassType }
-	 * 
-	 */
+     * Gets the value of the documentClass property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link DocumentClassType }
+     *     
+     */
 	public DocumentClassType getDocumentClass() {
 		return documentClass;
 	}
 
 	/**
-	 * Sets the value of the documentClass property.
-	 * 
-	 * @param value
-	 *            allowed object is {@link DocumentClassType }
-	 * 
-	 */
+     * Sets the value of the documentClass property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link DocumentClassType }
+     *     
+     */
 	public void setDocumentClass(DocumentClassType value) {
 		this.documentClass = value;
 	}
 
 	/**
-	 * Gets the value of the documentCategory property.
-	 * 
-	 * @return possible object is {@link DocumentCategoryType }
-	 * 
-	 */
+     * Gets the value of the documentCategory property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link DocumentCategoryType }
+     *     
+     */
 	public DocumentCategoryType getDocumentCategory() {
 		return documentCategory;
 	}
 
 	/**
-	 * Sets the value of the documentCategory property.
-	 * 
-	 * @param value
-	 *            allowed object is {@link DocumentCategoryType }
-	 * 
-	 */
+     * Sets the value of the documentCategory property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link DocumentCategoryType }
+     *     
+     */
 	public void setDocumentCategory(DocumentCategoryType value) {
 		this.documentCategory = value;
 	}
 
 	/**
-	 * Gets the value of the documentType property.
-	 * 
-	 * @return possible object is {@link String }
-	 * 
-	 */
+     * Gets the value of the documentType property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
 	public String getDocumentType() {
 		return documentType;
 	}
 
 	/**
-	 * Sets the value of the documentType property.
-	 * 
-	 * @param value
-	 *            allowed object is {@link String }
-	 * 
-	 */
+     * Sets the value of the documentType property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
 	public void setDocumentType(String value) {
 		this.documentType = value;
 	}
