@@ -1,3 +1,4 @@
+
 package budgetuserlibrary.gw.fmis.ibm.hr.infotypes;
 
 import hr.infomare.drrh.pojo.Bcitemlst;
@@ -11,12 +12,9 @@ import javax.xml.bind.annotation.XmlType;
 import org.apache.commons.lang.StringUtils;
 
 /**
- * <p>
- * Java class for BudgetStructure complex type.
+ * <p>Java class for BudgetStructure complex type.
  * 
- * <p>
- * The following schema fragment specifies the expected content contained within
- * this class.
+ * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="BudgetStructure">
@@ -39,8 +37,13 @@ import org.apache.commons.lang.StringUtils;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "BudgetStructure", namespace = "http://hr.ibm.fmis.gw.BudgetUserLibrary/infotypes/", propOrder = {
-		"fund", "year", "functionalArea", "commitmentItem", "activity",
-		"budgetUser" })
+    "fund",
+    "year",
+    "functionalArea",
+    "commitmentItem",
+    "activity",
+    "budgetUser"
+})
 public class BudgetStructure {
 
 	protected String fund;
@@ -52,127 +55,145 @@ public class BudgetStructure {
 	protected String budgetUser;
 
 	/**
-	 * Gets the value of the fund property.
-	 * 
-	 * @return possible object is {@link String }
-	 * 
-	 */
+     * Gets the value of the fund property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
 	public String getFund() {
 		return fund;
 	}
 
 	/**
-	 * Sets the value of the fund property.
-	 * 
-	 * @param value
-	 *            allowed object is {@link String }
-	 * 
-	 */
+     * Sets the value of the fund property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
 	public void setFund(String value) {
 		this.fund = value;
 	}
 
 	/**
-	 * Gets the value of the year property.
-	 * 
-	 * @return possible object is {@link String }
-	 * 
-	 */
+     * Gets the value of the year property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
 	public String getYear() {
 		return year;
 	}
 
 	/**
-	 * Sets the value of the year property.
-	 * 
-	 * @param value
-	 *            allowed object is {@link String }
-	 * 
-	 */
+     * Sets the value of the year property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
 	public void setYear(String value) {
 		this.year = value;
 	}
 
 	/**
-	 * Gets the value of the functionalArea property.
-	 * 
-	 * @return possible object is {@link String }
-	 * 
-	 */
+     * Gets the value of the functionalArea property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
 	public String getFunctionalArea() {
 		return functionalArea;
 	}
 
 	/**
-	 * Sets the value of the functionalArea property.
-	 * 
-	 * @param value
-	 *            allowed object is {@link String }
-	 * 
-	 */
+     * Sets the value of the functionalArea property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
 	public void setFunctionalArea(String value) {
 		this.functionalArea = value;
 	}
 
 	/**
-	 * Gets the value of the commitmentItem property.
-	 * 
-	 * @return possible object is {@link CommitmentItem }
-	 * 
-	 */
+     * Gets the value of the commitmentItem property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link CommitmentItem }
+     *     
+     */
 	public CommitmentItem getCommitmentItem() {
 		return commitmentItem;
 	}
 
 	/**
-	 * Sets the value of the commitmentItem property.
-	 * 
-	 * @param value
-	 *            allowed object is {@link CommitmentItem }
-	 * 
-	 */
+     * Sets the value of the commitmentItem property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link CommitmentItem }
+     *     
+     */
 	public void setCommitmentItem(CommitmentItem value) {
 		this.commitmentItem = value;
 	}
 
 	/**
-	 * Gets the value of the activity property.
-	 * 
-	 * @return possible object is {@link String }
-	 * 
-	 */
+     * Gets the value of the activity property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
 	public String getActivity() {
 		return activity;
 	}
 
 	/**
-	 * Sets the value of the activity property.
-	 * 
-	 * @param value
-	 *            allowed object is {@link String }
-	 * 
-	 */
+     * Sets the value of the activity property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
 	public void setActivity(String value) {
 		this.activity = value;
 	}
 
 	/**
-	 * Gets the value of the budgetUser property.
-	 * 
-	 * @return possible object is {@link String }
-	 * 
-	 */
+     * Gets the value of the budgetUser property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
 	public String getBudgetUser() {
 		return budgetUser;
 	}
 
 	/**
-	 * Sets the value of the budgetUser property.
-	 * 
-	 * @param value
-	 *            allowed object is {@link String }
-	 * 
-	 */
+     * Sets the value of the budgetUser property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
 	public void setBudgetUser(String value) {
 		this.budgetUser = value;
 	}
