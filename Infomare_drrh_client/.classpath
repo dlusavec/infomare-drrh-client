@@ -12,7 +12,7 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Hibernate"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JDBC_DB2_AS400_Toolbox"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/XStream"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre6">
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.6.0_25">
 		<attributes>
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>

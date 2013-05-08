@@ -57,6 +57,7 @@ public class Invoicemsg implements java.io.Serializable {
 	private int datetime;
 	private Date datetimews;
 	private Date timews;
+	private String vendoiban;
 
 	public Invoicemsg() {
 	}
@@ -362,13 +363,23 @@ public class Invoicemsg implements java.io.Serializable {
 		this.timews = timews;
 	}
 
+	@Column(name = "VENDOIBAN", nullable = true, length = 34)
+	public String getVendoiban() {
+		return this.vendoiban;
+	}
+
+	public void setVendoiban(String vendoiban) {
+		this.vendoiban = vendoiban;
+	}
+
 	public void postaviVrijednosti(byte status, Reqmsg reqMsg, Date dateTimeWS,
 			InvoiceStatusNotification notificationResponse) {
 		this.status = status;
 		this.reqmsg = reqMsg;
 		this.datetimews = dateTimeWS;
 		this.timews = dateTimeWS;
-//		this.invststy = notificationResponse.getInvoiceStatus() != null ? notificationResponse
-	//			.getInvoiceStatus().name() : null;
+		// this.invststy = notificationResponse.getInvoiceStatus() != null ?
+		// notificationResponse
+		// .getInvoiceStatus().name() : null;
 	}
 }
