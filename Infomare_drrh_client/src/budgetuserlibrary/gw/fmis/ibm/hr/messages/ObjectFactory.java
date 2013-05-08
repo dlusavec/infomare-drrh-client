@@ -1,59 +1,60 @@
+
 package budgetuserlibrary.gw.fmis.ibm.hr.messages;
 
 import javax.xml.bind.annotation.XmlRegistry;
 
 /**
- * This object contains factory methods for each Java content interface and Java
- * element interface generated in the budgetuserlibrary.gw.fmis.ibm.hr.messages
- * package.
- * <p>
- * An ObjectFactory allows you to programatically construct new instances of the
- * Java representation for XML content. The Java representation of XML content
- * can consist of schema derived interfaces and classes representing the binding
- * of schema type definitions, element declarations and model groups. Factory
- * methods for each of these are provided in this class.
+ * This object contains factory methods for each 
+ * Java content interface and Java element interface 
+ * generated in the budgetuserlibrary.gw.fmis.ibm.hr.messages package. 
+ * <p>An ObjectFactory allows you to programatically 
+ * construct new instances of the Java representation 
+ * for XML content. The Java representation of XML 
+ * content can consist of schema derived interfaces 
+ * and classes representing the binding of schema 
+ * type definitions, element declarations and model 
+ * groups.  Factory methods for each of these are 
+ * provided in this class.
  * 
  */
 @XmlRegistry
 public class ObjectFactory {
 
 	/**
-	 * Create a new ObjectFactory that can be used to create new instances of
-	 * schema derived classes for package:
-	 * budgetuserlibrary.gw.fmis.ibm.hr.messages
-	 * 
-	 */
+     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: budgetuserlibrary.gw.fmis.ibm.hr.messages
+     * 
+     */
 	public ObjectFactory() {
 	}
 
 	/**
-	 * Create an instance of {@link InvoiceChangeRequestMsg }
-	 * 
-	 */
+     * Create an instance of {@link InvoiceChangeRequestMsg }
+     * 
+     */
 	public InvoiceChangeRequestMsg createInvoiceChangeRequestMsg() {
 		return new InvoiceChangeRequestMsg();
 	}
 
 	/**
-	 * Create an instance of {@link InvoiceReverseRequestMsg }
-	 * 
-	 */
+     * Create an instance of {@link InvoiceReverseRequestMsg }
+     * 
+     */
 	public InvoiceReverseRequestMsg createInvoiceReverseRequestMsg() {
 		return new InvoiceReverseRequestMsg();
 	}
 
 	/**
-	 * Create an instance of {@link InvoiceResponseMsg }
-	 * 
-	 */
+     * Create an instance of {@link InvoiceResponseMsg }
+     * 
+     */
 	public InvoiceResponseMsg createInvoiceResponseMsg() {
 		return new InvoiceResponseMsg();
 	}
 
 	/**
-	 * Create an instance of {@link InvoiceCreateRequestMsg }
-	 * 
-	 */
+     * Create an instance of {@link InvoiceCreateRequestMsg }
+     * 
+     */
 	public InvoiceCreateRequestMsg createInvoiceCreateRequestMsg() {
 		return new InvoiceCreateRequestMsg();
 	}
