@@ -126,7 +126,7 @@ public class ResponseMessageHandlerServiceClientImpl {
 
 				// Fakture
 				if (retrive.getIdInvoice() != null
-						&& retrive.getIdPayexec() > 0) {
+						&& retrive.getIdInvoice() > 0) {
 					preuzmiInvoiceResponseMessageId(retrive.getIdInvoice()
 							.longValue());
 				}
