@@ -123,7 +123,14 @@ public class ResponseMessageHandlerServiceClientImpl {
 				// preuzmiReservationResponseMessageId();
 				// preuzmiContractResponseMessageId();
 				// preuzmiPurchaseOrderResponseMessageId();
-				// preuzmiInvoiceResponseMessageId();
+
+				// Fakture
+				if (retrive.getIdInvoice() != null
+						&& retrive.getIdPayexec() > 0) {
+					preuzmiInvoiceResponseMessageId(retrive.getIdInvoice()
+							.longValue());
+				}
+				// Izvodi
 				if (retrive.getIdPayexec() != null
 						&& retrive.getIdPayexec() > 0) {
 					preuzmiPayementExecutionMessageId(retrive.getIdPayexec()
@@ -136,8 +143,9 @@ public class ResponseMessageHandlerServiceClientImpl {
 					sessionPomocna.commitTransakcije();
 				} catch (Exception e) {
 					sessionPomocna.rollbackTransakcije();
-					Log.loger.severe("Greška kod preuzimanja odgovora, ponovno povlaæenje "
-							+ PomocnaError.getErrorMessage(e));
+					Log.loger
+							.severe("Greška kod preuzimanja odgovora, ponovno povlaæenje "
+									+ PomocnaError.getErrorMessage(e));
 				}
 			}
 		} catch (Exception e) {
@@ -249,14 +257,14 @@ public class ResponseMessageHandlerServiceClientImpl {
 		obradaInvoiceMsg(
 				(AnyTypeList) port
 						.getInvoiceResponseList(Postavke.LOGICAL_SYSTEM_NAME),
-				"retrieveInvoice");
+				"retrieveInvoice", false);
 	}
 
-	public void preuzmiInvoiceResponseMessageId() {
+	public void preuzmiInvoiceResponseMessageId(Long odPoruke) {
 		obradaInvoiceMsg(
 				(AnyTypeList) port.getInvoiceResponseListStartingWithMessageId(
-						Postavke.LOGICAL_SYSTEM_NAME, Long.valueOf(0)),
-				"retrieveInvoiceMessageId");
+						Postavke.LOGICAL_SYSTEM_NAME, odPoruke),
+				"retrieveInvoiceMessageId", true);
 	}
 
 	public void preuzmiPayementExecutionResponse() {
@@ -555,7 +563,8 @@ public class ResponseMessageHandlerServiceClientImpl {
 		obradaResponseXML(anyTypeLista, messageName);
 	}
 
-	private void obradaInvoiceMsg(AnyTypeList anyTypeLista, String messageName) {
+	private void obradaInvoiceMsg(AnyTypeList anyTypeLista, String messageName,
+			boolean ponavljanje) {
 		Integer statNotId = statusNotifDAO.getIduciRbr();
 		Integer notHeadId = notifHeadDAO.getIduciRbr();
 		Invoicemsg invoiceMsg = null;
@@ -581,7 +590,9 @@ public class ResponseMessageHandlerServiceClientImpl {
 				invoiceMsg = invoiceMsgDAO
 						.getInvoicemsgByDocumentId(invoiceStatusNotification
 								.getHeader().getOriginatingBuFmisDocumentID());
-				if (invoiceMsg != null) {
+				if (invoiceMsg != null
+						&& (!ponavljanje || ponavljanje
+								&& invoiceMsg.getStatus() == 2)) {
 					sessionPomocna.otvoriTransakciju();
 					messageHeader.postaviVrijednostiRetrieve();
 					reqMsg = reqMsgDAO.getReqMsgByPK(invoiceMsg.getReqmsg()
@@ -671,14 +682,15 @@ public class ResponseMessageHandlerServiceClientImpl {
 			messageHeader = response.getMessageHeader();
 			messageHeader.postaviVrijednostiRetrieve();
 			try {
-				
-				if (ponavljanje) {					
+
+				if (ponavljanje) {
 					resMsg = resMsgDAO.getResMsgByPK(messageHeader
 							.getResponseMsgId());
 				}
-				if (response != null && (!ponavljanje || ponavljanje && resMsg==null)) {
+				if (response != null
+						&& (!ponavljanje || ponavljanje && resMsg == null)) {
 					sessionPomocna.otvoriTransakciju();
-					
+
 					resMsg = new Resmsg();
 					resMsg.postaviVrijednosti(messageHeader, messageName,
 							ResponseMessageType.NOTIFICATION, null);
