@@ -24,7 +24,7 @@ public class HibernatePomocna {
 				Log.loger.info("Hibernate pokrenut.");
 			}
 		} catch (Exception e) {
-			Log.loger.severe("Greška kod pokretanja hibernata ! "
+			Log.loger.severe("Greška kod pokretanja hibernate-a ! "
 					+ e.getMessage());
 			System.exit(0);
 		}

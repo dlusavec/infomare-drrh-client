@@ -18,7 +18,7 @@ public class IspisObjekta {
 					System.out
 							.println("----------------------------------------");
 					System.out.println(polje.getName() + ": "
-							+ polje.get(object));
+							+ polje.get(object));					
 				} catch (IllegalArgumentException e) {
 					System.out.println(e.getMessage());
 				} catch (IllegalAccessException e) {
