@@ -1,0 +1,1 @@
+Infomare klijent WS.
